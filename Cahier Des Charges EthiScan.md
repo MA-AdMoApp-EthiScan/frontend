@@ -1,4 +1,5 @@
 # Cahier des Charges : EthiScan
+
 ## 1. Introduction
 
 **EthiScan** est une application mobile conçue pour permettre aux utilisateurs de scanner des produits et de recevoir des informations détaillées alignées avec leurs valeurs personnelles de consommation. Elle vise à promouvoir une consommation responsable en fournissant des données telles que l'évolution du prix, les labels environnementaux et nutritionnels, l'impact carbone, et plus encore.
