@@ -7,29 +7,40 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primaryColor: const Color(0xFF20ae82),
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.teal,
+          accentColor: const Color(0xFFffce00),
+        ).copyWith(
+          secondary: const Color(0xFFffce00),
+          surface: Colors.white,
+          onSurface: Colors.black,
+          background: Colors.white,
+          onBackground: const Color(0xFF20ae82),
+        ),
+        scaffoldBackgroundColor: const Color(0xFFE0F2F1),
+        // Add other ThemeData properties if needed
+      ),
+      darkTheme: ThemeData(
+        primaryColor: const Color(0xFF005A4C),
+        colorScheme: ColorScheme.fromSwatch(
+          brightness: Brightness.dark,
+          primarySwatch: Colors.teal,
+          accentColor: const Color(0xFFC79600),
+        ).copyWith(
+          secondary: const Color(0xFFC79600),
+          surface: const Color(0xFF121212),
+          onSurface: Colors.white,
+          background: const Color(0xFF121212),
+          onBackground: const Color(0xFF005A4C),
+        ),
+        scaffoldBackgroundColor: const Color(0xFF003D33),
+        // Add other ThemeData properties if needed
       ),
       home: const MyHomePage(title: 'Ethiscan Demo'),
     );
