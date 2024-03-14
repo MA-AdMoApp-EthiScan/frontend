@@ -1,4 +1,4 @@
-# MA_AdMoApp
+# EthiScan - frontend
 
 Le projet de AdMoApp au master MSE
 
