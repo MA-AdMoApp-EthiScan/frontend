@@ -19,7 +19,7 @@ final ThemeData lightTheme = ThemeData(
   primaryColor: lightPrimaryColor,
   hintColor: lightAccentColor,
   canvasColor: lightCanvasColor,
-  backgroundColor: lightBackgroundColor,
+  //backgroundColor: lightBackgroundColor,
   scaffoldBackgroundColor: lightScaffoldBackgroundColor,
   // Additional styling here
 );
@@ -29,7 +29,7 @@ final ThemeData darkTheme = ThemeData(
   primaryColor: darkPrimaryColor,
   hintColor: darkAccentColor,
   canvasColor: darkCanvasColor,
-  backgroundColor: darkBackgroundColor,
+  //backgroundColor: darkBackgroundColor,
   scaffoldBackgroundColor: darkScaffoldBackgroundColor,
   brightness: Brightness.dark,
   // Additional styling here
