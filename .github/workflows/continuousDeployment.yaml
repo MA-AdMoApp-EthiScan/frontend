@@ -37,10 +37,18 @@ jobs:
           files: | 
             build/app/outputs/apk/release/*.apk
       
-      - name: Send APK to Telegram Group
+      - name: Rename APK and Send to Telegram Group
         run: |
+          TAG_NAME=${GITHUB_REF/refs\/tags\//}
           APK_PATH=$(ls build/app/outputs/apk/release/*.apk)
-          curl -F document=@$APK_PATH https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendDocument?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}
+          NEW_APK_PATH="build/app/outputs/apk/release/ethiscan_${TAG_NAME}.apk"
+          mv "$APK_PATH" "$NEW_APK_PATH"
+          MESSAGE="🚀 New release of EthiScan available! Version: $TAG_NAME"
+          curl -F chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+               -F document=@"$NEW_APK_PATH" \
+               -F caption="$MESSAGE" \
+               https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendDocument
         env:
+          GITHUB_REF: ${{ github.ref }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
