@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../utils/i18n_utils.dart';
 import '../utils/ui_colors.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -33,15 +32,15 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: UIColors.lightPrimaryColor,
-          title: Text("EthiScan"),
+          title: const Text("EthiScan"),
           //titleTextStyle: TextStyle(color: UIColors.white),
         ),
         bottomNavigationBar: menu(),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
-            Container(child: Icon(Icons.favorite)),
-            Container(child: Icon(Icons.qr_code)),
-            Container(child: Icon(Icons.settings)),
+            Icon(Icons.favorite),
+            Icon(Icons.qr_code),
+            Icon(Icons.settings),
           ],
         ),
       ),
@@ -50,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget menu() {
     return Container(
       color: UIColors.lightPrimaryColor,
-      child: TabBar(
+      child: const TabBar(
         labelColor: Colors.white,
         unselectedLabelColor: Colors.white70,
         indicatorSize: TabBarIndicatorSize.tab,
