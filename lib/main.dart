@@ -1,15 +1,41 @@
+import 'dart:io';
+
+import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
+
+import 'domain/language/i_language_repository.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class App extends StatefulWidget {
+  const App({super.key});
 
   @override
+  State createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  @override
   Widget build(BuildContext context) {
+
+    /*final ILanguageRepository languageRepository = getIt();
+    // Set the locale from the shared preferences
+    SharedPreferences.getInstance().then((prefs) {
+      if (prefs.containsKey('locale')) {
+        FlutterI18n.refresh(context, Locale(prefs.getString('locale')!));
+        languageRepository.storeCachedLanguage(prefs.getString('locale')!);
+      } else {
+        String locale = Platform.localeName.split('_')[0];
+        languageRepository.storeCachedLanguage(locale);
+      }
+    });*/
+
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -43,7 +69,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFF003D33),
         // Add other ThemeData properties if needed
       ),
-      home: const MyHomePage(title: 'Ethiscan Demo'),
+      home: const MyHomePage(),
     );
   }
 }
