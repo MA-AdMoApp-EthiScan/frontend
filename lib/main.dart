@@ -1,49 +1,69 @@
 import 'package:ethiscan/presentation/home_page.dart';
+import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class App extends StatefulWidget {
+  const App({super.key});
 
   @override
+  State createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  @override
   Widget build(BuildContext context) {
+
+    /*final ILanguageRepository languageRepository = getIt();
+    // Set the locale from the shared preferences
+    SharedPreferences.getInstance().then((prefs) {
+      if (prefs.containsKey('locale')) {
+        FlutterI18n.refresh(context, Locale(prefs.getString('locale')!));
+        languageRepository.storeCachedLanguage(prefs.getString('locale')!);
+      } else {
+        String locale = Platform.localeName.split('_')[0];
+        languageRepository.storeCachedLanguage(locale);
+      }
+    });*/
+
+
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'EthiScan',
       theme: ThemeData(
-        primaryColor: const Color(0xFF20ae82),
+        primaryColor: UIColors.lightPrimaryColor,
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.teal,
-          accentColor: const Color(0xFFffce00),
+          accentColor: UIColors.lightAccentColor,
         ).copyWith(
-          secondary: const Color(0xFFffce00),
+          secondary: UIColors.lightAccentColor,
           surface: Colors.white,
           onSurface: Colors.black,
           background: Colors.white,
-          onBackground: const Color(0xFF20ae82),
+          onBackground: UIColors.lightPrimaryColor,
         ),
-        scaffoldBackgroundColor: const Color(0xFFE0F2F1),
+        scaffoldBackgroundColor: UIColors.lightScaffoldBackgroundColor,
         // Add other ThemeData properties if needed
       ),
       darkTheme: ThemeData(
-        primaryColor: const Color(0xFF005A4C),
+        primaryColor: UIColors.darkPrimaryColor,
         colorScheme: ColorScheme.fromSwatch(
           brightness: Brightness.dark,
           primarySwatch: Colors.teal,
-          accentColor: const Color(0xFFC79600),
+          accentColor: UIColors.darkAccentColor,
         ).copyWith(
-          secondary: const Color(0xFFC79600),
-          surface: const Color(0xFF121212),
+          secondary: UIColors.darkAccentColor,
+          surface: UIColors.darkCanvasColor,
           onSurface: Colors.white,
-          background: const Color(0xFF121212),
-          onBackground: const Color(0xFF005A4C),
+          background: UIColors.darkBackgroundColor,
+          onBackground: UIColors.darkPrimaryColor,
         ),
-        scaffoldBackgroundColor: const Color(0xFF003D33),
+        scaffoldBackgroundColor: UIColors.darkScaffoldBackgroundColor,
         // Add other ThemeData properties if needed
       ),
-      home: const MyHomePage(title: 'Ethiscan Demo'),
+      home: const MyHomePage(),
     );
   }
 }
