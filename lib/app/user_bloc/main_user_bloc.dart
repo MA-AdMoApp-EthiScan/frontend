@@ -47,11 +47,11 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
           emit(const MainUserState.disconnected());
         },
         reset: () {
-          emit(const MainUserState.reloading());
+          //emit(const MainUserState.reloading());
           add(const MainUserEvent.autoConnect(minDelay: Duration(milliseconds: 500)));
         },
         clearData: () {
-          emit(const MainUserState.reloading());
+          //emit(const MainUserState.reloading());
           add(const MainUserEvent.autoConnect(
               minDelay: Duration(milliseconds: 500)));
         }
