@@ -1,4 +1,3 @@
-
 import 'package:ethiscan/domain/core/either.dart';
 
 abstract class ILanguageRepository {

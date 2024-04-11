@@ -1,0 +1,13 @@
+app:
+  name: 'EthiScan'
+  serviceError: 'Service Error'
+  maintenance: 'Maintenance'
+  unknownVersion: 'Unknown Version'
+  reloading: 'Reloading'
+  disconnected: 'Disconnected'
+
+favorites:
+  title: 'Favorites'
+
+splash:
+  version: "Version {version}"
