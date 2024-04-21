@@ -1,9 +1,40 @@
-import 'package:ethiscan/presentation/home_page.dart';
-import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const App());
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+import 'package:ethiscan/utils/ui_colors.dart';
+import 'package:ethiscan/presentation/home_page.dart';
+import 'package:ethiscan/presentation/login_page.dart';
+import 'package:ethiscan/presentation/providers/auth_provider.dart';
+
+import 'package:get_it/get_it.dart';
+import 'package:ethiscan/domain/repositories/auth_repository.dart';
+import 'package:ethiscan/domain/repositories/firestore_repository.dart';
+import 'package:ethiscan/data/datasources/firebase_auth_data_source.dart';
+import 'package:ethiscan/data/datasources/firebase_firestore_data_source.dart';
+
+
+void setup() {
+  final getIt = GetIt.instance;
+  getIt.registerLazySingleton<AuthRepository>(() => FirebaseAuthDataSource(FirebaseAuth.instance));
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  setup();
+  //runApp(const App());
+  runApp(
+    ChangeNotifierProvider<AuthenticationProvider>(
+      create: (context) => AuthenticationProvider(GetIt.instance.get<AuthRepository>()),
+      child: const App(),
+    ),
+  );
 }
 
 class App extends StatefulWidget {
@@ -63,7 +94,18 @@ class _AppState extends State<App> {
         scaffoldBackgroundColor: UIColors.darkScaffoldBackgroundColor,
         // Add other ThemeData properties if needed
       ),
-      home: const MyHomePage(),
+      home: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.active) {
+            if (snapshot.hasData) {
+              return const MyHomePage();
+            }
+            return const LoginPage();
+          }
+          return const CircularProgressIndicator();
+        },
+      ),
     );
   }
 }
