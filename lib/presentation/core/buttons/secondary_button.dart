@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:ethiscan/utils/text_styles.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mobileapp/presentation/core/custom_boxes.dart';
-import 'package:mobileapp/presentation/core/buttons/buttons.dart';
-import 'package:mobileapp/presentation/utils/text_styles.dart';
-import 'package:mobileapp/presentation/utils/ui_colors.dart';
+import 'package:ethiscan/presentation/core/custom_boxes.dart';
+import 'package:ethiscan/presentation/core/buttons/buttons.dart';
+import 'package:ethiscan/utils/ui_colors.dart';
 
 class SecondaryButton extends Button {
   final String text;
@@ -49,7 +49,7 @@ class _SecondaryButtonState extends ButtonState<SecondaryButton> {
 
     if (widget.disabled) return baseStyle.copyWith(color: UIColors.grey2);
     return active
-        ? baseStyle.copyWith(color: UIColors.mainColorDark)
-        : baseStyle.copyWith(color: UIColors.mainColor);
+        ? baseStyle.copyWith(color: UIColors.darkPrimaryColor)
+        : baseStyle.copyWith(color: UIColors.lightPrimaryColor);
   }
 }

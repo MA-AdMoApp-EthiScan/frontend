@@ -1,9 +1,12 @@
+import 'package:ethiscan/app/favorites_bloc/favorites_bloc.dart';
+import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/core/list_view_layout_body.dart';
-import 'package:ethiscan/presentation/widget_core/my_card.dart';
+import 'package:ethiscan/presentation/favorites/widgets/favorites_card.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavoritesPage extends StatefulWidget {
   const FavoritesPage({super.key});
@@ -24,12 +27,30 @@ class FavoritesPage extends StatefulWidget {
 class _FavoritesPage extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
+    return BlocProvider<FavoritesBloc>(
+      create: (context) => getIt(),
+      child: BlocBuilder<FavoritesBloc, FavoritesState>(
+        builder: (context, state) => state.when(
+          loading: () => _page(context, loading: true),
+          error: () => _page(context, error: true),
+          initial: () => _page(context),
+          loaded: (List<String> favorites) => _page(context, favorites: favorites),
+        ),
+      ),
+    );
+  }
+
+  Widget _page(BuildContext context, {
+    bool loading = false,
+    bool error = false,
+    List<String> favorites = const [],
+  }) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: UIColors.lightScaffoldBackgroundColor,
         title: Text(I18nUtils.translate(
           context,
-          "favorites.title",
+          "favorites_bloc.title",
         )),
         titleTextStyle: const TextStyle(
             color: UIColors.lightPrimaryColor,
@@ -43,19 +64,26 @@ class _FavoritesPage extends State<FavoritesPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
-              children: [
-                MyCard(
-                  title: "Card 1",
-                  description: "Description 1",
-                  onTap: () {
-                    print("Card 1");
-                  },
-                ),
-              ],
+              children: _getFavoritesCards(favorites, loading, error),
             ),
           ),
         ],
       ),
     );
+  }
+
+  List<Widget> _getFavoritesCards(List<String> favorites, bool loading, bool error) {
+    if(error) {
+      return [
+        CustomH3(I18nUtils.translate(context, "favorites.error-title")),
+        CustomText(I18nUtils.translate(context, "favorites.error-message"))
+      ];
+    } else if(loading) {
+      return [
+        const FavoriteCard(loading: true),
+      ];
+    } else {
+      return favorites.map((favorite) => FavoriteCard(favorite: favorite)).toList();
+    }
   }
 }

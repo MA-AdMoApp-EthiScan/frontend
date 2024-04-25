@@ -1,4 +1,4 @@
-import 'package:ethiscan/presentation/favorites.dart';
+import 'package:ethiscan/presentation/favorites/favorites.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
   Widget menu() {
     String favorites = I18nUtils.translate(
       context,
-      "favorites.title",
+      "favorites_bloc.title",
     );
     return Container(
       color: UIColors.lightPrimaryColor,

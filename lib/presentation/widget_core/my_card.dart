@@ -1,11 +1,10 @@
+import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mobileapp/presentation/core/buttons/box_button.dart';
-import 'package:mobileapp/presentation/utils/ui_colors.dart';
-import 'package:mobileapp/presentation/utils/utils.dart';
-import 'package:mobileapp/presentation/core/custom_loading.dart';
+import 'package:ethiscan/presentation/core/buttons/box_button.dart';
+import 'package:ethiscan/presentation/core/custom_loading.dart';
 
-abstract class HomeCard extends StatelessWidget {
+abstract class MyCard extends StatelessWidget {
   final bool loading;
   final bool swapNavigation;
   final bool showChildWhileLoading;
@@ -14,7 +13,7 @@ abstract class HomeCard extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final Color color;
 
-  const HomeCard(
+  const MyCard(
       {Key? key, this.loading = false,
       this.swapNavigation = false,
       this.showChildWhileLoading = false,
@@ -43,9 +42,9 @@ abstract class HomeCard extends StatelessWidget {
         onTap: () {
           if (canNavigate()) {
             if (swapNavigation) {
-              NavigationUtils.swap(context, page());
+              //todo NavigationUtils.swap(context, page());
             } else {
-              NavigationUtils.push(context, page());
+              //todo NavigationUtils.push(context, page());
             }
           }
         },

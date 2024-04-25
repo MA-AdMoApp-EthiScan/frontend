@@ -1,8 +1,8 @@
+import 'package:ethiscan/utils/text_styles.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mobileapp/presentation/core/buttons/buttons.dart';
-import 'package:mobileapp/presentation/core/custom_texts.dart';
-import 'package:mobileapp/presentation/utils/text_styles.dart';
-import 'package:mobileapp/presentation/utils/ui_colors.dart';
+import 'package:ethiscan/presentation/core/buttons/buttons.dart';
+import 'package:ethiscan/presentation/core/custom_texts.dart';
+import 'package:ethiscan/utils/ui_colors.dart';
 
 class LinkButton extends Button {
   final String text;
@@ -34,7 +34,7 @@ class _LinkButtonState extends ButtonState<LinkButton> {
   TextStyle _textStyle() {
     if (widget.disabled) return widget.style.copyWith(color: UIColors.grey2);
     return active
-        ? widget.style.copyWith(color: UIColors.mainColorDark)
-        : widget.style.copyWith(color: UIColors.mainColor);
+        ? widget.style.copyWith(color: UIColors.darkPrimaryColor)
+        : widget.style.copyWith(color: UIColors.lightPrimaryColor);
   }
 }

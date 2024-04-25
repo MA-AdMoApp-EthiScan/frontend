@@ -1,6 +1,6 @@
+import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mobileapp/presentation/utils/ui_colors.dart';
 
 class CustomBox extends StatelessWidget {
   final Color color;

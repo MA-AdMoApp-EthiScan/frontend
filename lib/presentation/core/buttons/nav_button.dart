@@ -1,9 +1,9 @@
 
+import 'package:ethiscan/utils/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mobileapp/presentation/utils/text_styles.dart';
-import 'package:mobileapp/presentation/utils/ui_colors.dart';
-import 'package:mobileapp/presentation/core/custom_texts.dart';
+import 'package:ethiscan/utils/ui_colors.dart';
+import 'package:ethiscan/presentation/core/custom_texts.dart';
 
 class NavButton extends StatelessWidget {
   final IconData icon;
@@ -17,10 +17,10 @@ class NavButton extends StatelessWidget {
       required this.selected,
       required this.onTap}) : super(key: key);
 
-  Color get _iconColor => selected ? UIColors.white : UIColors.mainColor;
-  Color get _textColor => selected ? UIColors.mainColorDark : UIColors.mainColor;
+  Color get _iconColor => selected ? UIColors.white : UIColors.lightPrimaryColor;
+  Color get _textColor => selected ? UIColors.darkPrimaryColor : UIColors.lightPrimaryColor;
   Color get _backgroundColor =>
-      selected ? UIColors.mainColor : UIColors.mainColor.withOpacity(0.2);
+      selected ? UIColors.lightPrimaryColor : UIColors.lightPrimaryColor.withOpacity(0.2);
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mobileapp/presentation/core/buttons/buttons.dart';
-import 'package:mobileapp/presentation/utils/ui_colors.dart';
+import 'package:ethiscan/presentation/core/buttons/buttons.dart';
+import 'package:ethiscan/utils/ui_colors.dart';
 
 class OpacityButton extends Button {
   final Widget child;

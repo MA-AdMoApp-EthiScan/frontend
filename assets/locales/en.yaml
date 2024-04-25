@@ -5,9 +5,10 @@ app:
   unknownVersion: 'Unknown Version'
   reloading: 'Reloading'
   disconnected: 'Disconnected'
-
 favorites:
   title: 'Favorites'
+  error-title: 'Error'
+  error-message: 'An error occurred while fetching favorites'
 
 splash:
   version: "Version {version}"

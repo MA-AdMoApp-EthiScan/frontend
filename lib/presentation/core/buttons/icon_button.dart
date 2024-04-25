@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mobileapp/presentation/core/custom_boxes.dart';
-import 'package:mobileapp/presentation/core/buttons/buttons.dart';
-import 'package:mobileapp/presentation/utils/ui_colors.dart';
+import 'package:ethiscan/presentation/core/custom_boxes.dart';
+import 'package:ethiscan/presentation/core/buttons/buttons.dart';
+import 'package:ethiscan/utils/ui_colors.dart';
 
 class PrimaryIconButton extends Button {
   final IconData icon;
@@ -33,7 +33,7 @@ class _PrimaryIconButtonState extends ButtonState<PrimaryIconButton> {
 
   Color _boxColor() {
     if (widget.disabled) return UIColors.grey2;
-    return active ? UIColors.mainColorDark : UIColors.mainColor;
+    return active ? UIColors.darkPrimaryColor : UIColors.lightPrimaryColor;
   }
 }
 
@@ -74,6 +74,6 @@ class _SecondaryIconButtonState extends ButtonState<SecondaryIconButton> {
 
     if (widget.invert) return active ? UIColors.grey3 : UIColors.white;
 
-    return active ? UIColors.mainColorDark : UIColors.mainColor;
+    return active ? UIColors.darkPrimaryColor : UIColors.lightPrimaryColor;
   }
 }
