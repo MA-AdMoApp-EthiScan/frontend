@@ -17,6 +17,7 @@ favorite:
   remove: "Retirer des favoris"
   added: "Ajouté aux favoris"
   removed: "Retiré des favoris"
+  last_scan: 'Dernier scan : '
 
 favorites:
   title: 'Favoris'
