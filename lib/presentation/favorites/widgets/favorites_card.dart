@@ -1,12 +1,9 @@
-import 'package:ethiscan/app/favorites_bloc/favorites_bloc.dart';
-import 'package:ethiscan/presentation/core/buttons/icon_button.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/favorites/favorite.dart';
 import 'package:ethiscan/presentation/widget_core/my_card.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavoriteCard extends MyCard {
   final String? favorite;
