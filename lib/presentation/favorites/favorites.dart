@@ -1,5 +1,6 @@
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/core/list_view_layout_body.dart';
+import 'package:ethiscan/presentation/widget_core/my_card.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
@@ -23,34 +24,35 @@ class FavoritesPage extends StatefulWidget {
 class _FavoritesPage extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
-    String label = I18nUtils.translate(
-      context,
-      "favorites.title",
-    );
     return Scaffold(
       appBar: AppBar(
         backgroundColor: UIColors.lightScaffoldBackgroundColor,
-        title: Text(label),
-        titleTextStyle: const TextStyle(color: UIColors.lightPrimaryColor, fontSize: 24, fontWeight: FontWeight.bold),
+        title: Text(I18nUtils.translate(
+          context,
+          "favorites.title",
+        )),
+        titleTextStyle: const TextStyle(
+            color: UIColors.lightPrimaryColor,
+            fontSize: 24,
+            fontWeight: FontWeight.bold
+        ),
       ),
       body: ListViewLayoutBody(
         children: [
-          const SizedBox(height: 30),
+          const SizedBox(height: 15),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: CustomH1(
-              I18nUtils.translate(
-                context,
-                "home.title",
-              ),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Column(
+              children: [
+                MyCard(
+                  title: "Card 1",
+                  description: "Description 1",
+                  onTap: () {
+                    print("Card 1");
+                  },
+                ),
+              ],
             ),
-          ),
-          const SizedBox(height: 30),
-          const Column(
-            children: [
-              CustomH1(label)
-              SizedBox(height: 10),
-            ],
           ),
         ],
       ),
