@@ -7,7 +7,8 @@ class CustomCircularLoading extends StatelessWidget {
   final double size;
   final EdgeInsets padding;
 
-  const CustomCircularLoading({Key? key, 
+  const CustomCircularLoading({
+    Key? key,
     this.padding = const EdgeInsets.all(15),
     this.size = 40,
     this.color = UIColors.lightPrimaryColor,
@@ -36,7 +37,8 @@ class CustomLinearLoading extends StatelessWidget {
   final double opacity;
   final double height;
 
-  const CustomLinearLoading({super.key,
+  const CustomLinearLoading({
+    super.key,
     this.height = 5,
     this.color = UIColors.lightPrimaryColor,
     this.opacity = 0.6,

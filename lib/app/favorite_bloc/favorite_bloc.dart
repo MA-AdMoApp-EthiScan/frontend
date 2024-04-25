@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:injectable/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
 part 'favorite_bloc.freezed.dart';
 part 'favorite_event.dart';
@@ -9,7 +9,6 @@ part 'favorite_state.dart';
 @injectable
 class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
   FavoriteBloc() : super(FavoriteState.initial()) {
-
     on<FavoriteEvent>((event, emit) async {
       await event.when(
         load: () async {
@@ -22,5 +21,4 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
   }
 }
 
-class Favoritetate {
-}
+class Favoritetate {}

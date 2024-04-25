@@ -5,12 +5,12 @@ import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/core/list_view_layout_body.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavoritePage extends StatefulWidget {
   final String? favoriteName;
+
   const FavoritePage({super.key, this.favoriteName});
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -54,7 +54,8 @@ class _FavoritePage extends State<FavoritePage> {
     );
   }
 
-  Widget _page(BuildContext context, {
+  Widget _page(
+    BuildContext context, {
     bool loading = false,
     bool error = false,
     String favorite = "",
@@ -62,12 +63,12 @@ class _FavoritePage extends State<FavoritePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: UIColors.lightScaffoldBackgroundColor,
-        title: Text(this.favoriteName ?? I18nUtils.translate(context, "favorite.title")),
+        title: Text(this.favoriteName ??
+            I18nUtils.translate(context, "favorite.title")),
         titleTextStyle: const TextStyle(
             color: UIColors.lightPrimaryColor,
             fontSize: 24,
-            fontWeight: FontWeight.bold
-        ),
+            fontWeight: FontWeight.bold),
       ),
       body: ListViewLayoutBody(
         children: [
@@ -92,9 +93,7 @@ class _FavoritePage extends State<FavoritePage> {
         CustomText(I18nUtils.translate(context, "favorites.error.message"))
       ];
     } else {
-      return [
-        CustomH3(favorite)
-      ];
+      return [CustomH3(favorite)];
     }
   }
 }

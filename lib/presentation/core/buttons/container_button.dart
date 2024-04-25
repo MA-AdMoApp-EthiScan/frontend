@@ -1,18 +1,19 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:ethiscan/presentation/core/buttons/buttons.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class OpacityButton extends Button {
   final Widget child;
   final bool expanded;
 
-  const OpacityButton({Key? key, 
+  const OpacityButton({
+    Key? key,
     required this.child,
     this.expanded = false,
     bool disabled = false,
     void Function()? onTap,
-  }) : super(onTap,  key: key, disabled: disabled);
+  }) : super(onTap, key: key, disabled: disabled);
 
   @override
   _OpacityButtonState createState() => _OpacityButtonState();

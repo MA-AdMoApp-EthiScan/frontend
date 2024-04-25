@@ -4,13 +4,13 @@ class NavigationUtils {
   NavigationUtils._();
 
   static GlobalKey<NavigatorState> connectAppNavigatorKey =
-  GlobalKey<NavigatorState>();
+      GlobalKey<NavigatorState>();
 
   static void push(
-      BuildContext context,
-      Widget page, {
-        bool fullscreenDialog = false,
-      }) {
+    BuildContext context,
+    Widget page, {
+    bool fullscreenDialog = false,
+  }) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -21,10 +21,10 @@ class NavigationUtils {
   }
 
   static void swap(
-      BuildContext context,
-      Widget page, {
-        bool fullscreenDialog = false,
-      }) {
+    BuildContext context,
+    Widget page, {
+    bool fullscreenDialog = false,
+  }) {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -35,10 +35,10 @@ class NavigationUtils {
   }
 
   static void goTo(
-      BuildContext context,
-      Widget page, {
-        bool fullscreenDialog = false,
-      }) {
+    BuildContext context,
+    Widget page, {
+    bool fullscreenDialog = false,
+  }) {
     popAll(context);
     push(context, page, fullscreenDialog: fullscreenDialog);
   }
@@ -46,7 +46,7 @@ class NavigationUtils {
   static void popAll(BuildContext context) {
     Navigator.popUntil(
       context,
-          (route) => false,
+      (route) => false,
     );
   }
 

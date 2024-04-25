@@ -11,10 +11,9 @@ abstract class MainUserState with _$MainUserState {
   const factory MainUserState.disconnected() = MainUserDisconnected;
 
   const factory MainUserState.serviceError({
-      required bool maintenance,
-      required bool unknownVersion,
+    required bool maintenance,
+    required bool unknownVersion,
   }) = MainUserServiceError;
 
   factory MainUserState.initial() => const MainUserState.reloading();
 }
-

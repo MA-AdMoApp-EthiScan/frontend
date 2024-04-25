@@ -1,20 +1,19 @@
 import 'dart:io';
 
 import 'package:ethiscan/app/user_bloc/main_user_bloc.dart';
+import 'package:ethiscan/domain/language/i_language_repository.dart';
+import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/app/app_connected.dart';
 import 'package:ethiscan/presentation/app/custom_app.dart';
+import 'package:ethiscan/presentation/home_page.dart';
 import 'package:ethiscan/presentation/splash_page.dart';
+import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:ethiscan/domain/language/i_language_repository.dart';
-import 'package:ethiscan/injection.dart';
-import 'package:ethiscan/presentation/home_page.dart';
-import 'package:ethiscan/utils/i18n_utils.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -24,7 +23,6 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
@@ -59,6 +57,7 @@ class _AppState extends State<App> {
       ),
     );
   }
+
   Widget _serviceError({
     required bool maintenance,
     required bool unknownVersion,
@@ -101,12 +100,13 @@ class _AppState extends State<App> {
   }
 
   Widget _userConnected(
-      BuildContext context,
-      MainUserConnected state,
-      ) {
+    BuildContext context,
+    MainUserConnected state,
+  ) {
     return AppLifecycleReactor(
       reconnect: () {
-        BlocProvider.of<MainUserBloc>(context).add(const MainUserEvent.autoConnect());
+        BlocProvider.of<MainUserBloc>(context)
+            .add(const MainUserEvent.autoConnect());
       },
       child: AppConnected(
         user: state.user,
@@ -115,9 +115,9 @@ class _AppState extends State<App> {
   }
 
   Widget _userDisconnected(
-      BuildContext context,
-      MainUserDisconnected state,
-      ) {
+    BuildContext context,
+    MainUserDisconnected state,
+  ) {
     String? email;
     //if (state.user.settings.rememberMe == true && state.user.idm != null) {
     //  email = state.user.idm?.email;
@@ -125,7 +125,8 @@ class _AppState extends State<App> {
 
     return CustomApp(
       key: const Key('DisconnectedApp'),
-      home: HomePage(), /*TODO : state.user.settings.firstTime == true
+      home:
+          HomePage(), /*TODO : state.user.settings.firstTime == true
           ? const HomePage()
           : LoginPage(email: email),*/
     );

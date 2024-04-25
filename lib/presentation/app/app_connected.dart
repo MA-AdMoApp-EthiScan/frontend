@@ -13,7 +13,6 @@ class AppConnected extends StatefulWidget {
 }
 
 class _AppConnectedState extends State<AppConnected> {
-
   @override
   void initState() {
     super.initState();
@@ -39,7 +38,6 @@ class _AppConnectedState extends State<AppConnected> {
   }
 }
 
-
 class UserProvider extends InheritedWidget {
   final User user;
 
@@ -53,7 +51,7 @@ class UserProvider extends InheritedWidget {
 
   static User? of(BuildContext context) {
     UserProvider? widget =
-    context.dependOnInheritedWidgetOfExactType<UserProvider>();
+        context.dependOnInheritedWidgetOfExactType<UserProvider>();
 
     return widget!.user;
   }

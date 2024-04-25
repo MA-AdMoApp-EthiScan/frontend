@@ -50,6 +50,7 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
   Widget menu() {
     return Container(
       color: UIColors.lightPrimaryColor,

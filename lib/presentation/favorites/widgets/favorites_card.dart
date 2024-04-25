@@ -1,13 +1,11 @@
 import 'package:ethiscan/app/favorites_bloc/favorites_bloc.dart';
+import 'package:ethiscan/presentation/core/buttons/icon_button.dart';
+import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/favorites/favorite.dart';
-import 'package:ethiscan/presentation/favorites/favorites.dart';
 import 'package:ethiscan/presentation/widget_core/my_card.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ethiscan/presentation/core/buttons/icon_button.dart';
-import 'package:ethiscan/presentation/core/custom_texts.dart';
-
 
 class FavoriteCard extends MyCard {
   final String? favorite;
@@ -16,10 +14,10 @@ class FavoriteCard extends MyCard {
 
   const FavoriteCard({this.favorite, this.error = false, this.loading = false})
       : super(
-    loading: loading,
-    showChildWhileLoading: true,
-    disableNavigation: favorite == null || error || loading,
-  );
+          loading: loading,
+          showChildWhileLoading: true,
+          disableNavigation: favorite == null || error || loading,
+        );
 
   @override
   Widget title(BuildContext context) {
@@ -52,11 +50,10 @@ class FavoriteCard extends MyCard {
       );
     }
 
-    return CustomText(
-      favorite!
-    );
+    return CustomText(favorite!);
   }
 
   @override
-  Widget page() => FavoritePage(favoriteName: favorite); // TODO change to unique favorite page
+  Widget page() => FavoritePage(
+      favoriteName: favorite); // TODO change to unique favorite page
 }

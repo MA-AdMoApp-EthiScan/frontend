@@ -10,8 +10,7 @@ abstract class MainUserEvent with _$MainUserEvent {
 
   const factory MainUserEvent.accountCreated({
     required User newUser,
-  }) =
-  _MainUserAccountCreated;
+  }) = _MainUserAccountCreated;
 
   const factory MainUserEvent.autoConnect({
     @Default(Duration.zero) Duration minDelay,

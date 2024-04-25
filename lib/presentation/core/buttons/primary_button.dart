@@ -1,11 +1,11 @@
-import 'package:ethiscan/utils/text_styles.dart';
-import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/widgets.dart';
-import 'package:ethiscan/presentation/core/custom_boxes.dart';
 import 'package:ethiscan/presentation/core/buttons/buttons.dart';
-import 'package:ethiscan/utils/ui_colors.dart';
+import 'package:ethiscan/presentation/core/custom_boxes.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
+import 'package:ethiscan/utils/text_styles.dart';
+import 'package:ethiscan/utils/ui_colors.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class PrimaryButton extends Button {
   final String text;
@@ -13,14 +13,15 @@ class PrimaryButton extends Button {
   final bool loading;
   final bool danger;
 
-  const PrimaryButton({Key? key, 
+  const PrimaryButton({
+    Key? key,
     required this.text,
     this.expanded = false,
     bool disabled = false,
     this.loading = false,
     this.danger = false,
     void Function()? onTap,
-  }) : super(onTap,  key: key, disabled: disabled || loading);
+  }) : super(onTap, key: key, disabled: disabled || loading);
 
   @override
   _PrimaryButtonState createState() => _PrimaryButtonState();

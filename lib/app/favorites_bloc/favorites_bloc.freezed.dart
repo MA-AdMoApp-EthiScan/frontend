@@ -21,6 +21,7 @@ mixin _$FavoritesEvent {
     required TResult Function() load,
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
@@ -32,11 +33,13 @@ mixin _$FavoritesEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_FavoritesLoad value) load,
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FavoritesLoad value)? load,
@@ -62,9 +65,9 @@ class _$FavoritesEventCopyWithImpl<$Res, $Val extends FavoritesEvent>
     implements $FavoritesEventCopyWith<$Res> {
   _$FavoritesEventCopyWithImpl(this._value, this._then);
 
-  // ignore: unused_field
+// ignore: unused_field
   final $Val _value;
-  // ignore: unused_field
+// ignore: unused_field
   final $Res Function($Val) _then;
 }
 
@@ -230,9 +233,9 @@ class _$FavoritesStateCopyWithImpl<$Res, $Val extends FavoritesState>
     implements $FavoritesStateCopyWith<$Res> {
   _$FavoritesStateCopyWithImpl(this._value, this._then);
 
-  // ignore: unused_field
+// ignore: unused_field
   final $Val _value;
-  // ignore: unused_field
+// ignore: unused_field
   final $Res Function($Val) _then;
 }
 
@@ -505,7 +508,7 @@ class _$FavoritesLoadedImpl implements _FavoritesLoaded {
   @override
   List<String> get favorites {
     if (_favorites is EqualUnmodifiableListView) return _favorites;
-    // ignore: implicit_dynamic_type
+// ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_favorites);
   }
 

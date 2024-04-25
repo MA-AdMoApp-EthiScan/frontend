@@ -1,17 +1,18 @@
+import 'package:ethiscan/presentation/core/buttons/buttons.dart';
+import 'package:ethiscan/presentation/core/custom_boxes.dart';
+import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:ethiscan/presentation/core/custom_boxes.dart';
-import 'package:ethiscan/presentation/core/buttons/buttons.dart';
-import 'package:ethiscan/utils/ui_colors.dart';
 
 class PrimaryIconButton extends Button {
   final IconData icon;
 
-  const PrimaryIconButton({Key? key, 
+  const PrimaryIconButton({
+    Key? key,
     required this.icon,
     bool disabled = false,
     void Function()? onTap,
-  }) : super(onTap,  key: key, disabled: disabled);
+  }) : super(onTap, key: key, disabled: disabled);
 
   @override
   _PrimaryIconButtonState createState() => _PrimaryIconButtonState();
@@ -42,13 +43,14 @@ class SecondaryIconButton extends Button {
   final bool invert;
   final double size;
 
-  const SecondaryIconButton({Key? key, 
+  const SecondaryIconButton({
+    Key? key,
     required this.icon,
     this.size = 24,
     this.invert = false,
     bool disabled = false,
     void Function()? onTap,
-  }) : super(onTap,  key: key, disabled: disabled);
+  }) : super(onTap, key: key, disabled: disabled);
 
   @override
   _SecondaryIconButtonState createState() => _SecondaryIconButtonState();

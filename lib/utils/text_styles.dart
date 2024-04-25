@@ -39,12 +39,12 @@ class TextStyles {
   );
 
   static TextStyle textBoldColor(Color c) => TextStyle(
-    color: c,
-    fontFamily: FONT_FAMILY,
-    fontWeight: FontWeight.w800,
-    fontSize: 14,
-    height: 1.4,
-  );
+        color: c,
+        fontFamily: FONT_FAMILY,
+        fontWeight: FontWeight.w800,
+        fontSize: 14,
+        height: 1.4,
+      );
 
   static const TextStyle text = TextStyle(
     color: UIColors.grey1,
@@ -64,7 +64,8 @@ class TextStyles {
     decorationStyle: TextDecorationStyle.dotted,
   );
 
-  static TextStyle get error => TextStyles.text.copyWith(color: UIColors.darkAccentColor);
+  static TextStyle get error =>
+      TextStyles.text.copyWith(color: UIColors.darkAccentColor);
 
   static const TextStyle small = TextStyle(
     color: Colors.black,
