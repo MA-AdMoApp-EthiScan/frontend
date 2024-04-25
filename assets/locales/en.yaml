@@ -11,10 +11,27 @@ app:
       title: 'Error'
       message: 'An error occurred while fetching data'
 
+favorite:
+  title: 'Favorite'
+  add: 'Add to Favorites'
+  remove: 'Remove from Favorites'
+  added: 'Added to Favorites'
+  removed: 'Removed from Favorites'
+
 favorites:
   title: 'Favorites'
   error-title: 'Error'
   error-message: 'An error occurred while fetching favorites'
+
+scanning:
+  title: 'Scan'
+  error-title: 'Error'
+  error-message: 'An error occurred while scanning'
+
+parameter:
+  title: 'Parameter'
+  error-title: 'Error'
+  error-message: 'An error occurred while fetching parameters'
 
 splash:
   version: "Version {version}"

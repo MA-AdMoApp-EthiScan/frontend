@@ -17,7 +17,6 @@ class FavoriteCard extends MyCard {
   const FavoriteCard({this.favorite, this.error = false, this.loading = false})
       : super(
     loading: loading,
-    swapNavigation: true,
     showChildWhileLoading: true,
     disableNavigation: favorite == null || error || loading,
   );
@@ -59,5 +58,5 @@ class FavoriteCard extends MyCard {
   }
 
   @override
-  Widget page() => FavoritePage(); // TODO change to unique favorite page
+  Widget page() => FavoritePage(favoriteName: favorite); // TODO change to unique favorite page
 }

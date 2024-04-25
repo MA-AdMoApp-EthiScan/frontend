@@ -2,13 +2,16 @@ import 'package:ethiscan/app/favorite_bloc/favorite_bloc.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
+import 'package:ethiscan/presentation/core/list_view_layout_body.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
+import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavoritePage extends StatefulWidget {
-  const FavoritePage({super.key});
+  final String? favoriteName;
+  const FavoritePage({super.key, this.favoriteName});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -20,11 +23,14 @@ class FavoritePage extends StatefulWidget {
   // always marked "final".
 
   @override
-  State<FavoritePage> createState() => _FavoritePage();
+  State<FavoritePage> createState() => _FavoritePage(favoriteName);
 }
 
 class _FavoritePage extends State<FavoritePage> {
   late FavoriteBloc _favoriteBloc;
+  final String? favoriteName;
+
+  _FavoritePage(this.favoriteName);
 
   @override
   void initState() {
@@ -55,10 +61,24 @@ class _FavoritePage extends State<FavoritePage> {
   }) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favorite'),
+        backgroundColor: UIColors.lightScaffoldBackgroundColor,
+        title: Text(this.favoriteName ?? I18nUtils.translate(context, "favorite.title")),
+        titleTextStyle: const TextStyle(
+            color: UIColors.lightPrimaryColor,
+            fontSize: 24,
+            fontWeight: FontWeight.bold
+        ),
       ),
-      body: ListView(
-        children: _getContent(loading, error, favorite),
+      body: ListViewLayoutBody(
+        children: [
+          const SizedBox(height: 15),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 0),
+            child: Column(
+              children: _getContent(loading, error, favorite),
+            ),
+          ),
+        ],
       ),
     );
   }

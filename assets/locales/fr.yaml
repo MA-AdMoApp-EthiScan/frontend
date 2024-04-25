@@ -1,13 +1,37 @@
 app:
   name: 'EthiScan'
-  serviceError: 'Erreur de service'
+  serviceError: "Erreur de service"
   maintenance: 'Maintenance'
-  unknownVersion: 'Version inconnue'
-  reloading: 'Rechargement'
-  disconnected: 'Déconnecté'
+  unknownVersion: "Version inconnue"
+  reloading: "Rechargement"
+  disconnected: "Déconnecté"
+  data:
+    empty: "Aucune donnée disponible"
+    error:
+      title: 'Erreur'
+      message: "Une erreur s'est produite lors de la récupération des données"
+
+favorite:
+  title: 'Favori'
+  add: "Ajouter aux favoris"
+  remove: "Retirer des favoris"
+  added: "Ajouté aux favoris"
+  removed: "Retiré des favoris"
 
 favorites:
   title: 'Favoris'
+  error-title: 'Erreur'
+  error-message: "Une erreur s'est produite lors de la récupération des favoris"
+
+scan:
+  title: 'Scan'
+  error-title: 'Error'
+  error-message: "Une erreur s'est produite lors du scan"
+
+parameter:
+  title: 'Paramètres'
+  error-title: 'Erreur'
+  error-message: "Une erreur s'est produite lors de la récupération des paramètres"
 
 splash:
   version: "Version {version}"

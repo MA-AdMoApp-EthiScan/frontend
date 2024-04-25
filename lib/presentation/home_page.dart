@@ -51,13 +51,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
   Widget menu() {
-    String favorites = I18nUtils.translate(
-      context,
-      "favorites_bloc.title",
-    );
     return Container(
       color: UIColors.lightPrimaryColor,
-      child: const TabBar(
+      child: TabBar(
         labelColor: Colors.white,
         unselectedLabelColor: Colors.white70,
         indicatorSize: TabBarIndicatorSize.tab,
@@ -65,15 +61,24 @@ class _HomePageState extends State<HomePage> {
         indicatorColor: UIColors.darkPrimaryColor,
         tabs: [
           Tab(
-            text: "Favorites",
+            text: I18nUtils.translate(
+              context,
+              "favorites.title",
+            ),
             icon: Icon(Icons.favorite),
           ),
           Tab(
-            text: "Scan",
+            text: I18nUtils.translate(
+              context,
+              "scan.title",
+            ),
             icon: Icon(Icons.qr_code),
           ),
           Tab(
-            text: "Parameters",
+            text: I18nUtils.translate(
+              context,
+              "parameter.title",
+            ),
             icon: Icon(Icons.settings),
           ),
         ],
