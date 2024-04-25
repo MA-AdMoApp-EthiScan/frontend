@@ -19,7 +19,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     BlocProvider.of<MainUserBloc>(context)
-         .add(const MainUserEvent.autoConnect(minDelay: Duration(seconds: 3)));
+        .add(const MainUserEvent.autoConnect(minDelay: Duration(seconds: 3)));
   }
 
   @override

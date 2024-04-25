@@ -44,13 +44,15 @@ class _FavoritesPage extends State<FavoritesPage> {
           loading: () => _page(context, loading: true),
           error: () => _page(context, error: true),
           initial: () => _page(context),
-          loaded: (List<String> favorites) => _page(context, favorites: favorites),
+          loaded: (List<String> favorites) =>
+              _page(context, favorites: favorites),
         ),
       ),
     );
   }
 
-  Widget _page(BuildContext context, {
+  Widget _page(
+    BuildContext context, {
     bool loading = false,
     bool error = false,
     List<String> favorites = const [],
@@ -65,8 +67,7 @@ class _FavoritesPage extends State<FavoritesPage> {
         titleTextStyle: const TextStyle(
             color: UIColors.lightPrimaryColor,
             fontSize: 24,
-            fontWeight: FontWeight.bold
-        ),
+            fontWeight: FontWeight.bold),
       ),
       body: ListViewLayoutBody(
         children: [
@@ -82,14 +83,15 @@ class _FavoritesPage extends State<FavoritesPage> {
     );
   }
 
-  List<Widget> _getFavoritesCards(List<String> favorites, bool loading, bool error) {
+  List<Widget> _getFavoritesCards(
+      List<String> favorites, bool loading, bool error) {
     // loading = true;
-    if(error) {
+    if (error) {
       return [
         CustomH3(I18nUtils.translate(context, "favorites.error-title")),
         CustomText(I18nUtils.translate(context, "favorites.error-message"))
       ];
-    } else if(loading) {
+    } else if (loading) {
       return [
         const Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -99,10 +101,12 @@ class _FavoritesPage extends State<FavoritesPage> {
     } else {
       favorites = favorites.isEmpty ? ["test", "test 2"] : favorites;
       List<Widget> widgets = [];
-      List<Widget> f = favorites.map((favorite) => FavoriteCard(favorite: favorite)).toList();
+      List<Widget> f = favorites
+          .map((favorite) => FavoriteCard(favorite: favorite))
+          .toList();
       for (int i = 0; i < f.length; i++) {
-          widgets.add(const SizedBox(height: 15));
-          widgets.add(f[i]);
+        widgets.add(const SizedBox(height: 15));
+        widgets.add(f[i]);
       }
       return widgets;
     }

@@ -1,6 +1,6 @@
-import 'package:injectable/injectable.dart';
 import 'package:ethiscan/domain/core/either.dart';
 import 'package:ethiscan/domain/language/i_language_repository.dart';
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @LazySingleton(as: ILanguageRepository)
@@ -27,5 +27,4 @@ class LanguageRepository implements ILanguageRepository {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('language', language);
   }
-
 }

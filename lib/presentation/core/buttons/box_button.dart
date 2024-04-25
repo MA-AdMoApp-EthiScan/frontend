@@ -1,8 +1,8 @@
+import 'package:ethiscan/presentation/core/buttons/buttons.dart';
+import 'package:ethiscan/presentation/core/custom_boxes.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:ethiscan/presentation/core/custom_boxes.dart';
-import 'package:ethiscan/presentation/core/buttons/buttons.dart';
 
 class BoxButton extends Button {
   final Widget child;
@@ -10,14 +10,15 @@ class BoxButton extends Button {
   final bool animated;
   final Color color;
 
-  const BoxButton({Key? key, 
+  const BoxButton({
+    Key? key,
     required this.child,
     this.expanded = false,
     bool disabled = false,
     this.animated = true,
     this.color = UIColors.white,
     void Function()? onTap,
-  }) : super(onTap,  key: key, disabled: disabled);
+  }) : super(onTap, key: key, disabled: disabled);
 
   @override
   _BoxButtonState createState() => _BoxButtonState();
@@ -35,6 +36,8 @@ class _BoxButtonState extends ButtonState<BoxButton> {
 
   Color _boxColor() {
     if (widget.disabled) return UIColors.grey2;
-    return active && widget.animated ? UIColors.darken(widget.color) : widget.color;
+    return active && widget.animated
+        ? UIColors.darken(widget.color)
+        : widget.color;
   }
 }
