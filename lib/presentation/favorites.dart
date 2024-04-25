@@ -1,3 +1,5 @@
+import 'package:ethiscan/presentation/core/custom_texts.dart';
+import 'package:ethiscan/presentation/core/list_view_layout_body.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
@@ -21,28 +23,36 @@ class FavoritesPage extends StatefulWidget {
 class _FavoritesPage extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
-    try {
-      String title = I18nUtils.translate(
-        context,
-        "favorites.title",
-      );
-      print("Eureka! $title");
-    } catch (e) {
-      print(e);
-      throw e;
-    }
-
+    String label = I18nUtils.translate(
+      context,
+      "favorites.title",
+    );
     return Scaffold(
       appBar: AppBar(
         backgroundColor: UIColors.lightScaffoldBackgroundColor,
-        title: const Text("Favorites"),
+        title: Text(label),
         titleTextStyle: const TextStyle(color: UIColors.lightPrimaryColor, fontSize: 24, fontWeight: FontWeight.bold),
       ),
-      body: const Center(
-        child: Text(
-          'Favorites',
-          style: TextStyle(fontSize: 24),
-        ),
+      body: ListViewLayoutBody(
+        children: [
+          const SizedBox(height: 30),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: CustomH1(
+              I18nUtils.translate(
+                context,
+                "home.title",
+              ),
+            ),
+          ),
+          const SizedBox(height: 30),
+          const Column(
+            children: [
+              CustomH1(label)
+              SizedBox(height: 10),
+            ],
+          ),
+        ],
       ),
     );
   }
