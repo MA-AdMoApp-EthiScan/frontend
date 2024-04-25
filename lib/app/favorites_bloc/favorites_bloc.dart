@@ -8,21 +8,16 @@ part 'favorites_state.dart';
 
 @injectable
 class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
-  FavoritesBloc() : super(FavoritesState.initial());
+  FavoritesBloc() : super(FavoritesState.initial()) {
 
-  @override
-  Stream<FavoritesState> mapEventToState(
-    FavoritesEvent event,
-  ) async* {
-    yield* event.map(
-      load: (e) async* {
-        yield const FavoritesState.loading();
-        // final failureOrSurveys = await _surveysRepository.getFavorites();
-        // yield failureOrSurveys.fold(
-        //   (failure) => FavoritesState.error(),
-        //   (surveys) => FavoritesState.loaded(surveys: surveys),
-        // );
-      },
-    );
+    on<FavoritesEvent>((event, emit) async {
+      await event.when(
+        load: () async {
+          emit(const FavoritesState.loading());
+          await Future.delayed(const Duration(seconds: 3));
+          emit(const FavoritesState.loaded(favorites: ['Favorite 1', 'Favorite 2']));
+        },
+      );
+    });
   }
 }

@@ -5,6 +5,12 @@ app:
   unknownVersion: 'Unknown Version'
   reloading: 'Reloading'
   disconnected: 'Disconnected'
+  data:
+    empty: 'No data available'
+    error:
+      title: 'Error'
+      message: 'An error occurred while fetching data'
+
 favorites:
   title: 'Favorites'
   error-title: 'Error'

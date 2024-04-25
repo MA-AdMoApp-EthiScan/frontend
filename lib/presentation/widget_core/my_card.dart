@@ -1,3 +1,4 @@
+import 'package:ethiscan/utils/navigation_util.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -42,9 +43,9 @@ abstract class MyCard extends StatelessWidget {
         onTap: () {
           if (canNavigate()) {
             if (swapNavigation) {
-              //todo NavigationUtils.swap(context, page());
+              NavigationUtils.swap(context, page());
             } else {
-              //todo NavigationUtils.push(context, page());
+              NavigationUtils.push(context, page());
             }
           }
         },

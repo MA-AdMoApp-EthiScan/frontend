@@ -1,5 +1,6 @@
 import 'package:ethiscan/app/favorites_bloc/favorites_bloc.dart';
 import 'package:ethiscan/injection.dart';
+import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/core/list_view_layout_body.dart';
 import 'package:ethiscan/presentation/favorites/widgets/favorites_card.dart';
@@ -25,6 +26,15 @@ class FavoritesPage extends StatefulWidget {
 }
 
 class _FavoritesPage extends State<FavoritesPage> {
+  late FavoritesBloc _favoritesBloc;
+
+  @override
+  void initState() {
+    _favoritesBloc = getIt();
+    _favoritesBloc.add(const FavoritesEvent.load());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<FavoritesBloc>(
@@ -50,7 +60,7 @@ class _FavoritesPage extends State<FavoritesPage> {
         backgroundColor: UIColors.lightScaffoldBackgroundColor,
         title: Text(I18nUtils.translate(
           context,
-          "favorites_bloc.title",
+          "favorites.title",
         )),
         titleTextStyle: const TextStyle(
             color: UIColors.lightPrimaryColor,
@@ -62,7 +72,7 @@ class _FavoritesPage extends State<FavoritesPage> {
         children: [
           const SizedBox(height: 15),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 0),
             child: Column(
               children: _getFavoritesCards(favorites, loading, error),
             ),
@@ -73,6 +83,7 @@ class _FavoritesPage extends State<FavoritesPage> {
   }
 
   List<Widget> _getFavoritesCards(List<String> favorites, bool loading, bool error) {
+    // loading = true;
     if(error) {
       return [
         CustomH3(I18nUtils.translate(context, "favorites.error-title")),
@@ -80,10 +91,20 @@ class _FavoritesPage extends State<FavoritesPage> {
       ];
     } else if(loading) {
       return [
-        const FavoriteCard(loading: true),
+        const Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          child: const CustomCircularLoading(),
+        ),
       ];
     } else {
-      return favorites.map((favorite) => FavoriteCard(favorite: favorite)).toList();
+      favorites = favorites.isEmpty ? ["test", "test 2"] : favorites;
+      List<Widget> widgets = [];
+      List<Widget> f = favorites.map((favorite) => FavoriteCard(favorite: favorite)).toList();
+      for (int i = 0; i < f.length; i++) {
+          widgets.add(const SizedBox(height: 15));
+          widgets.add(f[i]);
+      }
+      return widgets;
     }
   }
 }
