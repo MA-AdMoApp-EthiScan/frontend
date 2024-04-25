@@ -12,9 +12,9 @@ import 'package:ethiscan/presentation/providers/auth_provider.dart';
 
 import 'package:get_it/get_it.dart';
 import 'package:ethiscan/domain/repositories/auth_repository.dart';
-import 'package:ethiscan/domain/repositories/firestore_repository.dart';
+// import 'package:ethiscan/domain/repositories/firestore_repository.dart';
 import 'package:ethiscan/data/datasources/firebase_auth_data_source.dart';
-import 'package:ethiscan/data/datasources/firebase_firestore_data_source.dart';
+// import 'package:ethiscan/data/datasources/firebase_firestore_data_source.dart';
 
 
 void setup() {

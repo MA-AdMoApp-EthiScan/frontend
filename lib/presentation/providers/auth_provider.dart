@@ -11,7 +11,7 @@ class AuthenticationProvider extends ChangeNotifier {
             await authRepository.signIn(email, password);
             notifyListeners();
         } catch (e) {
-            print("Login error: $e");
+            //todo check this : print("Login error: $e");
             notifyListeners();
         }
     }
