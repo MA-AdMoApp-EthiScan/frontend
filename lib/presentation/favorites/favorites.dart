@@ -85,7 +85,7 @@ class _FavoritesPage extends State<FavoritesPage> {
 
   List<Widget> _getFavoritesCards(
       List<String> favorites, bool loading, bool error) {
-    // loading = true;
+    //error = true;
     if (error) {
       return [
         CustomH3(I18nUtils.translate(context, "favorites.error-title")),
