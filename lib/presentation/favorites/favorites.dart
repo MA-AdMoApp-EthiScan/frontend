@@ -102,7 +102,7 @@ class _FavoritesPage extends State<FavoritesPage> {
       favorites = favorites.isEmpty ? ["test", "test 2"] : favorites;
       List<Widget> widgets = [];
       List<Widget> f = favorites
-          .map((favorite) => FavoriteCard(favorite: favorite))
+          .map((favorite) => FavoriteCard(favorite: favorite, date: "12 nov. 2023")) // todo : use values from backend
           .toList();
       for (int i = 0; i < f.length; i++) {
         widgets.add(const SizedBox(height: 15));
