@@ -24,10 +24,10 @@ class PrimaryButton extends Button {
   }) : super(onTap, key: key, disabled: disabled || loading);
 
   @override
-  _PrimaryButtonState createState() => _PrimaryButtonState();
+  PrimaryButtonState createState() => PrimaryButtonState();
 }
 
-class _PrimaryButtonState extends ButtonState<PrimaryButton> {
+class PrimaryButtonState extends ButtonState<PrimaryButton> {
   @override
   Widget buildButton(BuildContext context) {
     return CustomBox(

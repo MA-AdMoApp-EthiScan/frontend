@@ -19,10 +19,10 @@ class LinkButton extends Button {
   }) : super(onTap, key: key, disabled: disabled);
 
   @override
-  _LinkButtonState createState() => _LinkButtonState();
+  LinkButtonState createState() => LinkButtonState();
 }
 
-class _LinkButtonState extends ButtonState<LinkButton> {
+class LinkButtonState extends ButtonState<LinkButton> {
   @override
   Widget buildButton(BuildContext context) {
     return CustomText(

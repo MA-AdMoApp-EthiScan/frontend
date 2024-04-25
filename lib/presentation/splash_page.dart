@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({super.key});
 
   @override
   State<StatefulWidget> createState() => _SplashPageState();
@@ -50,7 +50,7 @@ class _SplashPageState extends State<SplashPage> {
                   context,
                   "splash.version",
                   translationParams: {
-                    "version": ConfigurationConstants.DATASOURCE_VERSION
+                    "version": ConfigurationConstants.datasourceVersion
                   },
                 ),
               ),

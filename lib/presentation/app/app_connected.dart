@@ -6,13 +6,13 @@ import 'package:flutter/cupertino.dart';
 class AppConnected extends StatefulWidget {
   final User user;
 
-  const AppConnected({Key? key, required this.user}) : super(key: key);
+  const AppConnected({super.key, required this.user});
 
   @override
-  _AppConnectedState createState() => _AppConnectedState();
+  AppConnectedState createState() => AppConnectedState();
 }
 
-class _AppConnectedState extends State<AppConnected> {
+class AppConnectedState extends State<AppConnected> {
   @override
   void initState() {
     super.initState();
@@ -44,10 +44,10 @@ class UserProvider extends InheritedWidget {
   const UserProvider({
     // FIXME: might not work
     // TODO: provide bloc instead
-    Key? key,
+    super.key,
     required this.user,
-    required Widget child,
-  }) : super(key: key, child: child);
+    required super.child,
+  });
 
   static User? of(BuildContext context) {
     UserProvider? widget =
@@ -58,5 +58,5 @@ class UserProvider extends InheritedWidget {
 
   // TODO: check if the data changed
   @override
-  bool updateShouldNotify(UserProvider old) => true;
+  bool updateShouldNotify(UserProvider oldWidget) => true;
 }

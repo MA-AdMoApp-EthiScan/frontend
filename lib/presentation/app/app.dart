@@ -118,13 +118,13 @@ class _AppState extends State<App> {
     BuildContext context,
     MainUserDisconnected state,
   ) {
-    String? email;
+    // String? email;
     //if (state.user.settings.rememberMe == true && state.user.idm != null) {
     //  email = state.user.idm?.email;
     //}
 
-    return CustomApp(
-      key: const Key('DisconnectedApp'),
+    return const CustomApp(
+      key: Key('DisconnectedApp'),
       home:
           HomePage(), /*TODO : state.user.settings.firstTime == true
           ? const HomePage()
@@ -138,16 +138,16 @@ class AppLifecycleReactor extends StatefulWidget {
   final Widget child;
 
   const AppLifecycleReactor({
-    Key? key,
+    super.key,
     required this.reconnect,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
-  _AppLifecycleReactorState createState() => _AppLifecycleReactorState();
+  AppLifecycleReactorState createState() => AppLifecycleReactorState();
 }
 
-class _AppLifecycleReactorState extends State<AppLifecycleReactor>
+class AppLifecycleReactorState extends State<AppLifecycleReactor>
     with WidgetsBindingObserver {
   DateTime? _pauseTime;
 

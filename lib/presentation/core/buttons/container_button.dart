@@ -1,5 +1,4 @@
 import 'package:ethiscan/presentation/core/buttons/buttons.dart';
-import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -16,10 +15,10 @@ class OpacityButton extends Button {
   }) : super(onTap, key: key, disabled: disabled);
 
   @override
-  _OpacityButtonState createState() => _OpacityButtonState();
+  OpacityButtonState createState() => OpacityButtonState();
 }
 
-class _OpacityButtonState extends ButtonState<OpacityButton> {
+class OpacityButtonState extends ButtonState<OpacityButton> {
   @override
   HitTestBehavior? get behavior => HitTestBehavior.opaque;
 
@@ -36,8 +35,8 @@ class _OpacityButtonState extends ButtonState<OpacityButton> {
     );
   }
 
-  Color _boxColor() {
+  /*Color _boxColor() {
     if (widget.disabled) return UIColors.grey2;
     return active ? UIColors.grey4 : UIColors.white;
-  }
+  }*/
 }

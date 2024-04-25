@@ -12,11 +12,10 @@ class CustomApp extends StatelessWidget {
   final Map<String, Widget Function(BuildContext)> routes;
 
   const CustomApp({
-    Key? key,
+    super.key,
     required this.home,
-    Map<String, Widget Function(BuildContext)> routes = const {},
-  })  : routes = routes,
-        super(key: key);
+    this.routes = const {},
+  });
 
   @override
   Widget build(BuildContext context) {

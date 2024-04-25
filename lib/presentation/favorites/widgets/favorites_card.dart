@@ -9,14 +9,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavoriteCard extends MyCard {
   final String? favorite;
-  final bool loading;
   final bool error;
 
-  const FavoriteCard({this.favorite, this.error = false, this.loading = false})
+  const FavoriteCard({super.key, this.favorite, this.error = false})
       : super(
-          loading: loading,
           showChildWhileLoading: true,
-          disableNavigation: favorite == null || error || loading,
+          disableNavigation: favorite == null || error,
         );
 
   @override

@@ -11,12 +11,11 @@ class NavButton extends StatelessWidget {
   final void Function() onTap;
 
   const NavButton(
-      {Key? key,
+      {super.key,
       required this.icon,
       required this.text,
       required this.selected,
-      required this.onTap})
-      : super(key: key);
+      required this.onTap});
 
   Color get _iconColor =>
       selected ? UIColors.white : UIColors.lightPrimaryColor;

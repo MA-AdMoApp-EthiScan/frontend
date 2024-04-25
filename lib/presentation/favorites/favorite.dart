@@ -23,14 +23,11 @@ class FavoritePage extends StatefulWidget {
   // always marked "final".
 
   @override
-  State<FavoritePage> createState() => _FavoritePage(favoriteName);
+  State<FavoritePage> createState() => _FavoritePage();
 }
 
 class _FavoritePage extends State<FavoritePage> {
   late FavoriteBloc _favoriteBloc;
-  final String? favoriteName;
-
-  _FavoritePage(this.favoriteName);
 
   @override
   void initState() {
@@ -63,7 +60,7 @@ class _FavoritePage extends State<FavoritePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: UIColors.lightScaffoldBackgroundColor,
-        title: Text(this.favoriteName ??
+        title: Text(widget.favoriteName ??
             I18nUtils.translate(context, "favorite.title")),
         titleTextStyle: const TextStyle(
             color: UIColors.lightPrimaryColor,

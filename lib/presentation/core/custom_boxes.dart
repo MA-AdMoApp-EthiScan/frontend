@@ -10,13 +10,13 @@ class CustomBox extends StatelessWidget {
   final EdgeInsets innerPadding;
 
   const CustomBox({
-    Key? key,
+    super.key,
     this.child,
     this.color = UIColors.white,
     this.boxShape = BoxShape.rectangle,
     this.expand = false,
     this.innerPadding = const EdgeInsets.all(15),
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

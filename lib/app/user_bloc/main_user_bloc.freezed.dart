@@ -28,7 +28,6 @@ mixin _$MainUserEvent {
     required TResult Function() clearData,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Jwt jwt)? connect,
@@ -54,7 +53,6 @@ mixin _$MainUserEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_MainUserConnect value) connect,
@@ -67,7 +65,6 @@ mixin _$MainUserEvent {
     required TResult Function(_MainUserClearData value) clearData,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_MainUserConnect value)? connect,
@@ -107,9 +104,9 @@ class _$MainUserEventCopyWithImpl<$Res, $Val extends MainUserEvent>
     implements $MainUserEventCopyWith<$Res> {
   _$MainUserEventCopyWithImpl(this._value, this._then);
 
-// ignore: unused_field
+  // ignore: unused_field
   final $Val _value;
-// ignore: unused_field
+  // ignore: unused_field
   final $Res Function($Val) _then;
 }
 
@@ -1386,9 +1383,9 @@ class _$MainUserStateCopyWithImpl<$Res, $Val extends MainUserState>
     implements $MainUserStateCopyWith<$Res> {
   _$MainUserStateCopyWithImpl(this._value, this._then);
 
-// ignore: unused_field
+  // ignore: unused_field
   final $Val _value;
-// ignore: unused_field
+  // ignore: unused_field
   final $Res Function($Val) _then;
 }
 

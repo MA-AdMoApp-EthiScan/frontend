@@ -94,8 +94,8 @@ class _FavoritesPage extends State<FavoritesPage> {
     } else if (loading) {
       return [
         const Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-          child: const CustomCircularLoading(),
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          child: CustomCircularLoading(),
         ),
       ];
     } else {

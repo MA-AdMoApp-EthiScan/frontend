@@ -21,10 +21,10 @@ class BoxButton extends Button {
   }) : super(onTap, key: key, disabled: disabled);
 
   @override
-  _BoxButtonState createState() => _BoxButtonState();
+  BoxButtonState createState() => BoxButtonState();
 }
 
-class _BoxButtonState extends ButtonState<BoxButton> {
+class BoxButtonState extends ButtonState<BoxButton> {
   @override
   Widget buildButton(BuildContext context) {
     return CustomBox(

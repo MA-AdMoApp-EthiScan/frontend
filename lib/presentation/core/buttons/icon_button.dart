@@ -15,10 +15,10 @@ class PrimaryIconButton extends Button {
   }) : super(onTap, key: key, disabled: disabled);
 
   @override
-  _PrimaryIconButtonState createState() => _PrimaryIconButtonState();
+  PrimaryIconButtonState createState() => PrimaryIconButtonState();
 }
 
-class _PrimaryIconButtonState extends ButtonState<PrimaryIconButton> {
+class PrimaryIconButtonState extends ButtonState<PrimaryIconButton> {
   @override
   Widget buildButton(BuildContext context) {
     return CustomBox(
@@ -53,10 +53,10 @@ class SecondaryIconButton extends Button {
   }) : super(onTap, key: key, disabled: disabled);
 
   @override
-  _SecondaryIconButtonState createState() => _SecondaryIconButtonState();
+  SecondaryIconButtonState createState() => SecondaryIconButtonState();
 }
 
-class _SecondaryIconButtonState extends ButtonState<SecondaryIconButton> {
+class SecondaryIconButtonState extends ButtonState<SecondaryIconButton> {
   @override
   Widget buildButton(BuildContext context) {
     return Container(

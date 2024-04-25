@@ -4,12 +4,12 @@ abstract class Button extends StatefulWidget {
   final void Function()? onTap;
   final bool disabled;
 
-  const Button(this.onTap, {Key? key, this.disabled = false}) : super(key: key);
+  const Button(this.onTap, {super.key, this.disabled = false});
 }
 
 abstract class ButtonState<T extends Button> extends State<T>
     with SingleTickerProviderStateMixin {
-  static const Duration _ACTIVE_DURATION = Duration(milliseconds: 50);
+  static const Duration _activeDuration = Duration(milliseconds: 50);
 
   late AnimationController _animationController;
   late bool _active = false;
@@ -23,7 +23,7 @@ abstract class ButtonState<T extends Button> extends State<T>
     super.initState();
 
     _animationController = AnimationController(
-      duration: _ACTIVE_DURATION,
+      duration: _activeDuration,
       vsync: this,
     );
   }

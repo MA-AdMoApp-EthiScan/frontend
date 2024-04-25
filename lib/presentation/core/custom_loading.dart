@@ -8,11 +8,11 @@ class CustomCircularLoading extends StatelessWidget {
   final EdgeInsets padding;
 
   const CustomCircularLoading({
-    Key? key,
+    super.key,
     this.padding = const EdgeInsets.all(15),
     this.size = 40,
     this.color = UIColors.lightPrimaryColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -18,10 +18,10 @@ class SecondaryButton extends Button {
   }) : super(onTap, key: key, disabled: disabled);
 
   @override
-  _SecondaryButtonState createState() => _SecondaryButtonState();
+  SecondaryButtonState createState() => SecondaryButtonState();
 }
 
-class _SecondaryButtonState extends ButtonState<SecondaryButton> {
+class SecondaryButtonState extends ButtonState<SecondaryButton> {
   @override
   Widget buildButton(BuildContext context) {
     return CustomBox(

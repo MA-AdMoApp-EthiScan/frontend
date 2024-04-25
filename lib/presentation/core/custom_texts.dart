@@ -7,8 +7,7 @@ class CustomText extends StatelessWidget {
   final TextAlign? align;
 
   const CustomText(this.text,
-      {Key? key, this.style = TextStyles.text, this.align})
-      : super(key: key);
+      {super.key, this.style = TextStyles.text, this.align});
 
   @override
   Widget build(BuildContext context) {
@@ -21,38 +20,37 @@ class CustomText extends StatelessWidget {
 }
 
 class CustomH1 extends CustomText {
-  const CustomH1(String text, {Key? key, TextAlign? align})
-      : super(text, key: key, style: TextStyles.h1, align: align);
+  const CustomH1(super.text, {super.key, super.align})
+      : super(style: TextStyles.h1);
 }
 
 class CustomH2 extends CustomText {
-  const CustomH2(String text, {Key? key, TextAlign? align})
-      : super(text, key: key, style: TextStyles.h2, align: align);
+  const CustomH2(super.text, {super.key, super.align})
+      : super(style: TextStyles.h2);
 }
 
 class CustomH3 extends CustomText {
-  const CustomH3(String text, {Key? key, TextAlign? align})
-      : super(text, key: key, style: TextStyles.h3, align: align);
+  const CustomH3(super.text, {super.key, super.align})
+      : super(style: TextStyles.h3);
 }
 
 class CustomTextBold extends CustomText {
-  const CustomTextBold(String text, {Key? key, TextAlign? align})
-      : super(text, key: key, style: TextStyles.textBold, align: align);
+  const CustomTextBold(super.text, {super.key, super.align})
+      : super(style: TextStyles.textBold);
 }
 
 class CustomTextBoldColor extends CustomText {
-  CustomTextBoldColor(String text,
-      {Key? key, TextAlign? align, required Color color})
-      : super(text,
-            key: key, style: TextStyles.textBoldColor(color), align: align);
+  CustomTextBoldColor(super.text,
+      {super.key, super.align, required Color color})
+      : super(style: TextStyles.textBoldColor(color));
 }
 
 class CustomTextSmall extends CustomText {
-  const CustomTextSmall(String text, {Key? key, TextAlign? align})
-      : super(text, key: key, style: TextStyles.smallBold, align: align);
+  const CustomTextSmall(super.text, {super.key, super.align})
+      : super(style: TextStyles.smallBold);
 }
 
 class CustomTextSmallColor extends CustomText {
-  const CustomTextSmallColor(String text, {Key? key, TextAlign? align})
-      : super(text, key: key, style: TextStyles.smallBoldColor, align: align);
+  const CustomTextSmallColor(super.text, {super.key, super.align})
+      : super(style: TextStyles.smallBoldColor);
 }

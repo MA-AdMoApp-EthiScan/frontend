@@ -8,19 +8,19 @@ class ListViewLayoutBody extends StatefulWidget {
   final bool reverse;
 
   const ListViewLayoutBody({
-    Key? key,
+    super.key,
     this.controller,
     required this.children,
     this.padding,
     this.shrinkWrap = false,
     this.reverse = false,
-  }) : super(key: key);
+  });
 
   @override
-  _ListViewLayoutBodyState createState() => _ListViewLayoutBodyState();
+  ListViewLayoutBodyState createState() => ListViewLayoutBodyState();
 }
 
-class _ListViewLayoutBodyState extends State<ListViewLayoutBody> {
+class ListViewLayoutBodyState extends State<ListViewLayoutBody> {
   late ScrollController _scrollController;
 
   ScrollController get _controller => widget.controller ?? _scrollController;

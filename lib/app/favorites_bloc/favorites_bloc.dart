@@ -8,7 +8,7 @@ part 'favorites_state.dart';
 
 @injectable
 class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
-  FavoritesBloc() : super(FavoritesState.initial()) {
+  FavoritesBloc() : super(const FavoritesState.initial()) {
     on<FavoritesEvent>((event, emit) async {
       await event.when(
         load: () async {

@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
         labelColor: Colors.white,
         unselectedLabelColor: Colors.white70,
         indicatorSize: TabBarIndicatorSize.tab,
-        indicatorPadding: EdgeInsets.all(5.0),
+        indicatorPadding: const EdgeInsets.all(5.0),
         indicatorColor: UIColors.darkPrimaryColor,
         tabs: [
           Tab(
@@ -66,21 +66,21 @@ class _HomePageState extends State<HomePage> {
               context,
               "favorites.title",
             ),
-            icon: Icon(Icons.favorite),
+            icon: const Icon(Icons.favorite),
           ),
           Tab(
             text: I18nUtils.translate(
               context,
               "scan.title",
             ),
-            icon: Icon(Icons.qr_code),
+            icon: const Icon(Icons.qr_code),
           ),
           Tab(
             text: I18nUtils.translate(
               context,
               "parameter.title",
             ),
-            icon: Icon(Icons.settings),
+            icon: const Icon(Icons.settings),
           ),
         ],
       ),

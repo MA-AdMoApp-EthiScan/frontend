@@ -15,15 +15,14 @@ abstract class MyCard extends StatelessWidget {
   final Color color;
 
   const MyCard(
-      {Key? key,
+      {super.key,
       this.loading = false,
       this.swapNavigation = false,
       this.showChildWhileLoading = false,
       this.disableNavigation = false,
       this.hidden = false,
       this.color = UIColors.white,
-      this.padding = const EdgeInsets.symmetric(horizontal: 30)})
-      : super(key: key);
+      this.padding = const EdgeInsets.symmetric(horizontal: 30)});
 
   @override
   Widget build(BuildContext context) {
