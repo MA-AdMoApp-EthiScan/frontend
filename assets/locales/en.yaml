@@ -18,11 +18,15 @@ favorite:
   added: 'Added to Favorites'
   removed: 'Removed from Favorites'
   last_scan: 'Last scan : '
+  empty:
+    title: 'Empty page'
+    message: 'No favorite found'
 
 favorites:
   title: 'Favorites'
-  error-title: 'Error'
-  error-message: 'An error occurred while fetching favorites'
+  error:
+    title: 'Error'
+    message: 'An error occurred while fetching favorites'
 
 scan:
   title: 'Scan'

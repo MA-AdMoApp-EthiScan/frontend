@@ -170,7 +170,7 @@ mixin _$FavoriteState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String favorite) loaded,
+    required TResult Function(Product favorite) loaded,
     required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
@@ -178,7 +178,7 @@ mixin _$FavoriteState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String favorite)? loaded,
+    TResult? Function(Product favorite)? loaded,
     TResult? Function()? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -186,7 +186,7 @@ mixin _$FavoriteState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String favorite)? loaded,
+    TResult Function(Product favorite)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) =>
@@ -276,7 +276,7 @@ class _$FavoriteInitialImpl implements _FavoriteInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String favorite) loaded,
+    required TResult Function(Product favorite) loaded,
     required TResult Function() error,
   }) {
     return initial();
@@ -287,7 +287,7 @@ class _$FavoriteInitialImpl implements _FavoriteInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String favorite)? loaded,
+    TResult? Function(Product favorite)? loaded,
     TResult? Function()? error,
   }) {
     return initial?.call();
@@ -298,7 +298,7 @@ class _$FavoriteInitialImpl implements _FavoriteInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String favorite)? loaded,
+    TResult Function(Product favorite)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -390,7 +390,7 @@ class _$FavoriteLoadingImpl implements _FavoriteLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String favorite) loaded,
+    required TResult Function(Product favorite) loaded,
     required TResult Function() error,
   }) {
     return loading();
@@ -401,7 +401,7 @@ class _$FavoriteLoadingImpl implements _FavoriteLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String favorite)? loaded,
+    TResult? Function(Product favorite)? loaded,
     TResult? Function()? error,
   }) {
     return loading?.call();
@@ -412,7 +412,7 @@ class _$FavoriteLoadingImpl implements _FavoriteLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String favorite)? loaded,
+    TResult Function(Product favorite)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -470,7 +470,7 @@ abstract class _$$FavoriteLoadedImplCopyWith<$Res> {
           $Res Function(_$FavoriteLoadedImpl) then) =
       __$$FavoriteLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String favorite});
+  $Res call({Product favorite});
 }
 
 /// @nodoc
@@ -490,7 +490,7 @@ class __$$FavoriteLoadedImplCopyWithImpl<$Res>
       favorite: null == favorite
           ? _value.favorite
           : favorite // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Product,
     ));
   }
 }
@@ -501,7 +501,7 @@ class _$FavoriteLoadedImpl implements _FavoriteLoaded {
   const _$FavoriteLoadedImpl({required this.favorite});
 
   @override
-  final String favorite;
+  final Product favorite;
 
   @override
   String toString() {
@@ -532,7 +532,7 @@ class _$FavoriteLoadedImpl implements _FavoriteLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String favorite) loaded,
+    required TResult Function(Product favorite) loaded,
     required TResult Function() error,
   }) {
     return loaded(favorite);
@@ -543,7 +543,7 @@ class _$FavoriteLoadedImpl implements _FavoriteLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String favorite)? loaded,
+    TResult? Function(Product favorite)? loaded,
     TResult? Function()? error,
   }) {
     return loaded?.call(favorite);
@@ -554,7 +554,7 @@ class _$FavoriteLoadedImpl implements _FavoriteLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String favorite)? loaded,
+    TResult Function(Product favorite)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -603,10 +603,10 @@ class _$FavoriteLoadedImpl implements _FavoriteLoaded {
 }
 
 abstract class _FavoriteLoaded implements FavoriteState {
-  const factory _FavoriteLoaded({required final String favorite}) =
+  const factory _FavoriteLoaded({required final Product favorite}) =
       _$FavoriteLoadedImpl;
 
-  String get favorite;
+  Product get favorite;
   @JsonKey(ignore: true)
   _$$FavoriteLoadedImplCopyWith<_$FavoriteLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -652,7 +652,7 @@ class _$FavoriteErrorImpl implements _FavoriteError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String favorite) loaded,
+    required TResult Function(Product favorite) loaded,
     required TResult Function() error,
   }) {
     return error();
@@ -663,7 +663,7 @@ class _$FavoriteErrorImpl implements _FavoriteError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String favorite)? loaded,
+    TResult? Function(Product favorite)? loaded,
     TResult? Function()? error,
   }) {
     return error?.call();
@@ -674,7 +674,7 @@ class _$FavoriteErrorImpl implements _FavoriteError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String favorite)? loaded,
+    TResult Function(Product favorite)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {

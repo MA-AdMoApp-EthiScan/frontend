@@ -1,4 +1,6 @@
 import 'package:ethiscan/app/favorites_bloc/favorites_bloc.dart';
+import 'package:ethiscan/domain/entities/favorite_sort.dart';
+import 'package:ethiscan/domain/entities/list_product.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
@@ -27,27 +29,38 @@ class FavoritesPage extends StatefulWidget {
 
 class _FavoritesPage extends State<FavoritesPage> {
   late FavoritesBloc _favoritesBloc;
+  bool _isSearch = false;
 
   @override
   void initState() {
     _favoritesBloc = getIt();
-    _favoritesBloc.add(const FavoritesEvent.load());
+    _favoritesBloc.add(FavoritesEvent.load(FavoriteSort()));
     super.initState();
   }
 
   @override
+  void dispose() {
+    _favoritesBloc.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider<FavoritesBloc>(
-      create: (context) => getIt(),
-      child: BlocBuilder<FavoritesBloc, FavoritesState>(
-        builder: (context, state) => state.when(
-          loading: () => _page(context, loading: true),
-          error: () => _page(context, error: true),
-          initial: () => _page(context),
-          loaded: (List<String> favorites) =>
-              _page(context, favorites: favorites),
-        ),
-      ),
+    return BlocProvider.value(
+        value: _favoritesBloc,
+        child: BlocConsumer<FavoritesBloc, FavoritesState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            return state.maybeWhen(
+              loading: () => _page(context, loading: true),
+              error: () => _page(context, error: true),
+              initial: () => _page(context),
+              loaded: (List<ListProduct> favorites, FavoriteSort favoriteCriteria) =>
+                  _page(context, favorites: favorites, favoriteCriteria: favoriteCriteria),
+              orElse: () => _page(context),
+            );
+          },
+        )
     );
   }
 
@@ -55,8 +68,11 @@ class _FavoritesPage extends State<FavoritesPage> {
     BuildContext context, {
     bool loading = false,
     bool error = false,
-    List<String> favorites = const [],
+    List<ListProduct> favorites = const [],
+    FavoriteSort? favoriteCriteria,
   }) {
+
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: UIColors.lightScaffoldBackgroundColor,
@@ -64,6 +80,14 @@ class _FavoritesPage extends State<FavoritesPage> {
           context,
           "favorites.title",
         )),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search_outlined),
+            onPressed: () {
+              _isSearch = !_isSearch;
+            },
+          )
+        ],
         titleTextStyle: const TextStyle(
             color: UIColors.lightPrimaryColor,
             fontSize: 24,
@@ -84,12 +108,12 @@ class _FavoritesPage extends State<FavoritesPage> {
   }
 
   List<Widget> _getFavoritesCards(
-      List<String> favorites, bool loading, bool error) {
+      List<ListProduct> favorites, bool loading, bool error) {
     //error = true;
     if (error) {
       return [
-        CustomH3(I18nUtils.translate(context, "favorites.error-title")),
-        CustomText(I18nUtils.translate(context, "favorites.error-message"))
+        CustomH3(I18nUtils.translate(context, "favorites.error.title")),
+        CustomText(I18nUtils.translate(context, "favorites.error.message"))
       ];
     } else if (loading) {
       return [
@@ -99,10 +123,10 @@ class _FavoritesPage extends State<FavoritesPage> {
         ),
       ];
     } else {
-      favorites = favorites.isEmpty ? ["test", "test 2"] : favorites;
+      //favorites = favorites.isEmpty ? ["test", "test 2"] : favorites;
       List<Widget> widgets = [];
       List<Widget> f = favorites
-          .map((favorite) => FavoriteCard(favorite: favorite, date: "12 nov. 2023")) // todo : use values from backend
+          .map((favorite) => FavoriteCard(favorite: favorite))
           .toList();
       for (int i = 0; i < f.length; i++) {
         widgets.add(const SizedBox(height: 15));
@@ -111,4 +135,5 @@ class _FavoritesPage extends State<FavoritesPage> {
       return widgets;
     }
   }
+
 }
