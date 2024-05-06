@@ -1,6 +1,7 @@
 import 'package:ethiscan/domain/entities/sort_criteria.dart';
 
 class FavoriteSort {
+  final bool active;
   final String? name;
   final bool? isRange;
   final DateTime? dateFrom;
@@ -8,6 +9,7 @@ class FavoriteSort {
   final SortCriteria sortCriteria;
 
   FavoriteSort({
+    this.active = false,
     this.name,
     this.isRange,
     this.dateFrom,
@@ -22,6 +24,7 @@ class FavoriteSort {
   }
 
   FavoriteSort copyWith({
+    bool? active,
     String? name,
     bool? isRange,
     DateTime? dateFrom,
@@ -29,11 +32,17 @@ class FavoriteSort {
     SortCriteria? sortCriteria,
   }) {
     return FavoriteSort(
+      active: active ?? this.active,
       name: name ?? this.name,
       isRange: isRange ?? this.isRange,
       dateFrom: dateFrom ?? this.dateFrom,
       dateTo: dateTo ?? this.dateTo,
       sortCriteria: sortCriteria ?? this.sortCriteria,
     );
+  }
+
+  @override
+  String toString() {
+    return 'FavoriteSort{active: $active, name: $name, isRange: $isRange, dateFrom: $dateFrom, dateTo: $dateTo, sortCriteria: $sortCriteria}';
   }
 }

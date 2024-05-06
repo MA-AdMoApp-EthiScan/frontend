@@ -8,7 +8,6 @@ abstract class FavoritesState with _$FavoritesState {
 
   const factory FavoritesState.loaded({
     required List<ListProduct> favorites,
-    required FavoriteSort favoriteCriteria,
   }) = _FavoritesLoaded;
 
   const factory FavoritesState.error() = _FavoritesError;

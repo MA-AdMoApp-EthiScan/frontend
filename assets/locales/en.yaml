@@ -5,6 +5,7 @@ app:
   unknownVersion: 'Unknown Version'
   reloading: 'Reloading'
   disconnected: 'Disconnected'
+  search: 'Search'
   data:
     empty: 'No data available'
     error:
