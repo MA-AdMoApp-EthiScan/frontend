@@ -18,43 +18,53 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
     this._authRepository,
   ) : super(MainUserState.initial()) {
     on<MainUserEvent>((event, emit) async {
-      event.when(connect: (email, password) async {
-        UserCredential user_credential =
-            await _authRepository.signIn(email, password);
-        if (user_credential != null) {
-          EthiscanUser user = EthiscanUser(
-            id: user_credential.user!.uid,
-            name: "coco",
-            email: user_credential.user!.email!,
-          );
-          emit(MainUserState.connected(user: user));
-        } else {
-          emit(const MainUserState.disconnected());
+      await event.when(
+          connect: (email, password) async {
+            emit(const MainUserState.reloading());
+            try {
+              UserCredential userCredential = await _authRepository.signIn(email, password);
+              EthiscanUser user = EthiscanUser(
+                id: userCredential.user!.uid,
+                name: userCredential.user!.displayName!,
+                email: userCredential.user!.email!,
+              );
+              emit(MainUserState.connected(user: user));
+            } on FirebaseAuthException catch (e) {
+              emit(const MainUserState.disconnected());
+            }
+          },
+          firstLoad: () async {
+            //emit(const MainUserState.reloading());
+            add(const MainUserEvent.autoConnect(
+                minDelay: Duration(milliseconds: 2500)));
+          },
+          reload: () async {
+            //emit(const MainUserState.reloading());
+            add(const MainUserEvent.autoConnect(
+                minDelay: Duration(milliseconds: 500)));
+          },
+          accountCreated: (newUser) async {
+            emit(MainUserState.connected(user: newUser));
+          },
+          autoConnect: (minDelay) async {
+            //emit(const MainUserState.reloading());
+            //add(MainUserEvent.connect('coco', 'coco'));
+            emit(const MainUserState.disconnected());
+          },
+          disconnect: () async {
+            emit(const MainUserState.disconnected());
+          },
+          reset: () async {
+            //emit(const MainUserState.reloading());
+            add(const MainUserEvent.autoConnect(
+                minDelay: Duration(milliseconds: 500)));
+          },
+          clearData: () async {
+            //emit(const MainUserState.reloading());
+            add(const MainUserEvent.autoConnect(
+                minDelay: Duration(milliseconds: 500)));
+          });
         }
-      }, firstLoad: () {
-        //emit(const MainUserState.reloading());
-        add(const MainUserEvent.autoConnect(
-            minDelay: Duration(milliseconds: 2500)));
-      }, reload: () {
-        //emit(const MainUserState.reloading());
-        add(const MainUserEvent.autoConnect(
-            minDelay: Duration(milliseconds: 500)));
-      }, accountCreated: (newUser) {
-        emit(MainUserState.connected(user: newUser));
-      }, autoConnect: (minDelay) {
-        //emit(const MainUserState.reloading());
-        add(MainUserEvent.connect('coco', 'coco'));
-      }, disconnect: () {
-        emit(const MainUserState.disconnected());
-      }, reset: () {
-        //emit(const MainUserState.reloading());
-        add(const MainUserEvent.autoConnect(
-            minDelay: Duration(milliseconds: 500)));
-      }, clearData: () {
-        //emit(const MainUserState.reloading());
-        add(const MainUserEvent.autoConnect(
-            minDelay: Duration(milliseconds: 500)));
-      });
-    });
+      );
   }
 }

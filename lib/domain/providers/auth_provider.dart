@@ -4,15 +4,18 @@ import 'package:injectable/injectable.dart';
 
 @Singleton(as: AuthRepository)
 class AuthenticationProvider implements AuthRepository {
-  @singleton
-  FirebaseAuth get _firebaseAuth => FirebaseAuth.instance;
 
   AuthenticationProvider();
 
   @override
   Future<UserCredential> signIn(String email, String password) async {
-    return await _firebaseAuth.signInWithEmailAndPassword(
-        email: email, password: password);
+    try {
+      return await FirebaseAuth.instance
+      .signInWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      print(e);
+      throw e;
+    }
   }
 
   @override
