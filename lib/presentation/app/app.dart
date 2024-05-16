@@ -15,6 +15,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../utils/ui_colors.dart';
+
 class App extends StatefulWidget {
   const App({super.key});
 
@@ -23,6 +25,17 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  late MainUserBloc _mainUserBloc;
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    _mainUserBloc = getIt();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
@@ -39,9 +52,8 @@ class _AppState extends State<App> {
       }
     });
 
-    return BlocProvider<MainUserBloc>(
-      lazy: false,
-      create: (context) => getIt(),
+    return BlocProvider.value(
+      value: _mainUserBloc,
       child: BlocBuilder<MainUserBloc, MainUserState>(
         builder: (context, state) {
           return state.map(
@@ -118,9 +130,37 @@ class _AppState extends State<App> {
     BuildContext context,
     MainUserDisconnected state,
   ) {
-    return const CustomApp(
-      key: Key('DisconnectedApp'),
-      home: LoginPage(),
+    return CustomApp(
+      key: Key('DisconnectedApp'), // TODO use translated key
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: UIColors.lightPrimaryColor,
+          title: Text('Sign In'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextField(
+                controller: _emailController,
+                decoration: const InputDecoration(labelText: 'Email'),
+              ),
+              TextField(
+                controller: _passwordController,
+                decoration: const InputDecoration(labelText: 'Password'),
+                obscureText: true,
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () => _mainUserBloc.add(MainUserEvent.connect(
+                    _emailController.text, _passwordController.text)),
+                child: const Text('Sign In'),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

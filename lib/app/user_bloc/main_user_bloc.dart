@@ -23,9 +23,10 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
             emit(const MainUserState.reloading());
             try {
               UserCredential userCredential = await _authRepository.signIn(email, password);
+              print(userCredential);
               EthiscanUser user = EthiscanUser(
                 id: userCredential.user!.uid,
-                name: userCredential.user!.displayName!,
+                name: userCredential.user!.displayName ?? 'Unknown',
                 email: userCredential.user!.email!,
               );
               emit(MainUserState.connected(user: user));

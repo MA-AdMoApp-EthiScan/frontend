@@ -10,8 +10,7 @@ class AuthenticationProvider implements AuthRepository {
   @override
   Future<UserCredential> signIn(String email, String password) async {
     try {
-      return await FirebaseAuth.instance
-      .signInWithEmailAndPassword(email: email, password: password);
+      return await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       print(e);
       throw e;
