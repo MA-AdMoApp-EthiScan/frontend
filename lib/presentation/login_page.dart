@@ -23,7 +23,7 @@ class LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: UIColors.lightPrimaryColor,
-        title: const Text('Login'),
+        title: const Text('Sign In'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -41,9 +41,9 @@ class LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () => authProvider.login(
+              onPressed: () => authProvider.signIn(
                   _emailController.text, _passwordController.text),
-              child: const Text('Login'),
+              child: const Text('Sign In'),
             ),
           ],
         ),

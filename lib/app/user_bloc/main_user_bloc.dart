@@ -1,8 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:ethiscan/domain/entities/jwt.dart';
 import 'package:ethiscan/domain/entities/user.dart';
-import 'package:ethiscan/domain/entities/user_preferences.dart';
 import 'package:ethiscan/domain/repositories/auth_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -20,10 +19,10 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
   ) : super(MainUserState.initial()) {
     on<MainUserEvent>((event, emit) async {
       event.when(connect: (email, password) async {
-        Future<UserCredential> user_credential =
+        UserCredential user_credential =
             await _authRepository.signIn(email, password);
         if (user_credential != null) {
-          User user = User(
+          EthiscanUser user = EthiscanUser(
             id: user_credential.user!.uid,
             name: "coco",
             email: user_credential.user!.email!,

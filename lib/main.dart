@@ -9,7 +9,6 @@ import 'firebase_options.dart';
 
 import 'package:ethiscan/domain/repositories/auth_repository.dart';
 // import 'package:ethiscan/domain/repositories/firestore_repository.dart';
-import 'package:ethiscan/data/datasources/firebase_auth_data_source.dart';
 // import 'package:ethiscan/data/datasources/firebase_firestore_data_source.dart';
 
 void main() async {
@@ -21,8 +20,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  getIt.registerLazySingleton<AuthRepository>(
-      () => FirebaseAuthDataSource(FirebaseAuth.instance));
 
   runApp(const App());
 }

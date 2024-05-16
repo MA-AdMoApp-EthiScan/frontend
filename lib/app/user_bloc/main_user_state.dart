@@ -3,7 +3,7 @@ part of 'main_user_bloc.dart';
 @freezed
 abstract class MainUserState with _$MainUserState {
   const factory MainUserState.connected({
-    required User user,
+    required EthiscanUser user,
   }) = MainUserConnected;
 
   const factory MainUserState.reloading() = _MainUserReloading;

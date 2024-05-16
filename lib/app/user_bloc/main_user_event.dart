@@ -10,7 +10,7 @@ abstract class MainUserEvent with _$MainUserEvent {
   const factory MainUserEvent.reload() = _MainUserReload;
 
   const factory MainUserEvent.accountCreated({
-    required User newUser,
+    required EthiscanUser newUser,
   }) = _MainUserAccountCreated;
 
   const factory MainUserEvent.autoConnect({

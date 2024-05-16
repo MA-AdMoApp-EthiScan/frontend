@@ -1,11 +1,9 @@
-import 'package:ethiscan/domain/entities/user_preferences.dart';
-
-class User {
+class EthiscanUser {
   final String id;
   final String name;
   final String email;
 
-  User({
+  EthiscanUser({
     required this.id,
     required this.name,
     required this.email,
