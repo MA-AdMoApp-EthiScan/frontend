@@ -24,13 +24,12 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
         if (user_credential != null) {
           EthiscanUser user = EthiscanUser(
             id: user_credential.user!.uid,
-            name: "coco",
+            name: user_credential.user!.displayName ?? 'Unknown',
             email: user_credential.user!.email!,
           );
           emit(MainUserState.connected(user: user));
-        } else {
-          emit(const MainUserState.disconnected());
         }
+        emit(const MainUserState.disconnected());
       }, firstLoad: () {
         //emit(const MainUserState.reloading());
         add(const MainUserEvent.autoConnect(
@@ -43,7 +42,7 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
         emit(MainUserState.connected(user: newUser));
       }, autoConnect: (minDelay) {
         //emit(const MainUserState.reloading());
-        add(MainUserEvent.connect('coco', 'coco'));
+        add(const MainUserEvent.connect('coco', 'coco'));
       }, disconnect: () {
         emit(const MainUserState.disconnected());
       }, reset: () {
