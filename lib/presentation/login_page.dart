@@ -1,9 +1,7 @@
 import 'package:ethiscan/app/user_bloc/main_user_bloc.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import 'package:ethiscan/domain/providers/auth_provider.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
 
 class LoginPage extends StatefulWidget {
