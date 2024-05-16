@@ -1,3 +1,5 @@
+import 'package:ethiscan/app/user_bloc/main_user_bloc.dart';
+import 'package:ethiscan/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,14 +14,19 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
+  late MainUserBloc _mainUserBloc;
+
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
-    final authProvider =
-        Provider.of<AuthenticationProvider>(context, listen: false);
+  void initState() {
+    _mainUserBloc = getIt();
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: UIColors.lightPrimaryColor,
@@ -41,8 +48,8 @@ class LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () => authProvider.signIn(
-                  _emailController.text, _passwordController.text),
+              onPressed: () => _mainUserBloc.add(MainUserEvent.connect(
+                  _emailController.text, _passwordController.text)),
               child: const Text('Sign In'),
             ),
           ],
