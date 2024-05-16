@@ -4,9 +4,10 @@ import 'package:injectable/injectable.dart';
 
 @Singleton(as: AuthRepository)
 class AuthenticationProvider implements AuthRepository {
-  final FirebaseAuth _firebaseAuth;
+  @singleton
+  FirebaseAuth get _firebaseAuth => FirebaseAuth.instance;
 
-  AuthenticationProvider(this._firebaseAuth);
+  AuthenticationProvider();
 
   @override
   Future<UserCredential> signIn(String email, String password) async {
