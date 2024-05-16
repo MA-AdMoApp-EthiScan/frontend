@@ -2,7 +2,8 @@ part of 'main_user_bloc.dart';
 
 @freezed
 abstract class MainUserEvent with _$MainUserEvent {
-  const factory MainUserEvent.connect(Jwt jwt) = _MainUserConnect;
+  const factory MainUserEvent.connect(String email, String password) =
+      _MainUserConnect;
 
   const factory MainUserEvent.firstLoad() = _MainUserFirstLoad;
 

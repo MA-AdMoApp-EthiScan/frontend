@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:ethiscan/presentation/providers/auth_provider.dart';
+import 'package:ethiscan/domain/providers/auth_provider.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,7 +17,8 @@ class LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = Provider.of<AuthenticationProvider>(context, listen: false);
+    final authProvider =
+        Provider.of<AuthenticationProvider>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(
@@ -40,7 +41,8 @@ class LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () => authProvider.login(_emailController.text, _passwordController.text),
+              onPressed: () => authProvider.login(
+                  _emailController.text, _passwordController.text),
               child: const Text('Login'),
             ),
           ],

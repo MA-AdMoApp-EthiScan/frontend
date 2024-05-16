@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:ethiscan/domain/entities/jwt.dart';
 import 'package:ethiscan/domain/entities/user.dart';
 import 'package:ethiscan/domain/entities/user_preferences.dart';
+import 'package:ethiscan/domain/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -12,18 +13,25 @@ part 'main_user_state.dart';
 
 @injectable
 class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
-  MainUserBloc() : super(MainUserState.initial()) {
+  final AuthRepository _authRepository;
+
+  MainUserBloc(
+    this._authRepository,
+  ) : super(MainUserState.initial()) {
     on<MainUserEvent>((event, emit) async {
-      event.when(connect: (jwt) async {
-        List<MetaData> metadataSubscriptions = [];
-        User user = User(
-            id: 'id',
-            email: 'user@mail.com',
-            name: 'User',
-            preferences: UserPreferences(
-                metadataSubscriptions:
-                    metadataSubscriptions)); // todo get user from jwt
-        emit(MainUserState.connected(user: user));
+      event.when(connect: (email, password) async {
+        Future<UserCredential> user_credential =
+            await _authRepository.signIn(email, password);
+        if (user_credential != null) {
+          User user = User(
+            id: user_credential.user!.uid,
+            name: "coco",
+            email: user_credential.user!.email!,
+          );
+          emit(MainUserState.connected(user: user));
+        } else {
+          emit(const MainUserState.disconnected());
+        }
       }, firstLoad: () {
         //emit(const MainUserState.reloading());
         add(const MainUserEvent.autoConnect(
@@ -36,7 +44,7 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
         emit(MainUserState.connected(user: newUser));
       }, autoConnect: (minDelay) {
         //emit(const MainUserState.reloading());
-        add(MainUserEvent.connect(Jwt('jwt')));
+        add(MainUserEvent.connect('coco', 'coco'));
       }, disconnect: () {
         emit(const MainUserState.disconnected());
       }, reset: () {
