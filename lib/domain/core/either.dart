@@ -23,6 +23,7 @@ abstract class Either<L extends Failure, R> {
   const Either();
 
   factory Either.left(L failure) = Left;
+
   factory Either.right(R value) = Right;
 
   T when<T>(

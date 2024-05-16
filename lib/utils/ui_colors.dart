@@ -12,20 +12,28 @@ class UIColors {
   static const Color dark = Color(0xFF2D2D2D);
   static const Color black = Color(0xFF000000);
 
+  static const Color red = Color(0xFFCB3D3D);
+
   // Light Theme Colors
-  static const Color lightPrimaryColor = Color(0xFF20ae82); // The main green shade
-  static const Color lightAccentColor = Color(0xFFffce00); // The main yellow shade
+  static const Color lightPrimaryColor =
+      Color(0xFF20ae82); // The main green shade
+  static const Color lightAccentColor =
+      Color(0xFFffce00); // The main yellow shade
   static const Color lightCanvasColor = Colors.white;
   static const Color lightBackgroundColor = Colors.white;
-  static const Color lightScaffoldBackgroundColor = Color(0xFFE0F2F1); // very light green
+  static const Color lightScaffoldBackgroundColor =
+      Color(0xFFE0F2F1); // very light green
 
   // Dark Theme Colors
-  static const Color darkPrimaryColor = Color(0xFF005A4C); // a darker shade of the green
-  static const Color darkAccentColor = Color(0xFFC79600); // a darker shade of the yellow
-  static const Color darkCanvasColor = Color(0xFF121212); // standard for dark themes
+  static const Color darkPrimaryColor =
+      Color(0xFF005A4C); // a darker shade of the green
+  static const Color darkAccentColor =
+      Color(0xFFC79600); // a darker shade of the yellow
+  static const Color darkCanvasColor =
+      Color(0xFF121212); // standard for dark themes
   static const Color darkBackgroundColor = Color(0xFF121212);
-  static const Color darkScaffoldBackgroundColor = Color(0xFF003D33); // dark teal
-
+  static const Color darkScaffoldBackgroundColor =
+      Color(0xFF003D33); // dark teal
 
   static Color darken(Color color, [double amount = .1]) {
     assert(amount >= 0 && amount <= 1);
@@ -40,8 +48,10 @@ class UIColors {
     assert(amount >= 0 && amount <= 1);
 
     final hsl = HSLColor.fromColor(color);
-    final hslLight = hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
-    final finalColor = hslLight.withSaturation((hsl.saturation - amount).clamp(0.0, 1.0));
+    final hslLight =
+        hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
+    final finalColor =
+        hslLight.withSaturation((hsl.saturation - amount).clamp(0.0, 1.0));
 
     return finalColor.toColor();
   }

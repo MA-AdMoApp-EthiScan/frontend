@@ -1,9 +1,12 @@
+import 'package:ethiscan/presentation/favorites/favorites.dart';
+import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../utils/ui_colors.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -15,10 +18,10 @@ class MyHomePage extends StatefulWidget {
   // always marked "final".
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -32,13 +35,14 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: UIColors.lightPrimaryColor,
-          title: const Text("EthiScan"),
-          //titleTextStyle: TextStyle(color: UIColors.white),
+          title: SvgPicture.asset(
+            "assets/images/logo_white.svg",
+          ),
         ),
         bottomNavigationBar: menu(),
         body: const TabBarView(
           children: [
-            Icon(Icons.favorite),
+            FavoritesPage(),
             Icon(Icons.qr_code),
             Icon(Icons.settings),
           ],
@@ -46,27 +50,37 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
   Widget menu() {
     return Container(
       color: UIColors.lightPrimaryColor,
-      child: const TabBar(
+      child: TabBar(
         labelColor: Colors.white,
         unselectedLabelColor: Colors.white70,
         indicatorSize: TabBarIndicatorSize.tab,
-        indicatorPadding: EdgeInsets.all(5.0),
+        indicatorPadding: const EdgeInsets.all(5.0),
         indicatorColor: UIColors.darkPrimaryColor,
         tabs: [
           Tab(
-            text: "Favoris",
-            icon: Icon(Icons.favorite),
+            text: I18nUtils.translate(
+              context,
+              "favorites.title",
+            ),
+            icon: const Icon(Icons.favorite),
           ),
           Tab(
-            text: "Scan",
-            icon: Icon(Icons.qr_code),
+            text: I18nUtils.translate(
+              context,
+              "scan.title",
+            ),
+            icon: const Icon(Icons.qr_code),
           ),
           Tab(
-            text: "Parameters",
-            icon: Icon(Icons.settings),
+            text: I18nUtils.translate(
+              context,
+              "parameter.title",
+            ),
+            icon: const Icon(Icons.settings),
           ),
         ],
       ),

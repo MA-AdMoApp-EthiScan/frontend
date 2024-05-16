@@ -10,6 +10,7 @@ class I18nUtils {
     String? fallbackKey,
     Map<String, String>? translationParams,
   }) {
+    fallbackKey ??= 'en';
     return FlutterI18n.translate(
       context,
       translationKey,
