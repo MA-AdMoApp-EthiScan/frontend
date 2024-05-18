@@ -21,7 +21,7 @@ mixin _$MainUserEvent {
     required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
-    required TResult Function(EthiscanUser newUser) accountCreated,
+    required TResult Function(String email, String password) register,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
     required TResult Function() reset,
@@ -33,7 +33,7 @@ mixin _$MainUserEvent {
     TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
-    TResult? Function(EthiscanUser newUser)? accountCreated,
+    TResult? Function(String email, String password)? register,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
     TResult? Function()? reset,
@@ -45,7 +45,7 @@ mixin _$MainUserEvent {
     TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
-    TResult Function(EthiscanUser newUser)? accountCreated,
+    TResult Function(String email, String password)? register,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
     TResult Function()? reset,
@@ -58,7 +58,7 @@ mixin _$MainUserEvent {
     required TResult Function(_MainUserConnect value) connect,
     required TResult Function(_MainUserFirstLoad value) firstLoad,
     required TResult Function(_MainUserReload value) reload,
-    required TResult Function(_MainUserAccountCreated value) accountCreated,
+    required TResult Function(_MainUserRegister value) register,
     required TResult Function(_MainUserAutoConnect value) autoConnect,
     required TResult Function(_MainUserDisconnect value) disconnect,
     required TResult Function(_MainUserReset value) reset,
@@ -70,7 +70,7 @@ mixin _$MainUserEvent {
     TResult? Function(_MainUserConnect value)? connect,
     TResult? Function(_MainUserFirstLoad value)? firstLoad,
     TResult? Function(_MainUserReload value)? reload,
-    TResult? Function(_MainUserAccountCreated value)? accountCreated,
+    TResult? Function(_MainUserRegister value)? register,
     TResult? Function(_MainUserAutoConnect value)? autoConnect,
     TResult? Function(_MainUserDisconnect value)? disconnect,
     TResult? Function(_MainUserReset value)? reset,
@@ -82,7 +82,7 @@ mixin _$MainUserEvent {
     TResult Function(_MainUserConnect value)? connect,
     TResult Function(_MainUserFirstLoad value)? firstLoad,
     TResult Function(_MainUserReload value)? reload,
-    TResult Function(_MainUserAccountCreated value)? accountCreated,
+    TResult Function(_MainUserRegister value)? register,
     TResult Function(_MainUserAutoConnect value)? autoConnect,
     TResult Function(_MainUserDisconnect value)? disconnect,
     TResult Function(_MainUserReset value)? reset,
@@ -187,7 +187,7 @@ class _$MainUserConnectImpl implements _MainUserConnect {
     required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
-    required TResult Function(EthiscanUser newUser) accountCreated,
+    required TResult Function(String email, String password) register,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
     required TResult Function() reset,
@@ -202,7 +202,7 @@ class _$MainUserConnectImpl implements _MainUserConnect {
     TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
-    TResult? Function(EthiscanUser newUser)? accountCreated,
+    TResult? Function(String email, String password)? register,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
     TResult? Function()? reset,
@@ -217,7 +217,7 @@ class _$MainUserConnectImpl implements _MainUserConnect {
     TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
-    TResult Function(EthiscanUser newUser)? accountCreated,
+    TResult Function(String email, String password)? register,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
     TResult Function()? reset,
@@ -236,7 +236,7 @@ class _$MainUserConnectImpl implements _MainUserConnect {
     required TResult Function(_MainUserConnect value) connect,
     required TResult Function(_MainUserFirstLoad value) firstLoad,
     required TResult Function(_MainUserReload value) reload,
-    required TResult Function(_MainUserAccountCreated value) accountCreated,
+    required TResult Function(_MainUserRegister value) register,
     required TResult Function(_MainUserAutoConnect value) autoConnect,
     required TResult Function(_MainUserDisconnect value) disconnect,
     required TResult Function(_MainUserReset value) reset,
@@ -251,7 +251,7 @@ class _$MainUserConnectImpl implements _MainUserConnect {
     TResult? Function(_MainUserConnect value)? connect,
     TResult? Function(_MainUserFirstLoad value)? firstLoad,
     TResult? Function(_MainUserReload value)? reload,
-    TResult? Function(_MainUserAccountCreated value)? accountCreated,
+    TResult? Function(_MainUserRegister value)? register,
     TResult? Function(_MainUserAutoConnect value)? autoConnect,
     TResult? Function(_MainUserDisconnect value)? disconnect,
     TResult? Function(_MainUserReset value)? reset,
@@ -266,7 +266,7 @@ class _$MainUserConnectImpl implements _MainUserConnect {
     TResult Function(_MainUserConnect value)? connect,
     TResult Function(_MainUserFirstLoad value)? firstLoad,
     TResult Function(_MainUserReload value)? reload,
-    TResult Function(_MainUserAccountCreated value)? accountCreated,
+    TResult Function(_MainUserRegister value)? register,
     TResult Function(_MainUserAutoConnect value)? autoConnect,
     TResult Function(_MainUserDisconnect value)? disconnect,
     TResult Function(_MainUserReset value)? reset,
@@ -332,7 +332,7 @@ class _$MainUserFirstLoadImpl implements _MainUserFirstLoad {
     required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
-    required TResult Function(EthiscanUser newUser) accountCreated,
+    required TResult Function(String email, String password) register,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
     required TResult Function() reset,
@@ -347,7 +347,7 @@ class _$MainUserFirstLoadImpl implements _MainUserFirstLoad {
     TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
-    TResult? Function(EthiscanUser newUser)? accountCreated,
+    TResult? Function(String email, String password)? register,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
     TResult? Function()? reset,
@@ -362,7 +362,7 @@ class _$MainUserFirstLoadImpl implements _MainUserFirstLoad {
     TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
-    TResult Function(EthiscanUser newUser)? accountCreated,
+    TResult Function(String email, String password)? register,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
     TResult Function()? reset,
@@ -381,7 +381,7 @@ class _$MainUserFirstLoadImpl implements _MainUserFirstLoad {
     required TResult Function(_MainUserConnect value) connect,
     required TResult Function(_MainUserFirstLoad value) firstLoad,
     required TResult Function(_MainUserReload value) reload,
-    required TResult Function(_MainUserAccountCreated value) accountCreated,
+    required TResult Function(_MainUserRegister value) register,
     required TResult Function(_MainUserAutoConnect value) autoConnect,
     required TResult Function(_MainUserDisconnect value) disconnect,
     required TResult Function(_MainUserReset value) reset,
@@ -396,7 +396,7 @@ class _$MainUserFirstLoadImpl implements _MainUserFirstLoad {
     TResult? Function(_MainUserConnect value)? connect,
     TResult? Function(_MainUserFirstLoad value)? firstLoad,
     TResult? Function(_MainUserReload value)? reload,
-    TResult? Function(_MainUserAccountCreated value)? accountCreated,
+    TResult? Function(_MainUserRegister value)? register,
     TResult? Function(_MainUserAutoConnect value)? autoConnect,
     TResult? Function(_MainUserDisconnect value)? disconnect,
     TResult? Function(_MainUserReset value)? reset,
@@ -411,7 +411,7 @@ class _$MainUserFirstLoadImpl implements _MainUserFirstLoad {
     TResult Function(_MainUserConnect value)? connect,
     TResult Function(_MainUserFirstLoad value)? firstLoad,
     TResult Function(_MainUserReload value)? reload,
-    TResult Function(_MainUserAccountCreated value)? accountCreated,
+    TResult Function(_MainUserRegister value)? register,
     TResult Function(_MainUserAutoConnect value)? autoConnect,
     TResult Function(_MainUserDisconnect value)? disconnect,
     TResult Function(_MainUserReset value)? reset,
@@ -470,7 +470,7 @@ class _$MainUserReloadImpl implements _MainUserReload {
     required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
-    required TResult Function(EthiscanUser newUser) accountCreated,
+    required TResult Function(String email, String password) register,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
     required TResult Function() reset,
@@ -485,7 +485,7 @@ class _$MainUserReloadImpl implements _MainUserReload {
     TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
-    TResult? Function(EthiscanUser newUser)? accountCreated,
+    TResult? Function(String email, String password)? register,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
     TResult? Function()? reset,
@@ -500,7 +500,7 @@ class _$MainUserReloadImpl implements _MainUserReload {
     TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
-    TResult Function(EthiscanUser newUser)? accountCreated,
+    TResult Function(String email, String password)? register,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
     TResult Function()? reset,
@@ -519,7 +519,7 @@ class _$MainUserReloadImpl implements _MainUserReload {
     required TResult Function(_MainUserConnect value) connect,
     required TResult Function(_MainUserFirstLoad value) firstLoad,
     required TResult Function(_MainUserReload value) reload,
-    required TResult Function(_MainUserAccountCreated value) accountCreated,
+    required TResult Function(_MainUserRegister value) register,
     required TResult Function(_MainUserAutoConnect value) autoConnect,
     required TResult Function(_MainUserDisconnect value) disconnect,
     required TResult Function(_MainUserReset value) reset,
@@ -534,7 +534,7 @@ class _$MainUserReloadImpl implements _MainUserReload {
     TResult? Function(_MainUserConnect value)? connect,
     TResult? Function(_MainUserFirstLoad value)? firstLoad,
     TResult? Function(_MainUserReload value)? reload,
-    TResult? Function(_MainUserAccountCreated value)? accountCreated,
+    TResult? Function(_MainUserRegister value)? register,
     TResult? Function(_MainUserAutoConnect value)? autoConnect,
     TResult? Function(_MainUserDisconnect value)? disconnect,
     TResult? Function(_MainUserReset value)? reset,
@@ -549,7 +549,7 @@ class _$MainUserReloadImpl implements _MainUserReload {
     TResult Function(_MainUserConnect value)? connect,
     TResult Function(_MainUserFirstLoad value)? firstLoad,
     TResult Function(_MainUserReload value)? reload,
-    TResult Function(_MainUserAccountCreated value)? accountCreated,
+    TResult Function(_MainUserRegister value)? register,
     TResult Function(_MainUserAutoConnect value)? autoConnect,
     TResult Function(_MainUserDisconnect value)? disconnect,
     TResult Function(_MainUserReset value)? reset,
@@ -568,68 +568,75 @@ abstract class _MainUserReload implements MainUserEvent {
 }
 
 /// @nodoc
-abstract class _$$MainUserAccountCreatedImplCopyWith<$Res> {
-  factory _$$MainUserAccountCreatedImplCopyWith(
-          _$MainUserAccountCreatedImpl value,
-          $Res Function(_$MainUserAccountCreatedImpl) then) =
-      __$$MainUserAccountCreatedImplCopyWithImpl<$Res>;
+abstract class _$$MainUserRegisterImplCopyWith<$Res> {
+  factory _$$MainUserRegisterImplCopyWith(_$MainUserRegisterImpl value,
+          $Res Function(_$MainUserRegisterImpl) then) =
+      __$$MainUserRegisterImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({EthiscanUser newUser});
+  $Res call({String email, String password});
 }
 
 /// @nodoc
-class __$$MainUserAccountCreatedImplCopyWithImpl<$Res>
-    extends _$MainUserEventCopyWithImpl<$Res, _$MainUserAccountCreatedImpl>
-    implements _$$MainUserAccountCreatedImplCopyWith<$Res> {
-  __$$MainUserAccountCreatedImplCopyWithImpl(
-      _$MainUserAccountCreatedImpl _value,
-      $Res Function(_$MainUserAccountCreatedImpl) _then)
+class __$$MainUserRegisterImplCopyWithImpl<$Res>
+    extends _$MainUserEventCopyWithImpl<$Res, _$MainUserRegisterImpl>
+    implements _$$MainUserRegisterImplCopyWith<$Res> {
+  __$$MainUserRegisterImplCopyWithImpl(_$MainUserRegisterImpl _value,
+      $Res Function(_$MainUserRegisterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? newUser = null,
+    Object? email = null,
+    Object? password = null,
   }) {
-    return _then(_$MainUserAccountCreatedImpl(
-      newUser: null == newUser
-          ? _value.newUser
-          : newUser // ignore: cast_nullable_to_non_nullable
-              as EthiscanUser,
+    return _then(_$MainUserRegisterImpl(
+      null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _$MainUserAccountCreatedImpl implements _MainUserAccountCreated {
-  const _$MainUserAccountCreatedImpl({required this.newUser});
+class _$MainUserRegisterImpl implements _MainUserRegister {
+  const _$MainUserRegisterImpl(this.email, this.password);
 
   @override
-  final EthiscanUser newUser;
+  final String email;
+  @override
+  final String password;
 
   @override
   String toString() {
-    return 'MainUserEvent.accountCreated(newUser: $newUser)';
+    return 'MainUserEvent.register(email: $email, password: $password)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MainUserAccountCreatedImpl &&
-            (identical(other.newUser, newUser) || other.newUser == newUser));
+            other is _$MainUserRegisterImpl &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, newUser);
+  int get hashCode => Object.hash(runtimeType, email, password);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$MainUserAccountCreatedImplCopyWith<_$MainUserAccountCreatedImpl>
-      get copyWith => __$$MainUserAccountCreatedImplCopyWithImpl<
-          _$MainUserAccountCreatedImpl>(this, _$identity);
+  _$$MainUserRegisterImplCopyWith<_$MainUserRegisterImpl> get copyWith =>
+      __$$MainUserRegisterImplCopyWithImpl<_$MainUserRegisterImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -637,13 +644,13 @@ class _$MainUserAccountCreatedImpl implements _MainUserAccountCreated {
     required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
-    required TResult Function(EthiscanUser newUser) accountCreated,
+    required TResult Function(String email, String password) register,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
     required TResult Function() reset,
     required TResult Function() clearData,
   }) {
-    return accountCreated(newUser);
+    return register(email, password);
   }
 
   @override
@@ -652,13 +659,13 @@ class _$MainUserAccountCreatedImpl implements _MainUserAccountCreated {
     TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
-    TResult? Function(EthiscanUser newUser)? accountCreated,
+    TResult? Function(String email, String password)? register,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
     TResult? Function()? reset,
     TResult? Function()? clearData,
   }) {
-    return accountCreated?.call(newUser);
+    return register?.call(email, password);
   }
 
   @override
@@ -667,15 +674,15 @@ class _$MainUserAccountCreatedImpl implements _MainUserAccountCreated {
     TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
-    TResult Function(EthiscanUser newUser)? accountCreated,
+    TResult Function(String email, String password)? register,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
     TResult Function()? reset,
     TResult Function()? clearData,
     required TResult orElse(),
   }) {
-    if (accountCreated != null) {
-      return accountCreated(newUser);
+    if (register != null) {
+      return register(email, password);
     }
     return orElse();
   }
@@ -686,13 +693,13 @@ class _$MainUserAccountCreatedImpl implements _MainUserAccountCreated {
     required TResult Function(_MainUserConnect value) connect,
     required TResult Function(_MainUserFirstLoad value) firstLoad,
     required TResult Function(_MainUserReload value) reload,
-    required TResult Function(_MainUserAccountCreated value) accountCreated,
+    required TResult Function(_MainUserRegister value) register,
     required TResult Function(_MainUserAutoConnect value) autoConnect,
     required TResult Function(_MainUserDisconnect value) disconnect,
     required TResult Function(_MainUserReset value) reset,
     required TResult Function(_MainUserClearData value) clearData,
   }) {
-    return accountCreated(this);
+    return register(this);
   }
 
   @override
@@ -701,13 +708,13 @@ class _$MainUserAccountCreatedImpl implements _MainUserAccountCreated {
     TResult? Function(_MainUserConnect value)? connect,
     TResult? Function(_MainUserFirstLoad value)? firstLoad,
     TResult? Function(_MainUserReload value)? reload,
-    TResult? Function(_MainUserAccountCreated value)? accountCreated,
+    TResult? Function(_MainUserRegister value)? register,
     TResult? Function(_MainUserAutoConnect value)? autoConnect,
     TResult? Function(_MainUserDisconnect value)? disconnect,
     TResult? Function(_MainUserReset value)? reset,
     TResult? Function(_MainUserClearData value)? clearData,
   }) {
-    return accountCreated?.call(this);
+    return register?.call(this);
   }
 
   @override
@@ -716,28 +723,29 @@ class _$MainUserAccountCreatedImpl implements _MainUserAccountCreated {
     TResult Function(_MainUserConnect value)? connect,
     TResult Function(_MainUserFirstLoad value)? firstLoad,
     TResult Function(_MainUserReload value)? reload,
-    TResult Function(_MainUserAccountCreated value)? accountCreated,
+    TResult Function(_MainUserRegister value)? register,
     TResult Function(_MainUserAutoConnect value)? autoConnect,
     TResult Function(_MainUserDisconnect value)? disconnect,
     TResult Function(_MainUserReset value)? reset,
     TResult Function(_MainUserClearData value)? clearData,
     required TResult orElse(),
   }) {
-    if (accountCreated != null) {
-      return accountCreated(this);
+    if (register != null) {
+      return register(this);
     }
     return orElse();
   }
 }
 
-abstract class _MainUserAccountCreated implements MainUserEvent {
-  const factory _MainUserAccountCreated({required final EthiscanUser newUser}) =
-      _$MainUserAccountCreatedImpl;
+abstract class _MainUserRegister implements MainUserEvent {
+  const factory _MainUserRegister(final String email, final String password) =
+      _$MainUserRegisterImpl;
 
-  EthiscanUser get newUser;
+  String get email;
+  String get password;
   @JsonKey(ignore: true)
-  _$$MainUserAccountCreatedImplCopyWith<_$MainUserAccountCreatedImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$MainUserRegisterImplCopyWith<_$MainUserRegisterImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -810,7 +818,7 @@ class _$MainUserAutoConnectImpl implements _MainUserAutoConnect {
     required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
-    required TResult Function(EthiscanUser newUser) accountCreated,
+    required TResult Function(String email, String password) register,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
     required TResult Function() reset,
@@ -825,7 +833,7 @@ class _$MainUserAutoConnectImpl implements _MainUserAutoConnect {
     TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
-    TResult? Function(EthiscanUser newUser)? accountCreated,
+    TResult? Function(String email, String password)? register,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
     TResult? Function()? reset,
@@ -840,7 +848,7 @@ class _$MainUserAutoConnectImpl implements _MainUserAutoConnect {
     TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
-    TResult Function(EthiscanUser newUser)? accountCreated,
+    TResult Function(String email, String password)? register,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
     TResult Function()? reset,
@@ -859,7 +867,7 @@ class _$MainUserAutoConnectImpl implements _MainUserAutoConnect {
     required TResult Function(_MainUserConnect value) connect,
     required TResult Function(_MainUserFirstLoad value) firstLoad,
     required TResult Function(_MainUserReload value) reload,
-    required TResult Function(_MainUserAccountCreated value) accountCreated,
+    required TResult Function(_MainUserRegister value) register,
     required TResult Function(_MainUserAutoConnect value) autoConnect,
     required TResult Function(_MainUserDisconnect value) disconnect,
     required TResult Function(_MainUserReset value) reset,
@@ -874,7 +882,7 @@ class _$MainUserAutoConnectImpl implements _MainUserAutoConnect {
     TResult? Function(_MainUserConnect value)? connect,
     TResult? Function(_MainUserFirstLoad value)? firstLoad,
     TResult? Function(_MainUserReload value)? reload,
-    TResult? Function(_MainUserAccountCreated value)? accountCreated,
+    TResult? Function(_MainUserRegister value)? register,
     TResult? Function(_MainUserAutoConnect value)? autoConnect,
     TResult? Function(_MainUserDisconnect value)? disconnect,
     TResult? Function(_MainUserReset value)? reset,
@@ -889,7 +897,7 @@ class _$MainUserAutoConnectImpl implements _MainUserAutoConnect {
     TResult Function(_MainUserConnect value)? connect,
     TResult Function(_MainUserFirstLoad value)? firstLoad,
     TResult Function(_MainUserReload value)? reload,
-    TResult Function(_MainUserAccountCreated value)? accountCreated,
+    TResult Function(_MainUserRegister value)? register,
     TResult Function(_MainUserAutoConnect value)? autoConnect,
     TResult Function(_MainUserDisconnect value)? disconnect,
     TResult Function(_MainUserReset value)? reset,
@@ -954,7 +962,7 @@ class _$MainUserDisconnectImpl implements _MainUserDisconnect {
     required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
-    required TResult Function(EthiscanUser newUser) accountCreated,
+    required TResult Function(String email, String password) register,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
     required TResult Function() reset,
@@ -969,7 +977,7 @@ class _$MainUserDisconnectImpl implements _MainUserDisconnect {
     TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
-    TResult? Function(EthiscanUser newUser)? accountCreated,
+    TResult? Function(String email, String password)? register,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
     TResult? Function()? reset,
@@ -984,7 +992,7 @@ class _$MainUserDisconnectImpl implements _MainUserDisconnect {
     TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
-    TResult Function(EthiscanUser newUser)? accountCreated,
+    TResult Function(String email, String password)? register,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
     TResult Function()? reset,
@@ -1003,7 +1011,7 @@ class _$MainUserDisconnectImpl implements _MainUserDisconnect {
     required TResult Function(_MainUserConnect value) connect,
     required TResult Function(_MainUserFirstLoad value) firstLoad,
     required TResult Function(_MainUserReload value) reload,
-    required TResult Function(_MainUserAccountCreated value) accountCreated,
+    required TResult Function(_MainUserRegister value) register,
     required TResult Function(_MainUserAutoConnect value) autoConnect,
     required TResult Function(_MainUserDisconnect value) disconnect,
     required TResult Function(_MainUserReset value) reset,
@@ -1018,7 +1026,7 @@ class _$MainUserDisconnectImpl implements _MainUserDisconnect {
     TResult? Function(_MainUserConnect value)? connect,
     TResult? Function(_MainUserFirstLoad value)? firstLoad,
     TResult? Function(_MainUserReload value)? reload,
-    TResult? Function(_MainUserAccountCreated value)? accountCreated,
+    TResult? Function(_MainUserRegister value)? register,
     TResult? Function(_MainUserAutoConnect value)? autoConnect,
     TResult? Function(_MainUserDisconnect value)? disconnect,
     TResult? Function(_MainUserReset value)? reset,
@@ -1033,7 +1041,7 @@ class _$MainUserDisconnectImpl implements _MainUserDisconnect {
     TResult Function(_MainUserConnect value)? connect,
     TResult Function(_MainUserFirstLoad value)? firstLoad,
     TResult Function(_MainUserReload value)? reload,
-    TResult Function(_MainUserAccountCreated value)? accountCreated,
+    TResult Function(_MainUserRegister value)? register,
     TResult Function(_MainUserAutoConnect value)? autoConnect,
     TResult Function(_MainUserDisconnect value)? disconnect,
     TResult Function(_MainUserReset value)? reset,
@@ -1092,7 +1100,7 @@ class _$MainUserResetImpl implements _MainUserReset {
     required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
-    required TResult Function(EthiscanUser newUser) accountCreated,
+    required TResult Function(String email, String password) register,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
     required TResult Function() reset,
@@ -1107,7 +1115,7 @@ class _$MainUserResetImpl implements _MainUserReset {
     TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
-    TResult? Function(EthiscanUser newUser)? accountCreated,
+    TResult? Function(String email, String password)? register,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
     TResult? Function()? reset,
@@ -1122,7 +1130,7 @@ class _$MainUserResetImpl implements _MainUserReset {
     TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
-    TResult Function(EthiscanUser newUser)? accountCreated,
+    TResult Function(String email, String password)? register,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
     TResult Function()? reset,
@@ -1141,7 +1149,7 @@ class _$MainUserResetImpl implements _MainUserReset {
     required TResult Function(_MainUserConnect value) connect,
     required TResult Function(_MainUserFirstLoad value) firstLoad,
     required TResult Function(_MainUserReload value) reload,
-    required TResult Function(_MainUserAccountCreated value) accountCreated,
+    required TResult Function(_MainUserRegister value) register,
     required TResult Function(_MainUserAutoConnect value) autoConnect,
     required TResult Function(_MainUserDisconnect value) disconnect,
     required TResult Function(_MainUserReset value) reset,
@@ -1156,7 +1164,7 @@ class _$MainUserResetImpl implements _MainUserReset {
     TResult? Function(_MainUserConnect value)? connect,
     TResult? Function(_MainUserFirstLoad value)? firstLoad,
     TResult? Function(_MainUserReload value)? reload,
-    TResult? Function(_MainUserAccountCreated value)? accountCreated,
+    TResult? Function(_MainUserRegister value)? register,
     TResult? Function(_MainUserAutoConnect value)? autoConnect,
     TResult? Function(_MainUserDisconnect value)? disconnect,
     TResult? Function(_MainUserReset value)? reset,
@@ -1171,7 +1179,7 @@ class _$MainUserResetImpl implements _MainUserReset {
     TResult Function(_MainUserConnect value)? connect,
     TResult Function(_MainUserFirstLoad value)? firstLoad,
     TResult Function(_MainUserReload value)? reload,
-    TResult Function(_MainUserAccountCreated value)? accountCreated,
+    TResult Function(_MainUserRegister value)? register,
     TResult Function(_MainUserAutoConnect value)? autoConnect,
     TResult Function(_MainUserDisconnect value)? disconnect,
     TResult Function(_MainUserReset value)? reset,
@@ -1230,7 +1238,7 @@ class _$MainUserClearDataImpl implements _MainUserClearData {
     required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
-    required TResult Function(EthiscanUser newUser) accountCreated,
+    required TResult Function(String email, String password) register,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
     required TResult Function() reset,
@@ -1245,7 +1253,7 @@ class _$MainUserClearDataImpl implements _MainUserClearData {
     TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
-    TResult? Function(EthiscanUser newUser)? accountCreated,
+    TResult? Function(String email, String password)? register,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
     TResult? Function()? reset,
@@ -1260,7 +1268,7 @@ class _$MainUserClearDataImpl implements _MainUserClearData {
     TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
-    TResult Function(EthiscanUser newUser)? accountCreated,
+    TResult Function(String email, String password)? register,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
     TResult Function()? reset,
@@ -1279,7 +1287,7 @@ class _$MainUserClearDataImpl implements _MainUserClearData {
     required TResult Function(_MainUserConnect value) connect,
     required TResult Function(_MainUserFirstLoad value) firstLoad,
     required TResult Function(_MainUserReload value) reload,
-    required TResult Function(_MainUserAccountCreated value) accountCreated,
+    required TResult Function(_MainUserRegister value) register,
     required TResult Function(_MainUserAutoConnect value) autoConnect,
     required TResult Function(_MainUserDisconnect value) disconnect,
     required TResult Function(_MainUserReset value) reset,
@@ -1294,7 +1302,7 @@ class _$MainUserClearDataImpl implements _MainUserClearData {
     TResult? Function(_MainUserConnect value)? connect,
     TResult? Function(_MainUserFirstLoad value)? firstLoad,
     TResult? Function(_MainUserReload value)? reload,
-    TResult? Function(_MainUserAccountCreated value)? accountCreated,
+    TResult? Function(_MainUserRegister value)? register,
     TResult? Function(_MainUserAutoConnect value)? autoConnect,
     TResult? Function(_MainUserDisconnect value)? disconnect,
     TResult? Function(_MainUserReset value)? reset,
@@ -1309,7 +1317,7 @@ class _$MainUserClearDataImpl implements _MainUserClearData {
     TResult Function(_MainUserConnect value)? connect,
     TResult Function(_MainUserFirstLoad value)? firstLoad,
     TResult Function(_MainUserReload value)? reload,
-    TResult Function(_MainUserAccountCreated value)? accountCreated,
+    TResult Function(_MainUserRegister value)? register,
     TResult Function(_MainUserAutoConnect value)? autoConnect,
     TResult Function(_MainUserDisconnect value)? disconnect,
     TResult Function(_MainUserReset value)? reset,

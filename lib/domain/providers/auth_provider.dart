@@ -8,7 +8,7 @@ class AuthenticationProvider implements AuthRepository {
   AuthenticationProvider();
 
   @override
-  Future<UserCredential> signIn(String email, String password) async {
+  Future<UserCredential> logIn(String email, String password) async {
     try {
       return await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
@@ -18,17 +18,16 @@ class AuthenticationProvider implements AuthRepository {
   }
 
   @override
-  Future<void> signOut() {
+  Future<void> logOut() {
     return FirebaseAuth.instance.signOut();
   }
 
   @override
-  Future<bool> register(
+  Future<UserCredential> signUp(
       {required String email, required String password}) async {
     try {
-      await FirebaseAuth.instance
+      return await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-      return true;
     } on FirebaseAuthException catch (e) {
       throw getAuthenticationExceptionFromCode(e.code);
     }
@@ -64,24 +63,24 @@ class AuthenticationProvider implements AuthRepository {
   //   }
   // }
 
-  // @override
-  // String getUserEmail() {
-  //   User? user = FirebaseAuth.instance.currentUser;
-  //   if (user == null) {
-  //     throw StateError("Not connected");
-  //   }
-  //   return user.email!;
-  // }
+  @override
+  String getUserEmail() {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      throw StateError("Not connected");
+    }
+    return user.email!;
+  }
 
-  // @override
-  // bool get isVerified {
-  //   User? user = FirebaseAuth.instance.currentUser;
-  //   if (user == null) {
-  //     throw StateError("Not connected");
-  //   }
-  //   user.reload();
-  //   return user.emailVerified;
-  // }
+  @override
+  bool get isVerified {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      throw StateError("Not connected");
+    }
+    user.reload();
+    return user.emailVerified;
+  }
 
   // @override
   // String get uid {

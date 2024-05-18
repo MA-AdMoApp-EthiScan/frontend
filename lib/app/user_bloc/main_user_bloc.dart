@@ -23,7 +23,6 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
         try {
           UserCredential userCredential =
               await _authRepository.signIn(email, password);
-          //print(userCredential);
           EthiscanUser user = EthiscanUser(
             id: userCredential.user!.uid,
             name: userCredential.user!.displayName ?? 'Unknown',
@@ -42,11 +41,10 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
         //emit(const MainUserState.reloading());
         add(const MainUserEvent.autoConnect(
             minDelay: Duration(milliseconds: 500)));
-      }, accountCreated: (newUser) async {
-        emit(MainUserState.connected(user: newUser));
+      }, register: (email, password) async {
+        emit(const MainUserState.connect(email, password));
       }, autoConnect: (minDelay) async {
         //emit(const MainUserState.reloading());
-        //add(MainUserEvent.connect('coco', 'coco'));
         emit(const MainUserState.disconnected());
       }, disconnect: () async {
         emit(const MainUserState.disconnected());
