@@ -5,15 +5,15 @@ import 'package:ethiscan/domain/language/i_language_repository.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/app/app_connected.dart';
 import 'package:ethiscan/presentation/app/custom_app.dart';
-import 'package:ethiscan/presentation/home_page.dart';
 import 'package:ethiscan/presentation/splash_page.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../utils/ui_colors.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -23,6 +23,17 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  late MainUserBloc _mainUserBloc;
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    _mainUserBloc = getIt();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
@@ -39,9 +50,8 @@ class _AppState extends State<App> {
       }
     });
 
-    return BlocProvider<MainUserBloc>(
-      lazy: false,
-      create: (context) => getIt(),
+    return BlocProvider.value(
+      value: _mainUserBloc,
       child: BlocBuilder<MainUserBloc, MainUserState>(
         builder: (context, state) {
           return state.map(
@@ -118,17 +128,37 @@ class _AppState extends State<App> {
     BuildContext context,
     MainUserDisconnected state,
   ) {
-    // String? email;
-    //if (state.user.settings.rememberMe == true && state.user.idm != null) {
-    //  email = state.user.idm?.email;
-    //}
-
-    return const CustomApp(
-      key: Key('DisconnectedApp'),
-      home:
-          HomePage(), /*TODO : state.user.settings.firstTime == true
-          ? const HomePage()
-          : LoginPage(email: email),*/
+    return CustomApp(
+      key: const Key('DisconnectedApp'), // TODO use translated key
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: UIColors.lightPrimaryColor,
+          title: const Text('Sign In'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextField(
+                controller: _emailController,
+                decoration: const InputDecoration(labelText: 'Email'),
+              ),
+              TextField(
+                controller: _passwordController,
+                decoration: const InputDecoration(labelText: 'Password'),
+                obscureText: true,
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () => _mainUserBloc.add(MainUserEvent.connect(
+                    _emailController.text, _passwordController.text)),
+                child: const Text('Sign In'),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
