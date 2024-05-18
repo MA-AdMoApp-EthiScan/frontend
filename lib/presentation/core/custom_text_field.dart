@@ -20,7 +20,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
 
-  const CustomTextField({Key? key, 
+  const CustomTextField({super.key,
     this.label,
     this.placeholder = "",
     this.password = false,
@@ -34,7 +34,7 @@ class CustomTextField extends StatelessWidget {
     this.minLines = 1,
     this.keyboardType,
     this.inputFormatters,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

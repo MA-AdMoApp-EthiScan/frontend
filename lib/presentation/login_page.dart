@@ -1,5 +1,7 @@
 import 'package:ethiscan/app/user_bloc/main_user_bloc.dart';
 import 'package:ethiscan/injection.dart';
+import 'package:ethiscan/presentation/core/buttons/primary_button.dart';
+import 'package:ethiscan/presentation/core/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ethiscan/utils/ui_colors.dart';
@@ -35,20 +37,18 @@ class LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TextField(
+            CustomTextField(
               controller: _emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
             ),
-            TextField(
+            CustomTextField(
               controller: _passwordController,
-              decoration: const InputDecoration(labelText: 'Password'),
-              obscureText: true,
+              password: true,
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => _mainUserBloc.add(MainUserEvent.connect(
+            PrimaryButton(
+              text: 'Sign In',
+              onTap: () => _mainUserBloc.add(MainUserEvent.connect(
                   _emailController.text, _passwordController.text)),
-              child: const Text('Sign In'),
             ),
           ],
         ),

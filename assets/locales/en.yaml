@@ -34,6 +34,11 @@ scan:
   error-title: 'Error'
   error-message: 'An error occurred while scanning'
 
+sign-in:
+  title: 'Sign In'
+  error-title: 'Error'
+  error-message: 'An error occurred while signing in'
+
 parameter:
   title: 'Parameter'
   error-title: 'Error'
@@ -41,3 +46,7 @@ parameter:
 
 splash:
   version: "Version {version}"
+
+words:
+  email: 'Email'
+  password: 'Password'
