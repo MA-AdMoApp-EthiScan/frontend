@@ -13,6 +13,7 @@ class UIColors {
   static const Color black = Color(0xFF000000);
 
   static const Color red = Color(0xFFCB3D3D);
+  static const Color darkRed = Color(0xFFA52A2A);
 
   // Light Theme Colors
   static const Color lightPrimaryColor =

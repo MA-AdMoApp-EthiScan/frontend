@@ -9,9 +9,8 @@ abstract class MainUserEvent with _$MainUserEvent {
 
   const factory MainUserEvent.reload() = _MainUserReload;
 
-  const factory MainUserEvent.accountCreated({
-    required EthiscanUser newUser,
-  }) = _MainUserAccountCreated;
+  const factory MainUserEvent.register(String email, String password) =
+      _MainUserRegister;
 
   const factory MainUserEvent.autoConnect({
     @Default(Duration.zero) Duration minDelay,

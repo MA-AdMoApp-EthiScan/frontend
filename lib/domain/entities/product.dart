@@ -1,18 +1,35 @@
-import 'package:ethiscan/domain/entities/certification.dart';
-import 'package:ethiscan/domain/entities/metadata.dart';
-
 class Product {
   final String id;
   final String name;
-  final String barcode;
-  final List<Certification> certification;
-  final List<Metadata> metadata;
+  final String image;
+  final String description;
+  final double carbonFootprint;
+  final DateTime scanDate;
 
   Product({
     required this.id,
     required this.name,
-    required this.barcode,
-    required this.certification,
-    required this.metadata,
+    required this.image,
+    required this.description,
+    required this.carbonFootprint,
+    required this.scanDate,
   });
+
+  Product copyWith({
+    String? id,
+    String? name,
+    String? image,
+    String? description,
+    double? carbonFootprint,
+    DateTime? scanDate,
+  }) {
+    return Product(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      image: image ?? this.image,
+      description: description ?? this.description,
+      carbonFootprint: carbonFootprint ?? this.carbonFootprint,
+      scanDate: scanDate ?? this.scanDate,
+    );
+  }
 }
