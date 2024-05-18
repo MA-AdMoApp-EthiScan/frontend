@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:ethiscan/utils/text_styles.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +22,8 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
 
-  const CustomTextField({super.key,
+  const CustomTextField({
+    super.key,
     this.label,
     this.placeholder = "",
     this.password = false,
@@ -106,7 +109,8 @@ class CustomTextField extends StatelessWidget {
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(
-                        color: error ? UIColors.red : UIColors.lightPrimaryColor,
+                        color:
+                            error ? UIColors.red : UIColors.lightPrimaryColor,
                         width: 1.0,
                       ),
                     ),
@@ -156,7 +160,8 @@ class PasswordCustomTextField extends StatefulWidget {
   final TextEditingController controller;
   final bool disabled;
 
-  const PasswordCustomTextField({Key? key, 
+  const PasswordCustomTextField({
+    super.key,
     required this.label,
     this.placeholder = "",
     this.error = false,
@@ -164,7 +169,7 @@ class PasswordCustomTextField extends StatefulWidget {
     this.onMoreInfo,
     required this.controller,
     this.disabled = false,
-  }) : super(key: key);
+  });
 
   @override
   _PasswordCustomTextFieldState createState() =>
