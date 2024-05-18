@@ -11,10 +11,10 @@
 import 'package:ethiscan/app/favorite_bloc/favorite_bloc.dart' as _i4;
 import 'package:ethiscan/app/favorites_bloc/favorites_bloc.dart' as _i3;
 import 'package:ethiscan/app/user_bloc/main_user_bloc.dart' as _i9;
-import 'package:ethiscan/data/repositories/language_repository.dart' as _i6;
-import 'package:ethiscan/domain/language/i_language_repository.dart' as _i5;
-import 'package:ethiscan/domain/providers/auth_provider.dart' as _i8;
-import 'package:ethiscan/data/repositories/auth_repository.dart' as _i7;
+import 'package:ethiscan/data/datasources/auth_provider.dart' as _i6;
+import 'package:ethiscan/data/repositories/auth_repository.dart' as _i5;
+import 'package:ethiscan/data/repositories/language_repository.dart' as _i8;
+import 'package:ethiscan/domain/language/i_language_repository.dart' as _i7;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
@@ -31,10 +31,10 @@ extension GetItInjectableX on _i1.GetIt {
     );
     gh.factory<_i3.FavoritesBloc>(() => _i3.FavoritesBloc());
     gh.factory<_i4.FavoriteBloc>(() => _i4.FavoriteBloc());
-    gh.lazySingleton<_i5.ILanguageRepository>(() => _i6.LanguageRepository());
-    gh.singleton<_i7.AuthRepository>(() => _i8.AuthenticationProvider());
+    gh.singleton<_i5.AuthRepository>(() => _i6.AuthenticationProvider());
+    gh.lazySingleton<_i7.ILanguageRepository>(() => _i8.LanguageRepository());
     gh.factory<_i9.MainUserBloc>(
-        () => _i9.MainUserBloc(gh<_i7.AuthRepository>()));
+        () => _i9.MainUserBloc(gh<_i5.AuthRepository>()));
     return this;
   }
 }
