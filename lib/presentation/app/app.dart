@@ -134,7 +134,7 @@ class _AppState extends State<App> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: UIColors.lightPrimaryColor,
-          title: Text(I18nUtils.translate(context, 'sign_in.title')),
+          title: Text(I18nUtils.translate(context, "sign_in.title")),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -143,14 +143,14 @@ class _AppState extends State<App> {
             children: <Widget>[
               CustomTextField(
                 controller: _emailController,
-                placeholder: I18nUtils.translate(context, 'words.email'),
-                label: I18nUtils.translate(context, 'words.email'),
+                placeholder: I18nUtils.translate(context, "words.email"),
+                label: I18nUtils.translate(context, "words.email"),
               ),
               const SizedBox(height: 20),
               CustomTextField(
                 controller: _passwordController,
-                label: I18nUtils.translate(context, 'words.password'),
-                placeholder: I18nUtils.translate(context, 'words.password'),
+                label: I18nUtils.translate(context, "words.password"),
+                placeholder: I18nUtils.translate(context, "words.password"),
                 password: true,
               ),
               const SizedBox(height: 20),
