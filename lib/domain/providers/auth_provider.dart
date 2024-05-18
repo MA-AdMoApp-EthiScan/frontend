@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ethiscan/domain/repositories/auth_repository.dart';
+import 'package:ethiscan/data/repositories/auth_repository.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ethiscan/utils/exceptions.dart';
 

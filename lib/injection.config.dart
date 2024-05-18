@@ -11,10 +11,10 @@
 import 'package:ethiscan/app/favorite_bloc/favorite_bloc.dart' as _i4;
 import 'package:ethiscan/app/favorites_bloc/favorites_bloc.dart' as _i3;
 import 'package:ethiscan/app/user_bloc/main_user_bloc.dart' as _i9;
-import 'package:ethiscan/data/language/language_repository.dart' as _i6;
+import 'package:ethiscan/data/repositories/language_repository.dart' as _i6;
 import 'package:ethiscan/domain/language/i_language_repository.dart' as _i5;
 import 'package:ethiscan/domain/providers/auth_provider.dart' as _i8;
-import 'package:ethiscan/domain/repositories/auth_repository.dart' as _i7;
+import 'package:ethiscan/data/repositories/auth_repository.dart' as _i7;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 

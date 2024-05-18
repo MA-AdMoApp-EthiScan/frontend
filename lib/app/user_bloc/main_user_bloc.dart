@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:ethiscan/domain/entities/user.dart';
-import 'package:ethiscan/domain/repositories/auth_repository.dart';
+import 'package:ethiscan/data/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
