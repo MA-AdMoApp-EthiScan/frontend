@@ -3,7 +3,7 @@ import 'package:ethiscan/domain/entities/product.dart';
 import 'package:ethiscan/data/repositories/product_repository.dart';
 import 'package:injectable/injectable.dart';
 
-@Singleton(as: ProductRepositoryProvider)
+@Singleton()
 class ProductRepositoryProvider implements ProductRepository {
   final CollectionReference productCollection =
       FirebaseFirestore.instance.collection('products');

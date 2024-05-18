@@ -3,7 +3,7 @@ import 'package:ethiscan/domain/entities/user.dart';
 import 'package:ethiscan/data/repositories/user_repository.dart';
 import 'package:injectable/injectable.dart';
 
-@Singleton(as: UserRepositoryProvider)
+@Singleton()
 class UserRepositoryProvider implements UserRepository {
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('users');
