@@ -7,8 +7,10 @@ import 'package:ethiscan/utils/exceptions.dart';
 class AuthenticationProvider implements AuthRepository {
   AuthenticationProvider();
 
+  // ~~~ Authentication ~~~
   @override
-  Future<UserCredential> logIn(String email, String password) async {
+  Future<UserCredential> logIn(
+      {required String email, required String password}) async {
     try {
       return await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
@@ -22,6 +24,21 @@ class AuthenticationProvider implements AuthRepository {
     return FirebaseAuth.instance.signOut();
   }
 
+  @override
+  bool isUserConnected() {
+    return FirebaseAuth.instance.currentUser != null;
+  }
+
+  // @override
+  // String get uid {
+  //   User? user = FirebaseAuth.instance.currentUser;
+  //   if (user == null) {
+  //     throw StateError("Not connected");
+  //   }
+  //   return user.uid;
+  // }
+
+  // ~~~ Registration ~~~
   @override
   Future<UserCredential> signUp(
       {required String email, required String password}) async {
@@ -63,34 +80,22 @@ class AuthenticationProvider implements AuthRepository {
   //   }
   // }
 
-  @override
-  String getUserEmail() {
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user == null) {
-      throw StateError("Not connected");
-    }
-    return user.email!;
-  }
-
-  @override
-  bool get isVerified {
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user == null) {
-      throw StateError("Not connected");
-    }
-    user.reload();
-    return user.emailVerified;
-  }
-
   // @override
-  // String get uid {
+  // String getUserEmail() {
   //   User? user = FirebaseAuth.instance.currentUser;
   //   if (user == null) {
   //     throw StateError("Not connected");
   //   }
-  //   return user.uid;
+  //   return user.email!;
   // }
 
   // @override
-  // bool get isConnected => FirebaseAuth.instance.currentUser != null;
+  // bool get isVerified {
+  //   User? user = FirebaseAuth.instance.currentUser;
+  //   if (user == null) {
+  //     throw StateError("Not connected");
+  //   }
+  //   user.reload();
+  //   return user.emailVerified;
+  // }
 }
