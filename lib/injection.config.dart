@@ -31,10 +31,10 @@ extension GetItInjectableX on _i1.GetIt {
     );
     gh.factory<_i3.FavoritesBloc>(() => _i3.FavoritesBloc());
     gh.factory<_i4.FavoriteBloc>(() => _i4.FavoriteBloc());
-    gh.lazySingleton<_i5.ILanguageRepository>(() => _i6.LanguageRepository());
-    gh.singleton<_i7.AuthRepository>(() => _i8.AuthenticationProvider());
+    gh.singleton<_i5.AuthRepository>(() => _i6.AuthenticationProvider());
+    gh.lazySingleton<_i7.ILanguageRepository>(() => _i8.LanguageRepository());
     gh.factory<_i9.MainUserBloc>(
-        () => _i9.MainUserBloc(gh<_i7.AuthRepository>()));
+        () => _i9.MainUserBloc(gh<_i5.AuthRepository>()));
     return this;
   }
 }
