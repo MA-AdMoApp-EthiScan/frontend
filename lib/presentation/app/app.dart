@@ -7,6 +7,7 @@ import 'package:ethiscan/presentation/app/app_connected.dart';
 import 'package:ethiscan/presentation/app/custom_app.dart';
 import 'package:ethiscan/presentation/core/buttons/primary_button.dart';
 import 'package:ethiscan/presentation/core/custom_text_field.dart';
+import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/splash_page.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
@@ -31,14 +32,8 @@ class _AppState extends State<App> {
 
   @override
   void initState() {
-    _mainUserBloc = getIt();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     final ILanguageRepository languageRepository = getIt();
+    _mainUserBloc = getIt();
 
     // Set the locale from the shared preferences
     SharedPreferences.getInstance().then((prefs) {
@@ -51,9 +46,17 @@ class _AppState extends State<App> {
       }
     });
 
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+
     return BlocProvider.value(
       value: _mainUserBloc,
-      child: BlocBuilder<MainUserBloc, MainUserState>(
+      child: BlocConsumer<MainUserBloc, MainUserState>(
+        listener: (context, state) {},
         builder: (context, state) {
           return state.map(
             serviceError: (state) => _serviceError(
@@ -134,7 +137,7 @@ class _AppState extends State<App> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: UIColors.lightPrimaryColor,
-          title: Text(I18nUtils.translate(context, "sign_in.title")),
+          title: const CustomH1("Sign In"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -143,19 +146,19 @@ class _AppState extends State<App> {
             children: <Widget>[
               CustomTextField(
                 controller: _emailController,
-                placeholder: I18nUtils.translate(context, "words.email"),
-                label: I18nUtils.translate(context, "words.email"),
+                placeholder: 'Email',
+                label: 'Email',
               ),
               const SizedBox(height: 20),
               CustomTextField(
                 controller: _passwordController,
-                label: I18nUtils.translate(context, "words.password"),
-                placeholder: I18nUtils.translate(context, "words.password"),
+                label: 'Password', // TODO : translate 'Password
+                placeholder: 'Password',
                 password: true,
               ),
               const SizedBox(height: 20),
               PrimaryButton(
-                text: I18nUtils.translate(context, 'sign_in.title'),
+                text: 'Sign In', // TODO : translate 'Sign In'
                 onTap: () => _mainUserBloc.add(MainUserEvent.connect(
                     _emailController.text, _passwordController.text)),
               ),
