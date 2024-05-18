@@ -5,10 +5,8 @@ import 'package:ethiscan/domain/language/i_language_repository.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/app/app_connected.dart';
 import 'package:ethiscan/presentation/app/custom_app.dart';
-import 'package:ethiscan/presentation/login_page.dart';
 import 'package:ethiscan/presentation/splash_page.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -131,11 +129,11 @@ class _AppState extends State<App> {
     MainUserDisconnected state,
   ) {
     return CustomApp(
-      key: Key('DisconnectedApp'), // TODO use translated key
+      key: const Key('DisconnectedApp'), // TODO use translated key
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: UIColors.lightPrimaryColor,
-          title: Text('Sign In'),
+          title: const Text('Sign In'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
