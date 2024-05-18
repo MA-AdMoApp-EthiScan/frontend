@@ -5,11 +5,13 @@ import 'package:ethiscan/domain/language/i_language_repository.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/app/app_connected.dart';
 import 'package:ethiscan/presentation/app/custom_app.dart';
+import 'package:ethiscan/presentation/app/register.dart';
 import 'package:ethiscan/presentation/core/buttons/primary_button.dart';
 import 'package:ethiscan/presentation/core/custom_text_field.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/splash_page.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
+import 'package:ethiscan/utils/navigation_util.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -162,6 +164,12 @@ class _AppState extends State<App> {
                 onTap: () => _mainUserBloc.add(MainUserEvent.connect(
                     _emailController.text, _passwordController.text)),
               ),
+              const SizedBox(height: 50),
+              PrimaryButton(
+                  text: 'Register', // TODO : translate 'Register'
+                  onTap: () {
+                    NavigationUtils.goTo(context, const RegisterPage());
+                  }),
             ],
           ),
         ),
