@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:ethiscan/domain/entities/jwt.dart';
 import 'package:ethiscan/domain/entities/user.dart';
-import 'package:ethiscan/domain/entities/user_preferences.dart';
-import 'package:flutter/material.dart';
+import 'package:ethiscan/data/repositories/auth_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:ethiscan/utils/exceptions.dart';
 
 part 'main_user_bloc.freezed.dart';
 part 'main_user_event.dart';
@@ -12,38 +12,49 @@ part 'main_user_state.dart';
 
 @injectable
 class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
-  MainUserBloc() : super(MainUserState.initial()) {
+  final AuthRepository _authRepository;
+
+  MainUserBloc(
+    this._authRepository,
+  ) : super(MainUserState.initial()) {
     on<MainUserEvent>((event, emit) async {
-      event.when(connect: (jwt) async {
-        List<MetaData> metadataSubscriptions = [];
-        User user = User(
-            id: 'id',
-            email: 'user@mail.com',
-            name: 'User',
-            preferences: UserPreferences(
-                metadataSubscriptions:
-                    metadataSubscriptions)); // todo get user from jwt
-        emit(MainUserState.connected(user: user));
-      }, firstLoad: () {
+      await event.when(connect: (email, password) async {
+        emit(const MainUserState.reloading());
+        try {
+          UserCredential userCredential =
+              await _authRepository.signIn(email, password);
+          //print(userCredential);
+          EthiscanUser user = EthiscanUser(
+            id: userCredential.user!.uid,
+            name: userCredential.user!.displayName ?? 'Unknown',
+            email: userCredential.user!.email!,
+          );
+          emit(MainUserState.connected(user: user));
+        } on FirebaseAuthException catch (e) {
+          emit(const MainUserState.disconnected());
+          getAuthenticationExceptionFromCode(e.code);
+        }
+      }, firstLoad: () async {
         //emit(const MainUserState.reloading());
         add(const MainUserEvent.autoConnect(
             minDelay: Duration(milliseconds: 2500)));
-      }, reload: () {
+      }, reload: () async {
         //emit(const MainUserState.reloading());
         add(const MainUserEvent.autoConnect(
             minDelay: Duration(milliseconds: 500)));
-      }, accountCreated: (newUser) {
+      }, accountCreated: (newUser) async {
         emit(MainUserState.connected(user: newUser));
-      }, autoConnect: (minDelay) {
+      }, autoConnect: (minDelay) async {
         //emit(const MainUserState.reloading());
-        add(MainUserEvent.connect(Jwt('jwt')));
-      }, disconnect: () {
+        //add(MainUserEvent.connect('coco', 'coco'));
         emit(const MainUserState.disconnected());
-      }, reset: () {
+      }, disconnect: () async {
+        emit(const MainUserState.disconnected());
+      }, reset: () async {
         //emit(const MainUserState.reloading());
         add(const MainUserEvent.autoConnect(
             minDelay: Duration(milliseconds: 500)));
-      }, clearData: () {
+      }, clearData: () async {
         //emit(const MainUserState.reloading());
         add(const MainUserEvent.autoConnect(
             minDelay: Duration(milliseconds: 500)));

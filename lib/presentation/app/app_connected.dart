@@ -4,7 +4,7 @@ import 'package:ethiscan/presentation/home_page.dart';
 import 'package:flutter/cupertino.dart';
 
 class AppConnected extends StatefulWidget {
-  final User user;
+  final EthiscanUser user;
 
   const AppConnected({super.key, required this.user});
 
@@ -39,7 +39,7 @@ class AppConnectedState extends State<AppConnected> {
 }
 
 class UserProvider extends InheritedWidget {
-  final User user;
+  final EthiscanUser user;
 
   const UserProvider({
     // FIXME: might not work
@@ -49,7 +49,7 @@ class UserProvider extends InheritedWidget {
     required super.child,
   });
 
-  static User? of(BuildContext context) {
+  static EthiscanUser? of(BuildContext context) {
     UserProvider? widget =
         context.dependOnInheritedWidgetOfExactType<UserProvider>();
 

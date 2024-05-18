@@ -18,10 +18,10 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$MainUserEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Jwt jwt) connect,
+    required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
-    required TResult Function(User newUser) accountCreated,
+    required TResult Function(EthiscanUser newUser) accountCreated,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
     required TResult Function() reset,
@@ -30,10 +30,10 @@ mixin _$MainUserEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Jwt jwt)? connect,
+    TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
-    TResult? Function(User newUser)? accountCreated,
+    TResult? Function(EthiscanUser newUser)? accountCreated,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
     TResult? Function()? reset,
@@ -42,10 +42,10 @@ mixin _$MainUserEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Jwt jwt)? connect,
+    TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
-    TResult Function(User newUser)? accountCreated,
+    TResult Function(EthiscanUser newUser)? accountCreated,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
     TResult Function()? reset,
@@ -116,7 +116,7 @@ abstract class _$$MainUserConnectImplCopyWith<$Res> {
           $Res Function(_$MainUserConnectImpl) then) =
       __$$MainUserConnectImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Jwt jwt});
+  $Res call({String email, String password});
 }
 
 /// @nodoc
@@ -130,13 +130,18 @@ class __$$MainUserConnectImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? jwt = null,
+    Object? email = null,
+    Object? password = null,
   }) {
     return _then(_$MainUserConnectImpl(
-      null == jwt
-          ? _value.jwt
-          : jwt // ignore: cast_nullable_to_non_nullable
-              as Jwt,
+      null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -144,14 +149,16 @@ class __$$MainUserConnectImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$MainUserConnectImpl implements _MainUserConnect {
-  const _$MainUserConnectImpl(this.jwt);
+  const _$MainUserConnectImpl(this.email, this.password);
 
   @override
-  final Jwt jwt;
+  final String email;
+  @override
+  final String password;
 
   @override
   String toString() {
-    return 'MainUserEvent.connect(jwt: $jwt)';
+    return 'MainUserEvent.connect(email: $email, password: $password)';
   }
 
   @override
@@ -159,11 +166,13 @@ class _$MainUserConnectImpl implements _MainUserConnect {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MainUserConnectImpl &&
-            (identical(other.jwt, jwt) || other.jwt == jwt));
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, jwt);
+  int get hashCode => Object.hash(runtimeType, email, password);
 
   @JsonKey(ignore: true)
   @override
@@ -175,40 +184,40 @@ class _$MainUserConnectImpl implements _MainUserConnect {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Jwt jwt) connect,
+    required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
-    required TResult Function(User newUser) accountCreated,
+    required TResult Function(EthiscanUser newUser) accountCreated,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
     required TResult Function() reset,
     required TResult Function() clearData,
   }) {
-    return connect(jwt);
+    return connect(email, password);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Jwt jwt)? connect,
+    TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
-    TResult? Function(User newUser)? accountCreated,
+    TResult? Function(EthiscanUser newUser)? accountCreated,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
     TResult? Function()? reset,
     TResult? Function()? clearData,
   }) {
-    return connect?.call(jwt);
+    return connect?.call(email, password);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Jwt jwt)? connect,
+    TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
-    TResult Function(User newUser)? accountCreated,
+    TResult Function(EthiscanUser newUser)? accountCreated,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
     TResult Function()? reset,
@@ -216,7 +225,7 @@ class _$MainUserConnectImpl implements _MainUserConnect {
     required TResult orElse(),
   }) {
     if (connect != null) {
-      return connect(jwt);
+      return connect(email, password);
     }
     return orElse();
   }
@@ -272,9 +281,11 @@ class _$MainUserConnectImpl implements _MainUserConnect {
 }
 
 abstract class _MainUserConnect implements MainUserEvent {
-  const factory _MainUserConnect(final Jwt jwt) = _$MainUserConnectImpl;
+  const factory _MainUserConnect(final String email, final String password) =
+      _$MainUserConnectImpl;
 
-  Jwt get jwt;
+  String get email;
+  String get password;
   @JsonKey(ignore: true)
   _$$MainUserConnectImplCopyWith<_$MainUserConnectImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -318,10 +329,10 @@ class _$MainUserFirstLoadImpl implements _MainUserFirstLoad {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Jwt jwt) connect,
+    required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
-    required TResult Function(User newUser) accountCreated,
+    required TResult Function(EthiscanUser newUser) accountCreated,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
     required TResult Function() reset,
@@ -333,10 +344,10 @@ class _$MainUserFirstLoadImpl implements _MainUserFirstLoad {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Jwt jwt)? connect,
+    TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
-    TResult? Function(User newUser)? accountCreated,
+    TResult? Function(EthiscanUser newUser)? accountCreated,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
     TResult? Function()? reset,
@@ -348,10 +359,10 @@ class _$MainUserFirstLoadImpl implements _MainUserFirstLoad {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Jwt jwt)? connect,
+    TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
-    TResult Function(User newUser)? accountCreated,
+    TResult Function(EthiscanUser newUser)? accountCreated,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
     TResult Function()? reset,
@@ -456,10 +467,10 @@ class _$MainUserReloadImpl implements _MainUserReload {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Jwt jwt) connect,
+    required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
-    required TResult Function(User newUser) accountCreated,
+    required TResult Function(EthiscanUser newUser) accountCreated,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
     required TResult Function() reset,
@@ -471,10 +482,10 @@ class _$MainUserReloadImpl implements _MainUserReload {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Jwt jwt)? connect,
+    TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
-    TResult? Function(User newUser)? accountCreated,
+    TResult? Function(EthiscanUser newUser)? accountCreated,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
     TResult? Function()? reset,
@@ -486,10 +497,10 @@ class _$MainUserReloadImpl implements _MainUserReload {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Jwt jwt)? connect,
+    TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
-    TResult Function(User newUser)? accountCreated,
+    TResult Function(EthiscanUser newUser)? accountCreated,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
     TResult Function()? reset,
@@ -563,7 +574,7 @@ abstract class _$$MainUserAccountCreatedImplCopyWith<$Res> {
           $Res Function(_$MainUserAccountCreatedImpl) then) =
       __$$MainUserAccountCreatedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({User newUser});
+  $Res call({EthiscanUser newUser});
 }
 
 /// @nodoc
@@ -584,7 +595,7 @@ class __$$MainUserAccountCreatedImplCopyWithImpl<$Res>
       newUser: null == newUser
           ? _value.newUser
           : newUser // ignore: cast_nullable_to_non_nullable
-              as User,
+              as EthiscanUser,
     ));
   }
 }
@@ -595,7 +606,7 @@ class _$MainUserAccountCreatedImpl implements _MainUserAccountCreated {
   const _$MainUserAccountCreatedImpl({required this.newUser});
 
   @override
-  final User newUser;
+  final EthiscanUser newUser;
 
   @override
   String toString() {
@@ -623,10 +634,10 @@ class _$MainUserAccountCreatedImpl implements _MainUserAccountCreated {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Jwt jwt) connect,
+    required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
-    required TResult Function(User newUser) accountCreated,
+    required TResult Function(EthiscanUser newUser) accountCreated,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
     required TResult Function() reset,
@@ -638,10 +649,10 @@ class _$MainUserAccountCreatedImpl implements _MainUserAccountCreated {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Jwt jwt)? connect,
+    TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
-    TResult? Function(User newUser)? accountCreated,
+    TResult? Function(EthiscanUser newUser)? accountCreated,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
     TResult? Function()? reset,
@@ -653,10 +664,10 @@ class _$MainUserAccountCreatedImpl implements _MainUserAccountCreated {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Jwt jwt)? connect,
+    TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
-    TResult Function(User newUser)? accountCreated,
+    TResult Function(EthiscanUser newUser)? accountCreated,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
     TResult Function()? reset,
@@ -720,10 +731,10 @@ class _$MainUserAccountCreatedImpl implements _MainUserAccountCreated {
 }
 
 abstract class _MainUserAccountCreated implements MainUserEvent {
-  const factory _MainUserAccountCreated({required final User newUser}) =
+  const factory _MainUserAccountCreated({required final EthiscanUser newUser}) =
       _$MainUserAccountCreatedImpl;
 
-  User get newUser;
+  EthiscanUser get newUser;
   @JsonKey(ignore: true)
   _$$MainUserAccountCreatedImplCopyWith<_$MainUserAccountCreatedImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -796,10 +807,10 @@ class _$MainUserAutoConnectImpl implements _MainUserAutoConnect {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Jwt jwt) connect,
+    required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
-    required TResult Function(User newUser) accountCreated,
+    required TResult Function(EthiscanUser newUser) accountCreated,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
     required TResult Function() reset,
@@ -811,10 +822,10 @@ class _$MainUserAutoConnectImpl implements _MainUserAutoConnect {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Jwt jwt)? connect,
+    TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
-    TResult? Function(User newUser)? accountCreated,
+    TResult? Function(EthiscanUser newUser)? accountCreated,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
     TResult? Function()? reset,
@@ -826,10 +837,10 @@ class _$MainUserAutoConnectImpl implements _MainUserAutoConnect {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Jwt jwt)? connect,
+    TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
-    TResult Function(User newUser)? accountCreated,
+    TResult Function(EthiscanUser newUser)? accountCreated,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
     TResult Function()? reset,
@@ -940,10 +951,10 @@ class _$MainUserDisconnectImpl implements _MainUserDisconnect {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Jwt jwt) connect,
+    required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
-    required TResult Function(User newUser) accountCreated,
+    required TResult Function(EthiscanUser newUser) accountCreated,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
     required TResult Function() reset,
@@ -955,10 +966,10 @@ class _$MainUserDisconnectImpl implements _MainUserDisconnect {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Jwt jwt)? connect,
+    TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
-    TResult? Function(User newUser)? accountCreated,
+    TResult? Function(EthiscanUser newUser)? accountCreated,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
     TResult? Function()? reset,
@@ -970,10 +981,10 @@ class _$MainUserDisconnectImpl implements _MainUserDisconnect {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Jwt jwt)? connect,
+    TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
-    TResult Function(User newUser)? accountCreated,
+    TResult Function(EthiscanUser newUser)? accountCreated,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
     TResult Function()? reset,
@@ -1078,10 +1089,10 @@ class _$MainUserResetImpl implements _MainUserReset {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Jwt jwt) connect,
+    required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
-    required TResult Function(User newUser) accountCreated,
+    required TResult Function(EthiscanUser newUser) accountCreated,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
     required TResult Function() reset,
@@ -1093,10 +1104,10 @@ class _$MainUserResetImpl implements _MainUserReset {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Jwt jwt)? connect,
+    TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
-    TResult? Function(User newUser)? accountCreated,
+    TResult? Function(EthiscanUser newUser)? accountCreated,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
     TResult? Function()? reset,
@@ -1108,10 +1119,10 @@ class _$MainUserResetImpl implements _MainUserReset {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Jwt jwt)? connect,
+    TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
-    TResult Function(User newUser)? accountCreated,
+    TResult Function(EthiscanUser newUser)? accountCreated,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
     TResult Function()? reset,
@@ -1216,10 +1227,10 @@ class _$MainUserClearDataImpl implements _MainUserClearData {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Jwt jwt) connect,
+    required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
-    required TResult Function(User newUser) accountCreated,
+    required TResult Function(EthiscanUser newUser) accountCreated,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
     required TResult Function() reset,
@@ -1231,10 +1242,10 @@ class _$MainUserClearDataImpl implements _MainUserClearData {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Jwt jwt)? connect,
+    TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
-    TResult? Function(User newUser)? accountCreated,
+    TResult? Function(EthiscanUser newUser)? accountCreated,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
     TResult? Function()? reset,
@@ -1246,10 +1257,10 @@ class _$MainUserClearDataImpl implements _MainUserClearData {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Jwt jwt)? connect,
+    TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
-    TResult Function(User newUser)? accountCreated,
+    TResult Function(EthiscanUser newUser)? accountCreated,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
     TResult Function()? reset,
@@ -1320,7 +1331,7 @@ abstract class _MainUserClearData implements MainUserEvent {
 mixin _$MainUserState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user) connected,
+    required TResult Function(EthiscanUser user) connected,
     required TResult Function() reloading,
     required TResult Function() disconnected,
     required TResult Function(bool maintenance, bool unknownVersion)
@@ -1329,7 +1340,7 @@ mixin _$MainUserState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user)? connected,
+    TResult? Function(EthiscanUser user)? connected,
     TResult? Function()? reloading,
     TResult? Function()? disconnected,
     TResult? Function(bool maintenance, bool unknownVersion)? serviceError,
@@ -1337,7 +1348,7 @@ mixin _$MainUserState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user)? connected,
+    TResult Function(EthiscanUser user)? connected,
     TResult Function()? reloading,
     TResult Function()? disconnected,
     TResult Function(bool maintenance, bool unknownVersion)? serviceError,
@@ -1395,7 +1406,7 @@ abstract class _$$MainUserConnectedImplCopyWith<$Res> {
           $Res Function(_$MainUserConnectedImpl) then) =
       __$$MainUserConnectedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({User user});
+  $Res call({EthiscanUser user});
 }
 
 /// @nodoc
@@ -1415,7 +1426,7 @@ class __$$MainUserConnectedImplCopyWithImpl<$Res>
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User,
+              as EthiscanUser,
     ));
   }
 }
@@ -1426,7 +1437,7 @@ class _$MainUserConnectedImpl implements MainUserConnected {
   const _$MainUserConnectedImpl({required this.user});
 
   @override
-  final User user;
+  final EthiscanUser user;
 
   @override
   String toString() {
@@ -1454,7 +1465,7 @@ class _$MainUserConnectedImpl implements MainUserConnected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user) connected,
+    required TResult Function(EthiscanUser user) connected,
     required TResult Function() reloading,
     required TResult Function() disconnected,
     required TResult Function(bool maintenance, bool unknownVersion)
@@ -1466,7 +1477,7 @@ class _$MainUserConnectedImpl implements MainUserConnected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user)? connected,
+    TResult? Function(EthiscanUser user)? connected,
     TResult? Function()? reloading,
     TResult? Function()? disconnected,
     TResult? Function(bool maintenance, bool unknownVersion)? serviceError,
@@ -1477,7 +1488,7 @@ class _$MainUserConnectedImpl implements MainUserConnected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user)? connected,
+    TResult Function(EthiscanUser user)? connected,
     TResult Function()? reloading,
     TResult Function()? disconnected,
     TResult Function(bool maintenance, bool unknownVersion)? serviceError,
@@ -1528,10 +1539,10 @@ class _$MainUserConnectedImpl implements MainUserConnected {
 }
 
 abstract class MainUserConnected implements MainUserState {
-  const factory MainUserConnected({required final User user}) =
+  const factory MainUserConnected({required final EthiscanUser user}) =
       _$MainUserConnectedImpl;
 
-  User get user;
+  EthiscanUser get user;
   @JsonKey(ignore: true)
   _$$MainUserConnectedImplCopyWith<_$MainUserConnectedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1575,7 +1586,7 @@ class _$MainUserReloadingImpl implements _MainUserReloading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user) connected,
+    required TResult Function(EthiscanUser user) connected,
     required TResult Function() reloading,
     required TResult Function() disconnected,
     required TResult Function(bool maintenance, bool unknownVersion)
@@ -1587,7 +1598,7 @@ class _$MainUserReloadingImpl implements _MainUserReloading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user)? connected,
+    TResult? Function(EthiscanUser user)? connected,
     TResult? Function()? reloading,
     TResult? Function()? disconnected,
     TResult? Function(bool maintenance, bool unknownVersion)? serviceError,
@@ -1598,7 +1609,7 @@ class _$MainUserReloadingImpl implements _MainUserReloading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user)? connected,
+    TResult Function(EthiscanUser user)? connected,
     TResult Function()? reloading,
     TResult Function()? disconnected,
     TResult Function(bool maintenance, bool unknownVersion)? serviceError,
@@ -1691,7 +1702,7 @@ class _$MainUserDisconnectedImpl implements MainUserDisconnected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user) connected,
+    required TResult Function(EthiscanUser user) connected,
     required TResult Function() reloading,
     required TResult Function() disconnected,
     required TResult Function(bool maintenance, bool unknownVersion)
@@ -1703,7 +1714,7 @@ class _$MainUserDisconnectedImpl implements MainUserDisconnected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user)? connected,
+    TResult? Function(EthiscanUser user)? connected,
     TResult? Function()? reloading,
     TResult? Function()? disconnected,
     TResult? Function(bool maintenance, bool unknownVersion)? serviceError,
@@ -1714,7 +1725,7 @@ class _$MainUserDisconnectedImpl implements MainUserDisconnected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user)? connected,
+    TResult Function(EthiscanUser user)? connected,
     TResult Function()? reloading,
     TResult Function()? disconnected,
     TResult Function(bool maintenance, bool unknownVersion)? serviceError,
@@ -1845,7 +1856,7 @@ class _$MainUserServiceErrorImpl implements MainUserServiceError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user) connected,
+    required TResult Function(EthiscanUser user) connected,
     required TResult Function() reloading,
     required TResult Function() disconnected,
     required TResult Function(bool maintenance, bool unknownVersion)
@@ -1857,7 +1868,7 @@ class _$MainUserServiceErrorImpl implements MainUserServiceError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user)? connected,
+    TResult? Function(EthiscanUser user)? connected,
     TResult? Function()? reloading,
     TResult? Function()? disconnected,
     TResult? Function(bool maintenance, bool unknownVersion)? serviceError,
@@ -1868,7 +1879,7 @@ class _$MainUserServiceErrorImpl implements MainUserServiceError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user)? connected,
+    TResult Function(EthiscanUser user)? connected,
     TResult Function()? reloading,
     TResult Function()? disconnected,
     TResult Function(bool maintenance, bool unknownVersion)? serviceError,
