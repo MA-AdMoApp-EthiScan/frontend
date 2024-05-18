@@ -34,7 +34,7 @@ scan:
   error-title: 'Error'
   error-message: 'An error occurred while scanning'
 
-sign-in:
+sign_in:
   title: 'Sign In'
   error-title: 'Error'
   error-message: 'An error occurred while signing in'
