@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'product_metadata.dart';
 import 'package:uuid/uuid.dart';
 part 'product.g.dart';
 
@@ -10,7 +9,7 @@ class Product {
   final String imageUrl;
   final String description;
   final List<String>? certificationIds;
-  final List<ProductMetadata>? productMetadatas;
+  final List<String>? productMetadataIds;
 
   Product({
     id,
@@ -18,7 +17,7 @@ class Product {
     required this.imageUrl,
     required this.description,
     this.certificationIds,
-    this.productMetadatas,
+    this.productMetadataIds,
   }) : id = id ?? const Uuid().v4();
 
   factory Product.fromJson(Map<String, dynamic> json) =>

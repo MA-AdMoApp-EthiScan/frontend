@@ -14,8 +14,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       certificationIds: (json['certificationIds'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      productMetadatas: (json['productMetadatas'] as List<dynamic>?)
-          ?.map((e) => ProductMetadata.fromJson(e as Map<String, dynamic>))
+      productMetadataIds: (json['productMetadataIds'] as List<dynamic>?)
+          ?.map((e) => e as String)
           .toList(),
     );
 
@@ -25,5 +25,5 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       'imageUrl': instance.imageUrl,
       'description': instance.description,
       'certificationIds': instance.certificationIds,
-      'productMetadatas': instance.productMetadatas,
+      'productMetadataIds': instance.productMetadataIds,
     };
