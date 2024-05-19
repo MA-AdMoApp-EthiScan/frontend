@@ -1,6 +1,6 @@
 import 'package:ethiscan/domain/entities/list_product.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
-import 'package:ethiscan/presentation/favorites/favorite_page.dart';
+import 'package:ethiscan/presentation/prouct/product_page.dart';
 import 'package:ethiscan/presentation/widget_core/my_card.dart';
 import 'package:ethiscan/utils/date_helpers.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
@@ -26,7 +26,10 @@ class FavoriteCard extends MyCard {
     return ListTile(
       trailing: const Icon(Icons.star, color: UIColors.lightAccentColor),
       title: CustomH2(favorite.name),
-      subtitle: CustomText(I18nUtils.translate(context, "favorite.last_scan") + DateHelpers.formatDateToEuropeanStyle(favorite.scanDate)),
+      subtitle: CustomText(
+          I18nUtils.translate(context, "favorite.last_scan") +
+          DateHelpers.formatDateToEuropeanStyle(favorite.scanDate)
+      ),
     );
   }
 
@@ -36,6 +39,6 @@ class FavoriteCard extends MyCard {
   }
 
   @override
-  Widget page() => FavoritePage(
-      favoriteName: favorite.name);
+  Widget page() => ProductPage(
+      productId: favorite.name);
 }

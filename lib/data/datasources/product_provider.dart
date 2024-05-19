@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ethiscan/domain/core/either.dart';
+import 'package:ethiscan/domain/entities/api_error.dart';
 import 'package:ethiscan/domain/entities/product.dart';
 import 'package:ethiscan/data/repositories/product_repository.dart';
 import 'package:injectable/injectable.dart';
@@ -17,9 +19,11 @@ class ProductRepositoryProvider implements ProductRepository {
   }
 
   @override
-  Future<Product> getProductById(String id) async {
+  Either<APIError, Product> getProductById(String id) async {
     final doc = await productCollection.doc(id).get();
-    return Product.fromJson(doc.data() as Map<String, dynamic>);
+    var t = Product.fromJson(doc.data() as Map<String, dynamic>);
+    // todo return Either<APIError, Product>
+    return null;
   }
 
   @override

@@ -1,4 +1,4 @@
-import 'package:ethiscan/app/favorite_bloc/favorite_bloc.dart';
+import 'package:ethiscan/app/product_bloc/product_bloc.dart';
 import 'package:ethiscan/domain/entities/product.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
@@ -9,50 +9,42 @@ import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FavoritePage extends StatefulWidget {
-  final String? favoriteName;
+class ProductPage extends StatefulWidget {
+  final String productId;
 
-  const FavoritePage({super.key, this.favoriteName});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
+  const ProductPage({super.key, required this.productId});
 
   @override
-  State<FavoritePage> createState() => _FavoritePage();
+  State<ProductPage> createState() => _ProductPage();
 }
 
-class _FavoritePage extends State<FavoritePage> {
-  late FavoriteBloc _favoriteBloc;
+class _ProductPage extends State<ProductPage> {
+  late ProductBloc _productBloc;
 
   @override
   void initState() {
-    _favoriteBloc = getIt();
-    _favoriteBloc.add(const FavoriteEvent.load());
+    _productBloc = getIt();
+    _productBloc.add(ProductEvent.load(widget.productId));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-        value: _favoriteBloc,
-        child: BlocConsumer<FavoriteBloc, FavoriteState>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            return state.maybeWhen(
-              loading: () => _page(context, loading: true),
-              error: () => _page(context, error: true),
-              initial: () => _page(context),
-              loaded: (Product favorite) => _page(context, favorite: favorite),
-              orElse: () => _page(context),
-            );
-          },
-        ));
+      value: _productBloc,
+      child: BlocConsumer<ProductBloc, ProductState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return state.maybeWhen(
+            loading: () => _page(context, loading: true),
+            error: () => _page(context, error: true),
+            initial: () => _page(context),
+            loaded: (Product favorite) => _page(context, favorite: favorite),
+            orElse: () => _page(context),
+          );
+        },
+      )
+    );
   }
 
   Widget _page(
@@ -64,7 +56,7 @@ class _FavoritePage extends State<FavoritePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: UIColors.lightScaffoldBackgroundColor,
-        title: Text(widget.favoriteName ??
+        title: Text(widget.productId ??
             I18nUtils.translate(context, "favorite.title")),
         titleTextStyle: const TextStyle(
             color: UIColors.lightPrimaryColor,
