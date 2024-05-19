@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ethiscan/utils/exceptions.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 part 'main_user_bloc.freezed.dart';
 part 'main_user_event.dart';

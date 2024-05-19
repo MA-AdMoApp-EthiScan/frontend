@@ -68,8 +68,9 @@ class _ProductPage extends State<ProductPage> {
         children: [
           const SizedBox(height: 15),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: _getContent(loading, error, product),
             ),
           ),
@@ -88,12 +89,24 @@ class _ProductPage extends State<ProductPage> {
       ];
     } else if (product != null) {
       return [
-        CustomH2(I18nUtils.translate(context, "product.image")),
-        product.image != '' ? Image.network(product.image) : const SizedBox(),
-        CustomH2(I18nUtils.translate(context, "product.description")),
+        product.image != '' ? ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Image.network(
+            product.image,
+          ),
+        ) : const SizedBox(),
+        const SizedBox(height: 30),
+        CustomH2P(I18nUtils.translate(context, "product.description")),
         CustomText(product.description),
-        CustomH2(I18nUtils.translate(context, "product.carbon_footprint")),
-        CustomText(product.carbonFootprint.toString()),
+        const SizedBox(height: 30),
+        CustomH2P(I18nUtils.translate(context, "product.metadatas")),
+        Row(
+          children: [
+            CustomH3(I18nUtils.translate(context, "product.carbon_footprint")),
+            const Spacer(),
+            CustomText(product.carbonFootprint.toString()),
+          ],
+        ),
       ];
     } else {
       return [

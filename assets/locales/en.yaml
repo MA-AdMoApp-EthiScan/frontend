@@ -28,6 +28,7 @@ product:
   empty:
     title: 'Empty page'
     message: 'No product found'
+  metadatas: 'Metadatas'
 
 favorites:
   title: 'Favorites'

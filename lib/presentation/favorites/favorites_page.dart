@@ -128,8 +128,7 @@ class _FavoritesPage extends State<FavoritesPage> {
                 preferredSize:
                     const Size.fromHeight(110), // Provide the preferred height
                 child: Padding(
-                  padding: const EdgeInsets.all(
-                      0), // Add padding around the TextField
+                  padding: const EdgeInsets.all(0), // Add padding around the TextField
                   child: Column(
                     children: <Widget>[
                       Row(
