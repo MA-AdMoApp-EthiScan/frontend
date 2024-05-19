@@ -13,9 +13,7 @@ part 'product_state.dart';
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final ProductRepository _productRepository;
 
-  ProductBloc(
-      this._productRepository
-      ) : super(const ProductState.initial()) {
+  ProductBloc(this._productRepository) : super(const ProductState.initial()) {
     on<ProductEvent>((event, emit) async {
       await event.when(
         load: (id) async {

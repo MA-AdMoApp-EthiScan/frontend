@@ -32,20 +32,20 @@ class _ProductPage extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: _productBloc,
-      child: BlocConsumer<ProductBloc, ProductState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          return state.maybeWhen(
-            loading: () => _page(context, state, loading: true),
-            error: (error) => _page(context, state, error: error),
-            initial: () => _page(context, state),
-            loaded: (Product product) => _page(context, state, product: product),
-            orElse: () => _page(context, state),
-          );
-        },
-      )
-    );
+        value: _productBloc,
+        child: BlocConsumer<ProductBloc, ProductState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            return state.maybeWhen(
+              loading: () => _page(context, state, loading: true),
+              error: (error) => _page(context, state, error: error),
+              initial: () => _page(context, state),
+              loaded: (Product product) =>
+                  _page(context, state, product: product),
+              orElse: () => _page(context, state),
+            );
+          },
+        ));
   }
 
   Widget _page(
@@ -89,24 +89,26 @@ class _ProductPage extends State<ProductPage> {
       ];
     } else if (product != null) {
       return [
-        product.image != '' ? ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Image.network(
-            product.image,
-          ),
-        ) : const SizedBox(),
+        product.imageUrl != ''
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.network(
+                  product.imageUrl,
+                ),
+              )
+            : const SizedBox(),
         const SizedBox(height: 30),
         CustomH2P(I18nUtils.translate(context, "product.description")),
         CustomText(product.description),
         const SizedBox(height: 30),
         CustomH2P(I18nUtils.translate(context, "product.metadatas")),
-        Row(
-          children: [
-            CustomH3(I18nUtils.translate(context, "product.carbon_footprint")),
-            const Spacer(),
-            CustomText(product.carbonFootprint.toString()),
-          ],
-        ),
+        // Row(
+        //   children: [
+        //     CustomH3(I18nUtils.translate(context, "product.carbon_footprint")),
+        //     const Spacer(),
+        //     CustomText(product.carbonFootprint.toString()),
+        //   ],
+        // ),
       ];
     } else {
       return [
