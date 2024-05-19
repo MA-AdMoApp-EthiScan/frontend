@@ -247,7 +247,6 @@ class _FavoritesPage extends State<FavoritesPage> {
 
   List<Widget> _getFavoritesCards(
       List<Product> favorites, bool loading, bool error) {
-    //error = true;
     if (error) {
       return [
         CustomH3(I18nUtils.translate(context, "favorites.error.title")),
@@ -266,7 +265,6 @@ class _FavoritesPage extends State<FavoritesPage> {
         CustomText(I18nUtils.translate(context, "favorites.empty.message"))
       ];
     } else {
-      //favorites = favorites.isEmpty ? ["test", "test 2"] : favorites;
       List<Widget> widgets = [];
       List<Widget> f = favorites
           .map((favorite) => FavoriteCard(favorite: favorite))
