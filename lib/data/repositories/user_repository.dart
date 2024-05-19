@@ -1,4 +1,4 @@
-import 'package:ethiscan/domain/entities/user.dart';
+import 'package:ethiscan/domain/entities/ethiscan_user.dart';
 
 abstract class UserRepository {
   Future<EthiscanUser> getUserFromId(String uid);

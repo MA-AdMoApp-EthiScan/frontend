@@ -589,10 +589,10 @@ class __$$MainUserAccountCreatedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? newUser = null,
+    Object? newUser = freezed,
   }) {
     return _then(_$MainUserAccountCreatedImpl(
-      newUser: null == newUser
+      newUser: freezed == newUser
           ? _value.newUser
           : newUser // ignore: cast_nullable_to_non_nullable
               as EthiscanUser,
@@ -618,11 +618,12 @@ class _$MainUserAccountCreatedImpl implements _MainUserAccountCreated {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MainUserAccountCreatedImpl &&
-            (identical(other.newUser, newUser) || other.newUser == newUser));
+            const DeepCollectionEquality().equals(other.newUser, newUser));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, newUser);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(newUser));
 
   @JsonKey(ignore: true)
   @override
@@ -1420,10 +1421,10 @@ class __$$MainUserConnectedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = null,
+    Object? user = freezed,
   }) {
     return _then(_$MainUserConnectedImpl(
-      user: null == user
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as EthiscanUser,
@@ -1449,11 +1450,12 @@ class _$MainUserConnectedImpl implements MainUserConnected {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MainUserConnectedImpl &&
-            (identical(other.user, user) || other.user == user));
+            const DeepCollectionEquality().equals(other.user, user));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
 
   @JsonKey(ignore: true)
   @override
