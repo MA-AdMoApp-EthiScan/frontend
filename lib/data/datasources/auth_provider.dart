@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ethiscan/domain/repositories/auth_repository.dart';
+import 'package:ethiscan/data/repositories/auth_repository.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ethiscan/utils/exceptions.dart';
 
@@ -7,8 +7,10 @@ import 'package:ethiscan/utils/exceptions.dart';
 class AuthenticationProvider implements AuthRepository {
   AuthenticationProvider();
 
+  // ~~~ Authentication ~~~
   @override
-  Future<UserCredential> signIn(String email, String password) async {
+  Future<UserCredential> logIn(
+      {required String email, required String password}) async {
     try {
       return await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
@@ -18,17 +20,31 @@ class AuthenticationProvider implements AuthRepository {
   }
 
   @override
-  Future<void> signOut() {
+  Future<void> logOut() {
     return FirebaseAuth.instance.signOut();
   }
 
   @override
-  Future<bool> register(
+  bool isUserConnected() {
+    return FirebaseAuth.instance.currentUser != null;
+  }
+
+  // @override
+  // String get uid {
+  //   User? user = FirebaseAuth.instance.currentUser;
+  //   if (user == null) {
+  //     throw StateError("Not connected");
+  //   }
+  //   return user.uid;
+  // }
+
+  // ~~~ Registration ~~~
+  @override
+  Future<UserCredential> signUp(
       {required String email, required String password}) async {
     try {
-      await FirebaseAuth.instance
+      return await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-      return true;
     } on FirebaseAuthException catch (e) {
       throw getAuthenticationExceptionFromCode(e.code);
     }
@@ -82,16 +98,4 @@ class AuthenticationProvider implements AuthRepository {
   //   user.reload();
   //   return user.emailVerified;
   // }
-
-  // @override
-  // String get uid {
-  //   User? user = FirebaseAuth.instance.currentUser;
-  //   if (user == null) {
-  //     throw StateError("Not connected");
-  //   }
-  //   return user.uid;
-  // }
-
-  // @override
-  // bool get isConnected => FirebaseAuth.instance.currentUser != null;
 }

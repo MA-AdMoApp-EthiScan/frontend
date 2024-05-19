@@ -5,7 +5,7 @@ import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/core/list_view_layout_body.dart';
-import 'package:ethiscan/presentation/favorites/favorite.dart';
+import 'package:ethiscan/presentation/product/product_page.dart';
 import 'package:ethiscan/presentation/scan/widgets/scans_card.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 //import 'package:flutter/foundation.dart';
@@ -115,7 +115,7 @@ Widget build(BuildContext context) {
               Navigator.of(context)
                   .push(
                     MaterialPageRoute(
-                      builder: (context) => FavoritePage(favoriteName: barcode),
+                      builder: (context) => ProductPage(productId: barcode),
                     ),
                   )
                   .then((_) {

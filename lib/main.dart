@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/app/app.dart';
 import 'package:flutter/material.dart';
@@ -7,14 +8,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  await configureDependencies();
   WidgetsFlutterBinding.ensureInitialized();
-
-  await dotenv.load(fileName: ".env");
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  getIt.registerSingleton<FirebaseFirestore>(FirebaseFirestore.instance);
+
+  await configureDependencies();
+
+  await dotenv.load(fileName: ".env");
 
   runApp(const App());
 }

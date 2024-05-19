@@ -24,9 +24,24 @@ class CustomH1 extends CustomText {
       : super(style: TextStyles.h1);
 }
 
+class CustomH1W extends CustomText {
+  const CustomH1W(super.text, {super.key, super.align})
+      : super(style: TextStyles.h1w);
+}
+
+class CustomH1P extends CustomText {
+  const CustomH1P(super.text, {super.key, super.align})
+      : super(style: TextStyles.h1p);
+}
+
 class CustomH2 extends CustomText {
   const CustomH2(super.text, {super.key, super.align})
       : super(style: TextStyles.h2);
+}
+
+class CustomH2P extends CustomText {
+  const CustomH2P(super.text, {super.key, super.align})
+      : super(style: TextStyles.h2p);
 }
 
 class CustomH3 extends CustomText {

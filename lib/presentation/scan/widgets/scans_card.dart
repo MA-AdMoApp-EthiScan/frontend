@@ -1,5 +1,6 @@
 import 'package:ethiscan/presentation/core/custom_texts.dart';
-import 'package:ethiscan/presentation/favorites/favorite.dart';
+import 'package:ethiscan/presentation/product/product_page.dart';
+//import 'package:ethiscan/presentation/favorites/favorite.dart';
 //import 'package:ethiscan/presentation/scan/scan.dart';
 import 'package:ethiscan/presentation/widget_core/my_card.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
@@ -36,6 +37,5 @@ class ScansCard extends MyCard {
   }
 
   @override
-  Widget page() => FavoritePage(
-      favoriteName: scan);
+  Widget page() => ProductPage(productId: scan != null ? scan! : "unknown id");
 }

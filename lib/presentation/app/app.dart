@@ -5,17 +5,15 @@ import 'package:ethiscan/domain/language/i_language_repository.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/app/app_connected.dart';
 import 'package:ethiscan/presentation/app/custom_app.dart';
-import 'package:ethiscan/presentation/login_page.dart';
+import 'package:ethiscan/presentation/app/login_page.dart';
+import 'package:ethiscan/presentation/app/register_page.dart';
 import 'package:ethiscan/presentation/splash_page.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../utils/ui_colors.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -27,19 +25,10 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   late MainUserBloc _mainUserBloc;
 
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-
   @override
   void initState() {
-    _mainUserBloc = getIt();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     final ILanguageRepository languageRepository = getIt();
+    _mainUserBloc = getIt();
 
     // Set the locale from the shared preferences
     SharedPreferences.getInstance().then((prefs) {
@@ -52,9 +41,17 @@ class _AppState extends State<App> {
       }
     });
 
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+
     return BlocProvider.value(
       value: _mainUserBloc,
-      child: BlocBuilder<MainUserBloc, MainUserState>(
+      child: BlocConsumer<MainUserBloc, MainUserState>(
+        listener: (context, state) {},
         builder: (context, state) {
           return state.map(
             serviceError: (state) => _serviceError(
@@ -64,6 +61,7 @@ class _AppState extends State<App> {
             reloading: (_) => _reloading(),
             connected: (state) => _userConnected(context, state),
             disconnected: (state) => _userDisconnected(context, state),
+            error: (state) => _userDisconnectedError(context, state),
           );
         },
       ),
@@ -130,38 +128,18 @@ class _AppState extends State<App> {
     BuildContext context,
     MainUserDisconnected state,
   ) {
-    return CustomApp(
-      key: Key('DisconnectedApp'), // TODO use translated key
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: UIColors.lightPrimaryColor,
-          title: Text('Sign In'),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextField(
-                controller: _emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
-              ),
-              TextField(
-                controller: _passwordController,
-                decoration: const InputDecoration(labelText: 'Password'),
-                obscureText: true,
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () => _mainUserBloc.add(MainUserEvent.connect(
-                    _emailController.text, _passwordController.text)),
-                child: const Text('Sign In'),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+    return state.isRegister ?
+      RegisterPage(mainUserBloc: _mainUserBloc) :
+      LoginPage(mainUserBloc: _mainUserBloc);
+  }
+
+  Widget _userDisconnectedError(
+    BuildContext context,
+    MainUserError state,
+  ) {
+    return state.isRegister ?
+    RegisterPage(mainUserBloc: _mainUserBloc) :
+    LoginPage(mainUserBloc: _mainUserBloc);
   }
 }
 

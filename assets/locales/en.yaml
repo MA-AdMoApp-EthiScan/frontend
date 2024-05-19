@@ -5,24 +5,39 @@ app:
   unknownVersion: 'Unknown Version'
   reloading: 'Reloading'
   disconnected: 'Disconnected'
+  search: 'Search'
   data:
     empty: 'No data available'
     error:
       title: 'Error'
       message: 'An error occurred while fetching data'
 
-favorite:
-  title: 'Favorite'
+product:
+  title: 'Product'
   add: 'Add to Favorites'
-  remove: 'Remove from Favorites'
-  added: 'Added to Favorites'
-  removed: 'Removed from Favorites'
+  remove: 'Remove from favorites'
+  added: 'Added to favorites'
+  removed: 'Removed from favorites'
   last_scan: 'Last scan : '
+  carbon_footprint: 'Carbon footprint'
+  image: 'Image'
+  description: 'Description'
+  error:
+      title: 'Error'
+      message: 'An error occurred while fetching product'
+  empty:
+    title: 'Empty page'
+    message: 'No product found'
+  metadatas: 'Metadatas'
 
 favorites:
   title: 'Favorites'
-  error-title: 'Error'
-  error-message: 'An error occurred while fetching favorites'
+  error:
+    title: 'Error'
+    message: 'An error occurred while fetching favorites'
+  empty:
+    title: 'Empty page'
+    message: 'No favorite found'
 
 scans:
   title: 'Scans'
@@ -34,6 +49,11 @@ scanning:
   error-title: 'Error'
   error-message: 'An error occurred while scanning'
 
+sign_in:
+  title: 'Sign In'
+  error-title: 'Error'
+  error-message: 'An error occurred while signing in'
+
 parameter:
   title: 'Parameter'
   error-title: 'Error'
@@ -41,3 +61,7 @@ parameter:
 
 splash:
   version: "Version {version}"
+
+words:
+  email: 'Email'
+  password: 'Password'

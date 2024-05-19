@@ -1,4 +1,4 @@
-import 'package:ethiscan/domain/entities/user.dart';
+import 'package:ethiscan/domain/entities/ethiscan_user.dart';
 import 'package:ethiscan/presentation/app/custom_app.dart';
 import 'package:ethiscan/presentation/home_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,9 +30,9 @@ class AppConnectedState extends State<AppConnected> {
   Widget build(BuildContext context) {
     return UserProvider(
       user: widget.user,
-      child: const CustomApp(
-        key: Key('ConnectedApp'),
-        home: HomePage(),
+      child: CustomApp(
+        key: const Key('ConnectedApp'),
+        home: HomePage(widget.user),
       ),
     );
   }
@@ -52,7 +52,9 @@ class UserProvider extends InheritedWidget {
   static EthiscanUser? of(BuildContext context) {
     UserProvider? widget =
         context.dependOnInheritedWidgetOfExactType<UserProvider>();
-
+    if (widget?.user == null) {
+      throw Exception('UserProvider not found');
+    }
     return widget!.user;
   }
 
