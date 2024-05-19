@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:ethiscan/domain/entities/product.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart' show injectable;
 
@@ -14,11 +15,9 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
         load: () async {
           emit(const FavoriteState.loading());
           await Future.delayed(const Duration(seconds: 3));
-          emit(const FavoriteState.loaded(favorite: 'Favorite 1'));
+          // emit(const FavoriteState.loaded(favorite: null);
         },
       );
     });
   }
 }
-
-class Favoritetate {}

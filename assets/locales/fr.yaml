@@ -1,37 +1,52 @@
 app:
   name: 'EthiScan'
-  serviceError: "Erreur de service"
+  serviceError: 'Erreur de service'
   maintenance: 'Maintenance'
-  unknownVersion: "Version inconnue"
-  reloading: "Rechargement"
-  disconnected: "Déconnecté"
+  unknownVersion: 'Version inconnue'
+  reloading: 'Rechargement'
+  disconnected: 'Déconnecté'
+  search: 'Recherche'
   data:
-    empty: "Aucune donnée disponible"
+    empty: 'Aucune donnée disponible'
     error:
       title: 'Erreur'
-      message: "Une erreur s'est produite lors de la récupération des données"
+      message: 'Une erreur est survenue lors de la récupération des données'
 
 favorite:
   title: 'Favori'
-  add: "Ajouter aux favoris"
-  remove: "Retirer des favoris"
-  added: "Ajouté aux favoris"
-  removed: "Retiré des favoris"
+  add: 'Ajouter aux Favoris'
+  remove: 'Retirer des Favoris'
+  added: 'Ajouté aux Favoris'
+  removed: 'Retiré des Favoris'
+  last_scan: 'Dernier scan : '
+  empty:
+    title: 'Page vide'
+    message: 'Aucun favori trouvé'
 
 favorites:
   title: 'Favoris'
-  error-title: 'Erreur'
-  error-message: "Une erreur s'est produite lors de la récupération des favoris"
+  error:
+    title: 'Erreur'
+    message: 'Une erreur est survenue lors de la récupération des favoris'
 
 scan:
   title: 'Scan'
-  error-title: 'Error'
-  error-message: "Une erreur s'est produite lors du scan"
+  error-title: 'Erreur'
+  error-message: 'Une erreur est survenue lors du scan'
+
+sign_in:
+  title: 'Connexion'
+  error-title: 'Erreur'
+  error-message: 'Une erreur est survenue lors de la connexion'
 
 parameter:
-  title: 'Paramètres'
+  title: 'Paramètre'
   error-title: 'Erreur'
-  error-message: "Une erreur s'est produite lors de la récupération des paramètres"
+  error-message: 'Une erreur est survenue lors de la récupération des paramètres'
 
 splash:
   version: "Version {version}"
+
+words:
+  email: 'Email'
+  password: 'Mot de passe'

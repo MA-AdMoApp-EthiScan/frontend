@@ -1,4 +1,5 @@
 import 'package:ethiscan/app/favorite_bloc/favorite_bloc.dart';
+import 'package:ethiscan/domain/entities/product.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
@@ -38,24 +39,27 @@ class _FavoritePage extends State<FavoritePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<FavoriteBloc>(
-      create: (context) => getIt(),
-      child: BlocBuilder<FavoriteBloc, FavoriteState>(
-        builder: (context, state) => state.when(
-          loading: () => _page(context, loading: true),
-          error: () => _page(context, error: true),
-          initial: () => _page(context),
-          loaded: (favorite) => _page(context, favorite: favorite),
-        ),
-      ),
-    );
+    return BlocProvider.value(
+        value: _favoriteBloc,
+        child: BlocConsumer<FavoriteBloc, FavoriteState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            return state.maybeWhen(
+              loading: () => _page(context, loading: true),
+              error: () => _page(context, error: true),
+              initial: () => _page(context),
+              loaded: (Product favorite) => _page(context, favorite: favorite),
+              orElse: () => _page(context),
+            );
+          },
+        ));
   }
 
   Widget _page(
     BuildContext context, {
     bool loading = false,
     bool error = false,
-    String favorite = "",
+    Product? favorite,
   }) {
     return Scaffold(
       appBar: AppBar(
@@ -81,7 +85,7 @@ class _FavoritePage extends State<FavoritePage> {
     );
   }
 
-  List<Widget> _getContent(bool loading, bool error, String favorite) {
+  List<Widget> _getContent(bool loading, bool error, Product? favorite) {
     if (loading) {
       return [const CustomCircularLoading()];
     } else if (error) {
@@ -89,8 +93,13 @@ class _FavoritePage extends State<FavoritePage> {
         CustomH3(I18nUtils.translate(context, "favorites.error.title")),
         CustomText(I18nUtils.translate(context, "favorites.error.message"))
       ];
+    } else if (favorite != null) {
+      return [CustomH3(favorite.name)];
     } else {
-      return [CustomH3(favorite)];
+      return [
+        CustomH3(I18nUtils.translate(context, "favorite.empty.title")),
+        CustomText(I18nUtils.translate(context, "favorite.empty.message"))
+      ];
     }
   }
 }

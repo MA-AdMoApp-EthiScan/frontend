@@ -8,16 +8,18 @@ part 'product.g.dart';
 class Product {
   final String id;
   final String name;
-  final String barcode;
-  final List<Certification> certification;
-  final List<Metadata> metadata;
+  final String image;
+  final String description;
+  final double carbonFootprint;
+  final DateTime scanDate;
 
   Product({
     required this.id,
     required this.name,
-    required this.barcode,
-    required this.certification,
-    required this.metadata,
+    required this.image,
+    required this.description,
+    required this.carbonFootprint,
+    required this.scanDate,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) =>

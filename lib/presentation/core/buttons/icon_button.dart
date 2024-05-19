@@ -42,12 +42,16 @@ class SecondaryIconButton extends Button {
   final IconData icon;
   final bool invert;
   final double size;
+  final Color color;
+  final Color colorActive;
 
   const SecondaryIconButton({
     Key? key,
     required this.icon,
     this.size = 24,
     this.invert = false,
+    this.color = UIColors.lightPrimaryColor,
+    this.colorActive = UIColors.darkPrimaryColor,
     bool disabled = false,
     void Function()? onTap,
   }) : super(onTap, key: key, disabled: disabled);
@@ -76,6 +80,6 @@ class SecondaryIconButtonState extends ButtonState<SecondaryIconButton> {
 
     if (widget.invert) return active ? UIColors.grey3 : UIColors.white;
 
-    return active ? UIColors.darkPrimaryColor : UIColors.lightPrimaryColor;
+    return active ? widget.colorActive : widget.color;
   }
 }

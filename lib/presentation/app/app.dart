@@ -5,15 +5,19 @@ import 'package:ethiscan/domain/language/i_language_repository.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/app/app_connected.dart';
 import 'package:ethiscan/presentation/app/custom_app.dart';
+import 'package:ethiscan/presentation/app/register.dart';
+import 'package:ethiscan/presentation/core/buttons/primary_button.dart';
+import 'package:ethiscan/presentation/core/custom_text_field.dart';
+import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/splash_page.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
+import 'package:ethiscan/utils/navigation_util.dart';
+import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../utils/ui_colors.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -30,14 +34,8 @@ class _AppState extends State<App> {
 
   @override
   void initState() {
-    _mainUserBloc = getIt();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     final ILanguageRepository languageRepository = getIt();
+    _mainUserBloc = getIt();
 
     // Set the locale from the shared preferences
     SharedPreferences.getInstance().then((prefs) {
@@ -50,9 +48,17 @@ class _AppState extends State<App> {
       }
     });
 
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+
     return BlocProvider.value(
       value: _mainUserBloc,
-      child: BlocBuilder<MainUserBloc, MainUserState>(
+      child: BlocConsumer<MainUserBloc, MainUserState>(
+        listener: (context, state) {},
         builder: (context, state) {
           return state.map(
             serviceError: (state) => _serviceError(
@@ -133,28 +139,37 @@ class _AppState extends State<App> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: UIColors.lightPrimaryColor,
-          title: const Text('Sign In'),
+          title: const CustomH1("Sign In"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextField(
+              CustomTextField(
                 controller: _emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
-              ),
-              TextField(
-                controller: _passwordController,
-                decoration: const InputDecoration(labelText: 'Password'),
-                obscureText: true,
+                placeholder: 'Email',
+                label: 'Email',
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () => _mainUserBloc.add(MainUserEvent.connect(
-                    _emailController.text, _passwordController.text)),
-                child: const Text('Sign In'),
+              CustomTextField(
+                controller: _passwordController,
+                label: 'Password', // TODO : translate 'Password
+                placeholder: 'Password',
+                password: true,
               ),
+              const SizedBox(height: 20),
+              PrimaryButton(
+                text: 'Sign In', // TODO : translate 'Sign In'
+                onTap: () => _mainUserBloc.add(MainUserEvent.connect(
+                    _emailController.text, _passwordController.text)),
+              ),
+              const SizedBox(height: 50),
+              PrimaryButton(
+                  text: 'Register', // TODO : translate 'Register'
+                  onTap: () {
+                    NavigationUtils.goTo(context, const RegisterPage());
+                  }),
             ],
           ),
         ),

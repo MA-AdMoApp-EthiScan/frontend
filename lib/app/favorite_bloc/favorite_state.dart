@@ -7,7 +7,7 @@ abstract class FavoriteState with _$FavoriteState {
   const factory FavoriteState.loading() = _FavoriteLoading;
 
   const factory FavoriteState.loaded({
-    required String favorite,
+    required Product favorite,
   }) = _FavoriteLoaded;
 
   const factory FavoriteState.error() = _FavoriteError;

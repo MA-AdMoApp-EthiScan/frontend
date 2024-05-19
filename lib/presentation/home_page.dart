@@ -1,4 +1,4 @@
-import 'package:ethiscan/presentation/favorites/favorites.dart';
+import 'package:ethiscan/presentation/favorites/favorites_page.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
