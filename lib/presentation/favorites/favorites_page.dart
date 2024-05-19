@@ -246,16 +246,6 @@ class _FavoritesPage extends State<FavoritesPage> {
 
   List<Widget> _getFavoritesCards(
       List<Product> favorites, bool loading, bool error) {
-    List<Product> favorites = [];
-    if (favorites.isEmpty) {
-      favorites.add(Product(
-        id: "1",
-        name: "Product 1",
-        description: "Description 1",
-        imageUrl:
-            'https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg',
-      ));
-    }
     if (error) {
       return [
         CustomH3(I18nUtils.translate(context, "favorites.error.title")),

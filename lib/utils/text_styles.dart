@@ -38,6 +38,14 @@ class TextStyles {
     height: 1.4,
   );
 
+  static const TextStyle h2p = TextStyle(
+    color: UIColors.lightPrimaryColor,
+    fontFamily: fontFamily,
+    fontWeight: FontWeight.w600,
+    fontSize: 18,
+    height: 1.4,
+  );
+
   static const TextStyle h3 = TextStyle(
     color: UIColors.lightPrimaryColor,
     fontFamily: fontFamily,

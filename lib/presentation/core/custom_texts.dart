@@ -39,6 +39,11 @@ class CustomH2 extends CustomText {
       : super(style: TextStyles.h2);
 }
 
+class CustomH2P extends CustomText {
+  const CustomH2P(super.text, {super.key, super.align})
+      : super(style: TextStyles.h2p);
+}
+
 class CustomH3 extends CustomText {
   const CustomH3(super.text, {super.key, super.align})
       : super(style: TextStyles.h3);

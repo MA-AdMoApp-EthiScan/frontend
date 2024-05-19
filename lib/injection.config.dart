@@ -50,10 +50,8 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i14.MetadataRepositoryProvider());
     gh.factory<_i15.ProductBloc>(
         () => _i15.ProductBloc(gh<_i11.ProductRepository>()));
-    gh.factory<_i16.MainUserBloc>(() => _i16.MainUserBloc(
-          gh<_i7.AuthRepository>(),
-          gh<_i3.UserRepository>(),
-        ));
+    gh.factory<_i16.MainUserBloc>(
+        () => _i16.MainUserBloc(gh<_i7.AuthRepository>()));
     gh.factory<_i17.FavoritesBloc>(
         () => _i17.FavoritesBloc(gh<_i3.UserRepository>()));
     return this;
