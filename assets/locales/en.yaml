@@ -28,6 +28,9 @@ favorites:
   error:
     title: 'Error'
     message: 'An error occurred while fetching favorites'
+  empty:
+    title: 'Empty page'
+    message: 'No favorite found'
 
 scan:
   title: 'Scan'
