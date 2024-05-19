@@ -27,8 +27,6 @@ class _RegisterPage extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final width =
-        screenWidth == 0 ? MediaQuery.of(context).size.width : screenWidth;
 
     return CustomApp(
       key: const Key('DisconnectedApp'), // TODO use translated key

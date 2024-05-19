@@ -138,7 +138,8 @@ class _AppState extends State<App> {
     MainUserError state,
   ) {
     return state.isRegister ?
-      RegisterPage(mainU@Bloc: _mainUserBloc);
+    RegisterPage(mainUserBloc: _mainUserBloc) :
+    LoginPage(mainUserBloc: _mainUserBloc);
   }
 }
 

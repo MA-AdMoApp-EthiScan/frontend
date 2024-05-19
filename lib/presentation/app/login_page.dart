@@ -50,7 +50,7 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 20),
               SecondaryButton(
                   text: 'Register', // TODO : translate 'Register'
-                  onTap: () => mainUserBloc.add(MainUserEvent.goRegister()),
+                  onTap: () => mainUserBloc.add(const MainUserEvent.goRegister()),
               ),
             ],
           ),
