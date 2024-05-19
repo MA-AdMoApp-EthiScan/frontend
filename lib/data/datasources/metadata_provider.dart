@@ -3,7 +3,7 @@ import 'package:ethiscan/domain/entities/metadata.dart';
 import 'package:ethiscan/data/repositories/metadata_repository.dart';
 import 'package:injectable/injectable.dart';
 
-@Singleton()
+@Singleton(as: MetadataRepository)
 class MetadataRepositoryProvider implements MetadataRepository {
   final CollectionReference metadataCollection =
       FirebaseFirestore.instance.collection('metadata');

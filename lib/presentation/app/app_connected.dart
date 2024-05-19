@@ -30,9 +30,9 @@ class AppConnectedState extends State<AppConnected> {
   Widget build(BuildContext context) {
     return UserProvider(
       user: widget.user,
-      child: const CustomApp(
-        key: Key('ConnectedApp'),
-        home: HomePage(),
+      child: CustomApp(
+        key: const Key('ConnectedApp'),
+        home: HomePage(widget.user),
       ),
     );
   }

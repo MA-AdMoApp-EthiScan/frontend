@@ -1,8 +1,8 @@
 app:
   name: 'EthiScan'
-  serviceError: 'Erreur de service'
+  serviceError: 'Erreur de Service'
   maintenance: 'Maintenance'
-  unknownVersion: 'Version inconnue'
+  unknownVersion: 'Version Inconnue'
   reloading: 'Rechargement'
   disconnected: 'Déconnecté'
   search: 'Recherche'
@@ -20,7 +20,7 @@ favorite:
   removed: 'Retiré des Favoris'
   last_scan: 'Dernier scan : '
   empty:
-    title: 'Page vide'
+    title: 'Page Vide'
     message: 'Aucun favori trouvé'
 
 favorites:
@@ -28,6 +28,9 @@ favorites:
   error:
     title: 'Erreur'
     message: 'Une erreur est survenue lors de la récupération des favoris'
+  empty:
+    title: 'Page Vide'
+    message: 'Aucun favori trouvé'
 
 scan:
   title: 'Scan'

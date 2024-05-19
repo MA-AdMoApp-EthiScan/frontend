@@ -8,8 +8,11 @@ class Certification {
   final String description;
   final String imageUrl;
 
-  Certification(
-      {required this.name, required this.description, required this.imageUrl});
+  Certification({
+    required this.name,
+    required this.description,
+    required this.imageUrl,
+  });
 
   factory Certification.fromJson(Map<String, dynamic> json) =>
       _$CertificationFromJson(json);
