@@ -1,6 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'certification.dart';
-import 'metadata.dart';
 
 part 'product.g.dart';
 

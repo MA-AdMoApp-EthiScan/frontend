@@ -12,22 +12,20 @@ class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key, required this.mainUserBloc});
 
   @override
-  State<RegisterPage> createState() => _RegisterPage(mainUserBloc: mainUserBloc);
+  State<RegisterPage> createState() => _RegisterPage();
 }
 
 class _RegisterPage extends State<RegisterPage> {
   final double screenWidth = 0;
-  final MainUserBloc mainUserBloc;
+  late final MainUserBloc mainUserBloc;
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _password2Controller = TextEditingController();
 
-  _RegisterPage({required this.mainUserBloc});
-
   @override
   Widget build(BuildContext context) {
-
+    mainUserBloc = widget.mainUserBloc;
     return CustomApp(
       key: const Key('DisconnectedApp'), // TODO use translated key
       home: Scaffold(
