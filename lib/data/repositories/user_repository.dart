@@ -1,4 +1,8 @@
+import 'package:ethiscan/domain/entities/ethiscan_user.dart';
+
 abstract class UserRepository {
-  Future<void> addUser(Map<String, dynamic> userData);
-  Future<Map<String, dynamic>> getUserData(String uid);
+  Future<EthiscanUser> getUserFromId(String uid);
+  Future<void> addUser(EthiscanUser user);
+  Future<void> updateUser(EthiscanUser user);
+  Future<void> deleteUser(EthiscanUser user);
 }
