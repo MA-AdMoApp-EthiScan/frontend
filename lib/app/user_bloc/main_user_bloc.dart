@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:ethiscan/data/repositories/user_repository.dart';
 import 'package:ethiscan/domain/entities/ethiscan_user.dart';
 import 'package:ethiscan/data/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,11 +13,9 @@ part 'main_user_state.dart';
 @injectable
 class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
   final AuthRepository _authRepository;
-  final UserRepository _userRepository;
 
   MainUserBloc(
-    this._authRepository,
-    this._userRepository
+    this._authRepository
   ) : super(MainUserState.initial()) {
     on<MainUserEvent>((event, emit) async {
       // ~~~ Authentication ~~~
