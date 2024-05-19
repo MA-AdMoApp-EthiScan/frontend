@@ -8,7 +8,9 @@ abstract class MainUserState with _$MainUserState {
 
   const factory MainUserState.reloading() = _MainUserReloading;
 
-  const factory MainUserState.disconnected() = MainUserDisconnected;
+  const factory MainUserState.disconnected(bool isRegister) = MainUserDisconnected;
+
+  const factory MainUserState.error(bool isRegister, String exception) = MainUserError;
 
   const factory MainUserState.serviceError({
     required bool maintenance,
