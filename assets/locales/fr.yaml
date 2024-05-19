@@ -1,51 +1,69 @@
 app:
   name: 'EthiScan'
-  serviceError: 'Erreur de Service'
+  serviceError: 'Erreur de service'
   maintenance: 'Maintenance'
-  unknownVersion: 'Version Inconnue'
+  unknownVersion: 'Version inconnue'
   reloading: 'Rechargement'
   disconnected: 'Déconnecté'
-  search: 'Recherche'
+  search: 'Rechercher'
   data:
     empty: 'Aucune donnée disponible'
     error:
       title: 'Erreur'
-      message: 'Une erreur est survenue lors de la récupération des données'
+      message: "Une erreur s'est produite lors de la récupération des données"
 
-favorite:
-  title: 'Favori'
-  add: 'Ajouter aux Favoris'
-  remove: 'Retirer des Favoris'
-  added: 'Ajouté aux Favoris'
-  removed: 'Retiré des Favoris'
+popup:
+  logout:
+    title: 'Déconnexion'
+    message: 'Êtes-vous sûr de vouloir vous déconnecter ?'
+
+product:
+  title: 'Produit'
+  add: 'Ajouter aux favoris'
+  remove: 'Retirer des favoris'
+  added: 'Ajouté aux favoris'
+  removed: 'Retiré des favoris'
   last_scan: 'Dernier scan : '
+  carbon_footprint: 'Empreinte carbone'
+  image: 'Image'
+  description: 'Description'
+  error:
+    title: 'Erreur'
+    message: "Une erreur s'est produite lors de la récupération du produit"
   empty:
-    title: 'Page Vide'
-    message: 'Aucun favori trouvé'
+    title: 'Page vide'
+    message: 'Aucun produit trouvé'
+  metadatas: 'Métadonnées'
 
 favorites:
   title: 'Favoris'
   error:
     title: 'Erreur'
-    message: 'Une erreur est survenue lors de la récupération des favoris'
+    message: "Une erreur s'est produite lors de la récupération des favoris"
   empty:
-    title: 'Page Vide'
+    title: 'Page vide'
     message: 'Aucun favori trouvé'
 
 scan:
+  capture-and-scan: 'Capturer et scanner'
   title: 'Scan'
-  error-title: 'Erreur'
-  error-message: 'Une erreur est survenue lors du scan'
+  error:
+    title: 'Erreur'
+    message: "Une erreur s'est produite lors du scan"
 
 sign_in:
   title: 'Connexion'
   error-title: 'Erreur'
-  error-message: 'Une erreur est survenue lors de la connexion'
+  error-message: "Une erreur s'est produite lors de la connexion"
 
-parameter:
-  title: 'Paramètre'
-  error-title: 'Erreur'
-  error-message: 'Une erreur est survenue lors de la récupération des paramètres'
+parameters:
+  title: 'Paramètres'
+  error:
+    title: 'Erreur'
+    message: "Une erreur s'est produite lors de la récupération des paramètres"
+  empty:
+    title: 'Page vide'
+    message: 'Aucun paramètre trouvé'
 
 splash:
   version: "Version {version}"
@@ -53,3 +71,7 @@ splash:
 words:
   email: 'Email'
   password: 'Mot de passe'
+  ok: 'OK'
+  cancel: 'Annuler'
+  close: 'Fermer'
+  confirm: 'Confirmer'

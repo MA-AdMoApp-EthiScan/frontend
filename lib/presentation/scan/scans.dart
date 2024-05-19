@@ -2,19 +2,17 @@ import 'dart:async';
 
 import 'package:ethiscan/app/scans_bloc/scans_bloc.dart';
 import 'package:ethiscan/injection.dart';
+import 'package:ethiscan/presentation/core/buttons/primary_button.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/core/list_view_layout_body.dart';
 import 'package:ethiscan/presentation/product/product_page.dart';
 import 'package:ethiscan/presentation/scan/widgets/scans_card.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
-//import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:camera/camera.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
-//import 'package:http/http.dart' as http;
-//import 'dart:convert';
 
 class ScansPage extends StatefulWidget {
   const ScansPage({super.key});
@@ -170,43 +168,49 @@ Widget build(BuildContext context) {
                   ),
                 );
               } else {
-                return const Center(child: CircularProgressIndicator());
+                return const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  child: CustomCircularLoading(),
+                );
               }
             },
           ),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              //_scansBloc.add(const ScansEvent.load());
-              _captureFrame(); 
-            },
-            child: const Text('Capture Frame and Scan'),
-          ),
-          if (loading) const Center(child: CircularProgressIndicator()),
-          if (barcode != null) Text('Barcode found: $barcode'),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
-              children: _getScanCards(scans, loading, error),
-            ),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const SizedBox(height: 20),
+              PrimaryButton(
+                onTap: () {
+                  //_scansBloc.add(const ScansEvent.load());
+                  _captureFrame();
+                },
+                text: I18nUtils.translate(context, 'scan.capture-and-scan'),
+              ),
+              if (loading) const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                child: CustomCircularLoading(),
+              ),
+              if (barcode != null) Text('Barcode found: $barcode'),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 0),
+                child: Column(
+                  children: _getScanCards(scans, error),
+                ),
+              ),
+            ])
           ),
         ],
       ),
     );
   }
 
-  List<Widget> _getScanCards(List<String> scans, bool loading, bool error) {
+  List<Widget> _getScanCards(List<String> scans, bool error) {
     if (error) {
       return [
-        CustomH3(I18nUtils.translate(context, "scans.error-title")),
-        CustomText(I18nUtils.translate(context, "scans.error-message")),
-      ];
-    } else if (loading) {
-      return [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-          child: CustomCircularLoading(),
-        ),
+        CustomH3(I18nUtils.translate(context, "scan.error.title")),
+        CustomText(I18nUtils.translate(context, "scan.error.message")),
       ];
     } else {
       scans = scans.isEmpty ? ["Scan 1", "Scan 2"] : scans;

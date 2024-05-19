@@ -1,7 +1,5 @@
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/product/product_page.dart';
-//import 'package:ethiscan/presentation/favorites/favorite.dart';
-//import 'package:ethiscan/presentation/scan/scan.dart';
 import 'package:ethiscan/presentation/widget_core/my_card.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:ethiscan/utils/ui_colors.dart';

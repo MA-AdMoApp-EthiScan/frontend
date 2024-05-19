@@ -37,8 +37,8 @@ class _HomePageState extends State<HomePage> {
         body: TabBarView(
           children: [
             FavoritesPage(widget.user),
-            ScansPage(),
-            Icon(Icons.settings),
+            const ScansPage(),
+            const Icon(Icons.settings),
           ],
         ),
       ),
