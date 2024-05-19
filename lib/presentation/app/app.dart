@@ -120,6 +120,7 @@ class _AppState extends State<App> {
       },
       child: AppConnected(
         user: state.user,
+        mainUserBloc: _mainUserBloc,
       ),
     );
   }
@@ -138,8 +139,8 @@ class _AppState extends State<App> {
     MainUserError state,
   ) {
     return state.isRegister ?
-    RegisterPage(mainUserBloc: _mainUserBloc) :
-    LoginPage(mainUserBloc: _mainUserBloc);
+    RegisterPage(mainUserBloc: _mainUserBloc, error: state.exception) :
+    LoginPage(mainUserBloc: _mainUserBloc, error: state.exception);
   }
 }
 

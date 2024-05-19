@@ -12,6 +12,11 @@ app:
       title: 'Error'
       message: 'An error occurred while fetching data'
 
+popup:
+  logout:
+    title: 'Logging out'
+    message: 'Are you sure you want to log out ?'
+
 product:
   title: 'Product'
   add: 'Add to Favorites'
@@ -60,3 +65,7 @@ splash:
 words:
   email: 'Email'
   password: 'Password'
+  ok: 'OK'
+  cancel: 'Cancel'
+  close: 'Close'
+  confirm: 'Confirm'

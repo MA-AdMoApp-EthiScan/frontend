@@ -1,3 +1,4 @@
+import 'package:ethiscan/app/user_bloc/main_user_bloc.dart';
 import 'package:ethiscan/domain/entities/ethiscan_user.dart';
 import 'package:ethiscan/presentation/app/custom_app.dart';
 import 'package:ethiscan/presentation/home_page.dart';
@@ -5,8 +6,9 @@ import 'package:flutter/cupertino.dart';
 
 class AppConnected extends StatefulWidget {
   final EthiscanUser user;
+  final MainUserBloc mainUserBloc;
 
-  const AppConnected({super.key, required this.user});
+  const AppConnected({super.key, required this.user, required this.mainUserBloc});
 
   @override
   AppConnectedState createState() => AppConnectedState();
@@ -32,7 +34,7 @@ class AppConnectedState extends State<AppConnected> {
       user: widget.user,
       child: CustomApp(
         key: const Key('ConnectedApp'),
-        home: HomePage(widget.user),
+        home: HomePage(widget.user, widget.mainUserBloc),
       ),
     );
   }

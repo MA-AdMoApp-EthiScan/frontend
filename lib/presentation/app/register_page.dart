@@ -9,7 +9,8 @@ import 'package:ethiscan/presentation/core/custom_texts.dart';
 
 class RegisterPage extends StatefulWidget {
   final MainUserBloc mainUserBloc;
-  const RegisterPage({super.key, required this.mainUserBloc});
+  final String? error;
+  const RegisterPage({super.key, required this.mainUserBloc, this.error});
 
   @override
   State<RegisterPage> createState() => _RegisterPage();
@@ -65,6 +66,12 @@ class _RegisterPage extends State<RegisterPage> {
                     : null,
                 error: _passwordController.text != _password2Controller.text,
               ),
+              const SizedBox(height: 20),
+              if (widget.error != null && widget.error!.isNotEmpty)
+                Text(
+                  widget.error!,
+                  style: const TextStyle(color: Colors.red),
+                ),
               const SizedBox(height: 50),
               PrimaryButton(
                 text: 'Create account', // TODO : translate 'Sign In'

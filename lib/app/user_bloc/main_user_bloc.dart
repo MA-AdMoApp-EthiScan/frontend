@@ -33,8 +33,7 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
             );
             emit(MainUserState.connected(user: user));
           } on FirebaseAuthException catch (e) {
-            emit(const MainUserState.disconnected(false));
-            getAuthenticationExceptionFromCode(e.code);
+            emit(MainUserState.error(false, getAuthenticationExceptionFromCode(e.code).toString()));
           }
         }
       }, goRegister: () {
@@ -56,7 +55,7 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
       }, autoConnect: (minDelay) async {
         await reconnectCurrentUser(emit);
       }, disconnect: () async {
-        FirebaseAuth.instance.currentUser?.delete();
+        await FirebaseAuth.instance.signOut();
         emit(const MainUserState.disconnected(false));
       });
     });
