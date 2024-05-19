@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class SortCriteria {
   final SortField field;
   final SortOrder order;

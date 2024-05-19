@@ -7,7 +7,6 @@ import 'package:ethiscan/presentation/core/buttons/icon_button.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_text_field.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
-import 'package:ethiscan/presentation/core/cutom_checkbox.dart';
 import 'package:ethiscan/presentation/core/list_view_layout_body.dart';
 import 'package:ethiscan/presentation/favorites/widgets/favorites_card.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
@@ -54,7 +53,8 @@ class _FavoritesPage extends State<FavoritesPage> {
 
   void _searchChanged() {
     _favoritesBloc.add(
-      FavoritesEvent.updateSort(_favoriteSort!.copyWith(name: _searchController.text)),
+      FavoritesEvent.updateSort(
+          _favoriteSort!.copyWith(name: _searchController.text)),
     );
   }
 
@@ -81,8 +81,7 @@ class _FavoritesPage extends State<FavoritesPage> {
               orElse: () => _page(context),
             );
           },
-        )
-    );
+        ));
   }
 
   Widget _page(
@@ -100,18 +99,25 @@ class _FavoritesPage extends State<FavoritesPage> {
         )),
         actions: [
           SecondaryIconButton(
-            icon: _favoriteSort == null || _favoriteSort?.active == false ? Icons.search_outlined : Icons.close,
+            icon: _favoriteSort == null || _favoriteSort?.active == false
+                ? Icons.search_outlined
+                : Icons.close,
             size: 32,
-            color: _favoriteSort == null || _favoriteSort?.active == false ? UIColors.lightPrimaryColor : UIColors.red,
-            colorActive: _favoriteSort == null || _favoriteSort?.active == false ? UIColors.darkPrimaryColor : UIColors.darkRed,
+            color: _favoriteSort == null || _favoriteSort?.active == false
+                ? UIColors.lightPrimaryColor
+                : UIColors.red,
+            colorActive: _favoriteSort == null || _favoriteSort?.active == false
+                ? UIColors.darkPrimaryColor
+                : UIColors.darkRed,
             onTap: () {
               if (_favoriteSort == null) {
                 setState(() {
                   _favoriteSort = FavoriteSort(active: true);
                 });
-              } else if (_favoriteSort != null){
+              } else if (_favoriteSort != null) {
                 setState(() {
-                  _favoriteSort = _favoriteSort?.copyWith(active: !_favoriteSort!.active);
+                  _favoriteSort =
+                      _favoriteSort?.copyWith(active: !_favoriteSort!.active);
                 });
               }
             },
@@ -119,85 +125,116 @@ class _FavoritesPage extends State<FavoritesPage> {
           const SizedBox(width: 8),
         ],
         titleTextStyle: const TextStyle(
-            color: UIColors.lightPrimaryColor,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
+          color: UIColors.lightPrimaryColor,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
         ),
         bottom: _favoriteSort?.active == true
             ? PreferredSize(
-          preferredSize: const Size.fromHeight(110), // Provide the preferred height
-          child: Padding(
-            padding: const EdgeInsets.all(0), // Add padding around the TextField
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: SecondaryIconButton(
-                        icon: Icons.sort_by_alpha,
-                        size: 32,
-                        color: _favoriteSort?.sortCriteria.field == SortField.name ? UIColors.lightAccentColor : UIColors.lightPrimaryColor,
-                        colorActive: _favoriteSort?.sortCriteria.field == SortField.name ? UIColors.darkAccentColor : UIColors.darkPrimaryColor,
-                        onTap: () {
-                          SortCriteria? sortCriteria = _favoriteSort?.sortCriteria.copyWith(field: SortField.name);
-                          setState(() {
-                            _favoriteSort = _favoriteSort?.copyWith(sortCriteria: sortCriteria);
-                          });
-                          _favoritesBloc.add(FavoritesEvent.updateSort(_favoriteSort!));
-                        },
+                preferredSize:
+                    const Size.fromHeight(110), // Provide the preferred height
+                child: Padding(
+                  padding: const EdgeInsets.all(
+                      0), // Add padding around the TextField
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: SecondaryIconButton(
+                              icon: Icons.sort_by_alpha,
+                              size: 32,
+                              color: _favoriteSort?.sortCriteria.field ==
+                                      SortField.name
+                                  ? UIColors.lightAccentColor
+                                  : UIColors.lightPrimaryColor,
+                              colorActive: _favoriteSort?.sortCriteria.field ==
+                                      SortField.name
+                                  ? UIColors.darkAccentColor
+                                  : UIColors.darkPrimaryColor,
+                              onTap: () {
+                                SortCriteria? sortCriteria = _favoriteSort
+                                    ?.sortCriteria
+                                    .copyWith(field: SortField.name);
+                                setState(() {
+                                  _favoriteSort = _favoriteSort?.copyWith(
+                                      sortCriteria: sortCriteria);
+                                });
+                                _favoritesBloc.add(
+                                    FavoritesEvent.updateSort(_favoriteSort!));
+                              },
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: SecondaryIconButton(
+                              icon: Icons.schedule,
+                              size: 32,
+                              color: _favoriteSort?.sortCriteria.field ==
+                                      SortField.scanDate
+                                  ? UIColors.lightAccentColor
+                                  : UIColors.lightPrimaryColor,
+                              colorActive: _favoriteSort?.sortCriteria.field ==
+                                      SortField.scanDate
+                                  ? UIColors.darkAccentColor
+                                  : UIColors.darkPrimaryColor,
+                              onTap: () {
+                                SortCriteria? sortCriteria = _favoriteSort
+                                    ?.sortCriteria
+                                    .copyWith(field: SortField.scanDate);
+                                setState(() {
+                                  _favoriteSort = _favoriteSort?.copyWith(
+                                      sortCriteria: sortCriteria);
+                                });
+                                _favoritesBloc.add(
+                                    FavoritesEvent.updateSort(_favoriteSort!));
+                              },
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: SecondaryIconButton(
-                        icon: Icons.schedule,
-                        size: 32,
-                        color: _favoriteSort?.sortCriteria.field == SortField.scanDate ? UIColors.lightAccentColor : UIColors.lightPrimaryColor,
-                        colorActive: _favoriteSort?.sortCriteria.field == SortField.scanDate ? UIColors.darkAccentColor : UIColors.darkPrimaryColor,
-                        onTap: () {
-                          SortCriteria? sortCriteria = _favoriteSort?.sortCriteria.copyWith(field: SortField.scanDate);
-                          setState(() {
-                            _favoriteSort = _favoriteSort?.copyWith(sortCriteria: sortCriteria);
-                          });
-                          _favoritesBloc.add(FavoritesEvent.updateSort(_favoriteSort!));
-                        },
+                      const SizedBox(height: 12),
+                      Row(
+                        children: <Widget>[
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: CustomTextField(
+                              label: null,
+                              placeholder:
+                                  I18nUtils.translate(context, "app.search"),
+                              controller: _searchController,
+                              keyboardType: TextInputType.text,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          SecondaryIconButton(
+                            icon: Icons.swap_vert,
+                            size: 32,
+                            onTap: () {
+                              SortOrder order =
+                                  _favoriteSort?.sortCriteria.order ==
+                                          SortOrder.ascending
+                                      ? SortOrder.descending
+                                      : SortOrder.ascending;
+                              SortCriteria? sortCriteria = _favoriteSort
+                                  ?.sortCriteria
+                                  .copyWith(order: order);
+                              setState(() {
+                                _favoriteSort = _favoriteSort?.copyWith(
+                                    sortCriteria: sortCriteria);
+                              });
+                              _favoritesBloc.add(
+                                  FavoritesEvent.updateSort(_favoriteSort!));
+                            },
+                          ),
+                          const SizedBox(width: 8),
+                        ],
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 12),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 12),
-                Row(
-                  children: <Widget>[
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: CustomTextField(
-                        label: null,
-                        placeholder: I18nUtils.translate(context, "app.search"),
-                        controller: _searchController,
-                        keyboardType: TextInputType.text,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    SecondaryIconButton(
-                      icon: Icons.swap_vert,
-                      size: 32,
-                      onTap: () {
-                        SortOrder order = _favoriteSort?.sortCriteria.order == SortOrder.ascending ? SortOrder.descending : SortOrder.ascending;
-                        SortCriteria? sortCriteria = _favoriteSort?.sortCriteria.copyWith(order: order);
-                        setState(() {
-                          _favoriteSort = _favoriteSort?.copyWith(sortCriteria: sortCriteria);
-                        });
-                        _favoritesBloc.add(FavoritesEvent.updateSort(_favoriteSort!));
-                      },
-                    ),
-                    const SizedBox(width: 8),
-                  ],
-                ),
-                const SizedBox(height: 12),
-              ],
-            ),
-          ),
-        )
+              )
             : null,
       ),
       body: ListViewLayoutBody(
@@ -242,5 +279,4 @@ class _FavoritesPage extends State<FavoritesPage> {
       return widgets;
     }
   }
-
 }

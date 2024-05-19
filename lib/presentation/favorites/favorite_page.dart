@@ -48,25 +48,11 @@ class _FavoritePage extends State<FavoritePage> {
               loading: () => _page(context, loading: true),
               error: () => _page(context, error: true),
               initial: () => _page(context),
-              loaded: (Product favorite) =>
-                  _page(context, favorite: favorite),
+              loaded: (Product favorite) => _page(context, favorite: favorite),
               orElse: () => _page(context),
             );
           },
-        )
-    );
-
-    return BlocProvider<FavoriteBloc>(
-      create: (context) => getIt(),
-      child: BlocBuilder<FavoriteBloc, FavoriteState>(
-        builder: (context, state) => state.when(
-          loading: () => _page(context, loading: true),
-          error: () => _page(context, error: true),
-          initial: () => _page(context),
-          loaded: (favorite) => _page(context, favorite: favorite),
-        ),
-      ),
-    );
+        ));
   }
 
   Widget _page(

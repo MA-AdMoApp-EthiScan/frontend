@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'product.g.dart';
+
+@JsonSerializable()
 class Product {
   final String id;
   final String name;
@@ -15,21 +20,7 @@ class Product {
     required this.scanDate,
   });
 
-  Product copyWith({
-    String? id,
-    String? name,
-    String? image,
-    String? description,
-    double? carbonFootprint,
-    DateTime? scanDate,
-  }) {
-    return Product(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      image: image ?? this.image,
-      description: description ?? this.description,
-      carbonFootprint: carbonFootprint ?? this.carbonFootprint,
-      scanDate: scanDate ?? this.scanDate,
-    );
-  }
+  factory Product.fromJson(Map<String, dynamic> json) =>
+      _$ProductFromJson(json);
+  Map<String, dynamic> toJson() => _$ProductToJson(this);
 }
