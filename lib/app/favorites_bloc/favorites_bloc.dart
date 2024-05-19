@@ -3,6 +3,7 @@ import 'package:ethiscan/data/repositories/user_repository.dart';
 import 'package:ethiscan/domain/entities/ethiscan_user.dart';
 import 'package:ethiscan/domain/entities/favorite_sort.dart';
 import 'package:ethiscan/domain/entities/product.dart';
+import 'package:ethiscan/domain/entities/sort_criteria.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -24,7 +25,37 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
         },
         updateSort: (user, favoriteSort) async {
           emit(const FavoritesState.loading());
-          await getUserWithFavorites(user, emit);
+
+          List<Product> favorites = user.favorites;
+
+          // Filter by name if it's not null
+          if (favoriteSort.name != null) {
+            favorites = favorites
+                .where((element) => element.name
+                .toLowerCase()
+                .contains(favoriteSort.name!.toLowerCase()))
+                .toList();
+          }
+
+          // Filter by date range if isRange is true
+          if (favoriteSort.isRange == true) {
+            favorites = favorites
+                .where((element) =>
+                      element.scanDate.isAfter(favoriteSort.dateFrom!) &&
+                      element.scanDate.isBefore(favoriteSort.dateTo!))
+                .toList();
+          }
+
+          // Sort the list based on the sortCriteria
+          favorites.sort((a, b) {
+            if (favoriteSort.sortCriteria.order == SortOrder.ascending) {
+              return a.name.compareTo(b.name);
+            } else {
+              return b.name.compareTo(a.name);
+            }
+          });
+
+          emit(FavoritesState.loaded(favorites: favorites));
         }
       );
     });
