@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ethiscan/domain/core/either.dart';
+import 'package:ethiscan/domain/entities/api_error.dart';
 import 'package:ethiscan/domain/entities/product.dart';
 import 'package:ethiscan/data/repositories/product_repository.dart';
 import 'package:injectable/injectable.dart';
 
-@Singleton()
+@Singleton(as: ProductRepository)
 class ProductRepositoryProvider implements ProductRepository {
   final CollectionReference productCollection =
       FirebaseFirestore.instance.collection('products');
@@ -17,9 +19,12 @@ class ProductRepositoryProvider implements ProductRepository {
   }
 
   @override
-  Future<Product> getProductById(String id) async {
+  Future<Either<APIError, Product>> getProductById(String id) async {
     final doc = await productCollection.doc(id).get();
-    return Product.fromJson(doc.data() as Map<String, dynamic>);
+    if (!doc.exists) {
+      return Left(APIError('Product not found', 404));
+    }
+    return Right(Product.fromJson(doc.data() as Map<String, dynamic>));
   }
 
   @override

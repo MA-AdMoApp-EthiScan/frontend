@@ -1,28 +1,49 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'product.dart';
 import 'user_preferences.dart';
 
-part 'ethiscan_user.g.dart';
-
-@JsonSerializable()
 class EthiscanUser {
-  final String id;
-  final String name;
-  String email;
+  final User? firebaseUser;
   List<Product> favoriteProducts;
   UserPreferences userPreferences;
 
   EthiscanUser({
-    required this.id,
-    required this.name,
-    required this.email,
+    this.firebaseUser,
     List<Product>? favoriteProducts,
     UserPreferences? userPreferences,
   })  : favoriteProducts = favoriteProducts ?? [],
-        userPreferences =
-            userPreferences ?? UserPreferences(metadataSubscriptions: []);
+        userPreferences = userPreferences ?? UserPreferences(metadataSubscriptions: []);
 
-  factory EthiscanUser.fromJson(Map<String, dynamic> json) =>
-      _$EthiscanUserFromJson(json);
-  Map<String, dynamic> toJson() => _$EthiscanUserToJson(this);
+  factory EthiscanUser.fromJson(Map<String, dynamic> json) {
+    return EthiscanUser(
+      favoriteProducts: (json['favoriteProducts'] as List<dynamic>)
+          .map((item) => Product.fromJson(item as Map<String, dynamic>))
+          .toList(),
+      userPreferences: UserPreferences.fromJson(json['userPreferences'] as Map<String, dynamic>),
+    );
+  }
+
+  get favorites => favoriteProducts;
+
+  Map<String, dynamic> toJson() {
+    return {
+      'firebaseUser': {
+        'uid': firebaseUser?.uid,
+        'email': firebaseUser?.email,
+        'displayName': firebaseUser?.displayName,
+        'photoURL': firebaseUser?.photoURL,
+        'emailVerified': firebaseUser?.emailVerified,
+        'isAnonymous': firebaseUser?.isAnonymous,
+        'phoneNumber': firebaseUser?.phoneNumber,
+        'metadata': {
+          'creationTime': firebaseUser?.metadata.creationTime,
+          'lastSignInTime': firebaseUser?.metadata.lastSignInTime,
+        },
+      },
+      'favoriteProducts': favoriteProducts,
+      'userPreferences': {
+        'metadataSubscriptions': userPreferences.metadataSubscriptions,
+      }
+    };
+  }
 }

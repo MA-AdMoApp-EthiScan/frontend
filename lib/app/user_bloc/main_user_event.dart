@@ -5,10 +5,6 @@ abstract class MainUserEvent with _$MainUserEvent {
   const factory MainUserEvent.connect(String email, String password) =
       _MainUserConnect;
 
-  const factory MainUserEvent.firstLoad() = _MainUserFirstLoad;
-
-  const factory MainUserEvent.reload() = _MainUserReload;
-
   const factory MainUserEvent.goRegister() =
       _MainUserGoRegister;
 
@@ -23,8 +19,4 @@ abstract class MainUserEvent with _$MainUserEvent {
   }) = _MainUserAutoConnect;
 
   const factory MainUserEvent.disconnect() = _MainUserDisconnect;
-
-  const factory MainUserEvent.reset() = _MainUserReset;
-
-  const factory MainUserEvent.clearData() = _MainUserClearData;
 }

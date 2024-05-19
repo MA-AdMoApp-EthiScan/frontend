@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:ethiscan/data/repositories/user_repository.dart';
+import 'package:ethiscan/domain/entities/ethiscan_user.dart';
 import 'package:ethiscan/domain/entities/favorite_sort.dart';
-import 'package:ethiscan/domain/entities/list_product.dart';
+import 'package:ethiscan/domain/entities/product.dart';
 import 'package:ethiscan/domain/entities/sort_criteria.dart';
-import 'package:ethiscan/utils/date_helpers.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -12,61 +13,72 @@ part 'favorites_state.dart';
 
 @injectable
 class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
-  FavoritesBloc() : super(const FavoritesState.initial()) {
+  final UserRepository _userRepository;
+  FavoritesBloc(
+      this._userRepository
+      ) : super(const FavoritesState.initial()) {
     on<FavoritesEvent>((event, emit) async {
       await event.when(
-        load: () async {
+        load: (user) async {
           emit(const FavoritesState.loading());
-          await Future.delayed(const Duration(seconds: 3));
-          List<ListProduct> products = [
-            ListProduct(
-              id: "1",
-              name: 'Product 1',
-              scanDate: DateTime.now(),
-            ),
-            ListProduct(
-              id: "2",
-              name: 'Product 2',
-              scanDate: DateHelpers.firstDayOfWeek(DateTime.now()),
-            ),
-          ];
-          emit(FavoritesState.loaded(favorites: products));
+          await getUserWithFavorites(user, emit);
         },
-        updateSort: (favoriteSort) async {
+        updateSort: (user, favoriteSort) async {
           emit(const FavoritesState.loading());
-          // TODO: filter favorites
-          List<ListProduct> products = [];
 
-          if(favoriteSort.sortCriteria.order == SortOrder.ascending) {
-            products = [
-              ListProduct(
-                id: "1",
-                name: 'Product 1',
-                scanDate: DateTime.now(),
-              ),
-              ListProduct(
-                id: "2",
-                name: 'Product 2',
-                scanDate: DateHelpers.firstDayOfWeek(DateTime.now()),
-              ),
-            ];
-          } else if (favoriteSort.sortCriteria.order == SortOrder.descending) {
-            products = [
-              ListProduct(
-                id: "2",
-                name: 'Product 2',
-                scanDate: DateHelpers.firstDayOfWeek(DateTime.now()),
-              ),
-              ListProduct(
-                id: "1",
-                name: 'Product 1',
-                scanDate: DateTime.now(),
-              ),
-            ];
+          List<Product> favorites = user.favorites;
+
+          // Filter by name if it's not null
+          if (favoriteSort.name != null) {
+            favorites = favorites
+                .where((element) => element.name
+                .toLowerCase()
+                .contains(favoriteSort.name!.toLowerCase()))
+                .toList();
           }
-          emit(FavoritesState.loaded(favorites: products));
+
+          // Filter by date range if isRange is true
+          if (favoriteSort.isRange == true) {
+            favorites = favorites
+                .where((element) =>
+                      element.scanDate.isAfter(favoriteSort.dateFrom!) &&
+                      element.scanDate.isBefore(favoriteSort.dateTo!))
+                .toList();
+          }
+
+          // Sort the list based on the sortCriteria
+          favorites.sort((a, b) {
+            if (favoriteSort.sortCriteria.order == SortOrder.ascending) {
+              return a.name.compareTo(b.name);
+            } else {
+              return b.name.compareTo(a.name);
+            }
+          });
+
+          emit(FavoritesState.loaded(favorites: favorites));
         }
       );
     });
+  }
+
+  Future<void> getUserWithFavorites(EthiscanUser user, Emitter<FavoritesState> emit) async {
+    var either = await _userRepository.getUserFromId(user.firebaseUser!.uid);
+    await either.when(
+      left: (failure) async {
+        var newEither = await _userRepository.addUser(user);
+        await newEither.when(
+          left: (failure) async {
+            emit(const FavoritesState.error());
+          },
+          right: (user) async {
+            emit(FavoritesState.loaded(favorites: user.favorites));
+          },
+        );
+        emit(const FavoritesState.error());
+      },
+      right: (user) async {
+        emit(FavoritesState.loaded(favorites: user.favorites));
+      },
+    );
   }
 }
