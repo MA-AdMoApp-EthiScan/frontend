@@ -246,17 +246,6 @@ class _FavoritesPage extends State<FavoritesPage> {
 
   List<Widget> _getFavoritesCards(
       List<Product> favorites, bool loading, bool error) {
-    List<Product> _favorites = [];
-    if (favorites.isEmpty) {
-      _favorites.add(Product(
-        id: "1",
-        name: "Product 1",
-        description: "Description 1",
-        scanDate: DateTime.now(),
-        image: 'https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg',
-        carbonFootprint: 4,
-      ));
-    }
     if (error) {
       return [
         CustomH3(I18nUtils.translate(context, "favorites.error.title")),
@@ -269,14 +258,14 @@ class _FavoritesPage extends State<FavoritesPage> {
           child: CustomCircularLoading(),
         ),
       ];
-    } else if (_favorites.isEmpty) {
+    } else if (favorites.isEmpty) {
       return [
         CustomH3(I18nUtils.translate(context, "favorites.empty.title")),
         CustomText(I18nUtils.translate(context, "favorites.empty.message"))
       ];
     } else {
       List<Widget> widgets = [];
-      List<Widget> f = _favorites
+      List<Widget> f = favorites
           .map((favorite) => FavoriteCard(favorite: favorite))
           .toList();
       for (int i = 0; i < f.length; i++) {
