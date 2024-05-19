@@ -5,14 +5,10 @@ import 'package:ethiscan/domain/language/i_language_repository.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/app/app_connected.dart';
 import 'package:ethiscan/presentation/app/custom_app.dart';
-import 'package:ethiscan/presentation/app/register.dart';
-import 'package:ethiscan/presentation/core/buttons/primary_button.dart';
-import 'package:ethiscan/presentation/core/custom_text_field.dart';
-import 'package:ethiscan/presentation/core/custom_texts.dart';
+import 'package:ethiscan/presentation/app/login_page.dart';
+import 'package:ethiscan/presentation/app/register_page.dart';
 import 'package:ethiscan/presentation/splash_page.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
-import 'package:ethiscan/utils/navigation_util.dart';
-import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,9 +24,6 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   late MainUserBloc _mainUserBloc;
-
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -68,6 +61,7 @@ class _AppState extends State<App> {
             reloading: (_) => _reloading(),
             connected: (state) => _userConnected(context, state),
             disconnected: (state) => _userDisconnected(context, state),
+            error: (state) => _userDisconnectedError(context, state),
           );
         },
       ),
@@ -134,47 +128,18 @@ class _AppState extends State<App> {
     BuildContext context,
     MainUserDisconnected state,
   ) {
-    return CustomApp(
-      key: const Key('DisconnectedApp'), // TODO use translated key
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: UIColors.lightPrimaryColor,
-          title: const CustomH1("Sign In"),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              CustomTextField(
-                controller: _emailController,
-                placeholder: 'Email',
-                label: 'Email',
-              ),
-              const SizedBox(height: 20),
-              CustomTextField(
-                controller: _passwordController,
-                label: 'Password', // TODO : translate 'Password
-                placeholder: 'Password',
-                password: true,
-              ),
-              const SizedBox(height: 20),
-              PrimaryButton(
-                text: 'Sign In', // TODO : translate 'Sign In'
-                onTap: () => _mainUserBloc.add(MainUserEvent.connect(
-                    _emailController.text, _passwordController.text)),
-              ),
-              const SizedBox(height: 50),
-              PrimaryButton(
-                  text: 'Register', // TODO : translate 'Register'
-                  onTap: () {
-                    NavigationUtils.goTo(context, const RegisterPage());
-                  }),
-            ],
-          ),
-        ),
-      ),
-    );
+    return state.isRegister ?
+      RegisterPage(mainUserBloc: _mainUserBloc) :
+      LoginPage(mainUserBloc: _mainUserBloc);
+  }
+
+  Widget _userDisconnectedError(
+    BuildContext context,
+    MainUserError state,
+  ) {
+    return state.isRegister ?
+    RegisterPage(mainUserBloc: _mainUserBloc) :
+    LoginPage(mainUserBloc: _mainUserBloc);
   }
 }
 

@@ -21,6 +21,8 @@ mixin _$MainUserEvent {
     required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
+    required TResult Function() goRegister,
+    required TResult Function() goLogin,
     required TResult Function(String email, String password) register,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
@@ -33,6 +35,8 @@ mixin _$MainUserEvent {
     TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
+    TResult? Function()? goRegister,
+    TResult? Function()? goLogin,
     TResult? Function(String email, String password)? register,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
@@ -45,6 +49,8 @@ mixin _$MainUserEvent {
     TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
+    TResult Function()? goRegister,
+    TResult Function()? goLogin,
     TResult Function(String email, String password)? register,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
@@ -58,6 +64,8 @@ mixin _$MainUserEvent {
     required TResult Function(_MainUserConnect value) connect,
     required TResult Function(_MainUserFirstLoad value) firstLoad,
     required TResult Function(_MainUserReload value) reload,
+    required TResult Function(_MainUserGoRegister value) goRegister,
+    required TResult Function(_MainUserGoLogin value) goLogin,
     required TResult Function(_MainUserRegister value) register,
     required TResult Function(_MainUserAutoConnect value) autoConnect,
     required TResult Function(_MainUserDisconnect value) disconnect,
@@ -70,6 +78,8 @@ mixin _$MainUserEvent {
     TResult? Function(_MainUserConnect value)? connect,
     TResult? Function(_MainUserFirstLoad value)? firstLoad,
     TResult? Function(_MainUserReload value)? reload,
+    TResult? Function(_MainUserGoRegister value)? goRegister,
+    TResult? Function(_MainUserGoLogin value)? goLogin,
     TResult? Function(_MainUserRegister value)? register,
     TResult? Function(_MainUserAutoConnect value)? autoConnect,
     TResult? Function(_MainUserDisconnect value)? disconnect,
@@ -82,6 +92,8 @@ mixin _$MainUserEvent {
     TResult Function(_MainUserConnect value)? connect,
     TResult Function(_MainUserFirstLoad value)? firstLoad,
     TResult Function(_MainUserReload value)? reload,
+    TResult Function(_MainUserGoRegister value)? goRegister,
+    TResult Function(_MainUserGoLogin value)? goLogin,
     TResult Function(_MainUserRegister value)? register,
     TResult Function(_MainUserAutoConnect value)? autoConnect,
     TResult Function(_MainUserDisconnect value)? disconnect,
@@ -187,6 +199,8 @@ class _$MainUserConnectImpl implements _MainUserConnect {
     required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
+    required TResult Function() goRegister,
+    required TResult Function() goLogin,
     required TResult Function(String email, String password) register,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
@@ -202,6 +216,8 @@ class _$MainUserConnectImpl implements _MainUserConnect {
     TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
+    TResult? Function()? goRegister,
+    TResult? Function()? goLogin,
     TResult? Function(String email, String password)? register,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
@@ -217,6 +233,8 @@ class _$MainUserConnectImpl implements _MainUserConnect {
     TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
+    TResult Function()? goRegister,
+    TResult Function()? goLogin,
     TResult Function(String email, String password)? register,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
@@ -236,6 +254,8 @@ class _$MainUserConnectImpl implements _MainUserConnect {
     required TResult Function(_MainUserConnect value) connect,
     required TResult Function(_MainUserFirstLoad value) firstLoad,
     required TResult Function(_MainUserReload value) reload,
+    required TResult Function(_MainUserGoRegister value) goRegister,
+    required TResult Function(_MainUserGoLogin value) goLogin,
     required TResult Function(_MainUserRegister value) register,
     required TResult Function(_MainUserAutoConnect value) autoConnect,
     required TResult Function(_MainUserDisconnect value) disconnect,
@@ -251,6 +271,8 @@ class _$MainUserConnectImpl implements _MainUserConnect {
     TResult? Function(_MainUserConnect value)? connect,
     TResult? Function(_MainUserFirstLoad value)? firstLoad,
     TResult? Function(_MainUserReload value)? reload,
+    TResult? Function(_MainUserGoRegister value)? goRegister,
+    TResult? Function(_MainUserGoLogin value)? goLogin,
     TResult? Function(_MainUserRegister value)? register,
     TResult? Function(_MainUserAutoConnect value)? autoConnect,
     TResult? Function(_MainUserDisconnect value)? disconnect,
@@ -266,6 +288,8 @@ class _$MainUserConnectImpl implements _MainUserConnect {
     TResult Function(_MainUserConnect value)? connect,
     TResult Function(_MainUserFirstLoad value)? firstLoad,
     TResult Function(_MainUserReload value)? reload,
+    TResult Function(_MainUserGoRegister value)? goRegister,
+    TResult Function(_MainUserGoLogin value)? goLogin,
     TResult Function(_MainUserRegister value)? register,
     TResult Function(_MainUserAutoConnect value)? autoConnect,
     TResult Function(_MainUserDisconnect value)? disconnect,
@@ -332,6 +356,8 @@ class _$MainUserFirstLoadImpl implements _MainUserFirstLoad {
     required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
+    required TResult Function() goRegister,
+    required TResult Function() goLogin,
     required TResult Function(String email, String password) register,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
@@ -347,6 +373,8 @@ class _$MainUserFirstLoadImpl implements _MainUserFirstLoad {
     TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
+    TResult? Function()? goRegister,
+    TResult? Function()? goLogin,
     TResult? Function(String email, String password)? register,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
@@ -362,6 +390,8 @@ class _$MainUserFirstLoadImpl implements _MainUserFirstLoad {
     TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
+    TResult Function()? goRegister,
+    TResult Function()? goLogin,
     TResult Function(String email, String password)? register,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
@@ -381,6 +411,8 @@ class _$MainUserFirstLoadImpl implements _MainUserFirstLoad {
     required TResult Function(_MainUserConnect value) connect,
     required TResult Function(_MainUserFirstLoad value) firstLoad,
     required TResult Function(_MainUserReload value) reload,
+    required TResult Function(_MainUserGoRegister value) goRegister,
+    required TResult Function(_MainUserGoLogin value) goLogin,
     required TResult Function(_MainUserRegister value) register,
     required TResult Function(_MainUserAutoConnect value) autoConnect,
     required TResult Function(_MainUserDisconnect value) disconnect,
@@ -396,6 +428,8 @@ class _$MainUserFirstLoadImpl implements _MainUserFirstLoad {
     TResult? Function(_MainUserConnect value)? connect,
     TResult? Function(_MainUserFirstLoad value)? firstLoad,
     TResult? Function(_MainUserReload value)? reload,
+    TResult? Function(_MainUserGoRegister value)? goRegister,
+    TResult? Function(_MainUserGoLogin value)? goLogin,
     TResult? Function(_MainUserRegister value)? register,
     TResult? Function(_MainUserAutoConnect value)? autoConnect,
     TResult? Function(_MainUserDisconnect value)? disconnect,
@@ -411,6 +445,8 @@ class _$MainUserFirstLoadImpl implements _MainUserFirstLoad {
     TResult Function(_MainUserConnect value)? connect,
     TResult Function(_MainUserFirstLoad value)? firstLoad,
     TResult Function(_MainUserReload value)? reload,
+    TResult Function(_MainUserGoRegister value)? goRegister,
+    TResult Function(_MainUserGoLogin value)? goLogin,
     TResult Function(_MainUserRegister value)? register,
     TResult Function(_MainUserAutoConnect value)? autoConnect,
     TResult Function(_MainUserDisconnect value)? disconnect,
@@ -470,6 +506,8 @@ class _$MainUserReloadImpl implements _MainUserReload {
     required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
+    required TResult Function() goRegister,
+    required TResult Function() goLogin,
     required TResult Function(String email, String password) register,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
@@ -485,6 +523,8 @@ class _$MainUserReloadImpl implements _MainUserReload {
     TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
+    TResult? Function()? goRegister,
+    TResult? Function()? goLogin,
     TResult? Function(String email, String password)? register,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
@@ -500,6 +540,8 @@ class _$MainUserReloadImpl implements _MainUserReload {
     TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
+    TResult Function()? goRegister,
+    TResult Function()? goLogin,
     TResult Function(String email, String password)? register,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
@@ -519,6 +561,8 @@ class _$MainUserReloadImpl implements _MainUserReload {
     required TResult Function(_MainUserConnect value) connect,
     required TResult Function(_MainUserFirstLoad value) firstLoad,
     required TResult Function(_MainUserReload value) reload,
+    required TResult Function(_MainUserGoRegister value) goRegister,
+    required TResult Function(_MainUserGoLogin value) goLogin,
     required TResult Function(_MainUserRegister value) register,
     required TResult Function(_MainUserAutoConnect value) autoConnect,
     required TResult Function(_MainUserDisconnect value) disconnect,
@@ -534,6 +578,8 @@ class _$MainUserReloadImpl implements _MainUserReload {
     TResult? Function(_MainUserConnect value)? connect,
     TResult? Function(_MainUserFirstLoad value)? firstLoad,
     TResult? Function(_MainUserReload value)? reload,
+    TResult? Function(_MainUserGoRegister value)? goRegister,
+    TResult? Function(_MainUserGoLogin value)? goLogin,
     TResult? Function(_MainUserRegister value)? register,
     TResult? Function(_MainUserAutoConnect value)? autoConnect,
     TResult? Function(_MainUserDisconnect value)? disconnect,
@@ -549,6 +595,8 @@ class _$MainUserReloadImpl implements _MainUserReload {
     TResult Function(_MainUserConnect value)? connect,
     TResult Function(_MainUserFirstLoad value)? firstLoad,
     TResult Function(_MainUserReload value)? reload,
+    TResult Function(_MainUserGoRegister value)? goRegister,
+    TResult Function(_MainUserGoLogin value)? goLogin,
     TResult Function(_MainUserRegister value)? register,
     TResult Function(_MainUserAutoConnect value)? autoConnect,
     TResult Function(_MainUserDisconnect value)? disconnect,
@@ -565,6 +613,306 @@ class _$MainUserReloadImpl implements _MainUserReload {
 
 abstract class _MainUserReload implements MainUserEvent {
   const factory _MainUserReload() = _$MainUserReloadImpl;
+}
+
+/// @nodoc
+abstract class _$$MainUserGoRegisterImplCopyWith<$Res> {
+  factory _$$MainUserGoRegisterImplCopyWith(_$MainUserGoRegisterImpl value,
+          $Res Function(_$MainUserGoRegisterImpl) then) =
+      __$$MainUserGoRegisterImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$MainUserGoRegisterImplCopyWithImpl<$Res>
+    extends _$MainUserEventCopyWithImpl<$Res, _$MainUserGoRegisterImpl>
+    implements _$$MainUserGoRegisterImplCopyWith<$Res> {
+  __$$MainUserGoRegisterImplCopyWithImpl(_$MainUserGoRegisterImpl _value,
+      $Res Function(_$MainUserGoRegisterImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$MainUserGoRegisterImpl implements _MainUserGoRegister {
+  const _$MainUserGoRegisterImpl();
+
+  @override
+  String toString() {
+    return 'MainUserEvent.goRegister()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$MainUserGoRegisterImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String email, String password) connect,
+    required TResult Function() firstLoad,
+    required TResult Function() reload,
+    required TResult Function() goRegister,
+    required TResult Function() goLogin,
+    required TResult Function(String email, String password) register,
+    required TResult Function(Duration minDelay) autoConnect,
+    required TResult Function() disconnect,
+    required TResult Function() reset,
+    required TResult Function() clearData,
+  }) {
+    return goRegister();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String email, String password)? connect,
+    TResult? Function()? firstLoad,
+    TResult? Function()? reload,
+    TResult? Function()? goRegister,
+    TResult? Function()? goLogin,
+    TResult? Function(String email, String password)? register,
+    TResult? Function(Duration minDelay)? autoConnect,
+    TResult? Function()? disconnect,
+    TResult? Function()? reset,
+    TResult? Function()? clearData,
+  }) {
+    return goRegister?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String email, String password)? connect,
+    TResult Function()? firstLoad,
+    TResult Function()? reload,
+    TResult Function()? goRegister,
+    TResult Function()? goLogin,
+    TResult Function(String email, String password)? register,
+    TResult Function(Duration minDelay)? autoConnect,
+    TResult Function()? disconnect,
+    TResult Function()? reset,
+    TResult Function()? clearData,
+    required TResult orElse(),
+  }) {
+    if (goRegister != null) {
+      return goRegister();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_MainUserConnect value) connect,
+    required TResult Function(_MainUserFirstLoad value) firstLoad,
+    required TResult Function(_MainUserReload value) reload,
+    required TResult Function(_MainUserGoRegister value) goRegister,
+    required TResult Function(_MainUserGoLogin value) goLogin,
+    required TResult Function(_MainUserRegister value) register,
+    required TResult Function(_MainUserAutoConnect value) autoConnect,
+    required TResult Function(_MainUserDisconnect value) disconnect,
+    required TResult Function(_MainUserReset value) reset,
+    required TResult Function(_MainUserClearData value) clearData,
+  }) {
+    return goRegister(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_MainUserConnect value)? connect,
+    TResult? Function(_MainUserFirstLoad value)? firstLoad,
+    TResult? Function(_MainUserReload value)? reload,
+    TResult? Function(_MainUserGoRegister value)? goRegister,
+    TResult? Function(_MainUserGoLogin value)? goLogin,
+    TResult? Function(_MainUserRegister value)? register,
+    TResult? Function(_MainUserAutoConnect value)? autoConnect,
+    TResult? Function(_MainUserDisconnect value)? disconnect,
+    TResult? Function(_MainUserReset value)? reset,
+    TResult? Function(_MainUserClearData value)? clearData,
+  }) {
+    return goRegister?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_MainUserConnect value)? connect,
+    TResult Function(_MainUserFirstLoad value)? firstLoad,
+    TResult Function(_MainUserReload value)? reload,
+    TResult Function(_MainUserGoRegister value)? goRegister,
+    TResult Function(_MainUserGoLogin value)? goLogin,
+    TResult Function(_MainUserRegister value)? register,
+    TResult Function(_MainUserAutoConnect value)? autoConnect,
+    TResult Function(_MainUserDisconnect value)? disconnect,
+    TResult Function(_MainUserReset value)? reset,
+    TResult Function(_MainUserClearData value)? clearData,
+    required TResult orElse(),
+  }) {
+    if (goRegister != null) {
+      return goRegister(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _MainUserGoRegister implements MainUserEvent {
+  const factory _MainUserGoRegister() = _$MainUserGoRegisterImpl;
+}
+
+/// @nodoc
+abstract class _$$MainUserGoLoginImplCopyWith<$Res> {
+  factory _$$MainUserGoLoginImplCopyWith(_$MainUserGoLoginImpl value,
+          $Res Function(_$MainUserGoLoginImpl) then) =
+      __$$MainUserGoLoginImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$MainUserGoLoginImplCopyWithImpl<$Res>
+    extends _$MainUserEventCopyWithImpl<$Res, _$MainUserGoLoginImpl>
+    implements _$$MainUserGoLoginImplCopyWith<$Res> {
+  __$$MainUserGoLoginImplCopyWithImpl(
+      _$MainUserGoLoginImpl _value, $Res Function(_$MainUserGoLoginImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$MainUserGoLoginImpl implements _MainUserGoLogin {
+  const _$MainUserGoLoginImpl();
+
+  @override
+  String toString() {
+    return 'MainUserEvent.goLogin()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$MainUserGoLoginImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String email, String password) connect,
+    required TResult Function() firstLoad,
+    required TResult Function() reload,
+    required TResult Function() goRegister,
+    required TResult Function() goLogin,
+    required TResult Function(String email, String password) register,
+    required TResult Function(Duration minDelay) autoConnect,
+    required TResult Function() disconnect,
+    required TResult Function() reset,
+    required TResult Function() clearData,
+  }) {
+    return goLogin();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String email, String password)? connect,
+    TResult? Function()? firstLoad,
+    TResult? Function()? reload,
+    TResult? Function()? goRegister,
+    TResult? Function()? goLogin,
+    TResult? Function(String email, String password)? register,
+    TResult? Function(Duration minDelay)? autoConnect,
+    TResult? Function()? disconnect,
+    TResult? Function()? reset,
+    TResult? Function()? clearData,
+  }) {
+    return goLogin?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String email, String password)? connect,
+    TResult Function()? firstLoad,
+    TResult Function()? reload,
+    TResult Function()? goRegister,
+    TResult Function()? goLogin,
+    TResult Function(String email, String password)? register,
+    TResult Function(Duration minDelay)? autoConnect,
+    TResult Function()? disconnect,
+    TResult Function()? reset,
+    TResult Function()? clearData,
+    required TResult orElse(),
+  }) {
+    if (goLogin != null) {
+      return goLogin();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_MainUserConnect value) connect,
+    required TResult Function(_MainUserFirstLoad value) firstLoad,
+    required TResult Function(_MainUserReload value) reload,
+    required TResult Function(_MainUserGoRegister value) goRegister,
+    required TResult Function(_MainUserGoLogin value) goLogin,
+    required TResult Function(_MainUserRegister value) register,
+    required TResult Function(_MainUserAutoConnect value) autoConnect,
+    required TResult Function(_MainUserDisconnect value) disconnect,
+    required TResult Function(_MainUserReset value) reset,
+    required TResult Function(_MainUserClearData value) clearData,
+  }) {
+    return goLogin(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_MainUserConnect value)? connect,
+    TResult? Function(_MainUserFirstLoad value)? firstLoad,
+    TResult? Function(_MainUserReload value)? reload,
+    TResult? Function(_MainUserGoRegister value)? goRegister,
+    TResult? Function(_MainUserGoLogin value)? goLogin,
+    TResult? Function(_MainUserRegister value)? register,
+    TResult? Function(_MainUserAutoConnect value)? autoConnect,
+    TResult? Function(_MainUserDisconnect value)? disconnect,
+    TResult? Function(_MainUserReset value)? reset,
+    TResult? Function(_MainUserClearData value)? clearData,
+  }) {
+    return goLogin?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_MainUserConnect value)? connect,
+    TResult Function(_MainUserFirstLoad value)? firstLoad,
+    TResult Function(_MainUserReload value)? reload,
+    TResult Function(_MainUserGoRegister value)? goRegister,
+    TResult Function(_MainUserGoLogin value)? goLogin,
+    TResult Function(_MainUserRegister value)? register,
+    TResult Function(_MainUserAutoConnect value)? autoConnect,
+    TResult Function(_MainUserDisconnect value)? disconnect,
+    TResult Function(_MainUserReset value)? reset,
+    TResult Function(_MainUserClearData value)? clearData,
+    required TResult orElse(),
+  }) {
+    if (goLogin != null) {
+      return goLogin(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _MainUserGoLogin implements MainUserEvent {
+  const factory _MainUserGoLogin() = _$MainUserGoLoginImpl;
 }
 
 /// @nodoc
@@ -644,6 +992,8 @@ class _$MainUserRegisterImpl implements _MainUserRegister {
     required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
+    required TResult Function() goRegister,
+    required TResult Function() goLogin,
     required TResult Function(String email, String password) register,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
@@ -659,6 +1009,8 @@ class _$MainUserRegisterImpl implements _MainUserRegister {
     TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
+    TResult? Function()? goRegister,
+    TResult? Function()? goLogin,
     TResult? Function(String email, String password)? register,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
@@ -674,6 +1026,8 @@ class _$MainUserRegisterImpl implements _MainUserRegister {
     TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
+    TResult Function()? goRegister,
+    TResult Function()? goLogin,
     TResult Function(String email, String password)? register,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
@@ -693,6 +1047,8 @@ class _$MainUserRegisterImpl implements _MainUserRegister {
     required TResult Function(_MainUserConnect value) connect,
     required TResult Function(_MainUserFirstLoad value) firstLoad,
     required TResult Function(_MainUserReload value) reload,
+    required TResult Function(_MainUserGoRegister value) goRegister,
+    required TResult Function(_MainUserGoLogin value) goLogin,
     required TResult Function(_MainUserRegister value) register,
     required TResult Function(_MainUserAutoConnect value) autoConnect,
     required TResult Function(_MainUserDisconnect value) disconnect,
@@ -708,6 +1064,8 @@ class _$MainUserRegisterImpl implements _MainUserRegister {
     TResult? Function(_MainUserConnect value)? connect,
     TResult? Function(_MainUserFirstLoad value)? firstLoad,
     TResult? Function(_MainUserReload value)? reload,
+    TResult? Function(_MainUserGoRegister value)? goRegister,
+    TResult? Function(_MainUserGoLogin value)? goLogin,
     TResult? Function(_MainUserRegister value)? register,
     TResult? Function(_MainUserAutoConnect value)? autoConnect,
     TResult? Function(_MainUserDisconnect value)? disconnect,
@@ -723,6 +1081,8 @@ class _$MainUserRegisterImpl implements _MainUserRegister {
     TResult Function(_MainUserConnect value)? connect,
     TResult Function(_MainUserFirstLoad value)? firstLoad,
     TResult Function(_MainUserReload value)? reload,
+    TResult Function(_MainUserGoRegister value)? goRegister,
+    TResult Function(_MainUserGoLogin value)? goLogin,
     TResult Function(_MainUserRegister value)? register,
     TResult Function(_MainUserAutoConnect value)? autoConnect,
     TResult Function(_MainUserDisconnect value)? disconnect,
@@ -818,6 +1178,8 @@ class _$MainUserAutoConnectImpl implements _MainUserAutoConnect {
     required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
+    required TResult Function() goRegister,
+    required TResult Function() goLogin,
     required TResult Function(String email, String password) register,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
@@ -833,6 +1195,8 @@ class _$MainUserAutoConnectImpl implements _MainUserAutoConnect {
     TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
+    TResult? Function()? goRegister,
+    TResult? Function()? goLogin,
     TResult? Function(String email, String password)? register,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
@@ -848,6 +1212,8 @@ class _$MainUserAutoConnectImpl implements _MainUserAutoConnect {
     TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
+    TResult Function()? goRegister,
+    TResult Function()? goLogin,
     TResult Function(String email, String password)? register,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
@@ -867,6 +1233,8 @@ class _$MainUserAutoConnectImpl implements _MainUserAutoConnect {
     required TResult Function(_MainUserConnect value) connect,
     required TResult Function(_MainUserFirstLoad value) firstLoad,
     required TResult Function(_MainUserReload value) reload,
+    required TResult Function(_MainUserGoRegister value) goRegister,
+    required TResult Function(_MainUserGoLogin value) goLogin,
     required TResult Function(_MainUserRegister value) register,
     required TResult Function(_MainUserAutoConnect value) autoConnect,
     required TResult Function(_MainUserDisconnect value) disconnect,
@@ -882,6 +1250,8 @@ class _$MainUserAutoConnectImpl implements _MainUserAutoConnect {
     TResult? Function(_MainUserConnect value)? connect,
     TResult? Function(_MainUserFirstLoad value)? firstLoad,
     TResult? Function(_MainUserReload value)? reload,
+    TResult? Function(_MainUserGoRegister value)? goRegister,
+    TResult? Function(_MainUserGoLogin value)? goLogin,
     TResult? Function(_MainUserRegister value)? register,
     TResult? Function(_MainUserAutoConnect value)? autoConnect,
     TResult? Function(_MainUserDisconnect value)? disconnect,
@@ -897,6 +1267,8 @@ class _$MainUserAutoConnectImpl implements _MainUserAutoConnect {
     TResult Function(_MainUserConnect value)? connect,
     TResult Function(_MainUserFirstLoad value)? firstLoad,
     TResult Function(_MainUserReload value)? reload,
+    TResult Function(_MainUserGoRegister value)? goRegister,
+    TResult Function(_MainUserGoLogin value)? goLogin,
     TResult Function(_MainUserRegister value)? register,
     TResult Function(_MainUserAutoConnect value)? autoConnect,
     TResult Function(_MainUserDisconnect value)? disconnect,
@@ -962,6 +1334,8 @@ class _$MainUserDisconnectImpl implements _MainUserDisconnect {
     required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
+    required TResult Function() goRegister,
+    required TResult Function() goLogin,
     required TResult Function(String email, String password) register,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
@@ -977,6 +1351,8 @@ class _$MainUserDisconnectImpl implements _MainUserDisconnect {
     TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
+    TResult? Function()? goRegister,
+    TResult? Function()? goLogin,
     TResult? Function(String email, String password)? register,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
@@ -992,6 +1368,8 @@ class _$MainUserDisconnectImpl implements _MainUserDisconnect {
     TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
+    TResult Function()? goRegister,
+    TResult Function()? goLogin,
     TResult Function(String email, String password)? register,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
@@ -1011,6 +1389,8 @@ class _$MainUserDisconnectImpl implements _MainUserDisconnect {
     required TResult Function(_MainUserConnect value) connect,
     required TResult Function(_MainUserFirstLoad value) firstLoad,
     required TResult Function(_MainUserReload value) reload,
+    required TResult Function(_MainUserGoRegister value) goRegister,
+    required TResult Function(_MainUserGoLogin value) goLogin,
     required TResult Function(_MainUserRegister value) register,
     required TResult Function(_MainUserAutoConnect value) autoConnect,
     required TResult Function(_MainUserDisconnect value) disconnect,
@@ -1026,6 +1406,8 @@ class _$MainUserDisconnectImpl implements _MainUserDisconnect {
     TResult? Function(_MainUserConnect value)? connect,
     TResult? Function(_MainUserFirstLoad value)? firstLoad,
     TResult? Function(_MainUserReload value)? reload,
+    TResult? Function(_MainUserGoRegister value)? goRegister,
+    TResult? Function(_MainUserGoLogin value)? goLogin,
     TResult? Function(_MainUserRegister value)? register,
     TResult? Function(_MainUserAutoConnect value)? autoConnect,
     TResult? Function(_MainUserDisconnect value)? disconnect,
@@ -1041,6 +1423,8 @@ class _$MainUserDisconnectImpl implements _MainUserDisconnect {
     TResult Function(_MainUserConnect value)? connect,
     TResult Function(_MainUserFirstLoad value)? firstLoad,
     TResult Function(_MainUserReload value)? reload,
+    TResult Function(_MainUserGoRegister value)? goRegister,
+    TResult Function(_MainUserGoLogin value)? goLogin,
     TResult Function(_MainUserRegister value)? register,
     TResult Function(_MainUserAutoConnect value)? autoConnect,
     TResult Function(_MainUserDisconnect value)? disconnect,
@@ -1100,6 +1484,8 @@ class _$MainUserResetImpl implements _MainUserReset {
     required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
+    required TResult Function() goRegister,
+    required TResult Function() goLogin,
     required TResult Function(String email, String password) register,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
@@ -1115,6 +1501,8 @@ class _$MainUserResetImpl implements _MainUserReset {
     TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
+    TResult? Function()? goRegister,
+    TResult? Function()? goLogin,
     TResult? Function(String email, String password)? register,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
@@ -1130,6 +1518,8 @@ class _$MainUserResetImpl implements _MainUserReset {
     TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
+    TResult Function()? goRegister,
+    TResult Function()? goLogin,
     TResult Function(String email, String password)? register,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
@@ -1149,6 +1539,8 @@ class _$MainUserResetImpl implements _MainUserReset {
     required TResult Function(_MainUserConnect value) connect,
     required TResult Function(_MainUserFirstLoad value) firstLoad,
     required TResult Function(_MainUserReload value) reload,
+    required TResult Function(_MainUserGoRegister value) goRegister,
+    required TResult Function(_MainUserGoLogin value) goLogin,
     required TResult Function(_MainUserRegister value) register,
     required TResult Function(_MainUserAutoConnect value) autoConnect,
     required TResult Function(_MainUserDisconnect value) disconnect,
@@ -1164,6 +1556,8 @@ class _$MainUserResetImpl implements _MainUserReset {
     TResult? Function(_MainUserConnect value)? connect,
     TResult? Function(_MainUserFirstLoad value)? firstLoad,
     TResult? Function(_MainUserReload value)? reload,
+    TResult? Function(_MainUserGoRegister value)? goRegister,
+    TResult? Function(_MainUserGoLogin value)? goLogin,
     TResult? Function(_MainUserRegister value)? register,
     TResult? Function(_MainUserAutoConnect value)? autoConnect,
     TResult? Function(_MainUserDisconnect value)? disconnect,
@@ -1179,6 +1573,8 @@ class _$MainUserResetImpl implements _MainUserReset {
     TResult Function(_MainUserConnect value)? connect,
     TResult Function(_MainUserFirstLoad value)? firstLoad,
     TResult Function(_MainUserReload value)? reload,
+    TResult Function(_MainUserGoRegister value)? goRegister,
+    TResult Function(_MainUserGoLogin value)? goLogin,
     TResult Function(_MainUserRegister value)? register,
     TResult Function(_MainUserAutoConnect value)? autoConnect,
     TResult Function(_MainUserDisconnect value)? disconnect,
@@ -1238,6 +1634,8 @@ class _$MainUserClearDataImpl implements _MainUserClearData {
     required TResult Function(String email, String password) connect,
     required TResult Function() firstLoad,
     required TResult Function() reload,
+    required TResult Function() goRegister,
+    required TResult Function() goLogin,
     required TResult Function(String email, String password) register,
     required TResult Function(Duration minDelay) autoConnect,
     required TResult Function() disconnect,
@@ -1253,6 +1651,8 @@ class _$MainUserClearDataImpl implements _MainUserClearData {
     TResult? Function(String email, String password)? connect,
     TResult? Function()? firstLoad,
     TResult? Function()? reload,
+    TResult? Function()? goRegister,
+    TResult? Function()? goLogin,
     TResult? Function(String email, String password)? register,
     TResult? Function(Duration minDelay)? autoConnect,
     TResult? Function()? disconnect,
@@ -1268,6 +1668,8 @@ class _$MainUserClearDataImpl implements _MainUserClearData {
     TResult Function(String email, String password)? connect,
     TResult Function()? firstLoad,
     TResult Function()? reload,
+    TResult Function()? goRegister,
+    TResult Function()? goLogin,
     TResult Function(String email, String password)? register,
     TResult Function(Duration minDelay)? autoConnect,
     TResult Function()? disconnect,
@@ -1287,6 +1689,8 @@ class _$MainUserClearDataImpl implements _MainUserClearData {
     required TResult Function(_MainUserConnect value) connect,
     required TResult Function(_MainUserFirstLoad value) firstLoad,
     required TResult Function(_MainUserReload value) reload,
+    required TResult Function(_MainUserGoRegister value) goRegister,
+    required TResult Function(_MainUserGoLogin value) goLogin,
     required TResult Function(_MainUserRegister value) register,
     required TResult Function(_MainUserAutoConnect value) autoConnect,
     required TResult Function(_MainUserDisconnect value) disconnect,
@@ -1302,6 +1706,8 @@ class _$MainUserClearDataImpl implements _MainUserClearData {
     TResult? Function(_MainUserConnect value)? connect,
     TResult? Function(_MainUserFirstLoad value)? firstLoad,
     TResult? Function(_MainUserReload value)? reload,
+    TResult? Function(_MainUserGoRegister value)? goRegister,
+    TResult? Function(_MainUserGoLogin value)? goLogin,
     TResult? Function(_MainUserRegister value)? register,
     TResult? Function(_MainUserAutoConnect value)? autoConnect,
     TResult? Function(_MainUserDisconnect value)? disconnect,
@@ -1317,6 +1723,8 @@ class _$MainUserClearDataImpl implements _MainUserClearData {
     TResult Function(_MainUserConnect value)? connect,
     TResult Function(_MainUserFirstLoad value)? firstLoad,
     TResult Function(_MainUserReload value)? reload,
+    TResult Function(_MainUserGoRegister value)? goRegister,
+    TResult Function(_MainUserGoLogin value)? goLogin,
     TResult Function(_MainUserRegister value)? register,
     TResult Function(_MainUserAutoConnect value)? autoConnect,
     TResult Function(_MainUserDisconnect value)? disconnect,
@@ -1341,7 +1749,8 @@ mixin _$MainUserState {
   TResult when<TResult extends Object?>({
     required TResult Function(EthiscanUser user) connected,
     required TResult Function() reloading,
-    required TResult Function() disconnected,
+    required TResult Function(bool isRegister) disconnected,
+    required TResult Function(bool isRegister, String exception) error,
     required TResult Function(bool maintenance, bool unknownVersion)
         serviceError,
   }) =>
@@ -1350,7 +1759,8 @@ mixin _$MainUserState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(EthiscanUser user)? connected,
     TResult? Function()? reloading,
-    TResult? Function()? disconnected,
+    TResult? Function(bool isRegister)? disconnected,
+    TResult? Function(bool isRegister, String exception)? error,
     TResult? Function(bool maintenance, bool unknownVersion)? serviceError,
   }) =>
       throw _privateConstructorUsedError;
@@ -1358,7 +1768,8 @@ mixin _$MainUserState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(EthiscanUser user)? connected,
     TResult Function()? reloading,
-    TResult Function()? disconnected,
+    TResult Function(bool isRegister)? disconnected,
+    TResult Function(bool isRegister, String exception)? error,
     TResult Function(bool maintenance, bool unknownVersion)? serviceError,
     required TResult orElse(),
   }) =>
@@ -1368,6 +1779,7 @@ mixin _$MainUserState {
     required TResult Function(MainUserConnected value) connected,
     required TResult Function(_MainUserReloading value) reloading,
     required TResult Function(MainUserDisconnected value) disconnected,
+    required TResult Function(MainUserError value) error,
     required TResult Function(MainUserServiceError value) serviceError,
   }) =>
       throw _privateConstructorUsedError;
@@ -1376,6 +1788,7 @@ mixin _$MainUserState {
     TResult? Function(MainUserConnected value)? connected,
     TResult? Function(_MainUserReloading value)? reloading,
     TResult? Function(MainUserDisconnected value)? disconnected,
+    TResult? Function(MainUserError value)? error,
     TResult? Function(MainUserServiceError value)? serviceError,
   }) =>
       throw _privateConstructorUsedError;
@@ -1384,6 +1797,7 @@ mixin _$MainUserState {
     TResult Function(MainUserConnected value)? connected,
     TResult Function(_MainUserReloading value)? reloading,
     TResult Function(MainUserDisconnected value)? disconnected,
+    TResult Function(MainUserError value)? error,
     TResult Function(MainUserServiceError value)? serviceError,
     required TResult orElse(),
   }) =>
@@ -1428,10 +1842,10 @@ class __$$MainUserConnectedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
+    Object? user = null,
   }) {
     return _then(_$MainUserConnectedImpl(
-      user: freezed == user
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as EthiscanUser,
@@ -1457,12 +1871,11 @@ class _$MainUserConnectedImpl implements MainUserConnected {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MainUserConnectedImpl &&
-            const DeepCollectionEquality().equals(other.user, user));
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
+  int get hashCode => Object.hash(runtimeType, user);
 
   @JsonKey(ignore: true)
   @override
@@ -1476,7 +1889,8 @@ class _$MainUserConnectedImpl implements MainUserConnected {
   TResult when<TResult extends Object?>({
     required TResult Function(EthiscanUser user) connected,
     required TResult Function() reloading,
-    required TResult Function() disconnected,
+    required TResult Function(bool isRegister) disconnected,
+    required TResult Function(bool isRegister, String exception) error,
     required TResult Function(bool maintenance, bool unknownVersion)
         serviceError,
   }) {
@@ -1488,7 +1902,8 @@ class _$MainUserConnectedImpl implements MainUserConnected {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(EthiscanUser user)? connected,
     TResult? Function()? reloading,
-    TResult? Function()? disconnected,
+    TResult? Function(bool isRegister)? disconnected,
+    TResult? Function(bool isRegister, String exception)? error,
     TResult? Function(bool maintenance, bool unknownVersion)? serviceError,
   }) {
     return connected?.call(user);
@@ -1499,7 +1914,8 @@ class _$MainUserConnectedImpl implements MainUserConnected {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(EthiscanUser user)? connected,
     TResult Function()? reloading,
-    TResult Function()? disconnected,
+    TResult Function(bool isRegister)? disconnected,
+    TResult Function(bool isRegister, String exception)? error,
     TResult Function(bool maintenance, bool unknownVersion)? serviceError,
     required TResult orElse(),
   }) {
@@ -1515,6 +1931,7 @@ class _$MainUserConnectedImpl implements MainUserConnected {
     required TResult Function(MainUserConnected value) connected,
     required TResult Function(_MainUserReloading value) reloading,
     required TResult Function(MainUserDisconnected value) disconnected,
+    required TResult Function(MainUserError value) error,
     required TResult Function(MainUserServiceError value) serviceError,
   }) {
     return connected(this);
@@ -1526,6 +1943,7 @@ class _$MainUserConnectedImpl implements MainUserConnected {
     TResult? Function(MainUserConnected value)? connected,
     TResult? Function(_MainUserReloading value)? reloading,
     TResult? Function(MainUserDisconnected value)? disconnected,
+    TResult? Function(MainUserError value)? error,
     TResult? Function(MainUserServiceError value)? serviceError,
   }) {
     return connected?.call(this);
@@ -1537,6 +1955,7 @@ class _$MainUserConnectedImpl implements MainUserConnected {
     TResult Function(MainUserConnected value)? connected,
     TResult Function(_MainUserReloading value)? reloading,
     TResult Function(MainUserDisconnected value)? disconnected,
+    TResult Function(MainUserError value)? error,
     TResult Function(MainUserServiceError value)? serviceError,
     required TResult orElse(),
   }) {
@@ -1597,7 +2016,8 @@ class _$MainUserReloadingImpl implements _MainUserReloading {
   TResult when<TResult extends Object?>({
     required TResult Function(EthiscanUser user) connected,
     required TResult Function() reloading,
-    required TResult Function() disconnected,
+    required TResult Function(bool isRegister) disconnected,
+    required TResult Function(bool isRegister, String exception) error,
     required TResult Function(bool maintenance, bool unknownVersion)
         serviceError,
   }) {
@@ -1609,7 +2029,8 @@ class _$MainUserReloadingImpl implements _MainUserReloading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(EthiscanUser user)? connected,
     TResult? Function()? reloading,
-    TResult? Function()? disconnected,
+    TResult? Function(bool isRegister)? disconnected,
+    TResult? Function(bool isRegister, String exception)? error,
     TResult? Function(bool maintenance, bool unknownVersion)? serviceError,
   }) {
     return reloading?.call();
@@ -1620,7 +2041,8 @@ class _$MainUserReloadingImpl implements _MainUserReloading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(EthiscanUser user)? connected,
     TResult Function()? reloading,
-    TResult Function()? disconnected,
+    TResult Function(bool isRegister)? disconnected,
+    TResult Function(bool isRegister, String exception)? error,
     TResult Function(bool maintenance, bool unknownVersion)? serviceError,
     required TResult orElse(),
   }) {
@@ -1636,6 +2058,7 @@ class _$MainUserReloadingImpl implements _MainUserReloading {
     required TResult Function(MainUserConnected value) connected,
     required TResult Function(_MainUserReloading value) reloading,
     required TResult Function(MainUserDisconnected value) disconnected,
+    required TResult Function(MainUserError value) error,
     required TResult Function(MainUserServiceError value) serviceError,
   }) {
     return reloading(this);
@@ -1647,6 +2070,7 @@ class _$MainUserReloadingImpl implements _MainUserReloading {
     TResult? Function(MainUserConnected value)? connected,
     TResult? Function(_MainUserReloading value)? reloading,
     TResult? Function(MainUserDisconnected value)? disconnected,
+    TResult? Function(MainUserError value)? error,
     TResult? Function(MainUserServiceError value)? serviceError,
   }) {
     return reloading?.call(this);
@@ -1658,6 +2082,7 @@ class _$MainUserReloadingImpl implements _MainUserReloading {
     TResult Function(MainUserConnected value)? connected,
     TResult Function(_MainUserReloading value)? reloading,
     TResult Function(MainUserDisconnected value)? disconnected,
+    TResult Function(MainUserError value)? error,
     TResult Function(MainUserServiceError value)? serviceError,
     required TResult orElse(),
   }) {
@@ -1677,6 +2102,8 @@ abstract class _$$MainUserDisconnectedImplCopyWith<$Res> {
   factory _$$MainUserDisconnectedImplCopyWith(_$MainUserDisconnectedImpl value,
           $Res Function(_$MainUserDisconnectedImpl) then) =
       __$$MainUserDisconnectedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isRegister});
 }
 
 /// @nodoc
@@ -1686,38 +2113,65 @@ class __$$MainUserDisconnectedImplCopyWithImpl<$Res>
   __$$MainUserDisconnectedImplCopyWithImpl(_$MainUserDisconnectedImpl _value,
       $Res Function(_$MainUserDisconnectedImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isRegister = null,
+  }) {
+    return _then(_$MainUserDisconnectedImpl(
+      null == isRegister
+          ? _value.isRegister
+          : isRegister // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$MainUserDisconnectedImpl implements MainUserDisconnected {
-  const _$MainUserDisconnectedImpl();
+  const _$MainUserDisconnectedImpl(this.isRegister);
+
+  @override
+  final bool isRegister;
 
   @override
   String toString() {
-    return 'MainUserState.disconnected()';
+    return 'MainUserState.disconnected(isRegister: $isRegister)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MainUserDisconnectedImpl);
+            other is _$MainUserDisconnectedImpl &&
+            (identical(other.isRegister, isRegister) ||
+                other.isRegister == isRegister));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, isRegister);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MainUserDisconnectedImplCopyWith<_$MainUserDisconnectedImpl>
+      get copyWith =>
+          __$$MainUserDisconnectedImplCopyWithImpl<_$MainUserDisconnectedImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(EthiscanUser user) connected,
     required TResult Function() reloading,
-    required TResult Function() disconnected,
+    required TResult Function(bool isRegister) disconnected,
+    required TResult Function(bool isRegister, String exception) error,
     required TResult Function(bool maintenance, bool unknownVersion)
         serviceError,
   }) {
-    return disconnected();
+    return disconnected(isRegister);
   }
 
   @override
@@ -1725,10 +2179,11 @@ class _$MainUserDisconnectedImpl implements MainUserDisconnected {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(EthiscanUser user)? connected,
     TResult? Function()? reloading,
-    TResult? Function()? disconnected,
+    TResult? Function(bool isRegister)? disconnected,
+    TResult? Function(bool isRegister, String exception)? error,
     TResult? Function(bool maintenance, bool unknownVersion)? serviceError,
   }) {
-    return disconnected?.call();
+    return disconnected?.call(isRegister);
   }
 
   @override
@@ -1736,12 +2191,13 @@ class _$MainUserDisconnectedImpl implements MainUserDisconnected {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(EthiscanUser user)? connected,
     TResult Function()? reloading,
-    TResult Function()? disconnected,
+    TResult Function(bool isRegister)? disconnected,
+    TResult Function(bool isRegister, String exception)? error,
     TResult Function(bool maintenance, bool unknownVersion)? serviceError,
     required TResult orElse(),
   }) {
     if (disconnected != null) {
-      return disconnected();
+      return disconnected(isRegister);
     }
     return orElse();
   }
@@ -1752,6 +2208,7 @@ class _$MainUserDisconnectedImpl implements MainUserDisconnected {
     required TResult Function(MainUserConnected value) connected,
     required TResult Function(_MainUserReloading value) reloading,
     required TResult Function(MainUserDisconnected value) disconnected,
+    required TResult Function(MainUserError value) error,
     required TResult Function(MainUserServiceError value) serviceError,
   }) {
     return disconnected(this);
@@ -1763,6 +2220,7 @@ class _$MainUserDisconnectedImpl implements MainUserDisconnected {
     TResult? Function(MainUserConnected value)? connected,
     TResult? Function(_MainUserReloading value)? reloading,
     TResult? Function(MainUserDisconnected value)? disconnected,
+    TResult? Function(MainUserError value)? error,
     TResult? Function(MainUserServiceError value)? serviceError,
   }) {
     return disconnected?.call(this);
@@ -1774,6 +2232,7 @@ class _$MainUserDisconnectedImpl implements MainUserDisconnected {
     TResult Function(MainUserConnected value)? connected,
     TResult Function(_MainUserReloading value)? reloading,
     TResult Function(MainUserDisconnected value)? disconnected,
+    TResult Function(MainUserError value)? error,
     TResult Function(MainUserServiceError value)? serviceError,
     required TResult orElse(),
   }) {
@@ -1785,7 +2244,177 @@ class _$MainUserDisconnectedImpl implements MainUserDisconnected {
 }
 
 abstract class MainUserDisconnected implements MainUserState {
-  const factory MainUserDisconnected() = _$MainUserDisconnectedImpl;
+  const factory MainUserDisconnected(final bool isRegister) =
+      _$MainUserDisconnectedImpl;
+
+  bool get isRegister;
+  @JsonKey(ignore: true)
+  _$$MainUserDisconnectedImplCopyWith<_$MainUserDisconnectedImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$MainUserErrorImplCopyWith<$Res> {
+  factory _$$MainUserErrorImplCopyWith(
+          _$MainUserErrorImpl value, $Res Function(_$MainUserErrorImpl) then) =
+      __$$MainUserErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isRegister, String exception});
+}
+
+/// @nodoc
+class __$$MainUserErrorImplCopyWithImpl<$Res>
+    extends _$MainUserStateCopyWithImpl<$Res, _$MainUserErrorImpl>
+    implements _$$MainUserErrorImplCopyWith<$Res> {
+  __$$MainUserErrorImplCopyWithImpl(
+      _$MainUserErrorImpl _value, $Res Function(_$MainUserErrorImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isRegister = null,
+    Object? exception = null,
+  }) {
+    return _then(_$MainUserErrorImpl(
+      null == isRegister
+          ? _value.isRegister
+          : isRegister // ignore: cast_nullable_to_non_nullable
+              as bool,
+      null == exception
+          ? _value.exception
+          : exception // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$MainUserErrorImpl implements MainUserError {
+  const _$MainUserErrorImpl(this.isRegister, this.exception);
+
+  @override
+  final bool isRegister;
+  @override
+  final String exception;
+
+  @override
+  String toString() {
+    return 'MainUserState.error(isRegister: $isRegister, exception: $exception)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MainUserErrorImpl &&
+            (identical(other.isRegister, isRegister) ||
+                other.isRegister == isRegister) &&
+            (identical(other.exception, exception) ||
+                other.exception == exception));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isRegister, exception);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MainUserErrorImplCopyWith<_$MainUserErrorImpl> get copyWith =>
+      __$$MainUserErrorImplCopyWithImpl<_$MainUserErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(EthiscanUser user) connected,
+    required TResult Function() reloading,
+    required TResult Function(bool isRegister) disconnected,
+    required TResult Function(bool isRegister, String exception) error,
+    required TResult Function(bool maintenance, bool unknownVersion)
+        serviceError,
+  }) {
+    return error(isRegister, exception);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(EthiscanUser user)? connected,
+    TResult? Function()? reloading,
+    TResult? Function(bool isRegister)? disconnected,
+    TResult? Function(bool isRegister, String exception)? error,
+    TResult? Function(bool maintenance, bool unknownVersion)? serviceError,
+  }) {
+    return error?.call(isRegister, exception);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(EthiscanUser user)? connected,
+    TResult Function()? reloading,
+    TResult Function(bool isRegister)? disconnected,
+    TResult Function(bool isRegister, String exception)? error,
+    TResult Function(bool maintenance, bool unknownVersion)? serviceError,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(isRegister, exception);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MainUserConnected value) connected,
+    required TResult Function(_MainUserReloading value) reloading,
+    required TResult Function(MainUserDisconnected value) disconnected,
+    required TResult Function(MainUserError value) error,
+    required TResult Function(MainUserServiceError value) serviceError,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(MainUserConnected value)? connected,
+    TResult? Function(_MainUserReloading value)? reloading,
+    TResult? Function(MainUserDisconnected value)? disconnected,
+    TResult? Function(MainUserError value)? error,
+    TResult? Function(MainUserServiceError value)? serviceError,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MainUserConnected value)? connected,
+    TResult Function(_MainUserReloading value)? reloading,
+    TResult Function(MainUserDisconnected value)? disconnected,
+    TResult Function(MainUserError value)? error,
+    TResult Function(MainUserServiceError value)? serviceError,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MainUserError implements MainUserState {
+  const factory MainUserError(final bool isRegister, final String exception) =
+      _$MainUserErrorImpl;
+
+  bool get isRegister;
+  String get exception;
+  @JsonKey(ignore: true)
+  _$$MainUserErrorImplCopyWith<_$MainUserErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1867,7 +2496,8 @@ class _$MainUserServiceErrorImpl implements MainUserServiceError {
   TResult when<TResult extends Object?>({
     required TResult Function(EthiscanUser user) connected,
     required TResult Function() reloading,
-    required TResult Function() disconnected,
+    required TResult Function(bool isRegister) disconnected,
+    required TResult Function(bool isRegister, String exception) error,
     required TResult Function(bool maintenance, bool unknownVersion)
         serviceError,
   }) {
@@ -1879,7 +2509,8 @@ class _$MainUserServiceErrorImpl implements MainUserServiceError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(EthiscanUser user)? connected,
     TResult? Function()? reloading,
-    TResult? Function()? disconnected,
+    TResult? Function(bool isRegister)? disconnected,
+    TResult? Function(bool isRegister, String exception)? error,
     TResult? Function(bool maintenance, bool unknownVersion)? serviceError,
   }) {
     return serviceError?.call(maintenance, unknownVersion);
@@ -1890,7 +2521,8 @@ class _$MainUserServiceErrorImpl implements MainUserServiceError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(EthiscanUser user)? connected,
     TResult Function()? reloading,
-    TResult Function()? disconnected,
+    TResult Function(bool isRegister)? disconnected,
+    TResult Function(bool isRegister, String exception)? error,
     TResult Function(bool maintenance, bool unknownVersion)? serviceError,
     required TResult orElse(),
   }) {
@@ -1906,6 +2538,7 @@ class _$MainUserServiceErrorImpl implements MainUserServiceError {
     required TResult Function(MainUserConnected value) connected,
     required TResult Function(_MainUserReloading value) reloading,
     required TResult Function(MainUserDisconnected value) disconnected,
+    required TResult Function(MainUserError value) error,
     required TResult Function(MainUserServiceError value) serviceError,
   }) {
     return serviceError(this);
@@ -1917,6 +2550,7 @@ class _$MainUserServiceErrorImpl implements MainUserServiceError {
     TResult? Function(MainUserConnected value)? connected,
     TResult? Function(_MainUserReloading value)? reloading,
     TResult? Function(MainUserDisconnected value)? disconnected,
+    TResult? Function(MainUserError value)? error,
     TResult? Function(MainUserServiceError value)? serviceError,
   }) {
     return serviceError?.call(this);
@@ -1928,6 +2562,7 @@ class _$MainUserServiceErrorImpl implements MainUserServiceError {
     TResult Function(MainUserConnected value)? connected,
     TResult Function(_MainUserReloading value)? reloading,
     TResult Function(MainUserDisconnected value)? disconnected,
+    TResult Function(MainUserError value)? error,
     TResult Function(MainUserServiceError value)? serviceError,
     required TResult orElse(),
   }) {

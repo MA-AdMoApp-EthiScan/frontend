@@ -31,7 +31,7 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
           );
           emit(MainUserState.connected(user: user));
         } on FirebaseAuthException catch (e) {
-          emit(const MainUserState.disconnected());
+          emit(const MainUserState.disconnected(false));
           getAuthenticationExceptionFromCode(e.code);
         }
       }, firstLoad: () async {
@@ -43,10 +43,14 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
         add(const MainUserEvent.autoConnect(
             minDelay: Duration(milliseconds: 500)));
         // ~~~ Registration ~~~
+      }, goRegister: () {
+        emit(const MainUserState.disconnected(true));
+      }, goLogin: () {
+        emit(const MainUserState.disconnected(false));
       }, register: (email, password) async {
         try {
           UserCredential userCredential =
-              await _authRepository.signUp(email: email, password: password);
+          await _authRepository.signUp(email: email, password: password);
           EthiscanUser user = EthiscanUser(
             id: userCredential.user!.uid,
             name: userCredential.user!.displayName ?? 'Unknown',
@@ -54,14 +58,14 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
           );
           emit(MainUserState.connected(user: user));
         } on FirebaseAuthException catch (e) {
-          emit(const MainUserState.disconnected());
+          emit(MainUserState.error(true, e.message??""));
           getAuthenticationExceptionFromCode(e.code);
         }
       }, autoConnect: (minDelay) async {
         //emit(const MainUserState.reloading());
-        emit(const MainUserState.disconnected());
+        emit(const MainUserState.disconnected(false));
       }, disconnect: () async {
-        emit(const MainUserState.disconnected());
+        emit(const MainUserState.disconnected(false));
       }, reset: () async {
         //emit(const MainUserState.reloading());
         add(const MainUserEvent.autoConnect(
