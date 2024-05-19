@@ -9,7 +9,7 @@ part of 'user_preferences.dart';
 UserPreferences _$UserPreferencesFromJson(Map<String, dynamic> json) =>
     UserPreferences(
       metadataSubscriptions: (json['metadataSubscriptions'] as List<dynamic>)
-          .map((e) => Metadata.fromJson(e as Map<String, dynamic>))
+          .map((e) => MetadataType.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

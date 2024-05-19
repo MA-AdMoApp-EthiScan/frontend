@@ -10,10 +10,12 @@ Certification _$CertificationFromJson(Map<String, dynamic> json) =>
     Certification(
       name: json['name'] as String,
       description: json['description'] as String,
+      imageUrl: json['imageUrl'] as String,
     );
 
 Map<String, dynamic> _$CertificationToJson(Certification instance) =>
     <String, dynamic>{
       'name': instance.name,
       'description': instance.description,
+      'imageUrl': instance.imageUrl,
     };

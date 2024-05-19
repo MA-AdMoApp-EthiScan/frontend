@@ -1,25 +1,27 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'product.dart';
 import 'user_preferences.dart';
+import 'favorite_product.dart';
 
 class EthiscanUser {
   final User? firebaseUser;
-  List<Product> favoriteProducts;
+  List<FavoriteProduct>? favoriteProducts;
   UserPreferences userPreferences;
 
   EthiscanUser({
     this.firebaseUser,
     List<Product>? favoriteProducts,
     UserPreferences? userPreferences,
-  })  : favoriteProducts = favoriteProducts ?? [],
-        userPreferences = userPreferences ?? UserPreferences(metadataSubscriptions: []);
+  }) : userPreferences =
+            userPreferences ?? UserPreferences(metadataSubscriptions: []);
 
   factory EthiscanUser.fromJson(Map<String, dynamic> json) {
     return EthiscanUser(
       favoriteProducts: (json['favoriteProducts'] as List<dynamic>)
           .map((item) => Product.fromJson(item as Map<String, dynamic>))
           .toList(),
-      userPreferences: UserPreferences.fromJson(json['userPreferences'] as Map<String, dynamic>),
+      userPreferences: UserPreferences.fromJson(
+          json['userPreferences'] as Map<String, dynamic>),
     );
   }
 

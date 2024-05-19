@@ -47,8 +47,7 @@ class _FavoritesPage extends State<FavoritesPage> {
   void _searchChanged() {
     _favoritesBloc.add(
       FavoritesEvent.updateSort(
-          widget.user,
-          _favoriteSort!.copyWith(name: _searchController.text)),
+          widget.user, _favoriteSort!.copyWith(name: _searchController.text)),
     );
   }
 
@@ -128,7 +127,8 @@ class _FavoritesPage extends State<FavoritesPage> {
                 preferredSize:
                     const Size.fromHeight(110), // Provide the preferred height
                 child: Padding(
-                  padding: const EdgeInsets.all(0), // Add padding around the TextField
+                  padding: const EdgeInsets.all(
+                      0), // Add padding around the TextField
                   child: Column(
                     children: <Widget>[
                       Row(
@@ -153,8 +153,8 @@ class _FavoritesPage extends State<FavoritesPage> {
                                   _favoriteSort = _favoriteSort?.copyWith(
                                       sortCriteria: sortCriteria);
                                 });
-                                _favoritesBloc.add(
-                                    FavoritesEvent.updateSort(widget.user, _favoriteSort!));
+                                _favoritesBloc.add(FavoritesEvent.updateSort(
+                                    widget.user, _favoriteSort!));
                               },
                             ),
                           ),
@@ -179,8 +179,8 @@ class _FavoritesPage extends State<FavoritesPage> {
                                   _favoriteSort = _favoriteSort?.copyWith(
                                       sortCriteria: sortCriteria);
                                 });
-                                _favoritesBloc.add(
-                                    FavoritesEvent.updateSort(widget.user, _favoriteSort!));
+                                _favoritesBloc.add(FavoritesEvent.updateSort(
+                                    widget.user, _favoriteSort!));
                               },
                             ),
                           ),
@@ -216,8 +216,8 @@ class _FavoritesPage extends State<FavoritesPage> {
                                 _favoriteSort = _favoriteSort?.copyWith(
                                     sortCriteria: sortCriteria);
                               });
-                              _favoritesBloc.add(
-                                  FavoritesEvent.updateSort(widget.user, _favoriteSort!));
+                              _favoritesBloc.add(FavoritesEvent.updateSort(
+                                  widget.user, _favoriteSort!));
                             },
                           ),
                           const SizedBox(width: 8),
