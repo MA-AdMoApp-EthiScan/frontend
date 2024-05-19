@@ -87,9 +87,10 @@ class _FavoritesPage extends State<FavoritesPage> {
       appBar: AppBar(
         backgroundColor: UIColors.lightScaffoldBackgroundColor,
         title: Text(I18nUtils.translate(
-          context,
-          "favorites.title",
-        )),
+            context,
+            "favorites.title",
+          )
+        ),
         actions: [
           SecondaryIconButton(
             icon: _favoriteSort == null || _favoriteSort?.active == false
@@ -231,16 +232,16 @@ class _FavoritesPage extends State<FavoritesPage> {
             : null,
       ),
       body: ListViewLayoutBody(
-        children: [
-          const SizedBox(height: 15),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0),
-            child: Column(
-              children: _getFavoritesCards(favorites, loading, error),
-            ),
+      children: [
+        const SizedBox(height: 15),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 0),
+          child: Column(
+            children: _getFavoritesCards(favorites, loading, error),
           ),
-        ],
-      ),
+        ),
+      ],
+    ),
     );
   }
 

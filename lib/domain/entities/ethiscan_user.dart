@@ -17,11 +17,13 @@ class EthiscanUser {
 
   factory EthiscanUser.fromJson(Map<String, dynamic> json) {
     return EthiscanUser(
-      favoriteProducts: (json['favoriteProducts'] as List<dynamic>)
+      firebaseUser: FirebaseAuth.instance.currentUser,
+      favoriteProducts: json['favoriteProducts'] != null ? (json['favoriteProducts'] as List<dynamic>)
           .map((item) => Product.fromJson(item as Map<String, dynamic>))
-          .toList(),
+          .toList() : [],
       userPreferences: UserPreferences.fromJson(
-          json['userPreferences'] as Map<String, dynamic>),
+          json['userPreferences'] != null ? json['userPreferences'] as Map<String, dynamic> : {}
+      ),
     );
   }
 
@@ -29,19 +31,7 @@ class EthiscanUser {
 
   Map<String, dynamic> toJson() {
     return {
-      'firebaseUser': {
-        'uid': firebaseUser?.uid,
-        'email': firebaseUser?.email,
-        'displayName': firebaseUser?.displayName,
-        'photoURL': firebaseUser?.photoURL,
-        'emailVerified': firebaseUser?.emailVerified,
-        'isAnonymous': firebaseUser?.isAnonymous,
-        'phoneNumber': firebaseUser?.phoneNumber,
-        'metadata': {
-          'creationTime': firebaseUser?.metadata.creationTime,
-          'lastSignInTime': firebaseUser?.metadata.lastSignInTime,
-        },
-      },
+      'uid': firebaseUser?.uid,
       'favoriteProducts': favoriteProducts,
       'userPreferences': {
         'metadataSubscriptions': userPreferences.metadataSubscriptions,

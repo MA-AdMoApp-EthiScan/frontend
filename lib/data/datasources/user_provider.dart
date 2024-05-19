@@ -21,8 +21,13 @@ class UserRepositoryProvider implements UserRepository {
 
   @override
   Future<Either<APIError, EthiscanUser>> addUser(EthiscanUser user) async {
-    final doc = await userCollection.doc(user.firebaseUser?.uid).set(user.toJson());
-    return Right(EthiscanUser.fromJson(doc as Map<String, dynamic>));
+    try {
+      final doc =
+          await userCollection.doc(user.firebaseUser?.uid).set(user.toJson());
+      return Right(EthiscanUser.fromJson(doc as Map<String, dynamic>));
+    } on Exception catch (e) {
+      return Left(APIError(e.toString(), 500));
+    }
   }
 
   @override

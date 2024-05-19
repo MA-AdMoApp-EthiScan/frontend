@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../utils/ui_colors.dart';
+import 'parameter/parameters_page.dart';
 import 'widget_core/popup_validation.dart';
 
 class HomePage extends StatefulWidget {
@@ -47,7 +48,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             FavoritesPage(widget.user),
             const Icon(Icons.qr_code),
-            const Icon(Icons.settings),
+            ParametersPage(mainUserBloc: widget.mainUserBloc),
           ],
         ),
       ),
@@ -81,7 +82,7 @@ class _HomePageState extends State<HomePage> {
           Tab(
             text: I18nUtils.translate(
               context,
-              "parameter.title",
+              "parameters.title",
             ),
             icon: const Icon(Icons.settings),
           ),

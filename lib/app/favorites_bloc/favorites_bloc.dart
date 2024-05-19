@@ -67,13 +67,17 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
             emit(const FavoritesState.error());
           },
           right: (user) async {
-            emit(FavoritesState.loaded(favorites: user.favorites));
+            emit(FavoritesState.loaded(favorites: user.favorites != null
+                ? user.favorites!
+                : <Product>[]));
           },
         );
         emit(const FavoritesState.error());
       },
       right: (user) async {
-        emit(FavoritesState.loaded(favorites: user.favorites));
+        emit(FavoritesState.loaded(favorites: user.favorites != null
+            ? user.favorites!
+            : <Product>[]));
       },
     );
   }
