@@ -11,10 +11,11 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       name: json['name'] as String,
       imageUrl: json['imageUrl'] as String,
       description: json['description'] as String,
-      certification:
-          Certification.fromJson(json['certification'] as Map<String, dynamic>),
-      productMetadatas: (json['productMetadatas'] as List<dynamic>)
-          .map((e) => ProductMetadata.fromJson(e as Map<String, dynamic>))
+      certifications: (json['certifications'] as List<dynamic>?)
+          ?.map((e) => Certification.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      productMetadatas: (json['productMetadatas'] as List<dynamic>?)
+          ?.map((e) => ProductMetadata.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -23,6 +24,6 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       'name': instance.name,
       'imageUrl': instance.imageUrl,
       'description': instance.description,
-      'certification': instance.certification,
+      'certifications': instance.certifications,
       'productMetadatas': instance.productMetadatas,
     };
