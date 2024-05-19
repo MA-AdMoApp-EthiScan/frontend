@@ -9,19 +9,17 @@ part of 'product.dart';
 Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       id: json['id'] as String,
       name: json['name'] as String,
-      barcode: json['barcode'] as String,
-      certification: (json['certification'] as List<dynamic>)
-          .map((e) => Certification.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      metadata: (json['metadata'] as List<dynamic>)
-          .map((e) => Metadata.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      image: json['image'] as String,
+      description: json['description'] as String,
+      carbonFootprint: (json['carbonFootprint'] as num).toDouble(),
+      scanDate: DateTime.parse(json['scanDate'] as String),
     );
 
 Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'barcode': instance.barcode,
-      'certification': instance.certification,
-      'metadata': instance.metadata,
+      'image': instance.image,
+      'description': instance.description,
+      'carbonFootprint': instance.carbonFootprint,
+      'scanDate': instance.scanDate.toIso8601String(),
     };
