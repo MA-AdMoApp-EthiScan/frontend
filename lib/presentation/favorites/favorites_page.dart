@@ -47,8 +47,7 @@ class _FavoritesPage extends State<FavoritesPage> {
   void _searchChanged() {
     _favoritesBloc.add(
       FavoritesEvent.updateSort(
-          widget.user,
-          _favoriteSort!.copyWith(name: _searchController.text)),
+          widget.user, _favoriteSort!.copyWith(name: _searchController.text)),
     );
   }
 
@@ -154,8 +153,8 @@ class _FavoritesPage extends State<FavoritesPage> {
                                   _favoriteSort = _favoriteSort?.copyWith(
                                       sortCriteria: sortCriteria);
                                 });
-                                _favoritesBloc.add(
-                                    FavoritesEvent.updateSort(widget.user, _favoriteSort!));
+                                _favoritesBloc.add(FavoritesEvent.updateSort(
+                                    widget.user, _favoriteSort!));
                               },
                             ),
                           ),
@@ -180,8 +179,8 @@ class _FavoritesPage extends State<FavoritesPage> {
                                   _favoriteSort = _favoriteSort?.copyWith(
                                       sortCriteria: sortCriteria);
                                 });
-                                _favoritesBloc.add(
-                                    FavoritesEvent.updateSort(widget.user, _favoriteSort!));
+                                _favoritesBloc.add(FavoritesEvent.updateSort(
+                                    widget.user, _favoriteSort!));
                               },
                             ),
                           ),
@@ -217,8 +216,8 @@ class _FavoritesPage extends State<FavoritesPage> {
                                 _favoriteSort = _favoriteSort?.copyWith(
                                     sortCriteria: sortCriteria);
                               });
-                              _favoritesBloc.add(
-                                  FavoritesEvent.updateSort(widget.user, _favoriteSort!));
+                              _favoritesBloc.add(FavoritesEvent.updateSort(
+                                  widget.user, _favoriteSort!));
                             },
                           ),
                           const SizedBox(width: 8),
@@ -247,15 +246,14 @@ class _FavoritesPage extends State<FavoritesPage> {
 
   List<Widget> _getFavoritesCards(
       List<Product> favorites, bool loading, bool error) {
-    List<Product> _favorites = [];
+    List<Product> favorites = [];
     if (favorites.isEmpty) {
-      _favorites.add(Product(
+      favorites.add(Product(
         id: "1",
         name: "Product 1",
         description: "Description 1",
-        scanDate: DateTime.now(),
-        image: 'https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg',
-        carbonFootprint: 4,
+        imageUrl:
+            'https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg',
       ));
     }
     if (error) {
@@ -270,14 +268,14 @@ class _FavoritesPage extends State<FavoritesPage> {
           child: CustomCircularLoading(),
         ),
       ];
-    } else if (_favorites.isEmpty) {
+    } else if (favorites.isEmpty) {
       return [
         CustomH3(I18nUtils.translate(context, "favorites.empty.title")),
         CustomText(I18nUtils.translate(context, "favorites.empty.message"))
       ];
     } else {
       List<Widget> widgets = [];
-      List<Widget> f = _favorites
+      List<Widget> f = favorites
           .map((favorite) => FavoriteCard(favorite: favorite))
           .toList();
       for (int i = 0; i < f.length; i++) {

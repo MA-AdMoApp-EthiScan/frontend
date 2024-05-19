@@ -52,8 +52,10 @@ class UserProvider extends InheritedWidget {
   static EthiscanUser? of(BuildContext context) {
     UserProvider? widget =
         context.dependOnInheritedWidgetOfExactType<UserProvider>();
-
-    return widget.user;
+    if (widget?.user == null) {
+      throw Exception('UserProvider not found');
+    }
+    return widget!.user;
   }
 
   // TODO: check if the data changed

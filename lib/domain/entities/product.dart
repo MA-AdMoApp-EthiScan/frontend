@@ -10,16 +10,16 @@ class Product {
   final String name;
   final String imageUrl;
   final String description;
-  final Certification certification;
-  final List<ProductMetadata> productMetadatas;
+  final List<Certification>? certifications;
+  final List<ProductMetadata>? productMetadatas;
 
   Product({
     required this.id,
     required this.name,
     required this.imageUrl,
     required this.description,
-    required this.certification,
-    required this.productMetadatas,
+    this.certifications,
+    this.productMetadatas,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) =>

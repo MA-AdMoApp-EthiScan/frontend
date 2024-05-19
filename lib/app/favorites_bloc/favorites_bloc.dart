@@ -14,54 +14,50 @@ part 'favorites_state.dart';
 @injectable
 class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
   final UserRepository _userRepository;
-  FavoritesBloc(
-      this._userRepository
-      ) : super(const FavoritesState.initial()) {
+  FavoritesBloc(this._userRepository) : super(const FavoritesState.initial()) {
     on<FavoritesEvent>((event, emit) async {
-      await event.when(
-        load: (user) async {
-          emit(const FavoritesState.loading());
-          await getUserWithFavorites(user, emit);
-        },
-        updateSort: (user, favoriteSort) async {
-          emit(const FavoritesState.loading());
+      await event.when(load: (user) async {
+        emit(const FavoritesState.loading());
+        await getUserWithFavorites(user, emit);
+      }, updateSort: (user, favoriteSort) async {
+        emit(const FavoritesState.loading());
 
-          List<Product> favorites = user.favorites;
+        List<Product> favorites = user.favorites;
 
-          // Filter by name if it's not null
-          if (favoriteSort.name != null) {
-            favorites = favorites
-                .where((element) => element.name
-                .toLowerCase()
-                .contains(favoriteSort.name!.toLowerCase()))
-                .toList();
-          }
-
-          // Filter by date range if isRange is true
-          if (favoriteSort.isRange == true) {
-            favorites = favorites
-                .where((element) =>
-                      element.scanDate.isAfter(favoriteSort.dateFrom!) &&
-                      element.scanDate.isBefore(favoriteSort.dateTo!))
-                .toList();
-          }
-
-          // Sort the list based on the sortCriteria
-          favorites.sort((a, b) {
-            if (favoriteSort.sortCriteria.order == SortOrder.ascending) {
-              return a.name.compareTo(b.name);
-            } else {
-              return b.name.compareTo(a.name);
-            }
-          });
-
-          emit(FavoritesState.loaded(favorites: favorites));
+        // Filter by name if it's not null
+        if (favoriteSort.name != null) {
+          favorites = favorites
+              .where((element) => element.name
+                  .toLowerCase()
+                  .contains(favoriteSort.name!.toLowerCase()))
+              .toList();
         }
-      );
+
+        // Filter by date range if isRange is true
+        // if (favoriteSort.isRange == true) {
+        //   favorites = favorites
+        //       .where((element) =>
+        //             element.scanDate.isAfter(favoriteSort.dateFrom!) &&
+        //             element.scanDate.isBefore(favoriteSort.dateTo!))
+        //       .toList();
+        // }
+
+        // Sort the list based on the sortCriteria
+        favorites.sort((a, b) {
+          if (favoriteSort.sortCriteria.order == SortOrder.ascending) {
+            return a.name.compareTo(b.name);
+          } else {
+            return b.name.compareTo(a.name);
+          }
+        });
+
+        emit(FavoritesState.loaded(favorites: favorites));
+      });
     });
   }
 
-  Future<void> getUserWithFavorites(EthiscanUser user, Emitter<FavoritesState> emit) async {
+  Future<void> getUserWithFavorites(
+      EthiscanUser user, Emitter<FavoritesState> emit) async {
     var either = await _userRepository.getUserFromId(user.firebaseUser!.uid);
     await either.when(
       left: (failure) async {

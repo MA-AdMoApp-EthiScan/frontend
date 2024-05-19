@@ -13,9 +13,7 @@ part 'product_state.dart';
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final ProductRepository _productRepository;
 
-  ProductBloc(
-      this._productRepository
-      ) : super(const ProductState.initial()) {
+  ProductBloc(this._productRepository) : super(const ProductState.initial()) {
     on<ProductEvent>((event, emit) async {
       await event.when(
         load: (id) async {
@@ -27,9 +25,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
                 id: "1",
                 name: "Product 1",
                 description: "Description 1",
-                scanDate: DateTime.now(),
-                image: 'https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg',
-                carbonFootprint: 4,
+                imageUrl:
+                    'https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg',
+                certifications: null,
               );
               emit(ProductState.loaded(product: p));
               //emit(ProductState.error(error: failure));
