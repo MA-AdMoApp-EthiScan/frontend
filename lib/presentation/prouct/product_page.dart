@@ -1,4 +1,5 @@
 import 'package:ethiscan/app/product_bloc/product_bloc.dart';
+import 'package:ethiscan/domain/entities/api_error.dart';
 import 'package:ethiscan/domain/entities/product.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
@@ -37,7 +38,7 @@ class _ProductPage extends State<ProductPage> {
         builder: (context, state) {
           return state.maybeWhen(
             loading: () => _page(context, loading: true),
-            error: () => _page(context, error: true),
+            error: (error) => _page(context, error: error),
             initial: () => _page(context),
             loaded: (Product favorite) => _page(context, favorite: favorite),
             orElse: () => _page(context),
@@ -50,7 +51,7 @@ class _ProductPage extends State<ProductPage> {
   Widget _page(
     BuildContext context, {
     bool loading = false,
-    bool error = false,
+    APIError? error,
     Product? favorite,
   }) {
     return Scaffold(
@@ -77,10 +78,10 @@ class _ProductPage extends State<ProductPage> {
     );
   }
 
-  List<Widget> _getContent(bool loading, bool error, Product? favorite) {
+  List<Widget> _getContent(bool loading, APIError? error, Product? favorite) {
     if (loading) {
       return [const CustomCircularLoading()];
-    } else if (error) {
+    } else if (error != null) {
       return [
         CustomH3(I18nUtils.translate(context, "favorites.error.title")),
         CustomText(I18nUtils.translate(context, "favorites.error.message"))

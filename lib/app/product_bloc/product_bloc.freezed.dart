@@ -226,7 +226,7 @@ mixin _$ProductState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(Product product) loaded,
-    required TResult Function() error,
+    required TResult Function(APIError error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -234,7 +234,7 @@ mixin _$ProductState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(Product product)? loaded,
-    TResult? Function()? error,
+    TResult? Function(APIError error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -242,7 +242,7 @@ mixin _$ProductState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(Product product)? loaded,
-    TResult Function()? error,
+    TResult Function(APIError error)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -332,7 +332,7 @@ class _$ProductInitialImpl implements _ProductInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(Product product) loaded,
-    required TResult Function() error,
+    required TResult Function(APIError error) error,
   }) {
     return initial();
   }
@@ -343,7 +343,7 @@ class _$ProductInitialImpl implements _ProductInitial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(Product product)? loaded,
-    TResult? Function()? error,
+    TResult? Function(APIError error)? error,
   }) {
     return initial?.call();
   }
@@ -354,7 +354,7 @@ class _$ProductInitialImpl implements _ProductInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(Product product)? loaded,
-    TResult Function()? error,
+    TResult Function(APIError error)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -446,7 +446,7 @@ class _$ProductLoadingImpl implements _ProductLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(Product product) loaded,
-    required TResult Function() error,
+    required TResult Function(APIError error) error,
   }) {
     return loading();
   }
@@ -457,7 +457,7 @@ class _$ProductLoadingImpl implements _ProductLoading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(Product product)? loaded,
-    TResult? Function()? error,
+    TResult? Function(APIError error)? error,
   }) {
     return loading?.call();
   }
@@ -468,7 +468,7 @@ class _$ProductLoadingImpl implements _ProductLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(Product product)? loaded,
-    TResult Function()? error,
+    TResult Function(APIError error)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -586,7 +586,7 @@ class _$ProductLoadedImpl implements _ProductLoaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(Product product) loaded,
-    required TResult Function() error,
+    required TResult Function(APIError error) error,
   }) {
     return loaded(product);
   }
@@ -597,7 +597,7 @@ class _$ProductLoadedImpl implements _ProductLoaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(Product product)? loaded,
-    TResult? Function()? error,
+    TResult? Function(APIError error)? error,
   }) {
     return loaded?.call(product);
   }
@@ -608,7 +608,7 @@ class _$ProductLoadedImpl implements _ProductLoaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(Product product)? loaded,
-    TResult Function()? error,
+    TResult Function(APIError error)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -670,6 +670,8 @@ abstract class _$$ProductErrorImplCopyWith<$Res> {
   factory _$$ProductErrorImplCopyWith(
           _$ProductErrorImpl value, $Res Function(_$ProductErrorImpl) then) =
       __$$ProductErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({APIError error});
 }
 
 /// @nodoc
@@ -679,26 +681,50 @@ class __$$ProductErrorImplCopyWithImpl<$Res>
   __$$ProductErrorImplCopyWithImpl(
       _$ProductErrorImpl _value, $Res Function(_$ProductErrorImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? error = null,
+  }) {
+    return _then(_$ProductErrorImpl(
+      error: null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as APIError,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$ProductErrorImpl implements _ProductError {
-  const _$ProductErrorImpl();
+  const _$ProductErrorImpl({required this.error});
+
+  @override
+  final APIError error;
 
   @override
   String toString() {
-    return 'ProductState.error()';
+    return 'ProductState.error(error: $error)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ProductErrorImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$ProductErrorImpl &&
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, error);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProductErrorImplCopyWith<_$ProductErrorImpl> get copyWith =>
+      __$$ProductErrorImplCopyWithImpl<_$ProductErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -706,9 +732,9 @@ class _$ProductErrorImpl implements _ProductError {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(Product product) loaded,
-    required TResult Function() error,
+    required TResult Function(APIError error) error,
   }) {
-    return error();
+    return error(this.error);
   }
 
   @override
@@ -717,9 +743,9 @@ class _$ProductErrorImpl implements _ProductError {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(Product product)? loaded,
-    TResult? Function()? error,
+    TResult? Function(APIError error)? error,
   }) {
-    return error?.call();
+    return error?.call(this.error);
   }
 
   @override
@@ -728,11 +754,11 @@ class _$ProductErrorImpl implements _ProductError {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(Product product)? loaded,
-    TResult Function()? error,
+    TResult Function(APIError error)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error();
+      return error(this.error);
     }
     return orElse();
   }
@@ -776,5 +802,11 @@ class _$ProductErrorImpl implements _ProductError {
 }
 
 abstract class _ProductError implements ProductState {
-  const factory _ProductError() = _$ProductErrorImpl;
+  const factory _ProductError({required final APIError error}) =
+      _$ProductErrorImpl;
+
+  APIError get error;
+  @JsonKey(ignore: true)
+  _$$ProductErrorImplCopyWith<_$ProductErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

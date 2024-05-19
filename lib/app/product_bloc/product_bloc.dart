@@ -21,11 +21,15 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       await event.when(
         load: (id) async {
           emit(const ProductState.loading());
-          Either<APIError, Product> product = _productRepository.getProductById(id);
-          if (product == null) {
-            emit(const ProductState.error());
-          }
-          emit(const ProductState.loaded(product: product));
+          var either = await _productRepository.getProductById(id);
+          await either.when(
+            left: (failure) async {
+              emit(ProductState.error(error: failure));
+            },
+            right: (product) async {
+              emit(ProductState.loaded(product: product));
+            },
+          );
         },
       );
     });

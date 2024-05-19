@@ -10,5 +10,7 @@ abstract class ProductState with _$ProductState {
     required Product product,
   }) = _ProductLoaded;
 
-  const factory ProductState.error() = _ProductError;
+  const factory ProductState.error({
+    required APIError error,
+  }) = _ProductError;
 }

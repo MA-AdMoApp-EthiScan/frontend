@@ -1,4 +1,6 @@
-class APIError {
+import 'package:ethiscan/domain/core/either.dart';
+
+class APIError extends Failure {
   final String message;
   final int code;
 
