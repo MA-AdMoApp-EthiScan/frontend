@@ -37,11 +37,11 @@ class _ProductPage extends State<ProductPage> {
         listener: (context, state) {},
         builder: (context, state) {
           return state.maybeWhen(
-            loading: () => _page(context, loading: true),
-            error: (error) => _page(context, error: error),
-            initial: () => _page(context),
-            loaded: (Product favorite) => _page(context, favorite: favorite),
-            orElse: () => _page(context),
+            loading: () => _page(context, state, loading: true),
+            error: (error) => _page(context, state, error: error),
+            initial: () => _page(context, state),
+            loaded: (Product favorite) => _page(context, state, favorite: favorite),
+            orElse: () => _page(context, state),
           );
         },
       )
@@ -49,7 +49,8 @@ class _ProductPage extends State<ProductPage> {
   }
 
   Widget _page(
-    BuildContext context, {
+    BuildContext context,
+    ProductState state, {
     bool loading = false,
     APIError? error,
     Product? favorite,
@@ -57,8 +58,7 @@ class _ProductPage extends State<ProductPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: UIColors.lightScaffoldBackgroundColor,
-        title: Text(widget.productId ??
-            I18nUtils.translate(context, "favorite.title")),
+        title: Text(favorite?.name ?? ""),
         titleTextStyle: const TextStyle(
             color: UIColors.lightPrimaryColor,
             fontSize: 24,

@@ -250,7 +250,7 @@ mixin _$ProductState {
   TResult map<TResult extends Object?>({
     required TResult Function(_ProductInitial value) initial,
     required TResult Function(_ProductLoading value) loading,
-    required TResult Function(_ProductLoaded value) loaded,
+    required TResult Function(ProductLoaded value) loaded,
     required TResult Function(_ProductError value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -258,7 +258,7 @@ mixin _$ProductState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ProductInitial value)? initial,
     TResult? Function(_ProductLoading value)? loading,
-    TResult? Function(_ProductLoaded value)? loaded,
+    TResult? Function(ProductLoaded value)? loaded,
     TResult? Function(_ProductError value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -266,7 +266,7 @@ mixin _$ProductState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ProductInitial value)? initial,
     TResult Function(_ProductLoading value)? loading,
-    TResult Function(_ProductLoaded value)? loaded,
+    TResult Function(ProductLoaded value)? loaded,
     TResult Function(_ProductError value)? error,
     required TResult orElse(),
   }) =>
@@ -368,7 +368,7 @@ class _$ProductInitialImpl implements _ProductInitial {
   TResult map<TResult extends Object?>({
     required TResult Function(_ProductInitial value) initial,
     required TResult Function(_ProductLoading value) loading,
-    required TResult Function(_ProductLoaded value) loaded,
+    required TResult Function(ProductLoaded value) loaded,
     required TResult Function(_ProductError value) error,
   }) {
     return initial(this);
@@ -379,7 +379,7 @@ class _$ProductInitialImpl implements _ProductInitial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ProductInitial value)? initial,
     TResult? Function(_ProductLoading value)? loading,
-    TResult? Function(_ProductLoaded value)? loaded,
+    TResult? Function(ProductLoaded value)? loaded,
     TResult? Function(_ProductError value)? error,
   }) {
     return initial?.call(this);
@@ -390,7 +390,7 @@ class _$ProductInitialImpl implements _ProductInitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ProductInitial value)? initial,
     TResult Function(_ProductLoading value)? loading,
-    TResult Function(_ProductLoaded value)? loaded,
+    TResult Function(ProductLoaded value)? loaded,
     TResult Function(_ProductError value)? error,
     required TResult orElse(),
   }) {
@@ -482,7 +482,7 @@ class _$ProductLoadingImpl implements _ProductLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(_ProductInitial value) initial,
     required TResult Function(_ProductLoading value) loading,
-    required TResult Function(_ProductLoaded value) loaded,
+    required TResult Function(ProductLoaded value) loaded,
     required TResult Function(_ProductError value) error,
   }) {
     return loading(this);
@@ -493,7 +493,7 @@ class _$ProductLoadingImpl implements _ProductLoading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ProductInitial value)? initial,
     TResult? Function(_ProductLoading value)? loading,
-    TResult? Function(_ProductLoaded value)? loaded,
+    TResult? Function(ProductLoaded value)? loaded,
     TResult? Function(_ProductError value)? error,
   }) {
     return loading?.call(this);
@@ -504,7 +504,7 @@ class _$ProductLoadingImpl implements _ProductLoading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ProductInitial value)? initial,
     TResult Function(_ProductLoading value)? loading,
-    TResult Function(_ProductLoaded value)? loaded,
+    TResult Function(ProductLoaded value)? loaded,
     TResult Function(_ProductError value)? error,
     required TResult orElse(),
   }) {
@@ -552,7 +552,7 @@ class __$$ProductLoadedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProductLoadedImpl implements _ProductLoaded {
+class _$ProductLoadedImpl implements ProductLoaded {
   const _$ProductLoadedImpl({required this.product});
 
   @override
@@ -622,7 +622,7 @@ class _$ProductLoadedImpl implements _ProductLoaded {
   TResult map<TResult extends Object?>({
     required TResult Function(_ProductInitial value) initial,
     required TResult Function(_ProductLoading value) loading,
-    required TResult Function(_ProductLoaded value) loaded,
+    required TResult Function(ProductLoaded value) loaded,
     required TResult Function(_ProductError value) error,
   }) {
     return loaded(this);
@@ -633,7 +633,7 @@ class _$ProductLoadedImpl implements _ProductLoaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ProductInitial value)? initial,
     TResult? Function(_ProductLoading value)? loading,
-    TResult? Function(_ProductLoaded value)? loaded,
+    TResult? Function(ProductLoaded value)? loaded,
     TResult? Function(_ProductError value)? error,
   }) {
     return loaded?.call(this);
@@ -644,7 +644,7 @@ class _$ProductLoadedImpl implements _ProductLoaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ProductInitial value)? initial,
     TResult Function(_ProductLoading value)? loading,
-    TResult Function(_ProductLoaded value)? loaded,
+    TResult Function(ProductLoaded value)? loaded,
     TResult Function(_ProductError value)? error,
     required TResult orElse(),
   }) {
@@ -655,8 +655,8 @@ class _$ProductLoadedImpl implements _ProductLoaded {
   }
 }
 
-abstract class _ProductLoaded implements ProductState {
-  const factory _ProductLoaded({required final Product product}) =
+abstract class ProductLoaded implements ProductState {
+  const factory ProductLoaded({required final Product product}) =
       _$ProductLoadedImpl;
 
   Product get product;
@@ -768,7 +768,7 @@ class _$ProductErrorImpl implements _ProductError {
   TResult map<TResult extends Object?>({
     required TResult Function(_ProductInitial value) initial,
     required TResult Function(_ProductLoading value) loading,
-    required TResult Function(_ProductLoaded value) loaded,
+    required TResult Function(ProductLoaded value) loaded,
     required TResult Function(_ProductError value) error,
   }) {
     return error(this);
@@ -779,7 +779,7 @@ class _$ProductErrorImpl implements _ProductError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ProductInitial value)? initial,
     TResult? Function(_ProductLoading value)? loading,
-    TResult? Function(_ProductLoaded value)? loaded,
+    TResult? Function(ProductLoaded value)? loaded,
     TResult? Function(_ProductError value)? error,
   }) {
     return error?.call(this);
@@ -790,7 +790,7 @@ class _$ProductErrorImpl implements _ProductError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ProductInitial value)? initial,
     TResult Function(_ProductLoading value)? loading,
-    TResult Function(_ProductLoaded value)? loaded,
+    TResult Function(ProductLoaded value)? loaded,
     TResult Function(_ProductError value)? error,
     required TResult orElse(),
   }) {

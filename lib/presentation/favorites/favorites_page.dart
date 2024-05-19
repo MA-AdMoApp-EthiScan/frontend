@@ -1,6 +1,7 @@
 import 'package:ethiscan/app/favorites_bloc/favorites_bloc.dart';
+import 'package:ethiscan/domain/entities/ethiscan_user.dart';
 import 'package:ethiscan/domain/entities/favorite_sort.dart';
-import 'package:ethiscan/domain/entities/list_product.dart';
+import 'package:ethiscan/domain/entities/product.dart';
 import 'package:ethiscan/domain/entities/sort_criteria.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/core/buttons/icon_button.dart';
@@ -15,7 +16,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavoritesPage extends StatefulWidget {
-  const FavoritesPage({super.key});
+  final EthiscanUser user;
+  const FavoritesPage(this.user, {super.key});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -38,7 +40,7 @@ class _FavoritesPage extends State<FavoritesPage> {
   @override
   void initState() {
     _favoritesBloc = getIt();
-    _favoritesBloc.add(const FavoritesEvent.load());
+    _favoritesBloc.add(FavoritesEvent.load(widget.user));
 
     _searchController = TextEditingController();
     _searchController.addListener(_searchChanged);
@@ -54,6 +56,7 @@ class _FavoritesPage extends State<FavoritesPage> {
   void _searchChanged() {
     _favoritesBloc.add(
       FavoritesEvent.updateSort(
+          widget.user,
           _favoriteSort!.copyWith(name: _searchController.text)),
     );
   }
@@ -76,7 +79,7 @@ class _FavoritesPage extends State<FavoritesPage> {
               loading: () => _page(context, loading: true),
               error: () => _page(context, error: true),
               initial: () => _page(context),
-              loaded: (List<ListProduct> favorites) =>
+              loaded: (List<Product> favorites) =>
                   _page(context, favorites: favorites),
               orElse: () => _page(context),
             );
@@ -88,7 +91,7 @@ class _FavoritesPage extends State<FavoritesPage> {
     BuildContext context, {
     bool loading = false,
     bool error = false,
-    List<ListProduct> favorites = const [],
+    List<Product> favorites = const [],
   }) {
     return Scaffold(
       appBar: AppBar(
@@ -161,7 +164,7 @@ class _FavoritesPage extends State<FavoritesPage> {
                                       sortCriteria: sortCriteria);
                                 });
                                 _favoritesBloc.add(
-                                    FavoritesEvent.updateSort(_favoriteSort!));
+                                    FavoritesEvent.updateSort(widget.user, _favoriteSort!));
                               },
                             ),
                           ),
@@ -187,7 +190,7 @@ class _FavoritesPage extends State<FavoritesPage> {
                                       sortCriteria: sortCriteria);
                                 });
                                 _favoritesBloc.add(
-                                    FavoritesEvent.updateSort(_favoriteSort!));
+                                    FavoritesEvent.updateSort(widget.user, _favoriteSort!));
                               },
                             ),
                           ),
@@ -224,7 +227,7 @@ class _FavoritesPage extends State<FavoritesPage> {
                                     sortCriteria: sortCriteria);
                               });
                               _favoritesBloc.add(
-                                  FavoritesEvent.updateSort(_favoriteSort!));
+                                  FavoritesEvent.updateSort(widget.user, _favoriteSort!));
                             },
                           ),
                           const SizedBox(width: 8),
@@ -252,7 +255,7 @@ class _FavoritesPage extends State<FavoritesPage> {
   }
 
   List<Widget> _getFavoritesCards(
-      List<ListProduct> favorites, bool loading, bool error) {
+      List<Product> favorites, bool loading, bool error) {
     //error = true;
     if (error) {
       return [

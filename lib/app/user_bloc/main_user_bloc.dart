@@ -25,9 +25,7 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
           UserCredential userCredential =
               await _authRepository.logIn(email: email, password: password);
           EthiscanUser user = EthiscanUser(
-            id: userCredential.user!.uid,
-            name: userCredential.user!.displayName ?? 'Unknown',
-            email: userCredential.user!.email!,
+              firebaseUser: userCredential.user
           );
           emit(MainUserState.connected(user: user));
         } on FirebaseAuthException catch (e) {
@@ -49,12 +47,10 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
         emit(const MainUserState.disconnected(false));
       }, register: (email, password) async {
         try {
-          UserCredential userCredential =
-          await _authRepository.signUp(email: email, password: password);
+          UserCredential userCredential = await _authRepository
+              .signUp(email: email, password: password);
           EthiscanUser user = EthiscanUser(
-            id: userCredential.user!.uid,
-            name: userCredential.user!.displayName ?? 'Unknown',
-            email: userCredential.user!.email!,
+              firebaseUser: userCredential.user
           );
           emit(MainUserState.connected(user: user));
         } on FirebaseAuthException catch (e) {

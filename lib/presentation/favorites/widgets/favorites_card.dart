@@ -1,4 +1,4 @@
-import 'package:ethiscan/domain/entities/list_product.dart';
+import 'package:ethiscan/domain/entities/product.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/prouct/product_page.dart';
 import 'package:ethiscan/presentation/widget_core/my_card.dart';
@@ -8,7 +8,7 @@ import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
 
 class FavoriteCard extends MyCard {
-  final ListProduct favorite;
+  final Product favorite;
   final bool error;
 
   const FavoriteCard({super.key, required this.favorite, this.error = false})

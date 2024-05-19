@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:ethiscan/data/repositories/product_repository.dart';
-import 'package:ethiscan/domain/core/either.dart';
 import 'package:ethiscan/domain/entities/api_error.dart';
 import 'package:ethiscan/domain/entities/product.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

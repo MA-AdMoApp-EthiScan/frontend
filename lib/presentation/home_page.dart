@@ -1,3 +1,4 @@
+import 'package:ethiscan/domain/entities/ethiscan_user.dart';
 import 'package:ethiscan/presentation/favorites/favorites_page.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:flutter/material.dart';
@@ -6,16 +7,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../utils/ui_colors.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
+  final EthiscanUser user;
+  const HomePage(this.user, {super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -40,11 +33,11 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         bottomNavigationBar: menu(),
-        body: const TabBarView(
+        body: TabBarView(
           children: [
-            FavoritesPage(),
-            Icon(Icons.qr_code),
-            Icon(Icons.settings),
+            FavoritesPage(widget.user),
+            const Icon(Icons.qr_code),
+            const Icon(Icons.settings),
           ],
         ),
       ),
