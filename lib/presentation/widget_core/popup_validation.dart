@@ -1,4 +1,6 @@
+import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
+import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
 
 class PopupValidation extends StatelessWidget {
@@ -14,23 +16,33 @@ class PopupValidation extends StatelessWidget {
       onPressed: () => showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          title: Text(I18nUtils.translate(context, 'popup.' + name + '.title')),
-          content: Text(I18nUtils.translate(context, 'popup.' + name + '.message')),
+          title: Text(I18nUtils.translate(context, 'popup.$name.title')),
+          content: Text(I18nUtils.translate(context, 'popup.$name.message')),
           actions: <Widget>[
             TextButton(
-              color: Colors.red,
               onPressed: () => Navigator.pop(context, 'Cancel'),
-              child: Text(I18nUtils.translate(context, 'words.cancel'))
+              child: CustomText(
+                I18nUtils.translate(context, 'words.cancel'),
+                style: const TextStyle(color: UIColors.lightPrimaryColor)
+              )
             ),
             TextButton(
-              onPressed: () => onPressed,
-              child: Text(I18nUtils.translate(context, 'words.ok'))
+                onPressed: () {
+                  Navigator.pop(context, 'OK');
+                  onPressed(); // Perform the action when OK is clicked
+                },
+              child: CustomText(
+                  I18nUtils.translate(context, 'words.ok'),
+                  style: const TextStyle(
+                      color: UIColors.lightPrimaryColor,
+                      fontWeight: FontWeight.bold
+                  )
+              )
             ),
           ],
         ),
       ),
       child: button,
-      //child: const Text('Show Dialog'),
     );
   }
 }

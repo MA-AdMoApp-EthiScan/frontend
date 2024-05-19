@@ -40,11 +40,6 @@ class _HomePageState extends State<HomePage> {
               onPressed: () => widget.mainUserBloc.add(const MainUserEvent.disconnect()),
               button: const Icon(Icons.logout, color: Colors.white),
             ),
-            IconButton(
-              color: Colors.white,
-              icon: const Icon(Icons.logout),
-              onPressed: () => widget.mainUserBloc.add(const MainUserEvent.disconnect()),
-            ),
           ],
         ),
         bottomNavigationBar: menu(),
