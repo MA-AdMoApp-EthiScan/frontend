@@ -279,9 +279,8 @@ void main() async {
     try {
       // Convert SoldProduct objects to Map
       var supplierData = supplier.toJson();
-      supplierData['products'] = supplier.products
-          ?.map((soldProduct) => soldProduct.toJson())
-          .toList();
+      supplierData['products'] =
+          supplier.products.map((soldProduct) => soldProduct.toJson()).toList();
 
       await firestore
           .collection('suppliers')
