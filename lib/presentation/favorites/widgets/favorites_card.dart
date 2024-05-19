@@ -40,5 +40,5 @@ class FavoriteCard extends MyCard {
 
   @override
   Widget page() => ProductPage(
-      productId: favorite.name);
+      productId: favorite.id);
 }

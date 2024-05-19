@@ -12,16 +12,22 @@ app:
       title: 'Error'
       message: 'An error occurred while fetching data'
 
-favorite:
-  title: 'Favorite'
+product:
+  title: 'Product'
   add: 'Add to Favorites'
-  remove: 'Remove from Favorites'
-  added: 'Added to Favorites'
-  removed: 'Removed from Favorites'
+  remove: 'Remove from favorites'
+  added: 'Added to favorites'
+  removed: 'Removed from favorites'
   last_scan: 'Last scan : '
+  carbon_footprint: 'Carbon footprint'
+  image: 'Image'
+  description: 'Description'
+  error:
+      title: 'Error'
+      message: 'An error occurred while fetching product'
   empty:
     title: 'Empty page'
-    message: 'No favorite found'
+    message: 'No product found'
 
 favorites:
   title: 'Favorites'

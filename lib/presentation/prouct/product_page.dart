@@ -40,7 +40,7 @@ class _ProductPage extends State<ProductPage> {
             loading: () => _page(context, state, loading: true),
             error: (error) => _page(context, state, error: error),
             initial: () => _page(context, state),
-            loaded: (Product favorite) => _page(context, state, favorite: favorite),
+            loaded: (Product product) => _page(context, state, product: product),
             orElse: () => _page(context, state),
           );
         },
@@ -53,12 +53,12 @@ class _ProductPage extends State<ProductPage> {
     ProductState state, {
     bool loading = false,
     APIError? error,
-    Product? favorite,
+    Product? product,
   }) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: UIColors.lightScaffoldBackgroundColor,
-        title: Text(favorite?.name ?? ""),
+        title: Text(product?.name ?? ""),
         titleTextStyle: const TextStyle(
             color: UIColors.lightPrimaryColor,
             fontSize: 24,
@@ -70,7 +70,7 @@ class _ProductPage extends State<ProductPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 0),
             child: Column(
-              children: _getContent(loading, error, favorite),
+              children: _getContent(loading, error, product),
             ),
           ),
         ],
@@ -78,20 +78,27 @@ class _ProductPage extends State<ProductPage> {
     );
   }
 
-  List<Widget> _getContent(bool loading, APIError? error, Product? favorite) {
+  List<Widget> _getContent(bool loading, APIError? error, Product? product) {
     if (loading) {
       return [const CustomCircularLoading()];
     } else if (error != null) {
       return [
-        CustomH3(I18nUtils.translate(context, "favorites.error.title")),
-        CustomText(I18nUtils.translate(context, "favorites.error.message"))
+        CustomH3(I18nUtils.translate(context, "product.error.title")),
+        CustomText(I18nUtils.translate(context, "product.error.message"))
       ];
-    } else if (favorite != null) {
-      return [CustomH3(favorite.name)];
+    } else if (product != null) {
+      return [
+        CustomH2(I18nUtils.translate(context, "product.image")),
+        product.image != '' ? Image.network(product.image) : const SizedBox(),
+        CustomH2(I18nUtils.translate(context, "product.description")),
+        CustomText(product.description),
+        CustomH2(I18nUtils.translate(context, "product.carbon_footprint")),
+        CustomText(product.carbonFootprint.toString()),
+      ];
     } else {
       return [
-        CustomH3(I18nUtils.translate(context, "favorite.empty.title")),
-        CustomText(I18nUtils.translate(context, "favorite.empty.message"))
+        CustomH3(I18nUtils.translate(context, "product.empty.title")),
+        CustomText(I18nUtils.translate(context, "product.empty.message"))
       ];
     }
   }
