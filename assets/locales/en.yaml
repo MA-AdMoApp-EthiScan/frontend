@@ -24,6 +24,11 @@ favorites:
   error-title: 'Error'
   error-message: 'An error occurred while fetching favorites'
 
+scans:
+  title: 'Scans'
+  error-title: 'Error'
+  error-message: 'An error occurred while fetching historical scans'
+
 scanning:
   title: 'Scan'
   error-title: 'Error'
