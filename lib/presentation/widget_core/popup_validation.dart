@@ -8,7 +8,12 @@ class PopupValidation extends StatelessWidget {
   final void Function() onPressed;
   final Widget button;
 
-  const PopupValidation({super.key, required this.name, required this.onPressed, required this.button});
+  const PopupValidation({
+    super.key,
+    required this.name,
+    required this.onPressed,
+    required this.button
+  });
 
   @override
   Widget build(BuildContext context) {
