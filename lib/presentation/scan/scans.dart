@@ -13,8 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:camera/camera.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+//import 'package:http/http.dart' as http;
+//import 'dart:convert';
 
 class ScansPage extends StatefulWidget {
   const ScansPage({super.key});
@@ -43,9 +43,9 @@ class _ScansPage extends State<ScansPage> {
   void startTimer() {
     const period = Duration(seconds: 1); // Change the duration as needed
     _timer = Timer.periodic(period, (timer) async {
-      if (!_isDisposed) {
+      //if (!_isDisposed) {
         await _captureFrame();
-      }
+      //}
     });
   }
 
@@ -72,22 +72,22 @@ class _ScansPage extends State<ScansPage> {
 
   Future<void> _captureFrame() async {
     if (_controller.value.isInitialized && !_isDisposed) {
-      _scansBloc.add(const ScansEvent.startScanning());
+      //_scansBloc.add(const ScansEvent.startScanning());
       try {
         final image = await _controller.takePicture();
         final inputImage = InputImage.fromFilePath(image.path);
         final List<Barcode> barcodes = await _barcodeScanner.processImage(inputImage);
 
         if (barcodes.isNotEmpty) {
-          stopTimer();
+          //stopTimer();
           final Barcode barcode = barcodes.first;
           //for (Barcode barcode in barcodes) {
           _scansBloc.add(ScansEvent.barcodeFound(barcode.displayValue ?? 'Unknown'));
           //}
         }
-        else {
-          _scansBloc.add(const ScansEvent.stopScanning());
-        }
+        //else {
+        //  _scansBloc.add(const ScansEvent.stopScanning());
+        //}
       } catch (e) {
         print('Error taking picture: $e');
       }
@@ -98,25 +98,30 @@ class _ScansPage extends State<ScansPage> {
   @override
   void dispose() {
     _isDisposed = true;
-    //stopTimer();
+    stopTimer();
     _controller.dispose();
     _barcodeScanner.close();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) {
+Widget build(BuildContext context) {
     return BlocProvider<ScansBloc>(
       create: (context) => _scansBloc,
       child: BlocListener<ScansBloc, ScansState>(
         listener: (context, state) {
           state.maybeWhen(
             barcodeFound: (barcode) {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => FavoritePage(favoriteName: barcode),
-                ),
-              );
+              Navigator.of(context)
+                  .push(
+                    MaterialPageRoute(
+                      builder: (context) => FavoritePage(favoriteName: barcode),
+                    ),
+                  )
+                  .then((_) {
+                // Dispatch returnToPrevious event when coming back
+                _scansBloc.add(const ScansEvent.returnToPrevious());
+              });
             },
             orElse: () {},
           );
@@ -128,10 +133,7 @@ class _ScansPage extends State<ScansPage> {
               error: () => _page(context, error: true),
               initial: () => _page(context),
               loaded: (scans) => _page(context, scans: scans),
-              scanning: () => _page(context, scanning: true),
               barcodeFound: (barcode) => _page(context, barcode: barcode),
-              //barcodeFound: (barcode) => _page(context, barcode: barcode),
-
             );
           },
         ),
@@ -143,7 +145,6 @@ class _ScansPage extends State<ScansPage> {
     BuildContext context, {
     bool loading = false,
     bool error = false,
-    bool scanning = false,
     String? barcode,
     List<String> scans = const [],
   }) {
@@ -174,17 +175,15 @@ class _ScansPage extends State<ScansPage> {
             },
           ),
           const SizedBox(height: 20),
-          if (barcode != null)
-            ElevatedButton(
-              onPressed: () async {
-                startTimer();//await _captureFrame();
-              },
-              child: const Text('Capture Frame and Scan'),
-            ),
-          //if (scanning)
-          //  const Center(child: CircularProgressIndicator()),
-          //if (barcode != null)
-          //  Text('Barcode found: $barcode'),
+          ElevatedButton(
+            onPressed: () {
+              //_scansBloc.add(const ScansEvent.load());
+              _captureFrame(); 
+            },
+            child: const Text('Capture Frame and Scan'),
+          ),
+          if (loading) const Center(child: CircularProgressIndicator()),
+          if (barcode != null) Text('Barcode found: $barcode'),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 0),
             child: Column(
