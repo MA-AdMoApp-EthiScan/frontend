@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'certification.dart';
 
 part 'product.g.dart';
 
@@ -6,18 +7,16 @@ part 'product.g.dart';
 class Product {
   final String id;
   final String name;
-  final String image;
+  final String imageUrl;
   final String description;
-  final double carbonFootprint;
-  final DateTime scanDate;
+  final Certification certification;
 
   Product({
     required this.id,
     required this.name,
-    required this.image,
+    required this.imageUrl,
     required this.description,
-    required this.carbonFootprint,
-    required this.scanDate,
+    required this.certification,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) =>

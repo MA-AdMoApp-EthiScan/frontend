@@ -6,8 +6,10 @@ part 'certification.g.dart';
 class Certification {
   final String name;
   final String description;
+  final String imageUrl;
 
-  Certification({required this.name, required this.description});
+  Certification(
+      {required this.name, required this.description, required this.imageUrl});
 
   factory Certification.fromJson(Map<String, dynamic> json) =>
       _$CertificationFromJson(json);

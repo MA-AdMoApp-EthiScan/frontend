@@ -53,7 +53,7 @@ class UserProvider extends InheritedWidget {
     UserProvider? widget =
         context.dependOnInheritedWidgetOfExactType<UserProvider>();
 
-    return widget!.user;
+    return widget.user;
   }
 
   // TODO: check if the data changed
