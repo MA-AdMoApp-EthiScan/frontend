@@ -1,19 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'favorite_product.dart';
+part of 'sold_product.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-FavoriteProduct _$FavoriteProductFromJson(Map<String, dynamic> json) =>
-    FavoriteProduct(
+SoldProduct _$SoldProductFromJson(Map<String, dynamic> json) => SoldProduct(
       productId: json['productId'] as String,
-      addedAt: DateTime.parse(json['addedAt'] as String),
+      price: (json['price'] as num).toDouble(),
     );
 
-Map<String, dynamic> _$FavoriteProductToJson(FavoriteProduct instance) =>
+Map<String, dynamic> _$SoldProductToJson(SoldProduct instance) =>
     <String, dynamic>{
       'productId': instance.productId,
-      'addedAt': instance.addedAt.toIso8601String(),
+      'price': instance.price,
     };
