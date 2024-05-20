@@ -24,11 +24,18 @@ class ScansBloc extends Bloc<ScansEvent, ScansState> {
           emit(ScansState.loaded(scans: history));
         },
         barcodeFound: (barcode) async {
-          var either = await _productRepository.getProductById(barcode);
+          var either = await _productRepository.getProductsByCodebareId(barcode);
           String productName = "";
           either.when(
             left: (failure)  {
-              productName = "Unknown name";
+              productName = 'Unknown name $barcode';
+              //_productRepository.addProduct(
+              //  Product(
+              //    id: barcode,
+              //    name: 'Unknown name $barcode',
+              //    imageUrl: 'Unknown', // Provide an image URL here
+              //    description: 'Unknown', // Provide a description here
+              //  ),);
             },
             right: (product)  {
               productName = product.name;

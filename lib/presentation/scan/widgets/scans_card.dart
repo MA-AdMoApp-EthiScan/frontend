@@ -5,14 +5,15 @@ import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:flutter/material.dart';
 
 class ScansCard extends MyCard {
-  final String? scan;
+  final String? name;
   final String? date;
+  final String? barcodeId;
   final bool error;
 
-  const ScansCard({super.key, this.scan, this.date, this.error = false})
+  const ScansCard({super.key, this.name, this.date, this.barcodeId, this.error = false})
       : super(
           showChildWhileLoading: true,
-          disableNavigation: scan == null || error,
+          disableNavigation: name == null || error,
         );
 
   @override
@@ -22,8 +23,8 @@ class ScansCard extends MyCard {
     }
 
     return ListTile(
-      title: CustomH2(scan!),
-      subtitle: CustomText(I18nUtils.translate(context, "scan.last_scan") + (date ?? "")),
+      title: Text(name!),
+      subtitle: Text(date!),
     );
   }
 
@@ -33,5 +34,5 @@ class ScansCard extends MyCard {
   }
 
   @override
-  Widget page() => ProductPage(productId: scan != null ? scan! : "unknown id");
+  Widget page() => ProductPage(productId: barcodeId != null ? barcodeId! : "unknown id");
 }

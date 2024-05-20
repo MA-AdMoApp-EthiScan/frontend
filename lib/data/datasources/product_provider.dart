@@ -21,6 +21,21 @@ class ProductRepositoryProvider implements ProductRepository {
   }
 
   @override
+  Future<Either<APIError, Product>> getProductsByCodebareId(String codebareId) async {
+    final querySnapshot = await productCollection
+        .where('id', isEqualTo: codebareId)
+        .get();
+    if (querySnapshot.docs.isEmpty) {
+      return Left(APIError('Product not found', 404));
+    }
+    final product = querySnapshot.docs
+        .map((doc) => Product.fromJson(doc.data() as Map<String, dynamic>))
+        .toList().first;
+
+    return Right(product);
+  }
+
+  @override
   Future<Either<APIError, List<Product>>> getProductByIdList(List<String> id) {
     final docList = id.map((productId) => productCollection.doc(productId).get());
     return Future.wait(docList).then((docs) {

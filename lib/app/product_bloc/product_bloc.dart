@@ -18,7 +18,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       await event.when(
         load: (id) async {
           emit(const ProductState.loading());
-          var either = await _productRepository.getProductById(id);
+          var either = await _productRepository.getProductsByCodebareId(id);
           await either.when(
             left: (failure) async {
               emit(ProductState.error(error: failure));

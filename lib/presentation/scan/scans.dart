@@ -224,7 +224,8 @@ class _ScansPage extends State<ScansPage> {
       List<Widget> widgets = [];
       List<Widget> f = scans
           .map((scan) => ScansCard(
-              scan: scan.name,
+              name: scan.name,
+              barcodeId: scan.barcodeId,
               date: DateFormat('dd/MM/yy HH:mm').format(scan.date!))) 
           .toList();
       for (int i = 0; i < f.length; i++) {
