@@ -69,7 +69,7 @@ class _ParametersPageState extends State<ParametersPage> {
   Widget _page(BuildContext context, {
     bool loading = false,
     List<MetadataType> allMetadataTypes = const [],
-    List<MetadataType> subscribedMetadataTypes = const [],
+    List<String> subscribedMetadataTypes = const [],
   }) {
     return Scaffold(
       appBar: AppBar(
@@ -94,7 +94,7 @@ class _ParametersPageState extends State<ParametersPage> {
               children: _getBody(context,
                   loading: loading,
                   allMetadataTypes: allMetadataTypes,
-                  subscribedMetadataTypes: subscribedMetadataTypes),
+                  subscribedMetadataTypeIds: subscribedMetadataTypes),
             ),
           ),
         ],
@@ -106,7 +106,7 @@ class _ParametersPageState extends State<ParametersPage> {
       BuildContext context, {
         required bool loading,
         List<MetadataType> allMetadataTypes = const [],
-        List<MetadataType> subscribedMetadataTypes = const [],
+        List<String> subscribedMetadataTypeIds = const [],
         bool error = false,
       }) {
     if (error) {
@@ -155,13 +155,11 @@ class _ParametersPageState extends State<ParametersPage> {
           widgets.add(
             CustomCheckbox(
               text: metadataType.name,
-              value: subscribedMetadataTypes.contains(metadataType),
+              value: subscribedMetadataTypeIds.contains(metadataType.id),
               onChanged: (value) {
                 if (value) {
-                  subscribedMetadataTypes.add(metadataType);
                   _parameterBloc.add(ParametersEvent.subscribe(metadataType.id));
                 } else {
-                  subscribedMetadataTypes.remove(metadataType);
                   _parameterBloc.add(ParametersEvent.unsubscribe(metadataType.id));
                 }
               },

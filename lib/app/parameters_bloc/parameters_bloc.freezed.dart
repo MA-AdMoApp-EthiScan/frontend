@@ -480,7 +480,7 @@ mixin _$ParametersState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<MetadataType> allMetadataTypes,
-            List<MetadataType> subscribedMetadataTypes)
+            List<String> subscribedMetadataTypeIds)
         loaded,
     required TResult Function() error,
   }) =>
@@ -490,7 +490,7 @@ mixin _$ParametersState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<MetadataType> allMetadataTypes,
-            List<MetadataType> subscribedMetadataTypes)?
+            List<String> subscribedMetadataTypeIds)?
         loaded,
     TResult? Function()? error,
   }) =>
@@ -500,7 +500,7 @@ mixin _$ParametersState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<MetadataType> allMetadataTypes,
-            List<MetadataType> subscribedMetadataTypes)?
+            List<String> subscribedMetadataTypeIds)?
         loaded,
     TResult Function()? error,
     required TResult orElse(),
@@ -592,7 +592,7 @@ class _$ParametersInitialImpl implements _ParametersInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<MetadataType> allMetadataTypes,
-            List<MetadataType> subscribedMetadataTypes)
+            List<String> subscribedMetadataTypeIds)
         loaded,
     required TResult Function() error,
   }) {
@@ -605,7 +605,7 @@ class _$ParametersInitialImpl implements _ParametersInitial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<MetadataType> allMetadataTypes,
-            List<MetadataType> subscribedMetadataTypes)?
+            List<String> subscribedMetadataTypeIds)?
         loaded,
     TResult? Function()? error,
   }) {
@@ -618,7 +618,7 @@ class _$ParametersInitialImpl implements _ParametersInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<MetadataType> allMetadataTypes,
-            List<MetadataType> subscribedMetadataTypes)?
+            List<String> subscribedMetadataTypeIds)?
         loaded,
     TResult Function()? error,
     required TResult orElse(),
@@ -712,7 +712,7 @@ class _$ParametersLoadingImpl implements _ParametersLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<MetadataType> allMetadataTypes,
-            List<MetadataType> subscribedMetadataTypes)
+            List<String> subscribedMetadataTypeIds)
         loaded,
     required TResult Function() error,
   }) {
@@ -725,7 +725,7 @@ class _$ParametersLoadingImpl implements _ParametersLoading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<MetadataType> allMetadataTypes,
-            List<MetadataType> subscribedMetadataTypes)?
+            List<String> subscribedMetadataTypeIds)?
         loaded,
     TResult? Function()? error,
   }) {
@@ -738,7 +738,7 @@ class _$ParametersLoadingImpl implements _ParametersLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<MetadataType> allMetadataTypes,
-            List<MetadataType> subscribedMetadataTypes)?
+            List<String> subscribedMetadataTypeIds)?
         loaded,
     TResult Function()? error,
     required TResult orElse(),
@@ -799,7 +799,7 @@ abstract class _$$ParametersLoadedImplCopyWith<$Res> {
   @useResult
   $Res call(
       {List<MetadataType> allMetadataTypes,
-      List<MetadataType> subscribedMetadataTypes});
+      List<String> subscribedMetadataTypeIds});
 }
 
 /// @nodoc
@@ -814,17 +814,17 @@ class __$$ParametersLoadedImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? allMetadataTypes = null,
-    Object? subscribedMetadataTypes = null,
+    Object? subscribedMetadataTypeIds = null,
   }) {
     return _then(_$ParametersLoadedImpl(
       allMetadataTypes: null == allMetadataTypes
           ? _value._allMetadataTypes
           : allMetadataTypes // ignore: cast_nullable_to_non_nullable
               as List<MetadataType>,
-      subscribedMetadataTypes: null == subscribedMetadataTypes
-          ? _value._subscribedMetadataTypes
-          : subscribedMetadataTypes // ignore: cast_nullable_to_non_nullable
-              as List<MetadataType>,
+      subscribedMetadataTypeIds: null == subscribedMetadataTypeIds
+          ? _value._subscribedMetadataTypeIds
+          : subscribedMetadataTypeIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -834,9 +834,9 @@ class __$$ParametersLoadedImplCopyWithImpl<$Res>
 class _$ParametersLoadedImpl implements _ParametersLoaded {
   const _$ParametersLoadedImpl(
       {required final List<MetadataType> allMetadataTypes,
-      required final List<MetadataType> subscribedMetadataTypes})
+      required final List<String> subscribedMetadataTypeIds})
       : _allMetadataTypes = allMetadataTypes,
-        _subscribedMetadataTypes = subscribedMetadataTypes;
+        _subscribedMetadataTypeIds = subscribedMetadataTypeIds;
 
   final List<MetadataType> _allMetadataTypes;
   @override
@@ -847,18 +847,18 @@ class _$ParametersLoadedImpl implements _ParametersLoaded {
     return EqualUnmodifiableListView(_allMetadataTypes);
   }
 
-  final List<MetadataType> _subscribedMetadataTypes;
+  final List<String> _subscribedMetadataTypeIds;
   @override
-  List<MetadataType> get subscribedMetadataTypes {
-    if (_subscribedMetadataTypes is EqualUnmodifiableListView)
-      return _subscribedMetadataTypes;
+  List<String> get subscribedMetadataTypeIds {
+    if (_subscribedMetadataTypeIds is EqualUnmodifiableListView)
+      return _subscribedMetadataTypeIds;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_subscribedMetadataTypes);
+    return EqualUnmodifiableListView(_subscribedMetadataTypeIds);
   }
 
   @override
   String toString() {
-    return 'ParametersState.loaded(allMetadataTypes: $allMetadataTypes, subscribedMetadataTypes: $subscribedMetadataTypes)';
+    return 'ParametersState.loaded(allMetadataTypes: $allMetadataTypes, subscribedMetadataTypeIds: $subscribedMetadataTypeIds)';
   }
 
   @override
@@ -869,14 +869,14 @@ class _$ParametersLoadedImpl implements _ParametersLoaded {
             const DeepCollectionEquality()
                 .equals(other._allMetadataTypes, _allMetadataTypes) &&
             const DeepCollectionEquality().equals(
-                other._subscribedMetadataTypes, _subscribedMetadataTypes));
+                other._subscribedMetadataTypeIds, _subscribedMetadataTypeIds));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_allMetadataTypes),
-      const DeepCollectionEquality().hash(_subscribedMetadataTypes));
+      const DeepCollectionEquality().hash(_subscribedMetadataTypeIds));
 
   @JsonKey(ignore: true)
   @override
@@ -891,11 +891,11 @@ class _$ParametersLoadedImpl implements _ParametersLoaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<MetadataType> allMetadataTypes,
-            List<MetadataType> subscribedMetadataTypes)
+            List<String> subscribedMetadataTypeIds)
         loaded,
     required TResult Function() error,
   }) {
-    return loaded(allMetadataTypes, subscribedMetadataTypes);
+    return loaded(allMetadataTypes, subscribedMetadataTypeIds);
   }
 
   @override
@@ -904,11 +904,11 @@ class _$ParametersLoadedImpl implements _ParametersLoaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<MetadataType> allMetadataTypes,
-            List<MetadataType> subscribedMetadataTypes)?
+            List<String> subscribedMetadataTypeIds)?
         loaded,
     TResult? Function()? error,
   }) {
-    return loaded?.call(allMetadataTypes, subscribedMetadataTypes);
+    return loaded?.call(allMetadataTypes, subscribedMetadataTypeIds);
   }
 
   @override
@@ -917,13 +917,13 @@ class _$ParametersLoadedImpl implements _ParametersLoaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<MetadataType> allMetadataTypes,
-            List<MetadataType> subscribedMetadataTypes)?
+            List<String> subscribedMetadataTypeIds)?
         loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(allMetadataTypes, subscribedMetadataTypes);
+      return loaded(allMetadataTypes, subscribedMetadataTypeIds);
     }
     return orElse();
   }
@@ -969,11 +969,11 @@ class _$ParametersLoadedImpl implements _ParametersLoaded {
 abstract class _ParametersLoaded implements ParametersState {
   const factory _ParametersLoaded(
           {required final List<MetadataType> allMetadataTypes,
-          required final List<MetadataType> subscribedMetadataTypes}) =
+          required final List<String> subscribedMetadataTypeIds}) =
       _$ParametersLoadedImpl;
 
   List<MetadataType> get allMetadataTypes;
-  List<MetadataType> get subscribedMetadataTypes;
+  List<String> get subscribedMetadataTypeIds;
   @JsonKey(ignore: true)
   _$$ParametersLoadedImplCopyWith<_$ParametersLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1020,7 +1020,7 @@ class _$ParametersErrorImpl implements _ParametersError {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<MetadataType> allMetadataTypes,
-            List<MetadataType> subscribedMetadataTypes)
+            List<String> subscribedMetadataTypeIds)
         loaded,
     required TResult Function() error,
   }) {
@@ -1033,7 +1033,7 @@ class _$ParametersErrorImpl implements _ParametersError {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<MetadataType> allMetadataTypes,
-            List<MetadataType> subscribedMetadataTypes)?
+            List<String> subscribedMetadataTypeIds)?
         loaded,
     TResult? Function()? error,
   }) {
@@ -1046,7 +1046,7 @@ class _$ParametersErrorImpl implements _ParametersError {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<MetadataType> allMetadataTypes,
-            List<MetadataType> subscribedMetadataTypes)?
+            List<String> subscribedMetadataTypeIds)?
         loaded,
     TResult Function()? error,
     required TResult orElse(),

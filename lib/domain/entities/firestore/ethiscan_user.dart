@@ -22,9 +22,8 @@ class EthiscanUser {
                   FavoriteProduct.fromJson(item as Map<String, dynamic>))
               .toList()
           : [],
-      metadataTypeIds: (json['userPreferences'] != null &&
-              json['userPreferences']['metadataSubscriptions'] != null)
-          ? (json['userPreferences']['metadataSubscriptions'] as List<dynamic>)
+      metadataTypeIds: json['metadataTypeIds'] != null
+          ? (json['metadataTypeIds'] as List<dynamic>)
               .map((item) => item as String)
               .toList()
           : [],

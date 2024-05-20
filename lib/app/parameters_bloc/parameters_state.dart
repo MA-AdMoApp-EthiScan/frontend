@@ -8,7 +8,7 @@ abstract class ParametersState with _$ParametersState {
 
   const factory ParametersState.loaded({
     required List<MetadataType> allMetadataTypes,
-    required List<MetadataType> subscribedMetadataTypes,
+    required List<String> subscribedMetadataTypeIds,
   }) = _ParametersLoaded;
 
   const factory ParametersState.error() = _ParametersError;
