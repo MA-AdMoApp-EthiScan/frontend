@@ -7,10 +7,17 @@ class FavoriteProduct {
   FavoriteProduct({required this.productId, required this.addedAt});
 
   factory FavoriteProduct.fromJson(Map<String, dynamic> json) {
-    return FavoriteProduct(
-      productId: json['productId'] as String,
-      addedAt: (json['addedAt'] as Timestamp).toDate(),
-    );
+    try {
+      return FavoriteProduct(
+        productId: json['productId'] as String,
+        addedAt: (json['addedAt'] as Timestamp).toDate(),
+      );
+    } catch (e) {
+      return FavoriteProduct(
+        productId: json['productId'] as String,
+        addedAt: DateTime.parse(json['addedAt'] as String),
+      );
+    }
   }
 
   Map<String, dynamic> toJson() {
