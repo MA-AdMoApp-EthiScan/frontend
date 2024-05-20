@@ -5,6 +5,7 @@ import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_text_field.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
+import 'package:ethiscan/presentation/core/cutom_checkbox.dart';
 import 'package:ethiscan/presentation/core/list_view_layout_body.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
@@ -84,6 +85,7 @@ class _ParametersPageState extends State<ParametersPage> {
         ),
       ),
       body: ListViewLayoutBody(
+        controller: ScrollController(),
         children: [
           const SizedBox(height: 15),
           Padding(
@@ -149,17 +151,23 @@ class _ParametersPageState extends State<ParametersPage> {
           CustomText(I18nUtils.translate(context, "parameters.empty.message"))
         ]);
       } else {
-        widgets.addAll([
-          ListView.builder(
-            itemCount: allMetadataTypes.length,
-            itemBuilder: (context, index) {
-              final parameter = allMetadataTypes[index];
-              return ListTile(
-                  title: Text(parameter.name),
-                  subtitle: Text(parameter.schema.toString()));
-            },
-          )
-        ]);
+        for (var metadataType in allMetadataTypes) {
+          widgets.add(
+            CustomCheckbox(
+              text: metadataType.name,
+              value: subscribedMetadataTypes.contains(metadataType),
+              onChanged: (value) {
+                if (value) {
+                  subscribedMetadataTypes.add(metadataType);
+                  _parameterBloc.add(ParametersEvent.subscribe(metadataType.id));
+                } else {
+                  subscribedMetadataTypes.remove(metadataType);
+                  _parameterBloc.add(ParametersEvent.unsubscribe(metadataType.id));
+                }
+              },
+            ),
+          );
+        }
       }
       return widgets;
     }

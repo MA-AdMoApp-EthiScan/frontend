@@ -19,32 +19,44 @@ mixin _$ParametersEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() load,
+    required TResult Function(String metadataTypeId) subscribe,
+    required TResult Function(String metadataTypeId) unsubscribe,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
+    TResult? Function(String metadataTypeId)? subscribe,
+    TResult? Function(String metadataTypeId)? unsubscribe,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
+    TResult Function(String metadataTypeId)? subscribe,
+    TResult Function(String metadataTypeId)? unsubscribe,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ParametersLoad value) load,
+    required TResult Function(_ParametersSubscribe value) subscribe,
+    required TResult Function(_ParametersUnsubscribe value) unsubscribe,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ParametersLoad value)? load,
+    TResult? Function(_ParametersSubscribe value)? subscribe,
+    TResult? Function(_ParametersUnsubscribe value)? unsubscribe,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ParametersLoad value)? load,
+    TResult Function(_ParametersSubscribe value)? subscribe,
+    TResult Function(_ParametersUnsubscribe value)? unsubscribe,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -107,6 +119,8 @@ class _$ParametersLoadImpl implements _ParametersLoad {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() load,
+    required TResult Function(String metadataTypeId) subscribe,
+    required TResult Function(String metadataTypeId) unsubscribe,
   }) {
     return load();
   }
@@ -115,6 +129,8 @@ class _$ParametersLoadImpl implements _ParametersLoad {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
+    TResult? Function(String metadataTypeId)? subscribe,
+    TResult? Function(String metadataTypeId)? unsubscribe,
   }) {
     return load?.call();
   }
@@ -123,6 +139,8 @@ class _$ParametersLoadImpl implements _ParametersLoad {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
+    TResult Function(String metadataTypeId)? subscribe,
+    TResult Function(String metadataTypeId)? unsubscribe,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -135,6 +153,8 @@ class _$ParametersLoadImpl implements _ParametersLoad {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ParametersLoad value) load,
+    required TResult Function(_ParametersSubscribe value) subscribe,
+    required TResult Function(_ParametersUnsubscribe value) unsubscribe,
   }) {
     return load(this);
   }
@@ -143,6 +163,8 @@ class _$ParametersLoadImpl implements _ParametersLoad {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ParametersLoad value)? load,
+    TResult? Function(_ParametersSubscribe value)? subscribe,
+    TResult? Function(_ParametersUnsubscribe value)? unsubscribe,
   }) {
     return load?.call(this);
   }
@@ -151,6 +173,8 @@ class _$ParametersLoadImpl implements _ParametersLoad {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ParametersLoad value)? load,
+    TResult Function(_ParametersSubscribe value)? subscribe,
+    TResult Function(_ParametersUnsubscribe value)? unsubscribe,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -162,6 +186,291 @@ class _$ParametersLoadImpl implements _ParametersLoad {
 
 abstract class _ParametersLoad implements ParametersEvent {
   const factory _ParametersLoad() = _$ParametersLoadImpl;
+}
+
+/// @nodoc
+abstract class _$$ParametersSubscribeImplCopyWith<$Res> {
+  factory _$$ParametersSubscribeImplCopyWith(_$ParametersSubscribeImpl value,
+          $Res Function(_$ParametersSubscribeImpl) then) =
+      __$$ParametersSubscribeImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String metadataTypeId});
+}
+
+/// @nodoc
+class __$$ParametersSubscribeImplCopyWithImpl<$Res>
+    extends _$ParametersEventCopyWithImpl<$Res, _$ParametersSubscribeImpl>
+    implements _$$ParametersSubscribeImplCopyWith<$Res> {
+  __$$ParametersSubscribeImplCopyWithImpl(_$ParametersSubscribeImpl _value,
+      $Res Function(_$ParametersSubscribeImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? metadataTypeId = null,
+  }) {
+    return _then(_$ParametersSubscribeImpl(
+      null == metadataTypeId
+          ? _value.metadataTypeId
+          : metadataTypeId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ParametersSubscribeImpl implements _ParametersSubscribe {
+  const _$ParametersSubscribeImpl(this.metadataTypeId);
+
+  @override
+  final String metadataTypeId;
+
+  @override
+  String toString() {
+    return 'ParametersEvent.subscribe(metadataTypeId: $metadataTypeId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ParametersSubscribeImpl &&
+            (identical(other.metadataTypeId, metadataTypeId) ||
+                other.metadataTypeId == metadataTypeId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, metadataTypeId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ParametersSubscribeImplCopyWith<_$ParametersSubscribeImpl> get copyWith =>
+      __$$ParametersSubscribeImplCopyWithImpl<_$ParametersSubscribeImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() load,
+    required TResult Function(String metadataTypeId) subscribe,
+    required TResult Function(String metadataTypeId) unsubscribe,
+  }) {
+    return subscribe(metadataTypeId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? load,
+    TResult? Function(String metadataTypeId)? subscribe,
+    TResult? Function(String metadataTypeId)? unsubscribe,
+  }) {
+    return subscribe?.call(metadataTypeId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? load,
+    TResult Function(String metadataTypeId)? subscribe,
+    TResult Function(String metadataTypeId)? unsubscribe,
+    required TResult orElse(),
+  }) {
+    if (subscribe != null) {
+      return subscribe(metadataTypeId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ParametersLoad value) load,
+    required TResult Function(_ParametersSubscribe value) subscribe,
+    required TResult Function(_ParametersUnsubscribe value) unsubscribe,
+  }) {
+    return subscribe(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ParametersLoad value)? load,
+    TResult? Function(_ParametersSubscribe value)? subscribe,
+    TResult? Function(_ParametersUnsubscribe value)? unsubscribe,
+  }) {
+    return subscribe?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ParametersLoad value)? load,
+    TResult Function(_ParametersSubscribe value)? subscribe,
+    TResult Function(_ParametersUnsubscribe value)? unsubscribe,
+    required TResult orElse(),
+  }) {
+    if (subscribe != null) {
+      return subscribe(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ParametersSubscribe implements ParametersEvent {
+  const factory _ParametersSubscribe(final String metadataTypeId) =
+      _$ParametersSubscribeImpl;
+
+  String get metadataTypeId;
+  @JsonKey(ignore: true)
+  _$$ParametersSubscribeImplCopyWith<_$ParametersSubscribeImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ParametersUnsubscribeImplCopyWith<$Res> {
+  factory _$$ParametersUnsubscribeImplCopyWith(
+          _$ParametersUnsubscribeImpl value,
+          $Res Function(_$ParametersUnsubscribeImpl) then) =
+      __$$ParametersUnsubscribeImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String metadataTypeId});
+}
+
+/// @nodoc
+class __$$ParametersUnsubscribeImplCopyWithImpl<$Res>
+    extends _$ParametersEventCopyWithImpl<$Res, _$ParametersUnsubscribeImpl>
+    implements _$$ParametersUnsubscribeImplCopyWith<$Res> {
+  __$$ParametersUnsubscribeImplCopyWithImpl(_$ParametersUnsubscribeImpl _value,
+      $Res Function(_$ParametersUnsubscribeImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? metadataTypeId = null,
+  }) {
+    return _then(_$ParametersUnsubscribeImpl(
+      null == metadataTypeId
+          ? _value.metadataTypeId
+          : metadataTypeId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ParametersUnsubscribeImpl implements _ParametersUnsubscribe {
+  const _$ParametersUnsubscribeImpl(this.metadataTypeId);
+
+  @override
+  final String metadataTypeId;
+
+  @override
+  String toString() {
+    return 'ParametersEvent.unsubscribe(metadataTypeId: $metadataTypeId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ParametersUnsubscribeImpl &&
+            (identical(other.metadataTypeId, metadataTypeId) ||
+                other.metadataTypeId == metadataTypeId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, metadataTypeId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ParametersUnsubscribeImplCopyWith<_$ParametersUnsubscribeImpl>
+      get copyWith => __$$ParametersUnsubscribeImplCopyWithImpl<
+          _$ParametersUnsubscribeImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() load,
+    required TResult Function(String metadataTypeId) subscribe,
+    required TResult Function(String metadataTypeId) unsubscribe,
+  }) {
+    return unsubscribe(metadataTypeId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? load,
+    TResult? Function(String metadataTypeId)? subscribe,
+    TResult? Function(String metadataTypeId)? unsubscribe,
+  }) {
+    return unsubscribe?.call(metadataTypeId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? load,
+    TResult Function(String metadataTypeId)? subscribe,
+    TResult Function(String metadataTypeId)? unsubscribe,
+    required TResult orElse(),
+  }) {
+    if (unsubscribe != null) {
+      return unsubscribe(metadataTypeId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ParametersLoad value) load,
+    required TResult Function(_ParametersSubscribe value) subscribe,
+    required TResult Function(_ParametersUnsubscribe value) unsubscribe,
+  }) {
+    return unsubscribe(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ParametersLoad value)? load,
+    TResult? Function(_ParametersSubscribe value)? subscribe,
+    TResult? Function(_ParametersUnsubscribe value)? unsubscribe,
+  }) {
+    return unsubscribe?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ParametersLoad value)? load,
+    TResult Function(_ParametersSubscribe value)? subscribe,
+    TResult Function(_ParametersUnsubscribe value)? unsubscribe,
+    required TResult orElse(),
+  }) {
+    if (unsubscribe != null) {
+      return unsubscribe(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ParametersUnsubscribe implements ParametersEvent {
+  const factory _ParametersUnsubscribe(final String metadataTypeId) =
+      _$ParametersUnsubscribeImpl;
+
+  String get metadataTypeId;
+  @JsonKey(ignore: true)
+  _$$ParametersUnsubscribeImplCopyWith<_$ParametersUnsubscribeImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

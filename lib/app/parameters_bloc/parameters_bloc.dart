@@ -14,6 +14,7 @@ part 'parameters_state.dart';
 class ParametersBloc extends Bloc<ParametersEvent, ParametersState> {
   final MetadataTypeRepository _metadataTypeRepository;
   final UserRepository _userRepository;
+  List<MetadataType> allMetadataTypes = [];
   
   ParametersBloc(
       this._metadataTypeRepository,
@@ -23,7 +24,6 @@ class ParametersBloc extends Bloc<ParametersEvent, ParametersState> {
       await event.when(
         load: () async {
           emit(const ParametersState.loading());
-          List<MetadataType> allMetadataTypes = [];
           var metadataTypesEither = await _metadataTypeRepository.getMetadataTypes();
           await metadataTypesEither.when(
               left: (failure) async {
@@ -67,6 +67,57 @@ class ParametersBloc extends Bloc<ParametersEvent, ParametersState> {
               }
           );
 
+        },
+        subscribe: (String metadataTypeId) async {
+          var either = await _userRepository.getUserFromId(FirebaseAuth.instance.currentUser!.uid);
+          await either.when(
+            right: (user) async {
+              user.metadataTypeIds ??= [];
+              user.metadataTypeIds!.add(metadataTypeId);
+              await _userRepository.updateUser(user);
+              var metadataTypesEither = await _metadataTypeRepository.getByIdList(user.metadataTypeIds!);
+              await metadataTypesEither.when(
+                  left: (failure) async {
+                    emit(const ParametersState.error());
+                  },
+                  right: (metadataTypes) async {
+                    emit(ParametersState.loaded(
+                        allMetadataTypes: allMetadataTypes,
+                        subscribedMetadataTypes: metadataTypes
+                    )
+                    );
+                  }
+              );
+            },
+            left: (failure) async {
+              emit(const ParametersState.error());
+            },
+          );
+        },
+        unsubscribe: (String metadataTypeId) async {
+          var either = await _userRepository.getUserFromId(FirebaseAuth.instance.currentUser!.uid);
+          await either.when(
+            right: (user) async {
+              user.metadataTypeIds?.remove(metadataTypeId);
+              await _userRepository.updateUser(user);
+              var metadataTypesEither = await _metadataTypeRepository.getByIdList(user.metadataTypeIds!);
+              await metadataTypesEither.when(
+                  left: (failure) async {
+                    emit(const ParametersState.error());
+                  },
+                  right: (metadataTypes) async {
+                    emit(ParametersState.loaded(
+                        allMetadataTypes: allMetadataTypes,
+                        subscribedMetadataTypes: metadataTypes
+                    )
+                    );
+                  }
+              );
+            },
+            left: (failure) async {
+              emit(const ParametersState.error());
+            },
+          );
         },
       );
     });
