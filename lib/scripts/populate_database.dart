@@ -2,12 +2,12 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:ethiscan/domain/entities/certification.dart';
-import 'package:ethiscan/domain/entities/product.dart';
-import 'package:ethiscan/domain/entities/metadata_type.dart';
-import 'package:ethiscan/domain/entities/supplier.dart';
-import 'package:ethiscan/domain/entities/sold_product.dart';
-import 'package:ethiscan/domain/entities/product_metadata.dart';
+import 'package:ethiscan/domain/entities/firestore/certification.dart';
+import 'package:ethiscan/domain/entities/firestore/product.dart';
+import 'package:ethiscan/domain/entities/firestore/metadata_type.dart';
+import 'package:ethiscan/domain/entities/firestore/supplier.dart';
+import 'package:ethiscan/domain/entities/firestore/sold_product.dart';
+import 'package:ethiscan/domain/entities/firestore/product_metadata.dart';
 import '../firebase_options.dart';
 
 // Add MetadataTypes

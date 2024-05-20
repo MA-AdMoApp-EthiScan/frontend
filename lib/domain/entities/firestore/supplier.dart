@@ -1,4 +1,4 @@
-import 'package:ethiscan/domain/entities/sold_product.dart';
+import 'package:ethiscan/domain/entities/firestore/sold_product.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'supplier.g.dart';
