@@ -8,9 +8,10 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:ethiscan/app/favorites_bloc/favorites_bloc.dart' as _i17;
 import 'package:ethiscan/app/product_bloc/product_bloc.dart' as _i16;
 import 'package:ethiscan/app/scans_bloc/scans_bloc.dart' as _i3;
-import 'package:ethiscan/app/user_bloc/main_user_bloc.dart' as _i17;
+import 'package:ethiscan/app/user_bloc/main_user_bloc.dart' as _i18;
 import 'package:ethiscan/data/datasources/auth_provider.dart' as _i9;
 import 'package:ethiscan/data/datasources/favorite_product_provider.dart'
     as _i7;
@@ -51,8 +52,12 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i15.MetadataRepositoryProvider());
     gh.factory<_i16.ProductBloc>(
         () => _i16.ProductBloc(gh<_i12.ProductRepository>()));
-    gh.factory<_i17.MainUserBloc>(
-        () => _i17.MainUserBloc(gh<_i8.AuthRepository>()));
+    gh.factory<_i17.FavoritesBloc>(() => _i17.FavoritesBloc(
+          gh<_i6.FavoriteProductRepository>(),
+          gh<_i12.ProductRepository>(),
+        ));
+    gh.factory<_i18.MainUserBloc>(
+        () => _i18.MainUserBloc(gh<_i8.AuthRepository>()));
     return this;
   }
 }

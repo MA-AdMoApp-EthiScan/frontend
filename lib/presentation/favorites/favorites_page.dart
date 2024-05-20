@@ -31,7 +31,7 @@ class _FavoritesPage extends State<FavoritesPage> {
   @override
   void initState() {
     _favoritesBloc = getIt();
-    _favoritesBloc.add(FavoritesEvent.load(widget.user));
+    _favoritesBloc.add(const FavoritesEvent.load());
 
     _searchController = TextEditingController();
     _searchController.addListener(_searchChanged);
@@ -45,10 +45,14 @@ class _FavoritesPage extends State<FavoritesPage> {
   }
 
   void _searchChanged() {
-    _favoritesBloc.add(
-      FavoritesEvent.updateSort(
-          widget.user, _favoriteSort!.copyWith(name: _searchController.text)),
-    );
+    if (_favoritesBloc.state instanceof FavoritesLoaded) {
+      _favoritesBloc.add(
+        FavoritesEvent.updateSort(
+          (_favoritesBloc.state as FavoritesLoaded),
+          _favoriteSort!.copyWith(name: _searchController.text),
+        ),
+      );
+    }
   }
 
   @override
