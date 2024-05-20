@@ -24,7 +24,7 @@ class ScansBloc extends Bloc<ScansEvent, ScansState> {
           emit(ScansState.loaded(scans: history));
         },
         barcodeFound: (barcode) async {
-          var either = await _productRepository.getProductsByCodebareId(barcode);
+          var either = await _productRepository.getProductById(barcode);
           String productName = "";
           either.when(
             left: (failure)  {

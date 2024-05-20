@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:ethiscan/app/scans_bloc/scans_bloc.dart';
 import 'package:ethiscan/domain/entities/app/scan_history.dart';
 import 'package:ethiscan/injection.dart';
-import 'package:ethiscan/presentation/core/buttons/primary_button.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/core/list_view_layout_body.dart';

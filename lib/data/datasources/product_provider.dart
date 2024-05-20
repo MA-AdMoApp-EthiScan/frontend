@@ -12,16 +12,7 @@ class ProductRepositoryProvider implements ProductRepository {
       FirebaseFirestore.instance.collection('products');
 
   @override
-  Future<Either<APIError, Product>> getProductById(String productId) async {
-    final doc = await productCollection.doc(productId).get();
-    if (!doc.exists) {
-      return Left(APIError('Product not found', 404));
-    }
-    return Right(Product.fromJson(doc.data() as Map<String, dynamic>));
-  }
-
-  @override
-  Future<Either<APIError, Product>> getProductsByCodebareId(String codebareId) async {
+  Future<Either<APIError, Product>> getProductById(String codebareId) async {
     final querySnapshot = await productCollection
         .where('id', isEqualTo: codebareId)
         .get();
