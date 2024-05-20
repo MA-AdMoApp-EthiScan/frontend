@@ -101,23 +101,31 @@ class _ProductPage extends State<ProductPage> {
         CustomH2P(I18nUtils.translate(context, "product.description")),
         CustomText(product.description),
         const SizedBox(height: 30),
-        CustomH2P(I18nUtils.translate(context, "product.metadatas")),
-        // Row(
-        //   children: [
-        //     CustomH3(I18nUtils.translate(context, "product.carbon_footprint")),
-        //     const Spacer(),
-        //     CustomText(product.carbonFootprint.toString()),
-        //   ],
-        // ),
+        if (product.productMetadataIds != null && product.productMetadataIds!.isNotEmpty)
+          CustomH2P(I18nUtils.translate(context, "product.metadatas")),
+          /*Row(
+            children: [
+              CustomH3(I18nUtils.translate(context, "product.carbon_footprint")),
+              const Spacer(),
+              CustomText(product.carbonFootprint.toString()),
+            ],
+          ),*/
         const SizedBox(height: 30),
-        CustomH2P(I18nUtils.translate(context, "product.certifications")),
-        // Row(
-        //   children: [
-        //     CustomH3(I18nUtils.translate(context, "product.carbon_footprint")),
-        //     const Spacer(),
-        //     CustomText(product.carbonFootprint.toString()),
-        //   ],
-        // ),
+        if (product.certificationIds != null && product.certificationIds!.isNotEmpty)
+          CustomH2P(I18nUtils.translate(context, "product.certifications")),
+          /*Row(
+            children: [
+              ListView.builder(
+                itemCount: product.certificationIds?.length,
+                itemBuilder: (context, index) {
+                  final parameter = product.certificationIds?[index];
+                  return ListTile(
+                      title: Text(parameter/*.name*/),
+                      subtitle: Text(parameter.schema.toString()));
+                },
+              )
+            ],
+          ),*/
       ];
     } else {
       return [
