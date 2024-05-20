@@ -1,5 +1,5 @@
 import 'package:ethiscan/domain/core/either.dart';
-import 'package:ethiscan/domain/entities/api_error.dart';
+import 'package:ethiscan/domain/entities/app/api_error.dart';
 import 'package:ethiscan/domain/entities/firestore/product.dart';
 import 'package:ethiscan/domain/entities/firestore/metadata_type.dart';
 

@@ -1,4 +1,4 @@
-import 'package:ethiscan/domain/entities/list_product.dart';
+import 'package:ethiscan/domain/entities/app/list_product.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/product/product_page.dart';
 import 'package:ethiscan/presentation/widget_core/my_card.dart';

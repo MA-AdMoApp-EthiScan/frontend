@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ethiscan/domain/core/either.dart';
-import 'package:ethiscan/domain/entities/api_error.dart';
+import 'package:ethiscan/domain/entities/app/api_error.dart';
 import 'package:ethiscan/data/repositories/favorite_product_repository.dart';
 import 'package:ethiscan/domain/entities/firestore/favorite_product.dart';
 import 'package:injectable/injectable.dart';

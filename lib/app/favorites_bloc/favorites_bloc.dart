@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:ethiscan/data/repositories/product_repository.dart';
 import 'package:ethiscan/data/repositories/user_repository.dart';
+import 'package:ethiscan/domain/entities/app/list_product.dart';
 import 'package:ethiscan/domain/entities/firestore/ethiscan_user.dart';
-import 'package:ethiscan/domain/entities/favorite_sort.dart';
+import 'package:ethiscan/domain/entities/app/favorite_sort.dart';
 import 'package:ethiscan/domain/entities/firestore/product.dart';
 import 'package:ethiscan/domain/entities/firestore/sort_criteria.dart';
-import 'package:ethiscan/domain/entities/list_product.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 

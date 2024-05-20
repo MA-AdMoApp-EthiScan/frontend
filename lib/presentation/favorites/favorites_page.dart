@@ -1,8 +1,8 @@
 import 'package:ethiscan/app/favorites_bloc/favorites_bloc.dart';
+import 'package:ethiscan/domain/entities/app/list_product.dart';
 import 'package:ethiscan/domain/entities/firestore/ethiscan_user.dart';
-import 'package:ethiscan/domain/entities/favorite_sort.dart';
+import 'package:ethiscan/domain/entities/app/favorite_sort.dart';
 import 'package:ethiscan/domain/entities/firestore/sort_criteria.dart';
-import 'package:ethiscan/domain/entities/list_product.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/core/buttons/icon_button.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';

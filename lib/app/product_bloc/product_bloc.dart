@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:ethiscan/data/repositories/product_repository.dart';
-import 'package:ethiscan/domain/entities/api_error.dart';
+import 'package:ethiscan/domain/entities/app/api_error.dart';
 import 'package:ethiscan/domain/entities/firestore/product.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart' show injectable;
