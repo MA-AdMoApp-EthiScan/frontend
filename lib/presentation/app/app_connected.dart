@@ -1,3 +1,4 @@
+import 'package:ethiscan/app/user_bloc/main_user_bloc.dart';
 import 'package:ethiscan/domain/entities/firestore/ethiscan_user.dart';
 import 'package:ethiscan/presentation/app/custom_app.dart';
 import 'package:ethiscan/presentation/home_page.dart';

@@ -170,7 +170,7 @@ mixin _$ParametersState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserPreferences userPreferences) loaded,
+    required TResult Function(List<MetadataType> metadataTypes) loaded,
     required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
@@ -178,7 +178,7 @@ mixin _$ParametersState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserPreferences userPreferences)? loaded,
+    TResult? Function(List<MetadataType> metadataTypes)? loaded,
     TResult? Function()? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -186,7 +186,7 @@ mixin _$ParametersState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserPreferences userPreferences)? loaded,
+    TResult Function(List<MetadataType> metadataTypes)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) =>
@@ -276,7 +276,7 @@ class _$ParametersInitialImpl implements _ParametersInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserPreferences userPreferences) loaded,
+    required TResult Function(List<MetadataType> metadataTypes) loaded,
     required TResult Function() error,
   }) {
     return initial();
@@ -287,7 +287,7 @@ class _$ParametersInitialImpl implements _ParametersInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserPreferences userPreferences)? loaded,
+    TResult? Function(List<MetadataType> metadataTypes)? loaded,
     TResult? Function()? error,
   }) {
     return initial?.call();
@@ -298,7 +298,7 @@ class _$ParametersInitialImpl implements _ParametersInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserPreferences userPreferences)? loaded,
+    TResult Function(List<MetadataType> metadataTypes)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -390,7 +390,7 @@ class _$ParametersLoadingImpl implements _ParametersLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserPreferences userPreferences) loaded,
+    required TResult Function(List<MetadataType> metadataTypes) loaded,
     required TResult Function() error,
   }) {
     return loading();
@@ -401,7 +401,7 @@ class _$ParametersLoadingImpl implements _ParametersLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserPreferences userPreferences)? loaded,
+    TResult? Function(List<MetadataType> metadataTypes)? loaded,
     TResult? Function()? error,
   }) {
     return loading?.call();
@@ -412,7 +412,7 @@ class _$ParametersLoadingImpl implements _ParametersLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserPreferences userPreferences)? loaded,
+    TResult Function(List<MetadataType> metadataTypes)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -470,7 +470,7 @@ abstract class _$$ParametersLoadedImplCopyWith<$Res> {
           $Res Function(_$ParametersLoadedImpl) then) =
       __$$ParametersLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({UserPreferences userPreferences});
+  $Res call({List<MetadataType> metadataTypes});
 }
 
 /// @nodoc
@@ -484,13 +484,13 @@ class __$$ParametersLoadedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userPreferences = null,
+    Object? metadataTypes = null,
   }) {
     return _then(_$ParametersLoadedImpl(
-      userPreferences: null == userPreferences
-          ? _value.userPreferences
-          : userPreferences // ignore: cast_nullable_to_non_nullable
-              as UserPreferences,
+      metadataTypes: null == metadataTypes
+          ? _value._metadataTypes
+          : metadataTypes // ignore: cast_nullable_to_non_nullable
+              as List<MetadataType>,
     ));
   }
 }
@@ -498,14 +498,21 @@ class __$$ParametersLoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ParametersLoadedImpl implements _ParametersLoaded {
-  const _$ParametersLoadedImpl({required this.userPreferences});
+  const _$ParametersLoadedImpl(
+      {required final List<MetadataType> metadataTypes})
+      : _metadataTypes = metadataTypes;
 
+  final List<MetadataType> _metadataTypes;
   @override
-  final UserPreferences userPreferences;
+  List<MetadataType> get metadataTypes {
+    if (_metadataTypes is EqualUnmodifiableListView) return _metadataTypes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_metadataTypes);
+  }
 
   @override
   String toString() {
-    return 'ParametersState.loaded(userPreferences: $userPreferences)';
+    return 'ParametersState.loaded(metadataTypes: $metadataTypes)';
   }
 
   @override
@@ -513,12 +520,13 @@ class _$ParametersLoadedImpl implements _ParametersLoaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ParametersLoadedImpl &&
-            (identical(other.userPreferences, userPreferences) ||
-                other.userPreferences == userPreferences));
+            const DeepCollectionEquality()
+                .equals(other._metadataTypes, _metadataTypes));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userPreferences);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_metadataTypes));
 
   @JsonKey(ignore: true)
   @override
@@ -532,10 +540,10 @@ class _$ParametersLoadedImpl implements _ParametersLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserPreferences userPreferences) loaded,
+    required TResult Function(List<MetadataType> metadataTypes) loaded,
     required TResult Function() error,
   }) {
-    return loaded(userPreferences);
+    return loaded(metadataTypes);
   }
 
   @override
@@ -543,10 +551,10 @@ class _$ParametersLoadedImpl implements _ParametersLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserPreferences userPreferences)? loaded,
+    TResult? Function(List<MetadataType> metadataTypes)? loaded,
     TResult? Function()? error,
   }) {
-    return loaded?.call(userPreferences);
+    return loaded?.call(metadataTypes);
   }
 
   @override
@@ -554,12 +562,12 @@ class _$ParametersLoadedImpl implements _ParametersLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserPreferences userPreferences)? loaded,
+    TResult Function(List<MetadataType> metadataTypes)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(userPreferences);
+      return loaded(metadataTypes);
     }
     return orElse();
   }
@@ -604,10 +612,10 @@ class _$ParametersLoadedImpl implements _ParametersLoaded {
 
 abstract class _ParametersLoaded implements ParametersState {
   const factory _ParametersLoaded(
-          {required final UserPreferences userPreferences}) =
+          {required final List<MetadataType> metadataTypes}) =
       _$ParametersLoadedImpl;
 
-  UserPreferences get userPreferences;
+  List<MetadataType> get metadataTypes;
   @JsonKey(ignore: true)
   _$$ParametersLoadedImplCopyWith<_$ParametersLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -653,7 +661,7 @@ class _$ParametersErrorImpl implements _ParametersError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(UserPreferences userPreferences) loaded,
+    required TResult Function(List<MetadataType> metadataTypes) loaded,
     required TResult Function() error,
   }) {
     return error();
@@ -664,7 +672,7 @@ class _$ParametersErrorImpl implements _ParametersError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(UserPreferences userPreferences)? loaded,
+    TResult? Function(List<MetadataType> metadataTypes)? loaded,
     TResult? Function()? error,
   }) {
     return error?.call();
@@ -675,7 +683,7 @@ class _$ParametersErrorImpl implements _ParametersError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(UserPreferences userPreferences)? loaded,
+    TResult Function(List<MetadataType> metadataTypes)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {

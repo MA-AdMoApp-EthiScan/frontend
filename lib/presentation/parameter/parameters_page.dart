@@ -1,6 +1,6 @@
 import 'package:ethiscan/app/parameters_bloc/parameters_bloc.dart';
 import 'package:ethiscan/app/user_bloc/main_user_bloc.dart';
-import 'package:ethiscan/domain/entities/user_preferences.dart';
+import 'package:ethiscan/domain/entities/firestore/metadata_type.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_text_field.dart';
@@ -55,7 +55,7 @@ class _ParametersPageState extends State<ParametersPage> {
       builder: (context, state) {
         return state.maybeWhen(
           loading: () => _page(context, loading: true),
-          loaded: (parameters) => _page(context, parameters: parameters),
+          loaded: (metadataTypes) => _page(context, metadataTypes: metadataTypes),
           orElse: () => _page(context),
         );
       },
@@ -64,7 +64,7 @@ class _ParametersPageState extends State<ParametersPage> {
 
   Widget _page(BuildContext context, {
     bool loading = false,
-    UserPreferences? parameters,
+    List<MetadataType> metadataTypes = const [],
   }) {
     return Scaffold(
       appBar: AppBar(
@@ -85,7 +85,7 @@ class _ParametersPageState extends State<ParametersPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
-              children: _getBody(context, loading: loading, parameters: parameters),
+              children: _getBody(context, loading: loading, metadataTypes: metadataTypes),
             ),
           ),
         ],
@@ -96,7 +96,7 @@ class _ParametersPageState extends State<ParametersPage> {
   List<Widget> _getBody(
       BuildContext context, {
         required bool loading,
-        UserPreferences?parameters,
+        List<MetadataType> metadataTypes = const [],
         bool error = false,
       }) {
     if (error) {
@@ -136,16 +136,16 @@ class _ParametersPageState extends State<ParametersPage> {
         CustomH2P(I18nUtils.translate(context, "parameters.metadatas")),
       ]);
       
-      if (parameters == null || parameters.metadataSubscriptions.isEmpty) {
+      if (metadataTypes.isEmpty) {
         widgets.addAll([
           CustomText(I18nUtils.translate(context, "parameters.empty.message"))
         ]);
       } else {
         widgets.addAll([
           ListView.builder(
-            itemCount: parameters.metadataSubscriptions.length,
+            itemCount: metadataTypes.length,
             itemBuilder: (context, index) {
-              final parameter = parameters.metadataSubscriptions[index];
+              final parameter = metadataTypes[index];
               return ListTile(
                   title: Text(parameter.name),
                   subtitle: Text(parameter.schema.toString()));

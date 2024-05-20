@@ -7,7 +7,8 @@ abstract class ParametersState with _$ParametersState {
   const factory ParametersState.loading() = _ParametersLoading;
 
   const factory ParametersState.loaded({
-    required UserPreferences userPreferences,
+    required List<MetadataType> allMetadataTypes,
+    required List<MetadataType> subscribedMetadataTypes,
   }) = _ParametersLoaded;
 
   const factory ParametersState.error() = _ParametersError;
