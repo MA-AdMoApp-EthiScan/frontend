@@ -1,14 +1,16 @@
 import 'package:bloc/bloc.dart';
+import 'package:ethiscan/data/repositories/product_repository.dart';
 import 'package:ethiscan/data/repositories/user_repository.dart';
-import 'package:ethiscan/data/repositories/favorite_product_repository.dart';
-import 'package:ethiscan/domain/entities/ethiscan_user.dart';
-import 'package:ethiscan/domain/entities/favorite_product.dart';
-import 'package:ethiscan/domain/entities/favorite_sort.dart';
-import 'package:ethiscan/domain/entities/list_product.dart';
-import 'package:ethiscan/domain/entities/product.dart';
-import 'package:ethiscan/domain/entities/sort_criteria.dart';
+import 'package:ethiscan/domain/entities/app/list_product.dart';
+import 'package:ethiscan/domain/entities/firestore/ethiscan_user.dart';
+import 'package:ethiscan/domain/entities/app/favorite_sort.dart';
+import 'package:ethiscan/domain/entities/firestore/product.dart';
+import 'package:ethiscan/domain/entities/firestore/sort_criteria.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:ethiscan/data/repositories/favorite_product_repository.dart';
+import 'package:ethiscan/domain/entities/app/list_products.dart';
 
 part 'favorites_bloc.freezed.dart';
 part 'favorites_event.dart';
@@ -18,7 +20,9 @@ part 'favorites_state.dart';
 class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
   final UserRepository _userRepository;
   final FavoriteProductRepository _favoriteProductRepository;
-  FavoritesBloc(this._userRepository, this._favoriteProductRepository)
+  final ProductRepository _productRepository;
+  FavoritesBloc(this._userRepository, this._favoriteProductRepository,
+      this._productRepository)
       : super(const FavoritesState.initial()) {
     on<FavoritesEvent>((event, emit) async {
       await event.when(load: (user) async {
@@ -33,7 +37,17 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
             emit(const FavoritesState.error());
           },
           right: (favoriteProducts) async {
-            emit(FavoritesState.loaded(favorites: favoriteProducts));
+            List<ListProduct> listProduct = favoriteProducts
+                .map((e) => ListProduct(
+                    id: e.productId,
+                    name: Element,
+                    scanDate: user.favoriteProducts!
+                        .firstWhere(
+                            (element) => e.productId == element.productId)
+                        .addedAt))
+                .toList();
+
+            emit(FavoritesState.loaded(favorites: listProduct));
           },
         );
 
@@ -66,7 +80,15 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
           }
         });
 
-        emit(FavoritesState.loaded(favorites: favorites));
+        List<ListProduct> listProduct = favorites
+            .map((e) => ListProduct(
+                id: e.id,
+                name: e.name,
+                scanDate: user.favoriteProducts!
+                    .firstWhere((element) => e.id == element.productId)
+                    .addedAt))
+            .toList();
+        emit(FavoritesState.loaded(favorites: listProduct));
       });
     });
   }
@@ -75,6 +97,29 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
       EthiscanUser user, Emitter<FavoritesState> emit) async {
     var either = await _userRepository.getUserFromId(user.uid);
     await either.when(
+      right: (user) async {
+        if (user.favoriteProducts == null) {
+          emit(const FavoritesState.loaded(favorites: []));
+          return;
+        }
+        List<String> favoriteIds =
+            user.favoriteProducts!.map((f) => f.productId).toList();
+        var favoritesEither =
+            await _productRepository.getProductByIdList(favoriteIds);
+        await favoritesEither.when(left: (failure) async {
+          emit(const FavoritesState.error());
+        }, right: (favorites) async {
+          List<ListProduct> listProduct = favorites
+              .map((e) => ListProduct(
+                  id: e.id,
+                  name: e.name,
+                  scanDate: user.favoriteProducts!
+                      .firstWhere((element) => e.id == element.productId)
+                      .addedAt))
+              .toList();
+          emit(FavoritesState.loaded(favorites: listProduct));
+        });
+      },
       left: (failure) async {
         var newEither = await _userRepository.addUser(user);
         await newEither.when(
@@ -82,13 +127,29 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
             emit(const FavoritesState.error());
           },
           right: (user) async {
-            emit(FavoritesState.loaded(favorites: user.favoriteProducts));
+            if (user.favoriteProducts == null) {
+              emit(const FavoritesState.loaded(favorites: []));
+              return;
+            }
+            List<String> favoriteIds =
+                user.favoriteProducts!.map((f) => f.productId).toList();
+            var favoritesEither =
+                await _productRepository.getProductByIdList(favoriteIds);
+            await favoritesEither.when(left: (failure) async {
+              emit(const FavoritesState.error());
+            }, right: (favorites) async {
+              List<ListProduct> listProduct = favorites
+                  .map((e) => ListProduct(
+                      id: e.id,
+                      name: e.name,
+                      scanDate: user.favoriteProducts!
+                          .firstWhere((element) => e.id == element.productId)
+                          .addedAt))
+                  .toList();
+              emit(FavoritesState.loaded(favorites: listProduct));
+            });
           },
         );
-        emit(const FavoritesState.error());
-      },
-      right: (user) async {
-        emit(FavoritesState.loaded(favorites: user.favoriteProducts));
       },
     );
   }
