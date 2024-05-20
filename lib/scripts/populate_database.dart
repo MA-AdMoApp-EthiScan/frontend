@@ -104,7 +104,18 @@ List<ProductMetadata> productMetadatas = [
     id: 'animalHappiness3',
     metadataTypeId: 'animalHappiness',
     data: {'note': 7},
-  )
+  ),
+  ProductMetadata(
+    id: 'impactCarbone10',
+    metadataTypeId: 'impactCarbone',
+    data: {
+      'note': 8,
+      'co2Quantity': 1.9,
+      'packagingPercentage': 87,
+      'manufacturingPercentage': 3,
+      'transportPercentage': 9
+    },
+  ),
 ];
 
 // Add Products
@@ -189,6 +200,15 @@ List<Product> products = [
     description: 'Huile colza IP-Suisse',
     certificationIds: ['ipSuisse'],
     productMetadataIds: ['impactCarbone2'],
+  ),
+  Product(
+    id: '10',
+    name: 'Blévita Sésam',
+    imageUrl:
+        'https://image.migros.ch/mo-custom/v-w-263-h-225.42857142857142/7dfaa9ac90e5d899c96ecc11e5fe22ebc978c0d2/blevita-sesame.jpg',
+    description: 'Biscuits cinq céréales au sésame',
+    certificationIds: [],
+    productMetadataIds: ['impactCarbone10'],
   )
 ];
 
@@ -199,6 +219,7 @@ List<Supplier> suppliers = [
     SoldProduct(productId: '2', price: 3.0),
     SoldProduct(productId: '3', price: 4.95),
     SoldProduct(productId: '7', price: 6.3),
+    SoldProduct(productId: '10', price: 3.55),
   ]),
   Supplier(name: 'Coop', products: [
     SoldProduct(productId: '4', price: 1.8),
