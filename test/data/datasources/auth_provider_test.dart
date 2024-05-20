@@ -20,12 +20,7 @@ void main() {
       final result = await authProvider.logIn(
           email: 'test@example.com', password: 'password');
 
-      result.when(
-        left: (failure) => fail('Expected a user but got failure'),
-        right: (userCredential) {
-          expect(userCredential.user, user);
-        },
-      );
+      expect(result.user, user);
     });
 
     test('logOut logs out user', () async {

@@ -1,18 +1,15 @@
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ethiscan/data/datasources/favorite_product_provider.dart';
-import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:ethiscan/domain/entities/firestore/favorite_product.dart';
 import 'package:ethiscan/domain/entities/app/api_error.dart';
 
 void main() {
   late FavoriteProductRepositoryProvider favoriteProductProvider;
   late FakeFirebaseFirestore fakeFirestore;
-  late MockFirebaseAuth mockAuth;
 
   setUp(() {
     fakeFirestore = FakeFirebaseFirestore();
-    mockAuth = MockFirebaseAuth(mockUser: MockUser(uid: '1'));
     favoriteProductProvider = FavoriteProductRepositoryProvider();
   });
 

@@ -2,7 +2,6 @@ import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ethiscan/data/datasources/metadata_provider.dart';
 import 'package:ethiscan/domain/entities/firestore/product_metadata.dart';
-import 'package:ethiscan/domain/entities/app/api_error.dart';
 
 void main() {
   late MetadataRepositoryProvider metadataProvider;
