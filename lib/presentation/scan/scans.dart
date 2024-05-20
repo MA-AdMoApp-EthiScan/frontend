@@ -12,7 +12,7 @@ import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:camera/camera.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
+import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
 
 class ScansPage extends StatefulWidget {
   const ScansPage({super.key});
@@ -36,7 +36,7 @@ class _ScansPage extends State<ScansPage> {
     _scansBloc.add(const ScansEvent.load());
     _initializeControllerFuture = _initializeCamera();
     // ignore: deprecated_member_use
-    _barcodeScanner = GoogleMlKit.vision.barcodeScanner();
+    _barcodeScanner = BarcodeScanner();
   }
 
   void startTimer() {
