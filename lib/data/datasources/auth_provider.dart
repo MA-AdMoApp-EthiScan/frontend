@@ -1,3 +1,5 @@
+import 'package:ethiscan/domain/core/either.dart';
+import 'package:ethiscan/domain/entities/app/api_error.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ethiscan/data/repositories/auth_repository.dart';
 import 'package:injectable/injectable.dart';
@@ -9,13 +11,14 @@ class AuthenticationProvider implements AuthRepository {
 
   // ~~~ Authentication ~~~
   @override
-  Future<UserCredential> logIn(
+  Future<Either<APIError, UserCredential>> logIn(
       {required String email, required String password}) async {
     try {
-      return await FirebaseAuth.instance
+      var e = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
+      return Either.right(e);
     } on FirebaseAuthException {
-      rethrow;
+      return Either.left(APIError("Invalid email or password", 400));
     }
   }
 

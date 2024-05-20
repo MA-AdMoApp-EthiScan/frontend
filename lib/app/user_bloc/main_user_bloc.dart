@@ -28,32 +28,44 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
         } else {
           try {
             // Log in
-            UserCredential userCredential =
-                await _authRepository.logIn(email: email, password: password);
-            if (userCredential.user == null) {
-              emit(const MainUserState.disconnected(false));
-              return;
-            }
-            final userId = userCredential.user!.uid;
-
-            var either = await _userRepository.getUserFromId(userId);
-            await either.when(left: (failure) async {
-              var newEither =
-                  await _userRepository.addUser(EthiscanUser(uid: userId));
-              await newEither.when(
-                left: (failure) {
+            var eitherUC = await _authRepository.logIn(email: email, password: password);
+            await eitherUC.when(
+              left: (failure) {
+                emit(const MainUserState.disconnected(false));
+                return;
+              },
+              right: (userCredential) async {
+                if (userCredential.user == null) {
                   emit(const MainUserState.disconnected(false));
-                },
-                right: (user) {
-                  emit(MainUserState.connected(user: user));
-                },
-              );
-            }, right: (user) {
-              emit(MainUserState.connected(user: user));
-            });
+                  return;
+                }
+                final userId = userCredential.user!.uid;
+
+                var either = await _userRepository.getUserFromId(userId);
+                await either.when(
+                  left: (failure) async {
+                    EthiscanUser u = EthiscanUser(uid: userId);
+                    var newEither = await _userRepository.addUser(u);
+                    newEither.when(
+                      left: (failure) {
+                        emit(const MainUserState.disconnected(false));
+                        return;
+                      },
+                      right: (user) {
+                      },
+                    );
+                    emit(MainUserState.connected(user: u));
+                  },
+                  right: (user) {
+                    emit(MainUserState.connected(user: user));
+                  }
+                );
+              }
+            );
           } on FirebaseAuthException catch (e) {
             emit(const MainUserState.disconnected(false));
             getAuthenticationExceptionFromCode(e.code);
+            return;
           }
         }
       }, goRegister: () {

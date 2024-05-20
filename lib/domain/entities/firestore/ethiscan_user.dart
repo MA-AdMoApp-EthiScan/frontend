@@ -36,7 +36,9 @@ class EthiscanUser {
   Map<String, dynamic> toJson() {
     return {
       'uid': uid,
-      'favoriteProducts': favoriteProducts,
+      'favoriteProducts': favoriteProducts != null
+          ? favoriteProducts!.map((e) => e.toJson()).toList()
+          : [],
       'metadataTypeIds': metadataTypeIds,
     };
   }
