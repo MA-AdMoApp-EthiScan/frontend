@@ -1,13 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:ethiscan/data/datasources/favorite_product_provider.dart';
-import 'package:ethiscan/domain/core/either.dart';
-import 'package:ethiscan/domain/entities/app/api_error.dart';
-import 'package:ethiscan/domain/entities/firestore/favorite_product.dart';
-import 'package:ethiscan/domain/entities/firestore/ethiscan_user.dart';
 import 'mock_firebase.mocks.dart';
 
 void main() {
