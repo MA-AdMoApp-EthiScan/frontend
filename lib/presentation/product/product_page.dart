@@ -2,6 +2,7 @@ import 'package:ethiscan/app/product_bloc/product_bloc.dart';
 import 'package:ethiscan/domain/entities/app/api_error.dart';
 import 'package:ethiscan/domain/entities/firestore/product.dart';
 import 'package:ethiscan/injection.dart';
+import 'package:ethiscan/presentation/core/buttons/primary_button.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/core/list_view_layout_body.dart';
@@ -40,8 +41,8 @@ class _ProductPage extends State<ProductPage> {
               loading: () => _page(context, state, loading: true),
               error: (error) => _page(context, state, error: error),
               initial: () => _page(context, state),
-              loaded: (Product product) =>
-                  _page(context, state, product: product),
+              loaded: (Product product, bool isInFavorite) =>
+                  _page(context, state, product: product, isInFavorite: isInFavorite),
               orElse: () => _page(context, state),
             );
           },
@@ -54,6 +55,7 @@ class _ProductPage extends State<ProductPage> {
     bool loading = false,
     APIError? error,
     Product? product,
+    bool? isInFavorite,
   }) {
     return Scaffold(
       appBar: AppBar(
@@ -71,7 +73,7 @@ class _ProductPage extends State<ProductPage> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: _getContent(loading, error, product),
+              children: _getContent(loading, error, product, isInFavorite),
             ),
           ),
         ],
@@ -79,7 +81,7 @@ class _ProductPage extends State<ProductPage> {
     );
   }
 
-  List<Widget> _getContent(bool loading, APIError? error, Product? product) {
+  List<Widget> _getContent(bool loading, APIError? error, Product? product, bool? isInFavorite) {
     if (loading) {
       return [const CustomCircularLoading()];
     } else if (error != null) {
@@ -97,6 +99,22 @@ class _ProductPage extends State<ProductPage> {
                 ),
               )
             : const SizedBox(),
+        const SizedBox(height: 20),
+        if (isInFavorite != null && isInFavorite) 
+          PrimaryButton(
+            onTap: () {
+              _productBloc.add(ProductEvent.addFavorite(product.id));
+                      },
+            text: I18nUtils.translate(context, 'product.add'),
+          ),
+        if (isInFavorite != null && !isInFavorite)
+          PrimaryButton(
+            onTap: () {
+              _productBloc.add(ProductEvent.removeFavorite(product.id));
+                      },
+            text: I18nUtils.translate(context, 'product.remove'),
+          ),
+
         const SizedBox(height: 30),
         CustomH2P(I18nUtils.translate(context, "product.description")),
         CustomText(product.description),
@@ -135,3 +153,22 @@ class _ProductPage extends State<ProductPage> {
     }
   }
 }
+
+
+
+     //     ElevatedButton(
+     //       onPressed: () {
+     //         _productBloc.add(ProductEvent.addFavorite(product.id));
+     //                 },
+     //       child: Text(I18nUtils.translate(context, 'product.add')),
+     //     ),
+     //   if (isInFavorite != null && !isInFavorite)
+     //     ElevatedButton(
+     //       onPressed: () {
+     //         _productBloc.add(ProductEvent.addFavorite(product.id));
+     //                 },
+     //       style: ElevatedButton.styleFrom(
+     //         foregroundColor: Colors.white, backgroundColor: Colors.red, // text color
+     //       ),
+     //       child: Text(I18nUtils.translate(context, 'product.remove')),
+     //     ),
