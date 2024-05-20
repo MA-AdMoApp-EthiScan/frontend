@@ -1,4 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:ethiscan/data/repositories/product_repository.dart';
+import 'package:ethiscan/data/repositories/scan_history_repository.dart';
+import 'package:ethiscan/domain/entities/app/scan_history.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -8,29 +11,47 @@ part 'scans_state.dart';
 
 @injectable
 class ScansBloc extends Bloc<ScansEvent, ScansState> {
-  ScansState? _previousState;
+  final ScanHistoryRepository _scanHistoryRepository;
+  final ProductRepository _productRepository;
 
-  ScansBloc() : super(const ScansState.initial()) {
+  ScansBloc(this._scanHistoryRepository,this._productRepository) : super(const ScansState.initial()) {
     on<ScansEvent>((event, emit) async {
       await event.when(
         load: () async {
           emit(const ScansState.loading());
-          await Future.delayed(const Duration(seconds: 3));
-          _previousState = const ScansState.loaded(scans: ['Scan 1', 'Scan 2']);
-          emit(_previousState!);
+          //await Future.delayed(const Duration(seconds: 3));
+          final history = await _scanHistoryRepository.getScanHistory();
+          emit(ScansState.loaded(scans: history));
         },
         barcodeFound: (barcode) async {
-          _previousState = state; // Store the current state before navigating
+          var either = await _productRepository.getProductById(barcode);
+          String productName = "";
+          either.when(
+            left: (failure)  {
+              productName = 'Unknown name $barcode';
+              //_productRepository.addProduct(
+              //  Product(
+              //    id: barcode,
+              //    name: 'Unknown name $barcode',
+              //    imageUrl: 'Unknown', // Provide an image URL here
+              //    description: 'Unknown', // Provide a description here
+              //  ),);
+            },
+            right: (product)  {
+              productName = product.name;
+            },
+          );
+          await _scanHistoryRepository.addScanHistory(
+            ScanHistory(
+              barcodeId: barcode,
+              name: productName,
+              date: DateTime.now(),
+            ),
+          );
           emit(ScansState.barcodeFound(barcode: barcode));
         },
-        invalideBarcode: (barcode) async {
-          _previousState = state; // Store the current state before navigating
+        invalidBarcode: (barcode) async {
           emit(const ScansState.error());
-        },
-        returnToPrevious: () async {
-          if (_previousState != null) {
-            emit(_previousState!);
-          }
         },
       );
     });

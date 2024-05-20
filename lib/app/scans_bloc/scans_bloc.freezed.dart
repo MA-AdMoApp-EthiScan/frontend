@@ -20,24 +20,21 @@ mixin _$ScansEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function(String barcode) barcodeFound,
-    required TResult Function(String barcode) invalideBarcode,
-    required TResult Function() returnToPrevious,
+    required TResult Function(String barcode) invalidBarcode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
     TResult? Function(String barcode)? barcodeFound,
-    TResult? Function(String barcode)? invalideBarcode,
-    TResult? Function()? returnToPrevious,
+    TResult? Function(String barcode)? invalidBarcode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function(String barcode)? barcodeFound,
-    TResult Function(String barcode)? invalideBarcode,
-    TResult Function()? returnToPrevious,
+    TResult Function(String barcode)? invalidBarcode,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -45,24 +42,21 @@ mixin _$ScansEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_ScansLoad value) load,
     required TResult Function(_ScansBarcodeFound value) barcodeFound,
-    required TResult Function(_ScansInvalideBarcode value) invalideBarcode,
-    required TResult Function(_ScansReturnToPrevious value) returnToPrevious,
+    required TResult Function(_ScansInvalidBarcode value) invalidBarcode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ScansLoad value)? load,
     TResult? Function(_ScansBarcodeFound value)? barcodeFound,
-    TResult? Function(_ScansInvalideBarcode value)? invalideBarcode,
-    TResult? Function(_ScansReturnToPrevious value)? returnToPrevious,
+    TResult? Function(_ScansInvalidBarcode value)? invalidBarcode,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ScansLoad value)? load,
     TResult Function(_ScansBarcodeFound value)? barcodeFound,
-    TResult Function(_ScansInvalideBarcode value)? invalideBarcode,
-    TResult Function(_ScansReturnToPrevious value)? returnToPrevious,
+    TResult Function(_ScansInvalidBarcode value)? invalidBarcode,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,8 +120,7 @@ class _$ScansLoadImpl implements _ScansLoad {
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function(String barcode) barcodeFound,
-    required TResult Function(String barcode) invalideBarcode,
-    required TResult Function() returnToPrevious,
+    required TResult Function(String barcode) invalidBarcode,
   }) {
     return load();
   }
@@ -137,8 +130,7 @@ class _$ScansLoadImpl implements _ScansLoad {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
     TResult? Function(String barcode)? barcodeFound,
-    TResult? Function(String barcode)? invalideBarcode,
-    TResult? Function()? returnToPrevious,
+    TResult? Function(String barcode)? invalidBarcode,
   }) {
     return load?.call();
   }
@@ -148,8 +140,7 @@ class _$ScansLoadImpl implements _ScansLoad {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function(String barcode)? barcodeFound,
-    TResult Function(String barcode)? invalideBarcode,
-    TResult Function()? returnToPrevious,
+    TResult Function(String barcode)? invalidBarcode,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -163,8 +154,7 @@ class _$ScansLoadImpl implements _ScansLoad {
   TResult map<TResult extends Object?>({
     required TResult Function(_ScansLoad value) load,
     required TResult Function(_ScansBarcodeFound value) barcodeFound,
-    required TResult Function(_ScansInvalideBarcode value) invalideBarcode,
-    required TResult Function(_ScansReturnToPrevious value) returnToPrevious,
+    required TResult Function(_ScansInvalidBarcode value) invalidBarcode,
   }) {
     return load(this);
   }
@@ -174,8 +164,7 @@ class _$ScansLoadImpl implements _ScansLoad {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ScansLoad value)? load,
     TResult? Function(_ScansBarcodeFound value)? barcodeFound,
-    TResult? Function(_ScansInvalideBarcode value)? invalideBarcode,
-    TResult? Function(_ScansReturnToPrevious value)? returnToPrevious,
+    TResult? Function(_ScansInvalidBarcode value)? invalidBarcode,
   }) {
     return load?.call(this);
   }
@@ -185,8 +174,7 @@ class _$ScansLoadImpl implements _ScansLoad {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ScansLoad value)? load,
     TResult Function(_ScansBarcodeFound value)? barcodeFound,
-    TResult Function(_ScansInvalideBarcode value)? invalideBarcode,
-    TResult Function(_ScansReturnToPrevious value)? returnToPrevious,
+    TResult Function(_ScansInvalidBarcode value)? invalidBarcode,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -267,8 +255,7 @@ class _$ScansBarcodeFoundImpl implements _ScansBarcodeFound {
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function(String barcode) barcodeFound,
-    required TResult Function(String barcode) invalideBarcode,
-    required TResult Function() returnToPrevious,
+    required TResult Function(String barcode) invalidBarcode,
   }) {
     return barcodeFound(barcode);
   }
@@ -278,8 +265,7 @@ class _$ScansBarcodeFoundImpl implements _ScansBarcodeFound {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
     TResult? Function(String barcode)? barcodeFound,
-    TResult? Function(String barcode)? invalideBarcode,
-    TResult? Function()? returnToPrevious,
+    TResult? Function(String barcode)? invalidBarcode,
   }) {
     return barcodeFound?.call(barcode);
   }
@@ -289,8 +275,7 @@ class _$ScansBarcodeFoundImpl implements _ScansBarcodeFound {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function(String barcode)? barcodeFound,
-    TResult Function(String barcode)? invalideBarcode,
-    TResult Function()? returnToPrevious,
+    TResult Function(String barcode)? invalidBarcode,
     required TResult orElse(),
   }) {
     if (barcodeFound != null) {
@@ -304,8 +289,7 @@ class _$ScansBarcodeFoundImpl implements _ScansBarcodeFound {
   TResult map<TResult extends Object?>({
     required TResult Function(_ScansLoad value) load,
     required TResult Function(_ScansBarcodeFound value) barcodeFound,
-    required TResult Function(_ScansInvalideBarcode value) invalideBarcode,
-    required TResult Function(_ScansReturnToPrevious value) returnToPrevious,
+    required TResult Function(_ScansInvalidBarcode value) invalidBarcode,
   }) {
     return barcodeFound(this);
   }
@@ -315,8 +299,7 @@ class _$ScansBarcodeFoundImpl implements _ScansBarcodeFound {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ScansLoad value)? load,
     TResult? Function(_ScansBarcodeFound value)? barcodeFound,
-    TResult? Function(_ScansInvalideBarcode value)? invalideBarcode,
-    TResult? Function(_ScansReturnToPrevious value)? returnToPrevious,
+    TResult? Function(_ScansInvalidBarcode value)? invalidBarcode,
   }) {
     return barcodeFound?.call(this);
   }
@@ -326,8 +309,7 @@ class _$ScansBarcodeFoundImpl implements _ScansBarcodeFound {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ScansLoad value)? load,
     TResult Function(_ScansBarcodeFound value)? barcodeFound,
-    TResult Function(_ScansInvalideBarcode value)? invalideBarcode,
-    TResult Function(_ScansReturnToPrevious value)? returnToPrevious,
+    TResult Function(_ScansInvalidBarcode value)? invalidBarcode,
     required TResult orElse(),
   }) {
     if (barcodeFound != null) {
@@ -348,20 +330,20 @@ abstract class _ScansBarcodeFound implements ScansEvent {
 }
 
 /// @nodoc
-abstract class _$$ScansInvalideBarcodeImplCopyWith<$Res> {
-  factory _$$ScansInvalideBarcodeImplCopyWith(_$ScansInvalideBarcodeImpl value,
-          $Res Function(_$ScansInvalideBarcodeImpl) then) =
-      __$$ScansInvalideBarcodeImplCopyWithImpl<$Res>;
+abstract class _$$ScansInvalidBarcodeImplCopyWith<$Res> {
+  factory _$$ScansInvalidBarcodeImplCopyWith(_$ScansInvalidBarcodeImpl value,
+          $Res Function(_$ScansInvalidBarcodeImpl) then) =
+      __$$ScansInvalidBarcodeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String barcode});
 }
 
 /// @nodoc
-class __$$ScansInvalideBarcodeImplCopyWithImpl<$Res>
-    extends _$ScansEventCopyWithImpl<$Res, _$ScansInvalideBarcodeImpl>
-    implements _$$ScansInvalideBarcodeImplCopyWith<$Res> {
-  __$$ScansInvalideBarcodeImplCopyWithImpl(_$ScansInvalideBarcodeImpl _value,
-      $Res Function(_$ScansInvalideBarcodeImpl) _then)
+class __$$ScansInvalidBarcodeImplCopyWithImpl<$Res>
+    extends _$ScansEventCopyWithImpl<$Res, _$ScansInvalidBarcodeImpl>
+    implements _$$ScansInvalidBarcodeImplCopyWith<$Res> {
+  __$$ScansInvalidBarcodeImplCopyWithImpl(_$ScansInvalidBarcodeImpl _value,
+      $Res Function(_$ScansInvalidBarcodeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -369,7 +351,7 @@ class __$$ScansInvalideBarcodeImplCopyWithImpl<$Res>
   $Res call({
     Object? barcode = null,
   }) {
-    return _then(_$ScansInvalideBarcodeImpl(
+    return _then(_$ScansInvalidBarcodeImpl(
       null == barcode
           ? _value.barcode
           : barcode // ignore: cast_nullable_to_non_nullable
@@ -380,22 +362,22 @@ class __$$ScansInvalideBarcodeImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ScansInvalideBarcodeImpl implements _ScansInvalideBarcode {
-  const _$ScansInvalideBarcodeImpl(this.barcode);
+class _$ScansInvalidBarcodeImpl implements _ScansInvalidBarcode {
+  const _$ScansInvalidBarcodeImpl(this.barcode);
 
   @override
   final String barcode;
 
   @override
   String toString() {
-    return 'ScansEvent.invalideBarcode(barcode: $barcode)';
+    return 'ScansEvent.invalidBarcode(barcode: $barcode)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ScansInvalideBarcodeImpl &&
+            other is _$ScansInvalidBarcodeImpl &&
             (identical(other.barcode, barcode) || other.barcode == barcode));
   }
 
@@ -405,20 +387,18 @@ class _$ScansInvalideBarcodeImpl implements _ScansInvalideBarcode {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ScansInvalideBarcodeImplCopyWith<_$ScansInvalideBarcodeImpl>
-      get copyWith =>
-          __$$ScansInvalideBarcodeImplCopyWithImpl<_$ScansInvalideBarcodeImpl>(
-              this, _$identity);
+  _$$ScansInvalidBarcodeImplCopyWith<_$ScansInvalidBarcodeImpl> get copyWith =>
+      __$$ScansInvalidBarcodeImplCopyWithImpl<_$ScansInvalidBarcodeImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function(String barcode) barcodeFound,
-    required TResult Function(String barcode) invalideBarcode,
-    required TResult Function() returnToPrevious,
+    required TResult Function(String barcode) invalidBarcode,
   }) {
-    return invalideBarcode(barcode);
+    return invalidBarcode(barcode);
   }
 
   @override
@@ -426,10 +406,9 @@ class _$ScansInvalideBarcodeImpl implements _ScansInvalideBarcode {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
     TResult? Function(String barcode)? barcodeFound,
-    TResult? Function(String barcode)? invalideBarcode,
-    TResult? Function()? returnToPrevious,
+    TResult? Function(String barcode)? invalidBarcode,
   }) {
-    return invalideBarcode?.call(barcode);
+    return invalidBarcode?.call(barcode);
   }
 
   @override
@@ -437,12 +416,11 @@ class _$ScansInvalideBarcodeImpl implements _ScansInvalideBarcode {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function(String barcode)? barcodeFound,
-    TResult Function(String barcode)? invalideBarcode,
-    TResult Function()? returnToPrevious,
+    TResult Function(String barcode)? invalidBarcode,
     required TResult orElse(),
   }) {
-    if (invalideBarcode != null) {
-      return invalideBarcode(barcode);
+    if (invalidBarcode != null) {
+      return invalidBarcode(barcode);
     }
     return orElse();
   }
@@ -452,10 +430,9 @@ class _$ScansInvalideBarcodeImpl implements _ScansInvalideBarcode {
   TResult map<TResult extends Object?>({
     required TResult Function(_ScansLoad value) load,
     required TResult Function(_ScansBarcodeFound value) barcodeFound,
-    required TResult Function(_ScansInvalideBarcode value) invalideBarcode,
-    required TResult Function(_ScansReturnToPrevious value) returnToPrevious,
+    required TResult Function(_ScansInvalidBarcode value) invalidBarcode,
   }) {
-    return invalideBarcode(this);
+    return invalidBarcode(this);
   }
 
   @override
@@ -463,10 +440,9 @@ class _$ScansInvalideBarcodeImpl implements _ScansInvalideBarcode {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ScansLoad value)? load,
     TResult? Function(_ScansBarcodeFound value)? barcodeFound,
-    TResult? Function(_ScansInvalideBarcode value)? invalideBarcode,
-    TResult? Function(_ScansReturnToPrevious value)? returnToPrevious,
+    TResult? Function(_ScansInvalidBarcode value)? invalidBarcode,
   }) {
-    return invalideBarcode?.call(this);
+    return invalidBarcode?.call(this);
   }
 
   @override
@@ -474,141 +450,24 @@ class _$ScansInvalideBarcodeImpl implements _ScansInvalideBarcode {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ScansLoad value)? load,
     TResult Function(_ScansBarcodeFound value)? barcodeFound,
-    TResult Function(_ScansInvalideBarcode value)? invalideBarcode,
-    TResult Function(_ScansReturnToPrevious value)? returnToPrevious,
+    TResult Function(_ScansInvalidBarcode value)? invalidBarcode,
     required TResult orElse(),
   }) {
-    if (invalideBarcode != null) {
-      return invalideBarcode(this);
+    if (invalidBarcode != null) {
+      return invalidBarcode(this);
     }
     return orElse();
   }
 }
 
-abstract class _ScansInvalideBarcode implements ScansEvent {
-  const factory _ScansInvalideBarcode(final String barcode) =
-      _$ScansInvalideBarcodeImpl;
+abstract class _ScansInvalidBarcode implements ScansEvent {
+  const factory _ScansInvalidBarcode(final String barcode) =
+      _$ScansInvalidBarcodeImpl;
 
   String get barcode;
   @JsonKey(ignore: true)
-  _$$ScansInvalideBarcodeImplCopyWith<_$ScansInvalideBarcodeImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ScansReturnToPreviousImplCopyWith<$Res> {
-  factory _$$ScansReturnToPreviousImplCopyWith(
-          _$ScansReturnToPreviousImpl value,
-          $Res Function(_$ScansReturnToPreviousImpl) then) =
-      __$$ScansReturnToPreviousImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$ScansReturnToPreviousImplCopyWithImpl<$Res>
-    extends _$ScansEventCopyWithImpl<$Res, _$ScansReturnToPreviousImpl>
-    implements _$$ScansReturnToPreviousImplCopyWith<$Res> {
-  __$$ScansReturnToPreviousImplCopyWithImpl(_$ScansReturnToPreviousImpl _value,
-      $Res Function(_$ScansReturnToPreviousImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$ScansReturnToPreviousImpl implements _ScansReturnToPrevious {
-  const _$ScansReturnToPreviousImpl();
-
-  @override
-  String toString() {
-    return 'ScansEvent.returnToPrevious()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ScansReturnToPreviousImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() load,
-    required TResult Function(String barcode) barcodeFound,
-    required TResult Function(String barcode) invalideBarcode,
-    required TResult Function() returnToPrevious,
-  }) {
-    return returnToPrevious();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? load,
-    TResult? Function(String barcode)? barcodeFound,
-    TResult? Function(String barcode)? invalideBarcode,
-    TResult? Function()? returnToPrevious,
-  }) {
-    return returnToPrevious?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? load,
-    TResult Function(String barcode)? barcodeFound,
-    TResult Function(String barcode)? invalideBarcode,
-    TResult Function()? returnToPrevious,
-    required TResult orElse(),
-  }) {
-    if (returnToPrevious != null) {
-      return returnToPrevious();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_ScansLoad value) load,
-    required TResult Function(_ScansBarcodeFound value) barcodeFound,
-    required TResult Function(_ScansInvalideBarcode value) invalideBarcode,
-    required TResult Function(_ScansReturnToPrevious value) returnToPrevious,
-  }) {
-    return returnToPrevious(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_ScansLoad value)? load,
-    TResult? Function(_ScansBarcodeFound value)? barcodeFound,
-    TResult? Function(_ScansInvalideBarcode value)? invalideBarcode,
-    TResult? Function(_ScansReturnToPrevious value)? returnToPrevious,
-  }) {
-    return returnToPrevious?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ScansLoad value)? load,
-    TResult Function(_ScansBarcodeFound value)? barcodeFound,
-    TResult Function(_ScansInvalideBarcode value)? invalideBarcode,
-    TResult Function(_ScansReturnToPrevious value)? returnToPrevious,
-    required TResult orElse(),
-  }) {
-    if (returnToPrevious != null) {
-      return returnToPrevious(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ScansReturnToPrevious implements ScansEvent {
-  const factory _ScansReturnToPrevious() = _$ScansReturnToPreviousImpl;
+  _$$ScansInvalidBarcodeImplCopyWith<_$ScansInvalidBarcodeImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -617,7 +476,7 @@ mixin _$ScansState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<String> scans) loaded,
+    required TResult Function(List<ScanHistory> scans) loaded,
     required TResult Function() error,
     required TResult Function(String barcode) barcodeFound,
   }) =>
@@ -626,7 +485,7 @@ mixin _$ScansState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<String> scans)? loaded,
+    TResult? Function(List<ScanHistory> scans)? loaded,
     TResult? Function()? error,
     TResult? Function(String barcode)? barcodeFound,
   }) =>
@@ -635,7 +494,7 @@ mixin _$ScansState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<String> scans)? loaded,
+    TResult Function(List<ScanHistory> scans)? loaded,
     TResult Function()? error,
     TResult Function(String barcode)? barcodeFound,
     required TResult orElse(),
@@ -729,7 +588,7 @@ class _$ScansInitialImpl implements _ScansInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<String> scans) loaded,
+    required TResult Function(List<ScanHistory> scans) loaded,
     required TResult Function() error,
     required TResult Function(String barcode) barcodeFound,
   }) {
@@ -741,7 +600,7 @@ class _$ScansInitialImpl implements _ScansInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<String> scans)? loaded,
+    TResult? Function(List<ScanHistory> scans)? loaded,
     TResult? Function()? error,
     TResult? Function(String barcode)? barcodeFound,
   }) {
@@ -753,7 +612,7 @@ class _$ScansInitialImpl implements _ScansInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<String> scans)? loaded,
+    TResult Function(List<ScanHistory> scans)? loaded,
     TResult Function()? error,
     TResult Function(String barcode)? barcodeFound,
     required TResult orElse(),
@@ -849,7 +708,7 @@ class _$ScansLoadingImpl implements _ScansLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<String> scans) loaded,
+    required TResult Function(List<ScanHistory> scans) loaded,
     required TResult Function() error,
     required TResult Function(String barcode) barcodeFound,
   }) {
@@ -861,7 +720,7 @@ class _$ScansLoadingImpl implements _ScansLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<String> scans)? loaded,
+    TResult? Function(List<ScanHistory> scans)? loaded,
     TResult? Function()? error,
     TResult? Function(String barcode)? barcodeFound,
   }) {
@@ -873,7 +732,7 @@ class _$ScansLoadingImpl implements _ScansLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<String> scans)? loaded,
+    TResult Function(List<ScanHistory> scans)? loaded,
     TResult Function()? error,
     TResult Function(String barcode)? barcodeFound,
     required TResult orElse(),
@@ -935,7 +794,7 @@ abstract class _$$ScansLoadedImplCopyWith<$Res> {
           _$ScansLoadedImpl value, $Res Function(_$ScansLoadedImpl) then) =
       __$$ScansLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<String> scans});
+  $Res call({List<ScanHistory> scans});
 }
 
 /// @nodoc
@@ -955,7 +814,7 @@ class __$$ScansLoadedImplCopyWithImpl<$Res>
       scans: null == scans
           ? _value._scans
           : scans // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<ScanHistory>,
     ));
   }
 }
@@ -963,11 +822,12 @@ class __$$ScansLoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ScansLoadedImpl implements _ScansLoaded {
-  const _$ScansLoadedImpl({required final List<String> scans}) : _scans = scans;
+  const _$ScansLoadedImpl({required final List<ScanHistory> scans})
+      : _scans = scans;
 
-  final List<String> _scans;
+  final List<ScanHistory> _scans;
   @override
-  List<String> get scans {
+  List<ScanHistory> get scans {
     if (_scans is EqualUnmodifiableListView) return _scans;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_scans);
@@ -1001,7 +861,7 @@ class _$ScansLoadedImpl implements _ScansLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<String> scans) loaded,
+    required TResult Function(List<ScanHistory> scans) loaded,
     required TResult Function() error,
     required TResult Function(String barcode) barcodeFound,
   }) {
@@ -1013,7 +873,7 @@ class _$ScansLoadedImpl implements _ScansLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<String> scans)? loaded,
+    TResult? Function(List<ScanHistory> scans)? loaded,
     TResult? Function()? error,
     TResult? Function(String barcode)? barcodeFound,
   }) {
@@ -1025,7 +885,7 @@ class _$ScansLoadedImpl implements _ScansLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<String> scans)? loaded,
+    TResult Function(List<ScanHistory> scans)? loaded,
     TResult Function()? error,
     TResult Function(String barcode)? barcodeFound,
     required TResult orElse(),
@@ -1078,10 +938,10 @@ class _$ScansLoadedImpl implements _ScansLoaded {
 }
 
 abstract class _ScansLoaded implements ScansState {
-  const factory _ScansLoaded({required final List<String> scans}) =
+  const factory _ScansLoaded({required final List<ScanHistory> scans}) =
       _$ScansLoadedImpl;
 
-  List<String> get scans;
+  List<ScanHistory> get scans;
   @JsonKey(ignore: true)
   _$$ScansLoadedImplCopyWith<_$ScansLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1127,7 +987,7 @@ class _$ScansErrorImpl implements _ScansError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<String> scans) loaded,
+    required TResult Function(List<ScanHistory> scans) loaded,
     required TResult Function() error,
     required TResult Function(String barcode) barcodeFound,
   }) {
@@ -1139,7 +999,7 @@ class _$ScansErrorImpl implements _ScansError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<String> scans)? loaded,
+    TResult? Function(List<ScanHistory> scans)? loaded,
     TResult? Function()? error,
     TResult? Function(String barcode)? barcodeFound,
   }) {
@@ -1151,7 +1011,7 @@ class _$ScansErrorImpl implements _ScansError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<String> scans)? loaded,
+    TResult Function(List<ScanHistory> scans)? loaded,
     TResult Function()? error,
     TResult Function(String barcode)? barcodeFound,
     required TResult orElse(),
@@ -1276,7 +1136,7 @@ class _$ScansBarcodeFoundStateImpl implements _ScansBarcodeFoundState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<String> scans) loaded,
+    required TResult Function(List<ScanHistory> scans) loaded,
     required TResult Function() error,
     required TResult Function(String barcode) barcodeFound,
   }) {
@@ -1288,7 +1148,7 @@ class _$ScansBarcodeFoundStateImpl implements _ScansBarcodeFoundState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<String> scans)? loaded,
+    TResult? Function(List<ScanHistory> scans)? loaded,
     TResult? Function()? error,
     TResult? Function(String barcode)? barcodeFound,
   }) {
@@ -1300,7 +1160,7 @@ class _$ScansBarcodeFoundStateImpl implements _ScansBarcodeFoundState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<String> scans)? loaded,
+    TResult Function(List<ScanHistory> scans)? loaded,
     TResult Function()? error,
     TResult Function(String barcode)? barcodeFound,
     required TResult orElse(),
