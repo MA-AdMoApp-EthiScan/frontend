@@ -23,7 +23,7 @@ class ScansBloc extends Bloc<ScansEvent, ScansState> {
           _previousState = state; // Store the current state before navigating
           emit(ScansState.barcodeFound(barcode: barcode));
         },
-        invalideBarcode: (barcode) async {
+        invalidBarcode: (barcode) async {
           _previousState = state; // Store the current state before navigating
           emit(const ScansState.error());
         },
