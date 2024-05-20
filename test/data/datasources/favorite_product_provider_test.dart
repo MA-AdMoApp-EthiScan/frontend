@@ -29,7 +29,6 @@ void main() {
 
       final result = await favoriteProductProvider.getFavoriteProducts();
 
-      expect(result.isRight, true);
       result.when(
         left: (failure) => fail('Expected favorite products but got failure'),
         right: (products) {
@@ -41,7 +40,6 @@ void main() {
     test('getFavoriteProducts returns error if user not exists', () async {
       final result = await favoriteProductProvider.getFavoriteProducts();
 
-      expect(result.isLeft, true);
       result.when(
         left: (failure) {
           expect(failure, isA<APIError>());

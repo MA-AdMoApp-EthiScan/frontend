@@ -23,7 +23,6 @@ void main() {
 
       final result = await metadataTypeProvider.getMetadataTypes();
 
-      expect(result.isRight, true);
       result.when(
         left: (failure) => fail('Expected metadata types but got failure'),
         right: (types) {
@@ -35,7 +34,6 @@ void main() {
     test('getMetadataTypes returns error if not exists', () async {
       final result = await metadataTypeProvider.getMetadataTypes();
 
-      expect(result.isLeft, true);
       result.when(
         left: (failure) {
           expect(failure, isA<APIError>());

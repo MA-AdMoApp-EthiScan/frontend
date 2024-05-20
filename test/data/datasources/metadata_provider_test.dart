@@ -23,7 +23,6 @@ void main() {
 
       final result = await metadataProvider.getMetadata();
 
-      expect(result.isRight, true);
       result.when(
         left: (failure) => fail('Expected metadata but got failure'),
         right: (metadataList) {
@@ -35,7 +34,6 @@ void main() {
     test('getMetadata returns empty list if not exists', () async {
       final result = await metadataProvider.getMetadata();
 
-      expect(result.isRight, true);
       result.when(
         left: (failure) => fail('Expected metadata but got failure'),
         right: (metadataList) {

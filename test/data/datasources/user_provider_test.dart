@@ -20,7 +20,6 @@ void main() {
 
       final result = await userProvider.getUserFromId('1');
 
-      expect(result.isRight, true);
       result.when(
         left: (failure) => fail('Expected a user but got failure'),
         right: (user) {
@@ -32,7 +31,6 @@ void main() {
     test('getUserFromId returns error if not exists', () async {
       final result = await userProvider.getUserFromId('999');
 
-      expect(result.isLeft, true);
       result.when(
         left: (failure) {
           expect(failure, isA<APIError>());

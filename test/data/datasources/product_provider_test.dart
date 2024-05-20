@@ -21,7 +21,6 @@ void main() {
 
       final result = await productProvider.getProductById('1');
 
-      expect(result.isRight, true);
       result.when(
         left: (failure) => fail('Expected a product but got failure'),
         right: (product) {
@@ -33,7 +32,6 @@ void main() {
     test('getProductById returns error if not exists', () async {
       final result = await productProvider.getProductById('999');
 
-      expect(result.isLeft, true);
       result.when(
         left: (failure) {
           expect(failure, isA<APIError>());

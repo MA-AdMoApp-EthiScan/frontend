@@ -20,7 +20,6 @@ void main() {
       final result = await authProvider.logIn(
           email: 'test@example.com', password: 'password');
 
-      expect(result.isRight, true);
       result.when(
         left: (failure) => fail('Expected a user but got failure'),
         right: (userCredential) {
