@@ -1,0 +1,583 @@
+Project Path: /home/olivier/projet/advanced_mobile_app/ethiscan/lib/data
+
+Source Tree:
+
+```
+data
+├── constants.dart
+├── datasources
+│   ├── product_provider.dart
+│   ├── user_provider.dart
+│   ├── favorite_product_provider.dart
+│   ├── matadata_type_provider.dart
+│   ├── auth_provider.dart
+│   ├── metadata_provider.dart
+│   └── firestore_provider.dart
+└── repositories
+    ├── metadata_type_repository.dart
+    ├── favorite_product_repository.dart
+    ├── product_repository.dart
+    ├── metadata_repository.dart
+    ├── auth_repository.dart
+    ├── user_repository.dart
+    └── language_repository.dart
+
+```
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/data/datasources/product_provider.dart`:
+
+```````dart
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ethiscan/domain/core/either.dart';
+import 'package:ethiscan/domain/entities/app/api_error.dart';
+import 'package:ethiscan/domain/entities/firestore/product.dart';
+import 'package:ethiscan/data/repositories/product_repository.dart';
+import 'package:injectable/injectable.dart';
+import 'package:ethiscan/domain/entities/firestore/metadata_type.dart';
+
+@Singleton(as: ProductRepository)
+class ProductRepositoryProvider implements ProductRepository {
+  final CollectionReference productCollection =
+      FirebaseFirestore.instance.collection('products');
+
+  @override
+  Future<Either<APIError, Product>> getProductById(String productId) async {
+    final doc = await productCollection.doc(productId).get();
+    if (!doc.exists) {
+      return Left(APIError('Product not found', 404));
+    }
+    return Right(Product.fromJson(doc.data() as Map<String, dynamic>));
+  }
+
+  @override
+  Future<Either<APIError, List<Product>>> getProductByIdList(List<String> id) {
+    final docList = id.map((productId) => productCollection.doc(productId).get());
+    return Future.wait(docList).then((docs) {
+      final products = docs
+          .where((doc) => doc.exists)
+          .map((doc) => Product.fromJson(doc.data() as Map<String, dynamic>))
+          .toList();
+      return Right(products);
+    });
+  }
+
+  @override
+  Future<Either<APIError, List<Product>>> getProductsByMetadataType(
+      MetadataType metadataType) async {
+    final querySnapshot = await productCollection
+        .where('productMetadatas.type.name', isEqualTo: metadataType.name)
+        .get();
+    final products = querySnapshot.docs
+        .map((doc) => Product.fromJson(doc.data() as Map<String, dynamic>))
+        .toList();
+    return Right(products);
+  }
+
+  @override
+  Future<void> addProduct(Product product) {
+    return productCollection.add(product.toJson());
+  }
+
+  @override
+  Future<void> updateProduct(Product product) {
+    return productCollection.doc(product.id).update(product.toJson());
+  }
+
+  @override
+  Future<void> deleteProduct(Product product) {
+    return productCollection.doc(product.id).delete();
+  }
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/data/datasources/user_provider.dart`:
+
+```````dart
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ethiscan/domain/core/either.dart';
+import 'package:ethiscan/domain/entities/app/api_error.dart';
+import 'package:ethiscan/domain/entities/firestore/ethiscan_user.dart';
+import 'package:ethiscan/data/repositories/user_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:injectable/injectable.dart';
+
+@Singleton(as: UserRepository)
+class UserRepositoryProvider implements UserRepository {
+  final CollectionReference userCollection =
+      FirebaseFirestore.instance.collection('users');
+
+  @override
+  Future<Either<APIError, EthiscanUser>> getUserFromId(String uid) async {
+    final doc = await userCollection.doc(uid).get();
+    if (!doc.exists) {
+      return Left(APIError('User not found', 404));
+    }
+    return Right(EthiscanUser.fromJson(doc.data() as Map<String, dynamic>));
+  }
+
+  @override
+  Future<Either<APIError, EthiscanUser>> addUser(EthiscanUser user) async {
+    try {
+      final doc =
+          await userCollection.doc(FirebaseAuth.instance.currentUser?.uid).set(user.toJson());
+      return Right(EthiscanUser.fromJson(doc as Map<String, dynamic>));
+    } on Exception catch (e) {
+      return Left(APIError(e.toString(), 500));
+    }
+  }
+
+  @override
+  Future<void> updateUser(EthiscanUser user) {
+    return userCollection.doc(user.uid).update(user.toJson());
+  }
+
+  @override
+  Future<void> deleteUser(EthiscanUser user) {
+    return userCollection.doc(user.uid).delete();
+  }
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/data/datasources/favorite_product_provider.dart`:
+
+```````dart
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ethiscan/domain/core/either.dart';
+import 'package:ethiscan/domain/entities/app/api_error.dart';
+import 'package:ethiscan/data/repositories/favorite_product_repository.dart';
+import 'package:ethiscan/domain/entities/firestore/favorite_product.dart';
+import 'package:injectable/injectable.dart';
+import 'package:ethiscan/domain/entities/firestore/ethiscan_user.dart';
+
+@Singleton(as: FavoriteProductRepository)
+class FavoriteProductRepositoryProvider implements FavoriteProductRepository {
+  final CollectionReference userCollection =
+      FirebaseFirestore.instance.collection('users');
+
+  Future<String?> getCurrentUserId() async {
+    User? currentUser = FirebaseAuth.instance.currentUser;
+    return currentUser?.uid;
+  }
+
+  @override
+  Future<Either<APIError, List<FavoriteProduct>>> getFavoriteProducts() async {
+    final userId = await getCurrentUserId();
+    final doc = await userCollection.doc(userId).get();
+    if (!doc.exists) {
+      return Left(APIError('User not found', 404));
+    }
+    final user = EthiscanUser.fromJson(doc.data() as Map<String, dynamic>);
+    return Right(user.favoriteProducts ?? []);
+  }
+
+  @override
+  Future<Either<APIError, void>> addFavoriteProduct(
+      FavoriteProduct favoriteProduct) async {
+    final userId = await getCurrentUserId();
+    final doc = await userCollection.doc(userId).get();
+    if (!doc.exists) {
+      return Left(APIError('User not found', 404));
+    }
+    final user = EthiscanUser.fromJson(doc.data() as Map<String, dynamic>);
+    final updatedFavorites = (user.favoriteProducts ?? [])
+      ..add(favoriteProduct);
+    userCollection.doc(userId).update(
+        {'favoriteProducts': updatedFavorites.map((e) => e.toJson()).toList()});
+    return Right(null);
+  }
+
+  @override
+  Future<Either<APIError, void>> removeFavoriteProduct(String productId) async {
+    final userId = await getCurrentUserId();
+    final doc = await userCollection.doc(userId).get();
+    if (!doc.exists) {
+      return Left(APIError('User not found', 404));
+    }
+    final user = EthiscanUser.fromJson(doc.data() as Map<String, dynamic>);
+    final updatedFavorites = (user.favoriteProducts ?? [])
+        .where((fav) => fav.productId != productId)
+        .toList();
+    userCollection.doc(userId).update(
+        {'favoriteProducts': updatedFavorites.map((e) => e.toJson()).toList()});
+    return Right(null);
+  }
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/data/datasources/matadata_type_provider.dart`:
+
+```````dart
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ethiscan/data/repositories/metadata_type_repository.dart';
+import 'package:ethiscan/domain/core/either.dart';
+import 'package:ethiscan/domain/entities/app/api_error.dart';
+import 'package:ethiscan/domain/entities/firestore/metadata_type.dart';
+import 'package:injectable/injectable.dart';
+
+@Singleton(as: MetadataTypeRepository)
+class MetadataTypeRepositoryProvider implements MetadataTypeRepository {
+  final CollectionReference metadataTypeCollection =
+      FirebaseFirestore.instance.collection('metadataTypes');
+
+  @override
+  Future<Either<APIError, List<MetadataType>>> getMetadataTypes() async {
+    final snapshot = await metadataTypeCollection.get();
+    if (snapshot.docs.isEmpty) {
+      return Left(APIError('MetadataType not found', 404));
+    }
+    final metadataTypes = snapshot.docs
+        .map((doc) => MetadataType.fromJson(doc.data() as Map<String, dynamic>))
+        .toList();
+    return Right(metadataTypes);
+  }
+
+  @override
+  Future<Either<APIError, List<MetadataType>>> getByIdList(List<String> ids) async {
+    final docList = ids.map((id) => metadataTypeCollection.doc(id).get());
+    return Future.wait(docList).then((docs) {
+      final metadataTypes = docs
+          .where((doc) => doc.exists)
+          .map((doc) => MetadataType.fromJson(doc.data() as Map<String, dynamic>))
+          .toList();
+      return Right(metadataTypes);
+    });
+  }
+}
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/data/datasources/auth_provider.dart`:
+
+```````dart
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ethiscan/data/repositories/auth_repository.dart';
+import 'package:injectable/injectable.dart';
+import 'package:ethiscan/utils/exceptions.dart';
+
+@Singleton(as: AuthRepository)
+class AuthenticationProvider implements AuthRepository {
+  AuthenticationProvider();
+
+  // ~~~ Authentication ~~~
+  @override
+  Future<UserCredential> logIn(
+      {required String email, required String password}) async {
+    try {
+      return await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> logOut() {
+    return FirebaseAuth.instance.signOut();
+  }
+
+  @override
+  bool isUserConnected() {
+    return FirebaseAuth.instance.currentUser != null;
+  }
+
+  // @override
+  // String get uid {
+  //   User? user = FirebaseAuth.instance.currentUser;
+  //   if (user == null) {
+  //     throw StateError("Not connected");
+  //   }
+  //   return user.uid;
+  // }
+
+  // ~~~ Registration ~~~
+  @override
+  Future<UserCredential> signUp(
+      {required String email, required String password}) async {
+    try {
+      return await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      throw getAuthenticationExceptionFromCode(e.code);
+    }
+  }
+
+  // @override
+  // Future<void> sendEmailVerification() async {
+  //   User? user = FirebaseAuth.instance.currentUser;
+  //   if (user == null) {
+  //     throw StateError("Not connected");
+  //   }
+  //   user.sendEmailVerification();
+  // }
+
+  // @override
+  // Future<bool> isEmailInUse(String emailAddress) async {
+  //   try {
+  //     // Fetch sign-in methods for the email address
+  //     final list =
+  //         await FirebaseAuth.instance.fetchSignInMethodsForEmail(emailAddress);
+
+  //     // In case list is not empty
+  //     if (list.isNotEmpty) {
+  //       // Return true because there is an existing
+  //       // user using the email address
+  //       return true;
+  //     } else {
+  //       // Return false because email address is not in use
+  //       return false;
+  //     }
+  //   } on FirebaseAuthException catch (e) {
+  //     throw getAuthenticationExceptionFromCode(e.code);
+  //   }
+  // }
+
+  // @override
+  // String getUserEmail() {
+  //   User? user = FirebaseAuth.instance.currentUser;
+  //   if (user == null) {
+  //     throw StateError("Not connected");
+  //   }
+  //   return user.email!;
+  // }
+
+  // @override
+  // bool get isVerified {
+  //   User? user = FirebaseAuth.instance.currentUser;
+  //   if (user == null) {
+  //     throw StateError("Not connected");
+  //   }
+  //   user.reload();
+  //   return user.emailVerified;
+  // }
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/data/datasources/metadata_provider.dart`:
+
+```````dart
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ethiscan/domain/core/either.dart';
+import 'package:ethiscan/domain/entities/app/api_error.dart';
+import 'package:ethiscan/domain/entities/firestore/product_metadata.dart';
+import 'package:ethiscan/data/repositories/metadata_repository.dart';
+import 'package:injectable/injectable.dart';
+
+@Singleton(as: MetadataRepository)
+class MetadataRepositoryProvider implements MetadataRepository {
+  final CollectionReference metadataCollection =
+      FirebaseFirestore.instance.collection('metadata');
+
+  @override
+  Future<Either<APIError, List<ProductMetadata>>> getMetadata() async {
+    final doc = await metadataCollection.get();
+    return Right(doc.docs.map((d) =>
+        ProductMetadata.fromJson(d.data() as Map<String, dynamic>))
+        .toList());
+  }
+
+  @override
+  Future<Either<APIError, List<ProductMetadata>>> getByIdList(List<String> ids) async {
+    final docList = ids.map((id) => metadataCollection.doc(id).get());
+    return Future.wait(docList).then((docs) {
+      final metadata = docs
+          .where((doc) => doc.exists)
+          .map((doc) => ProductMetadata.fromJson(doc.data() as Map<String, dynamic>))
+          .toList();
+      return Right(metadata);
+    });
+  }
+
+  @override
+  Future<void> addMetadata(ProductMetadata metadata) {
+    return metadataCollection.add(metadata.toJson());
+  }
+
+  @override
+  Future<void> updateMetadata(ProductMetadata metadata) {
+    return metadataCollection
+        .doc(metadata.metadataTypeId)
+        .update(metadata.toJson());
+  }
+
+  @override
+  Future<void> deleteMetadata(ProductMetadata metadata) {
+    return metadataCollection.doc(metadata.metadataTypeId).delete();
+  }
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/data/datasources/firestore_provider.dart`:
+
+```````dart
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class FirebaseAPI {
+  final FirebaseFirestore firestore;
+  late CollectionReference collectionReference;
+
+  FirebaseAPI(String collectionName) : firestore = FirebaseFirestore.instance {
+    collectionReference = firestore.collection(collectionName);
+  }
+
+  FirebaseFirestore getDb() {
+    return firestore;
+  }
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/data/repositories/metadata_type_repository.dart`:
+
+```````dart
+import 'package:ethiscan/domain/core/either.dart';
+import 'package:ethiscan/domain/entities/app/api_error.dart';
+import 'package:ethiscan/domain/entities/firestore/metadata_type.dart';
+
+abstract class MetadataTypeRepository {
+  Future<Either<APIError, List<MetadataType>>> getMetadataTypes();
+  Future<Either<APIError, List<MetadataType>>> getByIdList(List<String> ids);
+}
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/data/repositories/favorite_product_repository.dart`:
+
+```````dart
+import 'package:ethiscan/domain/core/either.dart';
+import 'package:ethiscan/domain/entities/app/api_error.dart';
+import 'package:ethiscan/domain/entities/firestore/favorite_product.dart';
+
+abstract class FavoriteProductRepository {
+  Future<Either<APIError, List<FavoriteProduct>>> getFavoriteProducts();
+  Future<Either<APIError, void>> addFavoriteProduct(
+      FavoriteProduct favoriteProduct);
+  Future<Either<APIError, void>> removeFavoriteProduct(String productId);
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/data/repositories/product_repository.dart`:
+
+```````dart
+import 'package:ethiscan/domain/core/either.dart';
+import 'package:ethiscan/domain/entities/app/api_error.dart';
+import 'package:ethiscan/domain/entities/firestore/product.dart';
+import 'package:ethiscan/domain/entities/firestore/metadata_type.dart';
+
+abstract class ProductRepository {
+  Future<Either<APIError, Product>> getProductById(String id);
+  Future<Either<APIError, List<Product>>> getProductByIdList(List<String> id);
+  Future<Either<APIError, List<Product>>> getProductsByMetadataType(
+      MetadataType metadataType);
+  Future<void> addProduct(Product product);
+  Future<void> updateProduct(Product product);
+  Future<void> deleteProduct(Product product);
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/data/repositories/metadata_repository.dart`:
+
+```````dart
+import 'package:ethiscan/domain/core/either.dart';
+import 'package:ethiscan/domain/entities/app/api_error.dart';
+import 'package:ethiscan/domain/entities/firestore/product_metadata.dart';
+
+abstract class MetadataRepository {
+  Future<Either<APIError, List<ProductMetadata>>> getMetadata();
+  Future<Either<APIError, List<ProductMetadata>>> getByIdList(List<String> ids);
+  Future<void> addMetadata(ProductMetadata metadata);
+  Future<void> updateMetadata(ProductMetadata metadata);
+  Future<void> deleteMetadata(ProductMetadata metadata);
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/data/repositories/auth_repository.dart`:
+
+```````dart
+// This is the abstract class that will be used to authenticate the user
+import 'package:firebase_auth/firebase_auth.dart';
+
+abstract class AuthRepository {
+  // ~~~ Authentication ~~~
+  Future<UserCredential> logIn(
+      {required String email, required String password});
+
+  Future<void> logOut();
+
+  bool isUserConnected();
+
+  // Future<String> getCurrentUID();
+
+  // ~~~ Registration ~~~
+  Future<UserCredential> signUp(
+      {required String email, required String password});
+
+  //Future<void> sendEmailVerification();
+
+  //Future<bool> isEmailInUse(String emailAddress)
+
+  //String getUserEmail()
+
+  //bool get isVerified
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/data/repositories/user_repository.dart`:
+
+```````dart
+import 'package:ethiscan/domain/core/either.dart';
+import 'package:ethiscan/domain/entities/app/api_error.dart';
+import 'package:ethiscan/domain/entities/firestore/ethiscan_user.dart';
+
+abstract class UserRepository {
+  Future<Either<APIError, EthiscanUser>> getUserFromId(String uid);
+  Future<Either<APIError, EthiscanUser>> addUser(EthiscanUser user);
+  Future<void> updateUser(EthiscanUser user);
+  Future<void> deleteUser(EthiscanUser user);
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/data/repositories/language_repository.dart`:
+
+```````dart
+import 'package:ethiscan/domain/core/either.dart';
+import 'package:ethiscan/domain/language/i_language_repository.dart';
+import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+@LazySingleton(as: ILanguageRepository)
+class LanguageRepository implements ILanguageRepository {
+  @override
+  Future<bool> deleteCachedLanguage() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.remove('language');
+  }
+
+  @override
+  Future<Either<NoCachedLanguageFailure, String>> getCachedLanguage() async {
+    final prefs = await SharedPreferences.getInstance();
+    final language = prefs.getString('language');
+    if (language != null) {
+      return Right(language);
+    } else {
+      return Left(NoCachedLanguageFailure());
+    }
+  }
+
+  @override
+  void storeCachedLanguage(String language) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('language', language);
+  }
+}
+
+```````
