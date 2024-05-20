@@ -1,5 +1,6 @@
 import 'package:ethiscan/domain/entities/ethiscan_user.dart';
 import 'package:ethiscan/presentation/favorites/favorites_page.dart';
+import 'package:ethiscan/presentation/scan/scans.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -36,7 +37,7 @@ class _HomePageState extends State<HomePage> {
         body: TabBarView(
           children: [
             FavoritesPage(widget.user),
-            const Icon(Icons.qr_code),
+            const ScansPage(),
             const Icon(Icons.settings),
           ],
         ),
