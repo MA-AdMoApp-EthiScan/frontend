@@ -1,5 +1,7 @@
+import 'package:ethiscan/domain/entities/app/scan_history.dart';
+
 abstract class ScanHistoryRepository {
-  Future<List<String>> getScanHistory();
-  Future<void> addScanHistory(String barcodeId);
+  Future<List<ScanHistory>> getScanHistory();
+  Future<void> addScanHistory(ScanHistory scanHistory);
   Future<void> deleteScanHistory(String barcodeId);
 }

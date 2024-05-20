@@ -1,22 +1,26 @@
+import 'dart:convert';
+
 import 'package:ethiscan/data/repositories/scan_history_repository.dart';
+import 'package:ethiscan/domain/entities/app/scan_history.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @Singleton(as: ScanHistoryRepository)
 class ScanHistoryProvider implements ScanHistoryRepository {
-  static const _scanHistoryKey = 'scan_history';
+  static const _scanHistoryKey = 'scan_history_2';
 
   @override
-  Future<List<String>> getScanHistory() async {
+  Future<List<ScanHistory>> getScanHistory() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getStringList(_scanHistoryKey) ?? [];
+    final history = prefs.getStringList(_scanHistoryKey) ?? [];
+    return history.map((item) => ScanHistory.fromMap(jsonDecode(item))).toList();
   }
 
   @override
-  Future<void> addScanHistory(String barcodeId) async {
+  Future<void> addScanHistory(ScanHistory scanHistory) async {
     final prefs = await SharedPreferences.getInstance();
     final history = prefs.getStringList(_scanHistoryKey) ?? [];
-    history.add(barcodeId);
+    history.add(jsonEncode(scanHistory.toMap()));
     await prefs.setStringList(_scanHistoryKey, history);
   }
 
@@ -24,7 +28,7 @@ class ScanHistoryProvider implements ScanHistoryRepository {
   Future<void> deleteScanHistory(String barcodeId) async {
     final prefs = await SharedPreferences.getInstance();
     final history = prefs.getStringList(_scanHistoryKey) ?? [];
-    history.remove(barcodeId);
+    history.removeWhere((item) => ScanHistory.fromMap(jsonDecode(item)).barcodeId == barcodeId);
     await prefs.setStringList(_scanHistoryKey, history);
   }
 }
