@@ -219,13 +219,13 @@ class _ScansPage extends State<ScansPage> {
         CustomText(I18nUtils.translate(context, "scan.error.message")),
       ];
     } else {
-      scans = scans.reversed.toList();//.isEmpty ? ["Scan 1", "Scan 2"] : scans;
+      scans = scans.reversed.toList();
       List<Widget> widgets = [];
       List<Widget> f = scans
           .map((scan) => ScansCard(
               name: scan.name,
               barcodeId: scan.barcodeId,
-              date: DateFormat('dd/MM/yy HH:mm').format(scan.date!))) 
+              date: DateFormat('dd/MM/yy HH:mm').format(scan.date!)))
           .toList();
       for (int i = 0; i < f.length; i++) {
         widgets.add(const SizedBox(height: 15));
@@ -235,3 +235,13 @@ class _ScansPage extends State<ScansPage> {
     }
   }
 }
+/*
+FavoriteCard(
+              key: Key(scan.barcodeId!),
+              error: scan.name == null,
+              favorite: ListProduct(
+                  id: scan.barcodeId,
+                  name: scan.name!,
+                  scanDate: scan.date!
+                  ))
+ */

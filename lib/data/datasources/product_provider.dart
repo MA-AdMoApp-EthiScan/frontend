@@ -27,15 +27,20 @@ class ProductRepositoryProvider implements ProductRepository {
   }
 
   @override
-  Future<Either<APIError, List<Product>>> getProductByIdList(List<String> id) {
-    final docList = id.map((productId) => productCollection.doc(productId).get());
-    return Future.wait(docList).then((docs) {
-      final products = docs
-          .where((doc) => doc.exists)
+  Future<Either<APIError, List<Product>>> getProductByIdList(List<String> id) async {
+    final docList = await productCollection
+        .where('id', whereIn: id)
+        .get();
+
+    if (docList.docs.isEmpty) {
+      return Left(APIError('Product not found', 404));
+    }
+    else {
+      final products = docList.docs
           .map((doc) => Product.fromJson(doc.data() as Map<String, dynamic>))
           .toList();
       return Right(products);
-    });
+    }
   }
 
   @override
