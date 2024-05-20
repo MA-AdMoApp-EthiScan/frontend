@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ethiscan/domain/core/either.dart';
 import 'package:ethiscan/domain/entities/api_error.dart';
 import 'package:ethiscan/domain/entities/favorite_product.dart';
@@ -11,9 +12,14 @@ class FavoriteProductRepositoryProvider implements FavoriteProductRepository {
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('users');
 
+  Future<String?> getCurrentUserId() async {
+    User? currentUser = FirebaseAuth.instance.currentUser;
+    return currentUser?.uid;
+  }
+
   @override
-  Future<Either<APIError, List<FavoriteProduct>>> getFavoriteProducts(
-      String userId) async {
+  Future<Either<APIError, List<FavoriteProduct>>> getFavoriteProducts() async {
+    final userId = await getCurrentUserId();
     final doc = await userCollection.doc(userId).get();
     if (!doc.exists) {
       return Left(APIError('User not found', 404));
@@ -24,7 +30,8 @@ class FavoriteProductRepositoryProvider implements FavoriteProductRepository {
 
   @override
   Future<Either<APIError, void>> addFavoriteProduct(
-      String userId, FavoriteProduct favoriteProduct) async {
+      FavoriteProduct favoriteProduct) async {
+    final userId = await getCurrentUserId();
     final doc = await userCollection.doc(userId).get();
     if (!doc.exists) {
       return Left(APIError('User not found', 404));
@@ -38,8 +45,8 @@ class FavoriteProductRepositoryProvider implements FavoriteProductRepository {
   }
 
   @override
-  Future<Either<APIError, void>> removeFavoriteProduct(
-      String userId, String productId) async {
+  Future<Either<APIError, void>> removeFavoriteProduct(String productId) async {
+    final userId = await getCurrentUserId();
     final doc = await userCollection.doc(userId).get();
     if (!doc.exists) {
       return Left(APIError('User not found', 404));

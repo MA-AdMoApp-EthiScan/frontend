@@ -21,17 +21,17 @@ class UserRepositoryProvider implements UserRepository {
 
   @override
   Future<Either<APIError, EthiscanUser>> addUser(EthiscanUser user) async {
-    final doc = await userCollection.doc(user.firebaseUser?.uid).set(user.toJson());
+    final doc = await userCollection.doc(user.uid).set(user.toJson());
     return Right(EthiscanUser.fromJson(doc as Map<String, dynamic>));
   }
 
   @override
   Future<void> updateUser(EthiscanUser user) {
-    return userCollection.doc(user.firebaseUser?.uid).update(user.toJson());
+    return userCollection.doc(user.uid).update(user.toJson());
   }
 
   @override
   Future<void> deleteUser(EthiscanUser user) {
-    return userCollection.doc(user.firebaseUser?.uid).delete();
+    return userCollection.doc(user.uid).delete();
   }
 }

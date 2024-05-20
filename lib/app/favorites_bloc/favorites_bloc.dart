@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:ethiscan/data/repositories/user_repository.dart';
 import 'package:ethiscan/domain/entities/ethiscan_user.dart';
+import 'package:ethiscan/domain/entities/favorite_product.dart';
 import 'package:ethiscan/domain/entities/favorite_sort.dart';
 import 'package:ethiscan/domain/entities/product.dart';
 import 'package:ethiscan/domain/entities/sort_criteria.dart';
@@ -22,7 +23,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
       }, updateSort: (user, favoriteSort) async {
         emit(const FavoritesState.loading());
 
-        List<Product> favorites = user.favorites;
+        List<FavoriteProduct> favorites = user.favoriteProducts ?? [];
 
         // Filter by name if it's not null
         if (favoriteSort.name != null) {
@@ -58,7 +59,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
 
   Future<void> getUserWithFavorites(
       EthiscanUser user, Emitter<FavoritesState> emit) async {
-    var either = await _userRepository.getUserFromId(user.firebaseUser!.uid);
+    var either = await _userRepository.getUserFromId(user.uid);
     await either.when(
       left: (failure) async {
         var newEither = await _userRepository.addUser(user);
@@ -67,13 +68,13 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
             emit(const FavoritesState.error());
           },
           right: (user) async {
-            emit(FavoritesState.loaded(favorites: user.favorites));
+            emit(FavoritesState.loaded(favorites: user.favoriteProducts));
           },
         );
         emit(const FavoritesState.error());
       },
       right: (user) async {
-        emit(FavoritesState.loaded(favorites: user.favorites));
+        emit(FavoritesState.loaded(favorites: user.favoriteProducts));
       },
     );
   }
