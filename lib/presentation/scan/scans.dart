@@ -121,8 +121,7 @@ class _ScansPage extends State<ScansPage> {
                 ),
               )
                   .then((_) {
-                // Dispatch returnToPrevious event when coming back
-                _scansBloc.add(const ScansEvent.returnToPrevious());
+                _scansBloc.add(const ScansEvent.load());
               });
             },
             orElse: () {},
@@ -219,7 +218,7 @@ class _ScansPage extends State<ScansPage> {
         CustomText(I18nUtils.translate(context, "scan.error.message")),
       ];
     } else {
-      scans = scans.isEmpty ? ["Scan 1", "Scan 2"] : scans;
+      scans = scans.reversed.toList();//.isEmpty ? ["Scan 1", "Scan 2"] : scans;
       List<Widget> widgets = [];
       List<Widget> f = scans
           .map((scan) => ScansCard(
