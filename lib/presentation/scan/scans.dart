@@ -35,6 +35,7 @@ class _ScansPage extends State<ScansPage> {
     _scansBloc = getIt();
     _scansBloc.add(const ScansEvent.load());
     _initializeControllerFuture = _initializeCamera();
+    // ignore: deprecated_member_use
     _barcodeScanner = GoogleMlKit.vision.barcodeScanner();
   }
 
