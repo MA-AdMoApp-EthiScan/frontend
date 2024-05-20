@@ -1,4 +1,4 @@
-import 'package:ethiscan/domain/entities/sort_criteria.dart';
+import 'package:ethiscan/domain/entities/firestore/sort_criteria.dart';
 
 class FavoriteSort {
   final bool active;

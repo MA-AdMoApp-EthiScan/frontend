@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ethiscan/domain/entities/product_metadata.dart';
+import 'package:ethiscan/domain/entities/firestore/product_metadata.dart';
 import 'package:ethiscan/data/repositories/metadata_repository.dart';
 import 'package:injectable/injectable.dart';
 

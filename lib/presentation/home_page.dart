@@ -1,4 +1,4 @@
-import 'package:ethiscan/domain/entities/ethiscan_user.dart';
+import 'package:ethiscan/domain/entities/firestore/ethiscan_user.dart';
 import 'package:ethiscan/presentation/favorites/favorites_page.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:flutter/material.dart';

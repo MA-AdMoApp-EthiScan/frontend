@@ -1,6 +1,6 @@
 import 'package:ethiscan/app/product_bloc/product_bloc.dart';
 import 'package:ethiscan/domain/entities/api_error.dart';
-import 'package:ethiscan/domain/entities/product.dart';
+import 'package:ethiscan/domain/entities/firestore/product.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
