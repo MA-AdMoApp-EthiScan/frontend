@@ -16,24 +16,26 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$FavoritesEvent {
-  EthiscanUser get user => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(EthiscanUser user) load,
-    required TResult Function(EthiscanUser user, FavoriteSort favoriteSort)
+    required TResult Function() load,
+    required TResult Function(
+            List<ListProduct> listProduct, FavoriteSort favoriteSort)
         updateSort,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(EthiscanUser user)? load,
-    TResult? Function(EthiscanUser user, FavoriteSort favoriteSort)? updateSort,
+    TResult? Function()? load,
+    TResult? Function(List<ListProduct> listProduct, FavoriteSort favoriteSort)?
+        updateSort,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(EthiscanUser user)? load,
-    TResult Function(EthiscanUser user, FavoriteSort favoriteSort)? updateSort,
+    TResult Function()? load,
+    TResult Function(List<ListProduct> listProduct, FavoriteSort favoriteSort)?
+        updateSort,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -56,10 +58,6 @@ mixin _$FavoritesEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $FavoritesEventCopyWith<FavoritesEvent> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -67,8 +65,6 @@ abstract class $FavoritesEventCopyWith<$Res> {
   factory $FavoritesEventCopyWith(
           FavoritesEvent value, $Res Function(FavoritesEvent) then) =
       _$FavoritesEventCopyWithImpl<$Res, FavoritesEvent>;
-  @useResult
-  $Res call({EthiscanUser user});
 }
 
 /// @nodoc
@@ -80,30 +76,13 @@ class _$FavoritesEventCopyWithImpl<$Res, $Val extends FavoritesEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = null,
-  }) {
-    return _then(_value.copyWith(
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as EthiscanUser,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$FavoritesLoadImplCopyWith<$Res>
-    implements $FavoritesEventCopyWith<$Res> {
+abstract class _$$FavoritesLoadImplCopyWith<$Res> {
   factory _$$FavoritesLoadImplCopyWith(
           _$FavoritesLoadImpl value, $Res Function(_$FavoritesLoadImpl) then) =
       __$$FavoritesLoadImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({EthiscanUser user});
 }
 
 /// @nodoc
@@ -113,79 +92,58 @@ class __$$FavoritesLoadImplCopyWithImpl<$Res>
   __$$FavoritesLoadImplCopyWithImpl(
       _$FavoritesLoadImpl _value, $Res Function(_$FavoritesLoadImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = null,
-  }) {
-    return _then(_$FavoritesLoadImpl(
-      null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as EthiscanUser,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$FavoritesLoadImpl implements _FavoritesLoad {
-  const _$FavoritesLoadImpl(this.user);
-
-  @override
-  final EthiscanUser user;
+  const _$FavoritesLoadImpl();
 
   @override
   String toString() {
-    return 'FavoritesEvent.load(user: $user)';
+    return 'FavoritesEvent.load()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FavoritesLoadImpl &&
-            (identical(other.user, user) || other.user == user));
+        (other.runtimeType == runtimeType && other is _$FavoritesLoadImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$FavoritesLoadImplCopyWith<_$FavoritesLoadImpl> get copyWith =>
-      __$$FavoritesLoadImplCopyWithImpl<_$FavoritesLoadImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(EthiscanUser user) load,
-    required TResult Function(EthiscanUser user, FavoriteSort favoriteSort)
+    required TResult Function() load,
+    required TResult Function(
+            List<ListProduct> listProduct, FavoriteSort favoriteSort)
         updateSort,
   }) {
-    return load(user);
+    return load();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(EthiscanUser user)? load,
-    TResult? Function(EthiscanUser user, FavoriteSort favoriteSort)? updateSort,
+    TResult? Function()? load,
+    TResult? Function(List<ListProduct> listProduct, FavoriteSort favoriteSort)?
+        updateSort,
   }) {
-    return load?.call(user);
+    return load?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(EthiscanUser user)? load,
-    TResult Function(EthiscanUser user, FavoriteSort favoriteSort)? updateSort,
+    TResult Function()? load,
+    TResult Function(List<ListProduct> listProduct, FavoriteSort favoriteSort)?
+        updateSort,
     required TResult orElse(),
   }) {
     if (load != null) {
-      return load(user);
+      return load();
     }
     return orElse();
   }
@@ -223,25 +181,16 @@ class _$FavoritesLoadImpl implements _FavoritesLoad {
 }
 
 abstract class _FavoritesLoad implements FavoritesEvent {
-  const factory _FavoritesLoad(final EthiscanUser user) = _$FavoritesLoadImpl;
-
-  @override
-  EthiscanUser get user;
-  @override
-  @JsonKey(ignore: true)
-  _$$FavoritesLoadImplCopyWith<_$FavoritesLoadImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _FavoritesLoad() = _$FavoritesLoadImpl;
 }
 
 /// @nodoc
-abstract class _$$FavoritesUpdateSortImplCopyWith<$Res>
-    implements $FavoritesEventCopyWith<$Res> {
+abstract class _$$FavoritesUpdateSortImplCopyWith<$Res> {
   factory _$$FavoritesUpdateSortImplCopyWith(_$FavoritesUpdateSortImpl value,
           $Res Function(_$FavoritesUpdateSortImpl) then) =
       __$$FavoritesUpdateSortImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({EthiscanUser user, FavoriteSort favoriteSort});
+  $Res call({List<ListProduct> listProduct, FavoriteSort favoriteSort});
 }
 
 /// @nodoc
@@ -255,14 +204,14 @@ class __$$FavoritesUpdateSortImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = null,
+    Object? listProduct = null,
     Object? favoriteSort = null,
   }) {
     return _then(_$FavoritesUpdateSortImpl(
-      null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as EthiscanUser,
+      null == listProduct
+          ? _value._listProduct
+          : listProduct // ignore: cast_nullable_to_non_nullable
+              as List<ListProduct>,
       null == favoriteSort
           ? _value.favoriteSort
           : favoriteSort // ignore: cast_nullable_to_non_nullable
@@ -274,16 +223,24 @@ class __$$FavoritesUpdateSortImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FavoritesUpdateSortImpl implements _FavoritesUpdateSort {
-  const _$FavoritesUpdateSortImpl(this.user, this.favoriteSort);
+  const _$FavoritesUpdateSortImpl(
+      final List<ListProduct> listProduct, this.favoriteSort)
+      : _listProduct = listProduct;
 
+  final List<ListProduct> _listProduct;
   @override
-  final EthiscanUser user;
+  List<ListProduct> get listProduct {
+    if (_listProduct is EqualUnmodifiableListView) return _listProduct;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_listProduct);
+  }
+
   @override
   final FavoriteSort favoriteSort;
 
   @override
   String toString() {
-    return 'FavoritesEvent.updateSort(user: $user, favoriteSort: $favoriteSort)';
+    return 'FavoritesEvent.updateSort(listProduct: $listProduct, favoriteSort: $favoriteSort)';
   }
 
   @override
@@ -291,13 +248,15 @@ class _$FavoritesUpdateSortImpl implements _FavoritesUpdateSort {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FavoritesUpdateSortImpl &&
-            (identical(other.user, user) || other.user == user) &&
+            const DeepCollectionEquality()
+                .equals(other._listProduct, _listProduct) &&
             (identical(other.favoriteSort, favoriteSort) ||
                 other.favoriteSort == favoriteSort));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, favoriteSort);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_listProduct), favoriteSort);
 
   @JsonKey(ignore: true)
   @override
@@ -309,31 +268,34 @@ class _$FavoritesUpdateSortImpl implements _FavoritesUpdateSort {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(EthiscanUser user) load,
-    required TResult Function(EthiscanUser user, FavoriteSort favoriteSort)
+    required TResult Function() load,
+    required TResult Function(
+            List<ListProduct> listProduct, FavoriteSort favoriteSort)
         updateSort,
   }) {
-    return updateSort(user, favoriteSort);
+    return updateSort(listProduct, favoriteSort);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(EthiscanUser user)? load,
-    TResult? Function(EthiscanUser user, FavoriteSort favoriteSort)? updateSort,
+    TResult? Function()? load,
+    TResult? Function(List<ListProduct> listProduct, FavoriteSort favoriteSort)?
+        updateSort,
   }) {
-    return updateSort?.call(user, favoriteSort);
+    return updateSort?.call(listProduct, favoriteSort);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(EthiscanUser user)? load,
-    TResult Function(EthiscanUser user, FavoriteSort favoriteSort)? updateSort,
+    TResult Function()? load,
+    TResult Function(List<ListProduct> listProduct, FavoriteSort favoriteSort)?
+        updateSort,
     required TResult orElse(),
   }) {
     if (updateSort != null) {
-      return updateSort(user, favoriteSort);
+      return updateSort(listProduct, favoriteSort);
     }
     return orElse();
   }
@@ -371,14 +333,11 @@ class _$FavoritesUpdateSortImpl implements _FavoritesUpdateSort {
 }
 
 abstract class _FavoritesUpdateSort implements FavoritesEvent {
-  const factory _FavoritesUpdateSort(
-          final EthiscanUser user, final FavoriteSort favoriteSort) =
-      _$FavoritesUpdateSortImpl;
+  const factory _FavoritesUpdateSort(final List<ListProduct> listProduct,
+      final FavoriteSort favoriteSort) = _$FavoritesUpdateSortImpl;
 
-  @override
-  EthiscanUser get user;
+  List<ListProduct> get listProduct;
   FavoriteSort get favoriteSort;
-  @override
   @JsonKey(ignore: true)
   _$$FavoritesUpdateSortImplCopyWith<_$FavoritesUpdateSortImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -415,7 +374,7 @@ mixin _$FavoritesState {
   TResult map<TResult extends Object?>({
     required TResult Function(_FavoritesInitial value) initial,
     required TResult Function(_FavoritesLoading value) loading,
-    required TResult Function(_FavoritesLoaded value) loaded,
+    required TResult Function(FavoritesLoaded value) loaded,
     required TResult Function(_FavoritesError value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -423,7 +382,7 @@ mixin _$FavoritesState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FavoritesInitial value)? initial,
     TResult? Function(_FavoritesLoading value)? loading,
-    TResult? Function(_FavoritesLoaded value)? loaded,
+    TResult? Function(FavoritesLoaded value)? loaded,
     TResult? Function(_FavoritesError value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -431,7 +390,7 @@ mixin _$FavoritesState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FavoritesInitial value)? initial,
     TResult Function(_FavoritesLoading value)? loading,
-    TResult Function(_FavoritesLoaded value)? loaded,
+    TResult Function(FavoritesLoaded value)? loaded,
     TResult Function(_FavoritesError value)? error,
     required TResult orElse(),
   }) =>
@@ -533,7 +492,7 @@ class _$FavoritesInitialImpl implements _FavoritesInitial {
   TResult map<TResult extends Object?>({
     required TResult Function(_FavoritesInitial value) initial,
     required TResult Function(_FavoritesLoading value) loading,
-    required TResult Function(_FavoritesLoaded value) loaded,
+    required TResult Function(FavoritesLoaded value) loaded,
     required TResult Function(_FavoritesError value) error,
   }) {
     return initial(this);
@@ -544,7 +503,7 @@ class _$FavoritesInitialImpl implements _FavoritesInitial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FavoritesInitial value)? initial,
     TResult? Function(_FavoritesLoading value)? loading,
-    TResult? Function(_FavoritesLoaded value)? loaded,
+    TResult? Function(FavoritesLoaded value)? loaded,
     TResult? Function(_FavoritesError value)? error,
   }) {
     return initial?.call(this);
@@ -555,7 +514,7 @@ class _$FavoritesInitialImpl implements _FavoritesInitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FavoritesInitial value)? initial,
     TResult Function(_FavoritesLoading value)? loading,
-    TResult Function(_FavoritesLoaded value)? loaded,
+    TResult Function(FavoritesLoaded value)? loaded,
     TResult Function(_FavoritesError value)? error,
     required TResult orElse(),
   }) {
@@ -647,7 +606,7 @@ class _$FavoritesLoadingImpl implements _FavoritesLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(_FavoritesInitial value) initial,
     required TResult Function(_FavoritesLoading value) loading,
-    required TResult Function(_FavoritesLoaded value) loaded,
+    required TResult Function(FavoritesLoaded value) loaded,
     required TResult Function(_FavoritesError value) error,
   }) {
     return loading(this);
@@ -658,7 +617,7 @@ class _$FavoritesLoadingImpl implements _FavoritesLoading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FavoritesInitial value)? initial,
     TResult? Function(_FavoritesLoading value)? loading,
-    TResult? Function(_FavoritesLoaded value)? loaded,
+    TResult? Function(FavoritesLoaded value)? loaded,
     TResult? Function(_FavoritesError value)? error,
   }) {
     return loading?.call(this);
@@ -669,7 +628,7 @@ class _$FavoritesLoadingImpl implements _FavoritesLoading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FavoritesInitial value)? initial,
     TResult Function(_FavoritesLoading value)? loading,
-    TResult Function(_FavoritesLoaded value)? loaded,
+    TResult Function(FavoritesLoaded value)? loaded,
     TResult Function(_FavoritesError value)? error,
     required TResult orElse(),
   }) {
@@ -717,7 +676,7 @@ class __$$FavoritesLoadedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FavoritesLoadedImpl implements _FavoritesLoaded {
+class _$FavoritesLoadedImpl implements FavoritesLoaded {
   const _$FavoritesLoadedImpl({required final List<ListProduct> favorites})
       : _favorites = favorites;
 
@@ -796,7 +755,7 @@ class _$FavoritesLoadedImpl implements _FavoritesLoaded {
   TResult map<TResult extends Object?>({
     required TResult Function(_FavoritesInitial value) initial,
     required TResult Function(_FavoritesLoading value) loading,
-    required TResult Function(_FavoritesLoaded value) loaded,
+    required TResult Function(FavoritesLoaded value) loaded,
     required TResult Function(_FavoritesError value) error,
   }) {
     return loaded(this);
@@ -807,7 +766,7 @@ class _$FavoritesLoadedImpl implements _FavoritesLoaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FavoritesInitial value)? initial,
     TResult? Function(_FavoritesLoading value)? loading,
-    TResult? Function(_FavoritesLoaded value)? loaded,
+    TResult? Function(FavoritesLoaded value)? loaded,
     TResult? Function(_FavoritesError value)? error,
   }) {
     return loaded?.call(this);
@@ -818,7 +777,7 @@ class _$FavoritesLoadedImpl implements _FavoritesLoaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FavoritesInitial value)? initial,
     TResult Function(_FavoritesLoading value)? loading,
-    TResult Function(_FavoritesLoaded value)? loaded,
+    TResult Function(FavoritesLoaded value)? loaded,
     TResult Function(_FavoritesError value)? error,
     required TResult orElse(),
   }) {
@@ -829,8 +788,8 @@ class _$FavoritesLoadedImpl implements _FavoritesLoaded {
   }
 }
 
-abstract class _FavoritesLoaded implements FavoritesState {
-  const factory _FavoritesLoaded({required final List<ListProduct> favorites}) =
+abstract class FavoritesLoaded implements FavoritesState {
+  const factory FavoritesLoaded({required final List<ListProduct> favorites}) =
       _$FavoritesLoadedImpl;
 
   List<ListProduct> get favorites;
@@ -916,7 +875,7 @@ class _$FavoritesErrorImpl implements _FavoritesError {
   TResult map<TResult extends Object?>({
     required TResult Function(_FavoritesInitial value) initial,
     required TResult Function(_FavoritesLoading value) loading,
-    required TResult Function(_FavoritesLoaded value) loaded,
+    required TResult Function(FavoritesLoaded value) loaded,
     required TResult Function(_FavoritesError value) error,
   }) {
     return error(this);
@@ -927,7 +886,7 @@ class _$FavoritesErrorImpl implements _FavoritesError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FavoritesInitial value)? initial,
     TResult? Function(_FavoritesLoading value)? loading,
-    TResult? Function(_FavoritesLoaded value)? loaded,
+    TResult? Function(FavoritesLoaded value)? loaded,
     TResult? Function(_FavoritesError value)? error,
   }) {
     return error?.call(this);
@@ -938,7 +897,7 @@ class _$FavoritesErrorImpl implements _FavoritesError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FavoritesInitial value)? initial,
     TResult Function(_FavoritesLoading value)? loading,
-    TResult Function(_FavoritesLoaded value)? loaded,
+    TResult Function(FavoritesLoaded value)? loaded,
     TResult Function(_FavoritesError value)? error,
     required TResult orElse(),
   }) {

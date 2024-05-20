@@ -12,6 +12,11 @@ app:
       title: "Erreur"
       message: "Une erreur s'est produite lors de la récupération des données"
 
+popup:
+  logout:
+    title: "Déconnexion"
+    message: "Êtes-vous sûr de vouloir vous déconnecter ?"
+
 product:
   title: "Produit"
   add: "Ajouter aux favoris"
@@ -29,7 +34,6 @@ product:
     title: "Page vide"
     message: "Aucun produit trouvé"
   metadatas: "Métadonnées"
-  certifications: "Certifications"
 
 favorites:
   title: "Favoris"
@@ -50,10 +54,25 @@ sign_in:
   error-title: "Erreur"
   error-message: "Une erreur s'est produite lors de la connexion"
 
-parameter:
-  title: "Paramètre"
-  error-title: "Erreur"
-  error-message: "Une erreur s'est produite lors de la récupération des paramètres"
+parameters:
+  title: "Paramètres"
+  personal: "Informations personnelles"
+  metadatas: "Métadonnées"
+  name:
+    label: 'Nom'
+    placeholder: 'Mon nom'
+  email:
+    label: 'Email'
+    placeholder: 'mon@email.com'
+  phone:
+    label: 'Téléphone'
+    placeholder: 'Mon numéro de téléphone'
+  error:
+    title: "Erreur"
+    message: "Une erreur s'est produite lors de la récupération des paramètres"
+  empty:
+    title: "Page vide"
+    message: "Aucune métadonnée trouvée"
 
 splash:
   version: "Version {version}"
@@ -61,3 +80,7 @@ splash:
 words:
   email: "Email"
   password: "Mot de passe"
+  ok: "OK"
+  cancel: "Annuler"
+  close: "Fermer"
+  confirm: "Confirmer"

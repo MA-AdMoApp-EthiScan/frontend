@@ -31,7 +31,7 @@ class _FavoritesPage extends State<FavoritesPage> {
   @override
   void initState() {
     _favoritesBloc = getIt();
-    _favoritesBloc.add(FavoritesEvent.load(widget.user));
+    _favoritesBloc.add(const FavoritesEvent.load());
 
     _searchController = TextEditingController();
     _searchController.addListener(_searchChanged);
@@ -47,7 +47,9 @@ class _FavoritesPage extends State<FavoritesPage> {
   void _searchChanged() {
     _favoritesBloc.add(
       FavoritesEvent.updateSort(
-          widget.user, _favoriteSort!.copyWith(name: _searchController.text)),
+        (_favoritesBloc.state as FavoritesLoaded).favorites,
+        _favoriteSort!.copyWith(name: _searchController.text),
+      ),
     );
   }
 
@@ -87,9 +89,10 @@ class _FavoritesPage extends State<FavoritesPage> {
       appBar: AppBar(
         backgroundColor: UIColors.lightScaffoldBackgroundColor,
         title: Text(I18nUtils.translate(
-          context,
-          "favorites.title",
-        )),
+            context,
+            "favorites.title",
+          )
+        ),
         actions: [
           SecondaryIconButton(
             icon: _favoriteSort == null || _favoriteSort?.active == false
@@ -154,7 +157,8 @@ class _FavoritesPage extends State<FavoritesPage> {
                                       sortCriteria: sortCriteria);
                                 });
                                 _favoritesBloc.add(FavoritesEvent.updateSort(
-                                    widget.user, _favoriteSort!));
+                                    (_favoritesBloc.state as FavoritesLoaded).favorites,
+                                    _favoriteSort!));
                               },
                             ),
                           ),
@@ -180,7 +184,8 @@ class _FavoritesPage extends State<FavoritesPage> {
                                       sortCriteria: sortCriteria);
                                 });
                                 _favoritesBloc.add(FavoritesEvent.updateSort(
-                                    widget.user, _favoriteSort!));
+                                    (_favoritesBloc.state as FavoritesLoaded).favorites,
+                                    _favoriteSort!));
                               },
                             ),
                           ),
@@ -217,7 +222,8 @@ class _FavoritesPage extends State<FavoritesPage> {
                                     sortCriteria: sortCriteria);
                               });
                               _favoritesBloc.add(FavoritesEvent.updateSort(
-                                  widget.user, _favoriteSort!));
+                                  (_favoritesBloc.state as FavoritesLoaded).favorites,
+                                  _favoriteSort!));
                             },
                           ),
                           const SizedBox(width: 8),
@@ -231,16 +237,16 @@ class _FavoritesPage extends State<FavoritesPage> {
             : null,
       ),
       body: ListViewLayoutBody(
-        children: [
-          const SizedBox(height: 15),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0),
-            child: Column(
-              children: _getFavoritesCards(favorites, loading, error),
-            ),
+      children: [
+        const SizedBox(height: 15),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 0),
+          child: Column(
+            children: _getFavoritesCards(favorites, loading, error),
           ),
-        ],
-      ),
+        ),
+      ],
+    ),
     );
   }
 
