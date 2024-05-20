@@ -15,7 +15,8 @@ class ParametersBloc extends Bloc<ParametersEvent, ParametersState> {
   final MetadataTypeRepository _metadataTypeRepository;
   final UserRepository _userRepository;
   List<MetadataType> allMetadataTypes = [];
-  
+  List<String> currentMetadataTypeIds = [];
+
   ParametersBloc(
       this._metadataTypeRepository,
       this._userRepository
@@ -35,7 +36,8 @@ class ParametersBloc extends Bloc<ParametersEvent, ParametersState> {
                 var either = await _userRepository.getUserFromId(FirebaseAuth.instance.currentUser!.uid);
                 await either.when(
                   right: (user) async {
-                    emit(ParametersState.loaded(
+                    currentMetadataTypeIds = user.metadataTypeIds ?? [];
+                        emit(ParametersState.loaded(
                         allMetadataTypes: allMetadataTypes,
                         subscribedMetadataTypeIds: user.metadataTypeIds ?? []
                       )
@@ -55,6 +57,7 @@ class ParametersBloc extends Bloc<ParametersEvent, ParametersState> {
           await either.when(
             right: (user) async {
               user.metadataTypeIds ??= [];
+              currentMetadataTypeIds = user.metadataTypeIds ?? [];
               user.metadataTypeIds!.add(metadataTypeId);
               await _userRepository.updateUser(user);
 
@@ -73,6 +76,7 @@ class ParametersBloc extends Bloc<ParametersEvent, ParametersState> {
           var either = await _userRepository.getUserFromId(FirebaseAuth.instance.currentUser!.uid);
           await either.when(
             right: (user) async {
+              currentMetadataTypeIds = user.metadataTypeIds ?? [];
               user.metadataTypeIds?.remove(metadataTypeId);
               await _userRepository.updateUser(user);
 
@@ -85,6 +89,24 @@ class ParametersBloc extends Bloc<ParametersEvent, ParametersState> {
               emit(const ParametersState.error());
             },
           );
+        },
+        updateName: (String newName) {
+          emit(const ParametersState.loading());
+          var currentUser = FirebaseAuth.instance.currentUser;
+          currentUser!.updateDisplayName(newName);
+          emit(ParametersState.loaded(
+              allMetadataTypes: allMetadataTypes,
+              subscribedMetadataTypeIds: currentMetadataTypeIds
+          ));
+        },
+        updateEmail: (String newEmail) {
+          emit(const ParametersState.loading());
+          var currentUser = FirebaseAuth.instance.currentUser;
+          currentUser!.verifyBeforeUpdateEmail(newEmail);
+          emit(ParametersState.loaded(
+              allMetadataTypes: allMetadataTypes,
+              subscribedMetadataTypeIds: currentMetadataTypeIds
+          ));
         },
       );
     });

@@ -12,6 +12,7 @@ import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:phone_number_controller/phone_number_controller.dart';
 
 class ParametersPage extends StatefulWidget {
   final MainUserBloc mainUserBloc;
@@ -28,7 +29,7 @@ class _ParametersPageState extends State<ParametersPage> {
   // Controllers
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
-  final _phoneController = TextEditingController();
+  final _phoneController = PhoneNumberController(countryCode: 'ch');
 
   @override
   void initState() {
@@ -39,6 +40,13 @@ class _ParametersPageState extends State<ParametersPage> {
     _nameController.text = currentUser?.displayName ?? "";
     _emailController.text = currentUser?.email ?? "";
     _phoneController.text = currentUser?.phoneNumber ?? "";
+
+    _nameController.addListener(() {
+      _parameterBloc.add(ParametersEvent.updateName(_nameController.text));
+    });
+    _emailController.addListener(() {
+      _parameterBloc.add(ParametersEvent.updateEmail(_emailController.text));
+    });
 
     super.initState();
   }
@@ -136,12 +144,12 @@ class _ParametersPageState extends State<ParametersPage> {
           placeholder: I18nUtils.translate(context, "parameters.email.placeholder"),
           label: I18nUtils.translate(context, "parameters.email.label"),
         ),
-        const SizedBox(height: 20),
+        /*const SizedBox(height: 20),
         CustomTextField(
           controller: _phoneController,
           placeholder: I18nUtils.translate(context, "parameters.phone.placeholder"),
           label: I18nUtils.translate(context, "parameters.phone.label"),
-        ),
+        ),*/
         const SizedBox(height: 20),
         CustomH2P(I18nUtils.translate(context, "parameters.metadatas")),
       ]);

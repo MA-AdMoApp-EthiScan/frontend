@@ -21,6 +21,8 @@ mixin _$ParametersEvent {
     required TResult Function() load,
     required TResult Function(String metadataTypeId) subscribe,
     required TResult Function(String metadataTypeId) unsubscribe,
+    required TResult Function(String newName) updateName,
+    required TResult Function(String newEmail) updateEmail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +30,8 @@ mixin _$ParametersEvent {
     TResult? Function()? load,
     TResult? Function(String metadataTypeId)? subscribe,
     TResult? Function(String metadataTypeId)? unsubscribe,
+    TResult? Function(String newName)? updateName,
+    TResult? Function(String newEmail)? updateEmail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +39,8 @@ mixin _$ParametersEvent {
     TResult Function()? load,
     TResult Function(String metadataTypeId)? subscribe,
     TResult Function(String metadataTypeId)? unsubscribe,
+    TResult Function(String newName)? updateName,
+    TResult Function(String newEmail)? updateEmail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +49,8 @@ mixin _$ParametersEvent {
     required TResult Function(_ParametersLoad value) load,
     required TResult Function(_ParametersSubscribe value) subscribe,
     required TResult Function(_ParametersUnsubscribe value) unsubscribe,
+    required TResult Function(_ParametersUpdateName value) updateName,
+    required TResult Function(_ParametersUpdateEmail value) updateEmail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +58,8 @@ mixin _$ParametersEvent {
     TResult? Function(_ParametersLoad value)? load,
     TResult? Function(_ParametersSubscribe value)? subscribe,
     TResult? Function(_ParametersUnsubscribe value)? unsubscribe,
+    TResult? Function(_ParametersUpdateName value)? updateName,
+    TResult? Function(_ParametersUpdateEmail value)? updateEmail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +67,8 @@ mixin _$ParametersEvent {
     TResult Function(_ParametersLoad value)? load,
     TResult Function(_ParametersSubscribe value)? subscribe,
     TResult Function(_ParametersUnsubscribe value)? unsubscribe,
+    TResult Function(_ParametersUpdateName value)? updateName,
+    TResult Function(_ParametersUpdateEmail value)? updateEmail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,6 +133,8 @@ class _$ParametersLoadImpl implements _ParametersLoad {
     required TResult Function() load,
     required TResult Function(String metadataTypeId) subscribe,
     required TResult Function(String metadataTypeId) unsubscribe,
+    required TResult Function(String newName) updateName,
+    required TResult Function(String newEmail) updateEmail,
   }) {
     return load();
   }
@@ -131,6 +145,8 @@ class _$ParametersLoadImpl implements _ParametersLoad {
     TResult? Function()? load,
     TResult? Function(String metadataTypeId)? subscribe,
     TResult? Function(String metadataTypeId)? unsubscribe,
+    TResult? Function(String newName)? updateName,
+    TResult? Function(String newEmail)? updateEmail,
   }) {
     return load?.call();
   }
@@ -141,6 +157,8 @@ class _$ParametersLoadImpl implements _ParametersLoad {
     TResult Function()? load,
     TResult Function(String metadataTypeId)? subscribe,
     TResult Function(String metadataTypeId)? unsubscribe,
+    TResult Function(String newName)? updateName,
+    TResult Function(String newEmail)? updateEmail,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -155,6 +173,8 @@ class _$ParametersLoadImpl implements _ParametersLoad {
     required TResult Function(_ParametersLoad value) load,
     required TResult Function(_ParametersSubscribe value) subscribe,
     required TResult Function(_ParametersUnsubscribe value) unsubscribe,
+    required TResult Function(_ParametersUpdateName value) updateName,
+    required TResult Function(_ParametersUpdateEmail value) updateEmail,
   }) {
     return load(this);
   }
@@ -165,6 +185,8 @@ class _$ParametersLoadImpl implements _ParametersLoad {
     TResult? Function(_ParametersLoad value)? load,
     TResult? Function(_ParametersSubscribe value)? subscribe,
     TResult? Function(_ParametersUnsubscribe value)? unsubscribe,
+    TResult? Function(_ParametersUpdateName value)? updateName,
+    TResult? Function(_ParametersUpdateEmail value)? updateEmail,
   }) {
     return load?.call(this);
   }
@@ -175,6 +197,8 @@ class _$ParametersLoadImpl implements _ParametersLoad {
     TResult Function(_ParametersLoad value)? load,
     TResult Function(_ParametersSubscribe value)? subscribe,
     TResult Function(_ParametersUnsubscribe value)? unsubscribe,
+    TResult Function(_ParametersUpdateName value)? updateName,
+    TResult Function(_ParametersUpdateEmail value)? updateEmail,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -257,6 +281,8 @@ class _$ParametersSubscribeImpl implements _ParametersSubscribe {
     required TResult Function() load,
     required TResult Function(String metadataTypeId) subscribe,
     required TResult Function(String metadataTypeId) unsubscribe,
+    required TResult Function(String newName) updateName,
+    required TResult Function(String newEmail) updateEmail,
   }) {
     return subscribe(metadataTypeId);
   }
@@ -267,6 +293,8 @@ class _$ParametersSubscribeImpl implements _ParametersSubscribe {
     TResult? Function()? load,
     TResult? Function(String metadataTypeId)? subscribe,
     TResult? Function(String metadataTypeId)? unsubscribe,
+    TResult? Function(String newName)? updateName,
+    TResult? Function(String newEmail)? updateEmail,
   }) {
     return subscribe?.call(metadataTypeId);
   }
@@ -277,6 +305,8 @@ class _$ParametersSubscribeImpl implements _ParametersSubscribe {
     TResult Function()? load,
     TResult Function(String metadataTypeId)? subscribe,
     TResult Function(String metadataTypeId)? unsubscribe,
+    TResult Function(String newName)? updateName,
+    TResult Function(String newEmail)? updateEmail,
     required TResult orElse(),
   }) {
     if (subscribe != null) {
@@ -291,6 +321,8 @@ class _$ParametersSubscribeImpl implements _ParametersSubscribe {
     required TResult Function(_ParametersLoad value) load,
     required TResult Function(_ParametersSubscribe value) subscribe,
     required TResult Function(_ParametersUnsubscribe value) unsubscribe,
+    required TResult Function(_ParametersUpdateName value) updateName,
+    required TResult Function(_ParametersUpdateEmail value) updateEmail,
   }) {
     return subscribe(this);
   }
@@ -301,6 +333,8 @@ class _$ParametersSubscribeImpl implements _ParametersSubscribe {
     TResult? Function(_ParametersLoad value)? load,
     TResult? Function(_ParametersSubscribe value)? subscribe,
     TResult? Function(_ParametersUnsubscribe value)? unsubscribe,
+    TResult? Function(_ParametersUpdateName value)? updateName,
+    TResult? Function(_ParametersUpdateEmail value)? updateEmail,
   }) {
     return subscribe?.call(this);
   }
@@ -311,6 +345,8 @@ class _$ParametersSubscribeImpl implements _ParametersSubscribe {
     TResult Function(_ParametersLoad value)? load,
     TResult Function(_ParametersSubscribe value)? subscribe,
     TResult Function(_ParametersUnsubscribe value)? unsubscribe,
+    TResult Function(_ParametersUpdateName value)? updateName,
+    TResult Function(_ParametersUpdateEmail value)? updateEmail,
     required TResult orElse(),
   }) {
     if (subscribe != null) {
@@ -400,6 +436,8 @@ class _$ParametersUnsubscribeImpl implements _ParametersUnsubscribe {
     required TResult Function() load,
     required TResult Function(String metadataTypeId) subscribe,
     required TResult Function(String metadataTypeId) unsubscribe,
+    required TResult Function(String newName) updateName,
+    required TResult Function(String newEmail) updateEmail,
   }) {
     return unsubscribe(metadataTypeId);
   }
@@ -410,6 +448,8 @@ class _$ParametersUnsubscribeImpl implements _ParametersUnsubscribe {
     TResult? Function()? load,
     TResult? Function(String metadataTypeId)? subscribe,
     TResult? Function(String metadataTypeId)? unsubscribe,
+    TResult? Function(String newName)? updateName,
+    TResult? Function(String newEmail)? updateEmail,
   }) {
     return unsubscribe?.call(metadataTypeId);
   }
@@ -420,6 +460,8 @@ class _$ParametersUnsubscribeImpl implements _ParametersUnsubscribe {
     TResult Function()? load,
     TResult Function(String metadataTypeId)? subscribe,
     TResult Function(String metadataTypeId)? unsubscribe,
+    TResult Function(String newName)? updateName,
+    TResult Function(String newEmail)? updateEmail,
     required TResult orElse(),
   }) {
     if (unsubscribe != null) {
@@ -434,6 +476,8 @@ class _$ParametersUnsubscribeImpl implements _ParametersUnsubscribe {
     required TResult Function(_ParametersLoad value) load,
     required TResult Function(_ParametersSubscribe value) subscribe,
     required TResult Function(_ParametersUnsubscribe value) unsubscribe,
+    required TResult Function(_ParametersUpdateName value) updateName,
+    required TResult Function(_ParametersUpdateEmail value) updateEmail,
   }) {
     return unsubscribe(this);
   }
@@ -444,6 +488,8 @@ class _$ParametersUnsubscribeImpl implements _ParametersUnsubscribe {
     TResult? Function(_ParametersLoad value)? load,
     TResult? Function(_ParametersSubscribe value)? subscribe,
     TResult? Function(_ParametersUnsubscribe value)? unsubscribe,
+    TResult? Function(_ParametersUpdateName value)? updateName,
+    TResult? Function(_ParametersUpdateEmail value)? updateEmail,
   }) {
     return unsubscribe?.call(this);
   }
@@ -454,6 +500,8 @@ class _$ParametersUnsubscribeImpl implements _ParametersUnsubscribe {
     TResult Function(_ParametersLoad value)? load,
     TResult Function(_ParametersSubscribe value)? subscribe,
     TResult Function(_ParametersUnsubscribe value)? unsubscribe,
+    TResult Function(_ParametersUpdateName value)? updateName,
+    TResult Function(_ParametersUpdateEmail value)? updateEmail,
     required TResult orElse(),
   }) {
     if (unsubscribe != null) {
@@ -470,6 +518,315 @@ abstract class _ParametersUnsubscribe implements ParametersEvent {
   String get metadataTypeId;
   @JsonKey(ignore: true)
   _$$ParametersUnsubscribeImplCopyWith<_$ParametersUnsubscribeImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ParametersUpdateNameImplCopyWith<$Res> {
+  factory _$$ParametersUpdateNameImplCopyWith(_$ParametersUpdateNameImpl value,
+          $Res Function(_$ParametersUpdateNameImpl) then) =
+      __$$ParametersUpdateNameImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String newName});
+}
+
+/// @nodoc
+class __$$ParametersUpdateNameImplCopyWithImpl<$Res>
+    extends _$ParametersEventCopyWithImpl<$Res, _$ParametersUpdateNameImpl>
+    implements _$$ParametersUpdateNameImplCopyWith<$Res> {
+  __$$ParametersUpdateNameImplCopyWithImpl(_$ParametersUpdateNameImpl _value,
+      $Res Function(_$ParametersUpdateNameImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? newName = null,
+  }) {
+    return _then(_$ParametersUpdateNameImpl(
+      null == newName
+          ? _value.newName
+          : newName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ParametersUpdateNameImpl implements _ParametersUpdateName {
+  const _$ParametersUpdateNameImpl(this.newName);
+
+  @override
+  final String newName;
+
+  @override
+  String toString() {
+    return 'ParametersEvent.updateName(newName: $newName)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ParametersUpdateNameImpl &&
+            (identical(other.newName, newName) || other.newName == newName));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, newName);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ParametersUpdateNameImplCopyWith<_$ParametersUpdateNameImpl>
+      get copyWith =>
+          __$$ParametersUpdateNameImplCopyWithImpl<_$ParametersUpdateNameImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() load,
+    required TResult Function(String metadataTypeId) subscribe,
+    required TResult Function(String metadataTypeId) unsubscribe,
+    required TResult Function(String newName) updateName,
+    required TResult Function(String newEmail) updateEmail,
+  }) {
+    return updateName(newName);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? load,
+    TResult? Function(String metadataTypeId)? subscribe,
+    TResult? Function(String metadataTypeId)? unsubscribe,
+    TResult? Function(String newName)? updateName,
+    TResult? Function(String newEmail)? updateEmail,
+  }) {
+    return updateName?.call(newName);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? load,
+    TResult Function(String metadataTypeId)? subscribe,
+    TResult Function(String metadataTypeId)? unsubscribe,
+    TResult Function(String newName)? updateName,
+    TResult Function(String newEmail)? updateEmail,
+    required TResult orElse(),
+  }) {
+    if (updateName != null) {
+      return updateName(newName);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ParametersLoad value) load,
+    required TResult Function(_ParametersSubscribe value) subscribe,
+    required TResult Function(_ParametersUnsubscribe value) unsubscribe,
+    required TResult Function(_ParametersUpdateName value) updateName,
+    required TResult Function(_ParametersUpdateEmail value) updateEmail,
+  }) {
+    return updateName(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ParametersLoad value)? load,
+    TResult? Function(_ParametersSubscribe value)? subscribe,
+    TResult? Function(_ParametersUnsubscribe value)? unsubscribe,
+    TResult? Function(_ParametersUpdateName value)? updateName,
+    TResult? Function(_ParametersUpdateEmail value)? updateEmail,
+  }) {
+    return updateName?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ParametersLoad value)? load,
+    TResult Function(_ParametersSubscribe value)? subscribe,
+    TResult Function(_ParametersUnsubscribe value)? unsubscribe,
+    TResult Function(_ParametersUpdateName value)? updateName,
+    TResult Function(_ParametersUpdateEmail value)? updateEmail,
+    required TResult orElse(),
+  }) {
+    if (updateName != null) {
+      return updateName(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ParametersUpdateName implements ParametersEvent {
+  const factory _ParametersUpdateName(final String newName) =
+      _$ParametersUpdateNameImpl;
+
+  String get newName;
+  @JsonKey(ignore: true)
+  _$$ParametersUpdateNameImplCopyWith<_$ParametersUpdateNameImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ParametersUpdateEmailImplCopyWith<$Res> {
+  factory _$$ParametersUpdateEmailImplCopyWith(
+          _$ParametersUpdateEmailImpl value,
+          $Res Function(_$ParametersUpdateEmailImpl) then) =
+      __$$ParametersUpdateEmailImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String newEmail});
+}
+
+/// @nodoc
+class __$$ParametersUpdateEmailImplCopyWithImpl<$Res>
+    extends _$ParametersEventCopyWithImpl<$Res, _$ParametersUpdateEmailImpl>
+    implements _$$ParametersUpdateEmailImplCopyWith<$Res> {
+  __$$ParametersUpdateEmailImplCopyWithImpl(_$ParametersUpdateEmailImpl _value,
+      $Res Function(_$ParametersUpdateEmailImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? newEmail = null,
+  }) {
+    return _then(_$ParametersUpdateEmailImpl(
+      null == newEmail
+          ? _value.newEmail
+          : newEmail // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ParametersUpdateEmailImpl implements _ParametersUpdateEmail {
+  const _$ParametersUpdateEmailImpl(this.newEmail);
+
+  @override
+  final String newEmail;
+
+  @override
+  String toString() {
+    return 'ParametersEvent.updateEmail(newEmail: $newEmail)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ParametersUpdateEmailImpl &&
+            (identical(other.newEmail, newEmail) ||
+                other.newEmail == newEmail));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, newEmail);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ParametersUpdateEmailImplCopyWith<_$ParametersUpdateEmailImpl>
+      get copyWith => __$$ParametersUpdateEmailImplCopyWithImpl<
+          _$ParametersUpdateEmailImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() load,
+    required TResult Function(String metadataTypeId) subscribe,
+    required TResult Function(String metadataTypeId) unsubscribe,
+    required TResult Function(String newName) updateName,
+    required TResult Function(String newEmail) updateEmail,
+  }) {
+    return updateEmail(newEmail);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? load,
+    TResult? Function(String metadataTypeId)? subscribe,
+    TResult? Function(String metadataTypeId)? unsubscribe,
+    TResult? Function(String newName)? updateName,
+    TResult? Function(String newEmail)? updateEmail,
+  }) {
+    return updateEmail?.call(newEmail);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? load,
+    TResult Function(String metadataTypeId)? subscribe,
+    TResult Function(String metadataTypeId)? unsubscribe,
+    TResult Function(String newName)? updateName,
+    TResult Function(String newEmail)? updateEmail,
+    required TResult orElse(),
+  }) {
+    if (updateEmail != null) {
+      return updateEmail(newEmail);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ParametersLoad value) load,
+    required TResult Function(_ParametersSubscribe value) subscribe,
+    required TResult Function(_ParametersUnsubscribe value) unsubscribe,
+    required TResult Function(_ParametersUpdateName value) updateName,
+    required TResult Function(_ParametersUpdateEmail value) updateEmail,
+  }) {
+    return updateEmail(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ParametersLoad value)? load,
+    TResult? Function(_ParametersSubscribe value)? subscribe,
+    TResult? Function(_ParametersUnsubscribe value)? unsubscribe,
+    TResult? Function(_ParametersUpdateName value)? updateName,
+    TResult? Function(_ParametersUpdateEmail value)? updateEmail,
+  }) {
+    return updateEmail?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ParametersLoad value)? load,
+    TResult Function(_ParametersSubscribe value)? subscribe,
+    TResult Function(_ParametersUnsubscribe value)? unsubscribe,
+    TResult Function(_ParametersUpdateName value)? updateName,
+    TResult Function(_ParametersUpdateEmail value)? updateEmail,
+    required TResult orElse(),
+  }) {
+    if (updateEmail != null) {
+      return updateEmail(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ParametersUpdateEmail implements ParametersEvent {
+  const factory _ParametersUpdateEmail(final String newEmail) =
+      _$ParametersUpdateEmailImpl;
+
+  String get newEmail;
+  @JsonKey(ignore: true)
+  _$$ParametersUpdateEmailImplCopyWith<_$ParametersUpdateEmailImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
