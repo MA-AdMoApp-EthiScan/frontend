@@ -1,27 +1,31 @@
-# This is a basic workflow to help you get started with Actions
 name: CD - Create a new release
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
   push:
     tags:
-      - "v*.*.*" # on every version tag will build a new android artifact.
+      - "v*.*.*"
+
 jobs:
   build:
     name: Build APK
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
           java-version: "12.x"
+          
       - name: Setup Flutter
         uses: subosito/flutter-action@v1
         with:
           flutter-version: "3.22.0"
 
+      - name: Write google-services.json
+        run: |
+          echo "${{ secrets.GOOGLE_SERVICES_JSON }}" > android/app/google-services.json
+          
       - name: Pub Get Packages
         run: flutter pub get
 
