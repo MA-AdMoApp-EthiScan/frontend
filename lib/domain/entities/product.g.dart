@@ -7,15 +7,15 @@ part of 'product.dart';
 // **************************************************************************
 
 Product _$ProductFromJson(Map<String, dynamic> json) => Product(
-      id: json['id'] as String,
+      id: json['id'],
       name: json['name'] as String,
       imageUrl: json['imageUrl'] as String,
       description: json['description'] as String,
-      certifications: (json['certifications'] as List<dynamic>?)
-          ?.map((e) => Certification.fromJson(e as Map<String, dynamic>))
+      certificationIds: (json['certificationIds'] as List<dynamic>?)
+          ?.map((e) => e as String)
           .toList(),
-      productMetadatas: (json['productMetadatas'] as List<dynamic>?)
-          ?.map((e) => ProductMetadata.fromJson(e as Map<String, dynamic>))
+      productMetadataIds: (json['productMetadataIds'] as List<dynamic>?)
+          ?.map((e) => e as String)
           .toList(),
     );
 
@@ -24,6 +24,6 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       'name': instance.name,
       'imageUrl': instance.imageUrl,
       'description': instance.description,
-      'certifications': instance.certifications,
-      'productMetadatas': instance.productMetadatas,
+      'certificationIds': instance.certificationIds,
+      'productMetadataIds': instance.productMetadataIds,
     };

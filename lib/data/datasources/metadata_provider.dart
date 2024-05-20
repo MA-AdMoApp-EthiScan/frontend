@@ -24,11 +24,13 @@ class MetadataRepositoryProvider implements MetadataRepository {
 
   @override
   Future<void> updateMetadata(ProductMetadata metadata) {
-    return metadataCollection.doc(metadata.id).update(metadata.toJson());
+    return metadataCollection
+        .doc(metadata.metadataTypeId)
+        .update(metadata.toJson());
   }
 
   @override
   Future<void> deleteMetadata(ProductMetadata metadata) {
-    return metadataCollection.doc(metadata.id).delete();
+    return metadataCollection.doc(metadata.metadataTypeId).delete();
   }
 }
