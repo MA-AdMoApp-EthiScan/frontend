@@ -1,6 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:ethiscan/data/datasources/product_provider.dart';
+import 'package:ethiscan/domain/core/either.dart';
+import 'package:ethiscan/domain/entities/app/api_error.dart';
+import 'package:ethiscan/domain/entities/firestore/product.dart';
 import 'mock_firebase.mocks.dart';
 
 void main() {
@@ -9,6 +14,11 @@ void main() {
   late MockDocumentReference<Map<String, dynamic>> mockDocumentReference;
   late MockDocumentSnapshot<Map<String, dynamic>> mockDocumentSnapshot;
   late ProductRepositoryProvider productRepository;
+
+  setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+  });
 
   setUp(() {
     mockFirestore = MockFirebaseFirestore();
