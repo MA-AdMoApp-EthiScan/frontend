@@ -109,6 +109,15 @@ class _ProductPage extends State<ProductPage> {
         //     CustomText(product.carbonFootprint.toString()),
         //   ],
         // ),
+        const SizedBox(height: 30),
+        CustomH2P(I18nUtils.translate(context, "product.certifications")),
+        // Row(
+        //   children: [
+        //     CustomH3(I18nUtils.translate(context, "product.carbon_footprint")),
+        //     const Spacer(),
+        //     CustomText(product.carbonFootprint.toString()),
+        //   ],
+        // ),
       ];
     } else {
       return [
