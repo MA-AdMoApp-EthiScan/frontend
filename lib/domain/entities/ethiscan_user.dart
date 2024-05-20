@@ -2,6 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 import 'product.dart';
 import 'favorite_product.dart';
 
+part 'ethiscan_user.g.dart';
+
 @JsonSerializable()
 class EthiscanUser {
   final String uid;

@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:ethiscan/data/repositories/user_repository.dart';
+import 'package:ethiscan/data/repositories/favorite_product_repository.dart';
 import 'package:ethiscan/domain/entities/ethiscan_user.dart';
 import 'package:ethiscan/domain/entities/favorite_product.dart';
 import 'package:ethiscan/domain/entities/favorite_sort.dart';
+import 'package:ethiscan/domain/entities/list_product.dart';
 import 'package:ethiscan/domain/entities/product.dart';
 import 'package:ethiscan/domain/entities/sort_criteria.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -15,7 +17,9 @@ part 'favorites_state.dart';
 @injectable
 class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
   final UserRepository _userRepository;
-  FavoritesBloc(this._userRepository) : super(const FavoritesState.initial()) {
+  final FavoriteProductRepository _favoriteProductRepository;
+  FavoritesBloc(this._userRepository, this._favoriteProductRepository)
+      : super(const FavoritesState.initial()) {
     on<FavoritesEvent>((event, emit) async {
       await event.when(load: (user) async {
         emit(const FavoritesState.loading());
@@ -23,7 +27,17 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
       }, updateSort: (user, favoriteSort) async {
         emit(const FavoritesState.loading());
 
-        List<FavoriteProduct> favorites = user.favoriteProducts ?? [];
+        var either = await _favoriteProductRepository.getFavoriteProducts();
+        await either.when(
+          left: (failure) async {
+            emit(const FavoritesState.error());
+          },
+          right: (favoriteProducts) async {
+            emit(FavoritesState.loaded(favorites: favoriteProducts));
+          },
+        );
+
+        List<Product> favorites = user.favoriteProducts;
 
         // Filter by name if it's not null
         if (favoriteSort.name != null) {
