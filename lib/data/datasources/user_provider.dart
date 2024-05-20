@@ -32,11 +32,11 @@ class UserRepositoryProvider implements UserRepository {
 
   @override
   Future<void> updateUser(EthiscanUser user) {
-    return userCollection.doc(user.firebaseUser?.uid).update(user.toJson());
+    return userCollection.doc(user.uid).update(user.toJson());
   }
 
   @override
   Future<void> deleteUser(EthiscanUser user) {
-    return userCollection.doc(user.firebaseUser?.uid).delete();
+    return userCollection.doc(user.uid).delete();
   }
 }

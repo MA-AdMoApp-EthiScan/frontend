@@ -24,9 +24,14 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
           await reconnectCurrentUser(emit);
         } else {
           try {
+            // Log in
             UserCredential userCredential =
                 await _authRepository.logIn(email: email, password: password);
-            EthiscanUser user = EthiscanUser(firebaseUser: userCredential.user);
+            if (userCredential.user == null) {
+              emit(const MainUserState.disconnected(false));
+              return;
+            }
+            EthiscanUser user = EthiscanUser(uid: userCredential.user!.uid);
             emit(MainUserState.connected(user: user));
           } on FirebaseAuthException catch (e) {
             emit(MainUserState.error(false, getAuthenticationExceptionFromCode(e.code).toString()));
@@ -40,7 +45,7 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
         try {
           UserCredential userCredential =
               await _authRepository.signUp(email: email, password: password);
-          EthiscanUser user = EthiscanUser(firebaseUser: userCredential.user);
+          EthiscanUser user = EthiscanUser(uid: userCredential.user!.uid);
           emit(MainUserState.connected(user: user));
         } on FirebaseAuthException catch (e) {
           emit(MainUserState.error(true, e.message ?? ""));
@@ -58,8 +63,7 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
   Future<void> reconnectCurrentUser(Emitter<MainUserState> emit) async {
     if (FirebaseAuth.instance.currentUser != null) {
       emit(MainUserState.connected(
-          user:
-              EthiscanUser(firebaseUser: FirebaseAuth.instance.currentUser!)));
+          user: EthiscanUser(uid: FirebaseAuth.instance.currentUser!.uid)));
     } else {
       emit(const MainUserState.disconnected(false));
     }

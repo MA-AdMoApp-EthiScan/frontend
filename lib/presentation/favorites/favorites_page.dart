@@ -31,7 +31,7 @@ class _FavoritesPage extends State<FavoritesPage> {
   @override
   void initState() {
     _favoritesBloc = getIt();
-    _favoritesBloc.add(FavoritesEvent.load(widget.user));
+    _favoritesBloc.add(const FavoritesEvent.load());
 
     _searchController = TextEditingController();
     _searchController.addListener(_searchChanged);
@@ -47,7 +47,9 @@ class _FavoritesPage extends State<FavoritesPage> {
   void _searchChanged() {
     _favoritesBloc.add(
       FavoritesEvent.updateSort(
-          widget.user, _favoriteSort!.copyWith(name: _searchController.text)),
+        (_favoritesBloc.state as FavoritesLoaded).favorites,
+        _favoriteSort!.copyWith(name: _searchController.text),
+      ),
     );
   }
 
@@ -155,7 +157,8 @@ class _FavoritesPage extends State<FavoritesPage> {
                                       sortCriteria: sortCriteria);
                                 });
                                 _favoritesBloc.add(FavoritesEvent.updateSort(
-                                    widget.user, _favoriteSort!));
+                                    (_favoritesBloc.state as FavoritesLoaded).favorites,
+                                    _favoriteSort!));
                               },
                             ),
                           ),
@@ -181,7 +184,8 @@ class _FavoritesPage extends State<FavoritesPage> {
                                       sortCriteria: sortCriteria);
                                 });
                                 _favoritesBloc.add(FavoritesEvent.updateSort(
-                                    widget.user, _favoriteSort!));
+                                    (_favoritesBloc.state as FavoritesLoaded).favorites,
+                                    _favoriteSort!));
                               },
                             ),
                           ),
@@ -218,7 +222,8 @@ class _FavoritesPage extends State<FavoritesPage> {
                                     sortCriteria: sortCriteria);
                               });
                               _favoritesBloc.add(FavoritesEvent.updateSort(
-                                  widget.user, _favoriteSort!));
+                                  (_favoritesBloc.state as FavoritesLoaded).favorites,
+                                  _favoriteSort!));
                             },
                           ),
                           const SizedBox(width: 8),
