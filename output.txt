@@ -1,28 +1,167 @@
-Project Path: /home/olivier/projet/advanced_mobile_app/ethiscan/lib/data
+Project Path: /home/olivier/projet/advanced_mobile_app/ethiscan/lib
 
 Source Tree:
 
 ```
-data
-├── constants.dart
-├── datasources
-│   ├── product_provider.dart
-│   ├── user_provider.dart
-│   ├── favorite_product_provider.dart
-│   ├── matadata_type_provider.dart
-│   ├── auth_provider.dart
-│   ├── metadata_provider.dart
-│   └── firestore_provider.dart
-└── repositories
-    ├── metadata_type_repository.dart
-    ├── favorite_product_repository.dart
-    ├── product_repository.dart
-    ├── metadata_repository.dart
-    ├── auth_repository.dart
-    ├── user_repository.dart
-    └── language_repository.dart
+lib
+├── configuration_constants.dart
+├── injection.dart
+├── data
+│   ├── constants.dart
+│   ├── datasources
+│   │   ├── product_provider.dart
+│   │   ├── user_provider.dart
+│   │   ├── scan_history_provider.dart
+│   │   ├── favorite_product_provider.dart
+│   │   ├── matadata_type_provider.dart
+│   │   ├── auth_provider.dart
+│   │   ├── metadata_provider.dart
+│   │   └── firestore_provider.dart
+│   └── repositories
+│       ├── metadata_type_repository.dart
+│       ├── favorite_product_repository.dart
+│       ├── product_repository.dart
+│       ├── metadata_repository.dart
+│       ├── auth_repository.dart
+│       ├── scan_history_repository.dart
+│       ├── user_repository.dart
+│       └── language_repository.dart
+├── presentation
+│   ├── scan
+│   │   ├── scans.dart
+│   │   └── widgets
+│   │       └── scans_card.dart
+│   ├── product
+│   │   └── product_page.dart
+│   ├── parameter
+│   │   └── parameters_page.dart
+│   ├── home_page.dart
+│   ├── widget_core
+│   │   ├── unfocus.dart
+│   │   ├── my_card.dart
+│   │   └── popup_validation.dart
+│   ├── core
+│   │   ├── custom_text_field.dart
+│   │   ├── buttons
+│   │   │   ├── icon_button.dart
+│   │   │   ├── nav_button.dart
+│   │   │   ├── box_button.dart
+│   │   │   ├── link_button.dart
+│   │   │   ├── buttons.dart
+│   │   │   ├── secondary_button.dart
+│   │   │   ├── container_button.dart
+│   │   │   └── primary_button.dart
+│   │   ├── cutom_checkbox.dart
+│   │   ├── custom_loading.dart
+│   │   ├── custom_texts.dart
+│   │   ├── custom_boxes.dart
+│   │   ├── list_view_layout_body.dart
+│   │   └── top_shape.dart
+│   ├── app
+│   │   ├── app_connected.dart
+│   │   ├── register_page.dart
+│   │   ├── app.dart
+│   │   ├── custom_app.dart
+│   │   └── login_page.dart
+│   ├── splash_page.dart
+│   └── favorites
+│       ├── favorites_page.dart
+│       └── widgets
+│           └── favorites_card.dart
+├── domain
+│   ├── entities
+│   │   ├── app
+│   │   │   ├── list_product.dart
+│   │   │   ├── api_error.dart
+│   │   │   ├── favorite_sort.dart
+│   │   │   └── scan_history.dart
+│   │   └── firestore
+│   │       ├── metadata_type.dart
+│   │       ├── product_metadata.dart
+│   │       ├── product.dart
+│   │       ├── certification.g.dart
+│   │       ├── favorite_product.dart
+│   │       ├── sold_product.dart
+│   │       ├── product_metadata.g.dart
+│   │       ├── certification.dart
+│   │       ├── product.g.dart
+│   │       ├── sold_product.g.dart
+│   │       ├── ethiscan_user.dart
+│   │       ├── supplier.g.dart
+│   │       ├── supplier.dart
+│   │       ├── sort_criteria.dart
+│   │       └── metadata_type.g.dart
+│   ├── core
+│   │   └── either.dart
+│   └── language
+│       └── i_language_repository.dart
+├── scripts
+│   └── populate_database.dart
+├── app
+│   ├── scans_bloc
+│   │   ├── scans_bloc.freezed.dart
+│   │   ├── scans_bloc.dart
+│   │   ├── scans_state.dart
+│   │   └── scans_event.dart
+│   ├── favorites_bloc
+│   │   ├── favorites_event.dart
+│   │   ├── favorites_bloc.freezed.dart
+│   │   ├── favorites_bloc.dart
+│   │   └── favorites_state.dart
+│   ├── user_bloc
+│   │   ├── main_user_state.dart
+│   │   ├── main_user_bloc.dart
+│   │   ├── main_user_event.dart
+│   │   └── main_user_bloc.freezed.dart
+│   ├── product_bloc
+│   │   ├── product_state.dart
+│   │   ├── product_bloc.freezed.dart
+│   │   ├── product_event.dart
+│   │   └── product_bloc.dart
+│   ├── navigator.dart
+│   └── parameters_bloc
+│       ├── parameters_bloc.freezed.dart
+│       ├── parameters_state.dart
+│       ├── parameters_bloc.dart
+│       └── parameters_event.dart
+├── injection.config.dart
+├── firebase_options.dart
+├── main.dart
+└── utils
+    ├── text_styles.dart
+    ├── date_helpers.dart
+    ├── exceptions.dart
+    ├── ui_colors.dart
+    ├── navigation_util.dart
+    └── i18n_utils.dart
 
 ```
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/configuration_constants.dart`:
+
+```````dart
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+class ConfigurationConstants {
+  static final String datasourceVersion = dotenv.get('DATASOURCE_VERSION');
+  static final String datasourceServerIp = dotenv.get('DATASOURCE_SERVER_IP');
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/injection.dart`:
+
+```````dart
+import 'package:get_it/get_it.dart';
+import 'package:injectable/injectable.dart';
+import './injection.config.dart';
+
+final getIt = GetIt.instance;
+
+@injectableInit
+Future<void> configureDependencies() async => getIt.init();
+
+```````
 
 `/home/olivier/projet/advanced_mobile_app/ethiscan/lib/data/datasources/product_provider.dart`:
 
@@ -41,24 +180,35 @@ class ProductRepositoryProvider implements ProductRepository {
       FirebaseFirestore.instance.collection('products');
 
   @override
-  Future<Either<APIError, Product>> getProductById(String productId) async {
-    final doc = await productCollection.doc(productId).get();
-    if (!doc.exists) {
+  Future<Either<APIError, Product>> getProductById(String codebareId) async {
+    final querySnapshot = await productCollection
+        .where('id', isEqualTo: codebareId)
+        .get();
+    if (querySnapshot.docs.isEmpty) {
       return Left(APIError('Product not found', 404));
     }
-    return Right(Product.fromJson(doc.data() as Map<String, dynamic>));
+    final product = querySnapshot.docs
+        .map((doc) => Product.fromJson(doc.data() as Map<String, dynamic>))
+        .toList().first;
+
+    return Right(product);
   }
 
   @override
-  Future<Either<APIError, List<Product>>> getProductByIdList(List<String> id) {
-    final docList = id.map((productId) => productCollection.doc(productId).get());
-    return Future.wait(docList).then((docs) {
-      final products = docs
-          .where((doc) => doc.exists)
+  Future<Either<APIError, List<Product>>> getProductByIdList(List<String> id) async {
+    final docList = await productCollection
+        .where('id', whereIn: id)
+        .get();
+
+    if (docList.docs.isEmpty) {
+      return Left(APIError('Product not found', 404));
+    }
+    else {
+      final products = docList.docs
           .map((doc) => Product.fromJson(doc.data() as Map<String, dynamic>))
           .toList();
       return Right(products);
-    });
+    }
   }
 
   @override
@@ -135,6 +285,46 @@ class UserRepositoryProvider implements UserRepository {
   @override
   Future<void> deleteUser(EthiscanUser user) {
     return userCollection.doc(user.uid).delete();
+  }
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/data/datasources/scan_history_provider.dart`:
+
+```````dart
+import 'dart:convert';
+
+import 'package:ethiscan/data/repositories/scan_history_repository.dart';
+import 'package:ethiscan/domain/entities/app/scan_history.dart';
+import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+@Singleton(as: ScanHistoryRepository)
+class ScanHistoryProvider implements ScanHistoryRepository {
+  static const _scanHistoryKey = 'scan_history_2';
+
+  @override
+  Future<List<ScanHistory>> getScanHistory() async {
+    final prefs = await SharedPreferences.getInstance();
+    final history = prefs.getStringList(_scanHistoryKey) ?? [];
+    return history.map((item) => ScanHistory.fromMap(jsonDecode(item))).toList();
+  }
+
+  @override
+  Future<void> addScanHistory(ScanHistory scanHistory) async {
+    final prefs = await SharedPreferences.getInstance();
+    final history = prefs.getStringList(_scanHistoryKey) ?? [];
+    history.add(jsonEncode(scanHistory.toMap()));
+    await prefs.setStringList(_scanHistoryKey, history);
+  }
+
+  @override
+  Future<void> deleteScanHistory(String barcodeId) async {
+    final prefs = await SharedPreferences.getInstance();
+    final history = prefs.getStringList(_scanHistoryKey) ?? [];
+    history.removeWhere((item) => ScanHistory.fromMap(jsonDecode(item)).barcodeId == barcodeId);
+    await prefs.setStringList(_scanHistoryKey, history);
   }
 }
 
@@ -238,11 +428,13 @@ class MetadataTypeRepositoryProvider implements MetadataTypeRepository {
 
   @override
   Future<Either<APIError, List<MetadataType>>> getByIdList(List<String> ids) async {
-    final docList = ids.map((id) => metadataTypeCollection.doc(id).get());
+    final docList = ids.map((id) => metadataTypeCollection
+        .where('id', isEqualTo: id)
+        .get());
     return Future.wait(docList).then((docs) {
       final metadataTypes = docs
-          .where((doc) => doc.exists)
-          .map((doc) => MetadataType.fromJson(doc.data() as Map<String, dynamic>))
+          .where((doc) => doc.docs.isEmpty)
+          .map((doc) => MetadataType.fromJson(doc.docs as Map<String, dynamic>))
           .toList();
       return Right(metadataTypes);
     });
@@ -470,7 +662,7 @@ import 'package:ethiscan/domain/entities/firestore/product.dart';
 import 'package:ethiscan/domain/entities/firestore/metadata_type.dart';
 
 abstract class ProductRepository {
-  Future<Either<APIError, Product>> getProductById(String id);
+  Future<Either<APIError, Product>> getProductById(String codebareId);
   Future<Either<APIError, List<Product>>> getProductByIdList(List<String> id);
   Future<Either<APIError, List<Product>>> getProductsByMetadataType(
       MetadataType metadataType);
@@ -530,6 +722,18 @@ abstract class AuthRepository {
 
 ```````
 
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/data/repositories/scan_history_repository.dart`:
+
+```````dart
+import 'package:ethiscan/domain/entities/app/scan_history.dart';
+
+abstract class ScanHistoryRepository {
+  Future<List<ScanHistory>> getScanHistory();
+  Future<void> addScanHistory(ScanHistory scanHistory);
+  Future<void> deleteScanHistory(String barcodeId);
+}
+```````
+
 `/home/olivier/projet/advanced_mobile_app/ethiscan/lib/data/repositories/user_repository.dart`:
 
 ```````dart
@@ -578,6 +782,850 @@ class LanguageRepository implements ILanguageRepository {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('language', language);
   }
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/entities/app/list_product.dart`:
+
+```````dart
+class ListProduct {
+  final String id;
+  final String name;
+  final DateTime scanDate;
+
+  ListProduct({
+    required this.id,
+    required this.name,
+    required this.scanDate,
+  });
+
+  ListProduct copyWith({
+    String? id,
+    String? name,
+    DateTime? scanDate,
+  }) {
+    return ListProduct(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      scanDate: scanDate ?? this.scanDate,
+    );
+  }
+}
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/entities/app/api_error.dart`:
+
+```````dart
+import 'package:ethiscan/domain/core/either.dart';
+
+class APIError extends Failure {
+  final String message;
+  final int code;
+
+  APIError(this.message, this.code);
+}
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/entities/app/favorite_sort.dart`:
+
+```````dart
+import 'package:ethiscan/domain/entities/firestore/sort_criteria.dart';
+
+class FavoriteSort {
+  final bool active;
+  final String? name;
+  final bool? isRange;
+  final DateTime? dateFrom;
+  final DateTime? dateTo;
+  final SortCriteria sortCriteria;
+
+  FavoriteSort({
+    this.active = false,
+    this.name,
+    this.isRange,
+    this.dateFrom,
+    this.dateTo,
+    SortCriteria? sortCriteria,
+  }) : sortCriteria = sortCriteria ?? SortCriteria() {
+    if (isRange == true) {
+      assert(dateFrom != null && dateTo != null);
+    } else if (isRange == false) {
+      assert(dateFrom != null && dateTo == null);
+    }
+  }
+
+  FavoriteSort copyWith({
+    bool? active,
+    String? name,
+    bool? isRange,
+    DateTime? dateFrom,
+    DateTime? dateTo,
+    SortCriteria? sortCriteria,
+  }) {
+    return FavoriteSort(
+      active: active ?? this.active,
+      name: name ?? this.name,
+      isRange: isRange ?? this.isRange,
+      dateFrom: dateFrom ?? this.dateFrom,
+      dateTo: dateTo ?? this.dateTo,
+      sortCriteria: sortCriteria ?? this.sortCriteria,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'FavoriteSort{active: $active, name: $name, isRange: $isRange, dateFrom: $dateFrom, dateTo: $dateTo, sortCriteria: $sortCriteria}';
+  }
+}
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/entities/app/scan_history.dart`:
+
+```````dart
+class ScanHistory {
+  final String barcodeId;
+  final String? name;
+  final DateTime? date;
+
+  ScanHistory({required this.barcodeId, this.name, this.date});
+
+  // Convert a ScanHistory object into a Map
+  Map<String, dynamic> toMap() {
+    return {
+      'barcodeId': barcodeId,
+      'name': name,
+      'date': date?.toIso8601String(),
+    };
+  }
+
+  // Convert a Map into a ScanHistory object
+  static ScanHistory fromMap(Map<String, dynamic> map) {
+    return ScanHistory(
+      barcodeId: map['barcodeId'],
+      name: map['name'],
+      date: map['date'] != null ? DateTime.parse(map['date']) : null,
+    );
+  }
+}
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/entities/firestore/metadata_type.dart`:
+
+```````dart
+import 'package:json_annotation/json_annotation.dart';
+import 'package:uuid/uuid.dart';
+
+part 'metadata_type.g.dart';
+
+@JsonSerializable()
+class MetadataType {
+  final String id;
+  final String name;
+  final Map<String, dynamic> schema;
+
+  MetadataType({
+    String? id,
+    required this.name,
+    required this.schema,
+  }) : id = id ?? const Uuid().v4();
+
+  factory MetadataType.fromJson(Map<String, dynamic> json) =>
+      _$MetadataTypeFromJson(json);
+  Map<String, dynamic> toJson() => _$MetadataTypeToJson(this);
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/entities/firestore/product_metadata.dart`:
+
+```````dart
+import 'package:json_annotation/json_annotation.dart';
+import 'package:uuid/uuid.dart';
+part 'product_metadata.g.dart';
+
+@JsonSerializable()
+class ProductMetadata {
+  final String id;
+  final String metadataTypeId;
+  final Map<String, dynamic> data;
+
+  ProductMetadata({
+    id,
+    required this.metadataTypeId,
+    required this.data,
+  }) : id = id ?? const Uuid().v4();
+
+  factory ProductMetadata.fromJson(Map<String, dynamic> json) =>
+      _$ProductMetadataFromJson(json);
+  Map<String, dynamic> toJson() => _$ProductMetadataToJson(this);
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/entities/firestore/product.dart`:
+
+```````dart
+import 'package:json_annotation/json_annotation.dart';
+import 'package:uuid/uuid.dart';
+part 'product.g.dart';
+
+@JsonSerializable()
+class Product {
+  final String id;
+  final String name;
+  final String imageUrl;
+  final String description;
+  final List<String>? certificationIds;
+  final List<String>? productMetadataIds;
+
+  Product({
+    id,
+    required this.name,
+    required this.imageUrl,
+    required this.description,
+    this.certificationIds,
+    this.productMetadataIds,
+  }) : id = id ?? const Uuid().v4();
+
+  factory Product.fromJson(Map<String, dynamic> json) =>
+      _$ProductFromJson(json);
+  Map<String, dynamic> toJson() => _$ProductToJson(this);
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/entities/firestore/certification.g.dart`:
+
+```````dart
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'certification.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Certification _$CertificationFromJson(Map<String, dynamic> json) =>
+    Certification(
+      id: json['id'],
+      name: json['name'] as String,
+      description: json['description'] as String,
+      imageUrl: json['imageUrl'] as String,
+    );
+
+Map<String, dynamic> _$CertificationToJson(Certification instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'description': instance.description,
+      'imageUrl': instance.imageUrl,
+    };
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/entities/firestore/favorite_product.dart`:
+
+```````dart
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class FavoriteProduct {
+  final String productId;
+  final DateTime addedAt;
+
+  FavoriteProduct({required this.productId, required this.addedAt});
+
+  factory FavoriteProduct.fromJson(Map<String, dynamic> json) {
+    try {
+      return FavoriteProduct(
+        productId: json['productId'] as String,
+        addedAt: (json['addedAt'] as Timestamp).toDate(),
+      );
+    } catch (e) {
+      return FavoriteProduct(
+        productId: json['productId'] as String,
+        addedAt: DateTime.parse(json['addedAt'] as String),
+      );
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'productId': productId,
+      'addedAt': addedAt.toIso8601String(),
+    };
+  }
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/entities/firestore/sold_product.dart`:
+
+```````dart
+import 'package:json_annotation/json_annotation.dart';
+
+part 'sold_product.g.dart';
+
+@JsonSerializable()
+class SoldProduct {
+  final String productId;
+  final double price;
+
+  SoldProduct({
+    required this.productId,
+    required this.price,
+  });
+
+  factory SoldProduct.fromJson(Map<String, dynamic> json) =>
+      _$SoldProductFromJson(json);
+  Map<String, dynamic> toJson() => _$SoldProductToJson(this);
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/entities/firestore/product_metadata.g.dart`:
+
+```````dart
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'product_metadata.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+ProductMetadata _$ProductMetadataFromJson(Map<String, dynamic> json) =>
+    ProductMetadata(
+      id: json['id'],
+      metadataTypeId: json['metadataTypeId'] as String,
+      data: json['data'] as Map<String, dynamic>,
+    );
+
+Map<String, dynamic> _$ProductMetadataToJson(ProductMetadata instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'metadataTypeId': instance.metadataTypeId,
+      'data': instance.data,
+    };
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/entities/firestore/certification.dart`:
+
+```````dart
+import 'package:json_annotation/json_annotation.dart';
+import 'package:uuid/uuid.dart';
+part 'certification.g.dart';
+
+@JsonSerializable()
+class Certification {
+  final String id;
+  final String name;
+  final String description;
+  final String imageUrl;
+
+  Certification({
+    id,
+    required this.name,
+    required this.description,
+    required this.imageUrl,
+  }) : id = id ?? const Uuid().v4();
+
+  factory Certification.fromJson(Map<String, dynamic> json) =>
+      _$CertificationFromJson(json);
+  Map<String, dynamic> toJson() => _$CertificationToJson(this);
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/entities/firestore/product.g.dart`:
+
+```````dart
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'product.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Product _$ProductFromJson(Map<String, dynamic> json) => Product(
+      id: json['id'],
+      name: json['name'] as String,
+      imageUrl: json['imageUrl'] as String,
+      description: json['description'] as String,
+      certificationIds: (json['certificationIds'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      productMetadataIds: (json['productMetadataIds'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+    );
+
+Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'imageUrl': instance.imageUrl,
+      'description': instance.description,
+      'certificationIds': instance.certificationIds,
+      'productMetadataIds': instance.productMetadataIds,
+    };
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/entities/firestore/sold_product.g.dart`:
+
+```````dart
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'sold_product.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+SoldProduct _$SoldProductFromJson(Map<String, dynamic> json) => SoldProduct(
+      productId: json['productId'] as String,
+      price: (json['price'] as num).toDouble(),
+    );
+
+Map<String, dynamic> _$SoldProductToJson(SoldProduct instance) =>
+    <String, dynamic>{
+      'productId': instance.productId,
+      'price': instance.price,
+    };
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/entities/firestore/ethiscan_user.dart`:
+
+```````dart
+import 'package:firebase_auth/firebase_auth.dart';
+import 'favorite_product.dart';
+
+class EthiscanUser {
+  final String uid;
+  List<FavoriteProduct>? favoriteProducts;
+  List<String>? metadataTypeIds;
+
+  EthiscanUser({
+    required this.uid,
+    this.favoriteProducts,
+    this.metadataTypeIds,
+  });
+
+  factory EthiscanUser.fromJson(Map<String, dynamic> json) {
+    return EthiscanUser(
+      uid:
+          FirebaseAuth.instance.currentUser?.uid ?? json['firebaseUser']['uid'],
+      favoriteProducts: json['favoriteProducts'] != null
+          ? (json['favoriteProducts'] as List<dynamic>)
+              .map((item) =>
+                  FavoriteProduct.fromJson(item as Map<String, dynamic>))
+              .toList()
+          : [],
+      metadataTypeIds: json['metadataTypeIds'] != null
+          ? (json['metadataTypeIds'] as List<dynamic>)
+              .map((item) => item as String)
+              .toList()
+          : [],
+    );
+  }
+
+  get favorites => favoriteProducts;
+
+  Map<String, dynamic> toJson() {
+    return {
+      'uid': uid,
+      'favoriteProducts': favoriteProducts?.map((e) => e.toJson()).toList(),
+      'metadataTypeIds': metadataTypeIds,
+    };
+  }
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/entities/firestore/supplier.g.dart`:
+
+```````dart
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'supplier.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Supplier _$SupplierFromJson(Map<String, dynamic> json) => Supplier(
+      name: json['name'] as String,
+      products: (json['products'] as List<dynamic>)
+          .map((e) => SoldProduct.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$SupplierToJson(Supplier instance) => <String, dynamic>{
+      'name': instance.name,
+      'products': instance.products,
+    };
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/entities/firestore/supplier.dart`:
+
+```````dart
+import 'package:ethiscan/domain/entities/firestore/sold_product.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'supplier.g.dart';
+
+@JsonSerializable()
+class Supplier {
+  final String name;
+  final List<SoldProduct> products;
+
+  Supplier({required this.name, required this.products});
+
+  factory Supplier.fromJson(Map<String, dynamic> json) =>
+      _$SupplierFromJson(json);
+  Map<String, dynamic> toJson() => _$SupplierToJson(this);
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/entities/firestore/sort_criteria.dart`:
+
+```````dart
+class SortCriteria {
+  final SortField field;
+  final SortOrder order;
+
+  SortCriteria({
+    this.field = SortField.name,
+    this.order = SortOrder.ascending,
+  });
+
+  @override
+  String toString() {
+    return 'SortCriteria{field: $field, order: $order}';
+  }
+
+  SortCriteria copyWith({
+    SortField? field,
+    SortOrder? order,
+  }) {
+    return SortCriteria(
+      field: field ?? this.field,
+      order: order ?? this.order,
+    );
+  }
+}
+
+enum SortOrder { ascending, descending }
+
+enum SortField { name, scanDate }
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/entities/firestore/metadata_type.g.dart`:
+
+```````dart
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'metadata_type.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+MetadataType _$MetadataTypeFromJson(Map<String, dynamic> json) => MetadataType(
+      id: json['id'] as String?,
+      name: json['name'] as String,
+      schema: json['schema'] as Map<String, dynamic>,
+    );
+
+Map<String, dynamic> _$MetadataTypeToJson(MetadataType instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'schema': instance.schema,
+    };
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/core/either.dart`:
+
+```````dart
+const Unit unit = Unit();
+
+class Unit {
+  const Unit();
+
+  @override
+  bool operator ==(Object other) {
+    return true;
+  }
+
+  @override
+  int get hashCode => 1;
+
+  @override
+  String toString() {
+    return '()';
+  }
+}
+
+class Failure {}
+
+abstract class Either<L extends Failure, R> {
+  const Either();
+
+  factory Either.left(L failure) = Left;
+
+  factory Either.right(R value) = Right;
+
+  T when<T>(
+      {required T Function(L failure) left,
+      required T Function(R value) right}) {
+    if (this is Left) {
+      return left((this as Left<L, R>).failure);
+    }
+
+    return right((this as Right<L, R>).value);
+  }
+}
+
+class Left<L extends Failure, R> extends Either<L, R> {
+  final L failure;
+
+  Left(this.failure);
+}
+
+class Right<L extends Failure, R> extends Either<L, R> {
+  final R value;
+
+  Right(this.value);
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/domain/language/i_language_repository.dart`:
+
+```````dart
+import 'package:ethiscan/domain/core/either.dart';
+
+abstract class ILanguageRepository {
+  Future<Either<NoCachedLanguageFailure, String>> getCachedLanguage();
+
+  void storeCachedLanguage(String language);
+
+  Future<bool> deleteCachedLanguage();
+}
+
+class NoCachedLanguageFailure extends Failure {}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/injection.config.dart`:
+
+```````dart
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+// **************************************************************************
+// InjectableConfigGenerator
+// **************************************************************************
+
+// ignore_for_file: type=lint
+// coverage:ignore-file
+
+// ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:ethiscan/app/favorites_bloc/favorites_bloc.dart' as _i20;
+import 'package:ethiscan/app/parameters_bloc/parameters_bloc.dart' as _i22;
+import 'package:ethiscan/app/product_bloc/product_bloc.dart' as _i19;
+import 'package:ethiscan/app/scans_bloc/scans_bloc.dart' as _i23;
+import 'package:ethiscan/app/user_bloc/main_user_bloc.dart' as _i21;
+import 'package:ethiscan/data/datasources/auth_provider.dart' as _i10;
+import 'package:ethiscan/data/datasources/favorite_product_provider.dart'
+    as _i6;
+import 'package:ethiscan/data/datasources/matadata_type_provider.dart' as _i8;
+import 'package:ethiscan/data/datasources/metadata_provider.dart' as _i16;
+import 'package:ethiscan/data/datasources/product_provider.dart' as _i14;
+import 'package:ethiscan/data/datasources/scan_history_provider.dart' as _i18;
+import 'package:ethiscan/data/datasources/user_provider.dart' as _i4;
+import 'package:ethiscan/data/repositories/auth_repository.dart' as _i9;
+import 'package:ethiscan/data/repositories/favorite_product_repository.dart'
+    as _i5;
+import 'package:ethiscan/data/repositories/language_repository.dart' as _i12;
+import 'package:ethiscan/data/repositories/metadata_repository.dart' as _i15;
+import 'package:ethiscan/data/repositories/metadata_type_repository.dart'
+    as _i7;
+import 'package:ethiscan/data/repositories/product_repository.dart' as _i13;
+import 'package:ethiscan/data/repositories/scan_history_repository.dart'
+    as _i17;
+import 'package:ethiscan/data/repositories/user_repository.dart' as _i3;
+import 'package:ethiscan/domain/language/i_language_repository.dart' as _i11;
+import 'package:get_it/get_it.dart' as _i1;
+import 'package:injectable/injectable.dart' as _i2;
+
+extension GetItInjectableX on _i1.GetIt {
+// initializes the registration of main-scope dependencies inside of GetIt
+  _i1.GetIt init({
+    String? environment,
+    _i2.EnvironmentFilter? environmentFilter,
+  }) {
+    final gh = _i2.GetItHelper(
+      this,
+      environment,
+      environmentFilter,
+    );
+    gh.singleton<_i3.UserRepository>(() => _i4.UserRepositoryProvider());
+    gh.singleton<_i5.FavoriteProductRepository>(
+        () => _i6.FavoriteProductRepositoryProvider());
+    gh.singleton<_i7.MetadataTypeRepository>(
+        () => _i8.MetadataTypeRepositoryProvider());
+    gh.singleton<_i9.AuthRepository>(() => _i10.AuthenticationProvider());
+    gh.lazySingleton<_i11.ILanguageRepository>(() => _i12.LanguageRepository());
+    gh.singleton<_i13.ProductRepository>(
+        () => _i14.ProductRepositoryProvider());
+    gh.singleton<_i15.MetadataRepository>(
+        () => _i16.MetadataRepositoryProvider());
+    gh.singleton<_i17.ScanHistoryRepository>(() => _i18.ScanHistoryProvider());
+    gh.factory<_i19.ProductBloc>(
+        () => _i19.ProductBloc(gh<_i13.ProductRepository>()));
+    gh.factory<_i20.FavoritesBloc>(() => _i20.FavoritesBloc(
+          gh<_i5.FavoriteProductRepository>(),
+          gh<_i13.ProductRepository>(),
+        ));
+    gh.factory<_i21.MainUserBloc>(
+        () => _i21.MainUserBloc(gh<_i9.AuthRepository>()));
+    gh.factory<_i22.ParametersBloc>(() => _i22.ParametersBloc(
+          gh<_i7.MetadataTypeRepository>(),
+          gh<_i3.UserRepository>(),
+        ));
+    gh.factory<_i23.ScansBloc>(() => _i23.ScansBloc(
+          gh<_i17.ScanHistoryRepository>(),
+          gh<_i13.ProductRepository>(),
+        ));
+    return this;
+  }
+}
+
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/firebase_options.dart`:
+
+```````dart
+// File generated by FlutterFire CLI.
+// ignore_for_file: type=lint
+import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
+import 'package:flutter/foundation.dart'
+    show defaultTargetPlatform, kIsWeb, TargetPlatform;
+
+/// Default [FirebaseOptions] for use with your Firebase apps.
+///
+/// Example:
+/// ```dart
+/// import 'firebase_options.dart';
+/// // ...
+/// await Firebase.initializeApp(
+///   options: DefaultFirebaseOptions.currentPlatform,
+/// );
+/// ```
+class DefaultFirebaseOptions {
+  static FirebaseOptions get currentPlatform {
+    if (kIsWeb) {
+      return web;
+    }
+    switch (defaultTargetPlatform) {
+      case TargetPlatform.android:
+        return android;
+      case TargetPlatform.iOS:
+        return ios;
+      case TargetPlatform.macOS:
+        return macos;
+      case TargetPlatform.windows:
+        return windows;
+      case TargetPlatform.linux:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for linux - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
+      default:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions are not supported for this platform.',
+        );
+    }
+  }
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyDwNPunH5GwF_MaJft8dGMZh7-jl0nMmTM',
+    appId: '1:916169609528:web:38ca8da33a9d61e0c6f1cd',
+    messagingSenderId: '916169609528',
+    projectId: 'ethiscan-mse',
+    authDomain: 'ethiscan-mse.firebaseapp.com',
+    storageBucket: 'ethiscan-mse.appspot.com',
+  );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyDuJnOglnnntUBAa_EJN8K0Rlp791Xs-zk',
+    appId: '1:916169609528:android:5f6d420dd600ad39c6f1cd',
+    messagingSenderId: '916169609528',
+    projectId: 'ethiscan-mse',
+    storageBucket: 'ethiscan-mse.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyB8cxQdlu-220lLKG5gEIvZYj3LBezXQbQ',
+    appId: '1:916169609528:ios:ead43268fcaa4701c6f1cd',
+    messagingSenderId: '916169609528',
+    projectId: 'ethiscan-mse',
+    storageBucket: 'ethiscan-mse.appspot.com',
+    iosBundleId: 'com.example.ethiscan',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyB8cxQdlu-220lLKG5gEIvZYj3LBezXQbQ',
+    appId: '1:916169609528:ios:ead43268fcaa4701c6f1cd',
+    messagingSenderId: '916169609528',
+    projectId: 'ethiscan-mse',
+    storageBucket: 'ethiscan-mse.appspot.com',
+    iosBundleId: 'com.example.ethiscan',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyDwNPunH5GwF_MaJft8dGMZh7-jl0nMmTM',
+    appId: '1:916169609528:web:3216865a0c6bfa83c6f1cd',
+    messagingSenderId: '916169609528',
+    projectId: 'ethiscan-mse',
+    authDomain: 'ethiscan-mse.firebaseapp.com',
+    storageBucket: 'ethiscan-mse.appspot.com',
+  );
+}
+```````
+
+`/home/olivier/projet/advanced_mobile_app/ethiscan/lib/main.dart`:
+
+```````dart
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ethiscan/injection.dart';
+import 'package:ethiscan/presentation/app/app.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  getIt.registerSingleton<FirebaseFirestore>(FirebaseFirestore.instance);
+
+  await configureDependencies();
+
+  await dotenv.load(fileName: ".env");
+
+  runApp(const App());
 }
 
 ```````
