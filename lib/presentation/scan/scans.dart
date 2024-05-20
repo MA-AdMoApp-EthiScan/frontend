@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:ethiscan/app/scans_bloc/scans_bloc.dart';
+import 'package:ethiscan/domain/entities/app/scan_history.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/core/buttons/primary_button.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
@@ -13,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:camera/camera.dart';
 import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
+import 'package:intl/intl.dart';
 
 class ScansPage extends StatefulWidget {
   const ScansPage({super.key});
@@ -121,8 +123,7 @@ class _ScansPage extends State<ScansPage> {
                 ),
               )
                   .then((_) {
-                // Dispatch returnToPrevious event when coming back
-                _scansBloc.add(const ScansEvent.returnToPrevious());
+                _scansBloc.add(const ScansEvent.load());
               });
             },
             orElse: () {},
@@ -148,7 +149,7 @@ class _ScansPage extends State<ScansPage> {
     bool loading = false,
     bool error = false,
     String? barcode,
-    List<String> scans = const [],
+    List<ScanHistory> scans = const [],
   }) {
     return Scaffold(
       body: ListViewLayoutBody(
@@ -212,19 +213,19 @@ class _ScansPage extends State<ScansPage> {
     );
   }
 
-  List<Widget> _getScanCards(List<String> scans, bool error) {
+  List<Widget> _getScanCards(List<ScanHistory> scans, bool error) {
     if (error) {
       return [
         CustomH3(I18nUtils.translate(context, "scan.error.title")),
         CustomText(I18nUtils.translate(context, "scan.error.message")),
       ];
     } else {
-      scans = scans.isEmpty ? ["Scan 1", "Scan 2"] : scans;
+      scans = scans.reversed.toList();//.isEmpty ? ["Scan 1", "Scan 2"] : scans;
       List<Widget> widgets = [];
       List<Widget> f = scans
           .map((scan) => ScansCard(
-              scan: scan,
-              date: "12 nov. 2023")) // todo : use values from backend
+              scan: scan.name,
+              date: DateFormat('dd/MM/yy HH:mm').format(scan.date!))) 
           .toList();
       for (int i = 0; i < f.length; i++) {
         widgets.add(const SizedBox(height: 15));
