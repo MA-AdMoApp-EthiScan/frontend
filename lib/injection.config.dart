@@ -71,8 +71,10 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i7.MetadataTypeRepository>(),
           gh<_i3.UserRepository>(),
         ));
-    gh.factory<_i23.ScansBloc>(
-        () => _i23.ScansBloc(gh<_i17.ScanHistoryRepository>()));
+    gh.factory<_i23.ScansBloc>(() => _i23.ScansBloc(
+          gh<_i17.ScanHistoryRepository>(),
+          gh<_i13.ProductRepository>(),
+        ));
     return this;
   }
 }

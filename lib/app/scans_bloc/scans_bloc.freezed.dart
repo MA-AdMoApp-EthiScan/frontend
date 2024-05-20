@@ -21,7 +21,6 @@ mixin _$ScansEvent {
     required TResult Function() load,
     required TResult Function(String barcode) barcodeFound,
     required TResult Function(String barcode) invalidBarcode,
-    required TResult Function() returnToPrevious,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +28,6 @@ mixin _$ScansEvent {
     TResult? Function()? load,
     TResult? Function(String barcode)? barcodeFound,
     TResult? Function(String barcode)? invalidBarcode,
-    TResult? Function()? returnToPrevious,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +35,6 @@ mixin _$ScansEvent {
     TResult Function()? load,
     TResult Function(String barcode)? barcodeFound,
     TResult Function(String barcode)? invalidBarcode,
-    TResult Function()? returnToPrevious,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -46,7 +43,6 @@ mixin _$ScansEvent {
     required TResult Function(_ScansLoad value) load,
     required TResult Function(_ScansBarcodeFound value) barcodeFound,
     required TResult Function(_ScansInvalidBarcode value) invalidBarcode,
-    required TResult Function(_ScansReturnToPrevious value) returnToPrevious,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,7 +50,6 @@ mixin _$ScansEvent {
     TResult? Function(_ScansLoad value)? load,
     TResult? Function(_ScansBarcodeFound value)? barcodeFound,
     TResult? Function(_ScansInvalidBarcode value)? invalidBarcode,
-    TResult? Function(_ScansReturnToPrevious value)? returnToPrevious,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,7 +57,6 @@ mixin _$ScansEvent {
     TResult Function(_ScansLoad value)? load,
     TResult Function(_ScansBarcodeFound value)? barcodeFound,
     TResult Function(_ScansInvalidBarcode value)? invalidBarcode,
-    TResult Function(_ScansReturnToPrevious value)? returnToPrevious,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,7 +121,6 @@ class _$ScansLoadImpl implements _ScansLoad {
     required TResult Function() load,
     required TResult Function(String barcode) barcodeFound,
     required TResult Function(String barcode) invalidBarcode,
-    required TResult Function() returnToPrevious,
   }) {
     return load();
   }
@@ -138,7 +131,6 @@ class _$ScansLoadImpl implements _ScansLoad {
     TResult? Function()? load,
     TResult? Function(String barcode)? barcodeFound,
     TResult? Function(String barcode)? invalidBarcode,
-    TResult? Function()? returnToPrevious,
   }) {
     return load?.call();
   }
@@ -149,7 +141,6 @@ class _$ScansLoadImpl implements _ScansLoad {
     TResult Function()? load,
     TResult Function(String barcode)? barcodeFound,
     TResult Function(String barcode)? invalidBarcode,
-    TResult Function()? returnToPrevious,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -164,7 +155,6 @@ class _$ScansLoadImpl implements _ScansLoad {
     required TResult Function(_ScansLoad value) load,
     required TResult Function(_ScansBarcodeFound value) barcodeFound,
     required TResult Function(_ScansInvalidBarcode value) invalidBarcode,
-    required TResult Function(_ScansReturnToPrevious value) returnToPrevious,
   }) {
     return load(this);
   }
@@ -175,7 +165,6 @@ class _$ScansLoadImpl implements _ScansLoad {
     TResult? Function(_ScansLoad value)? load,
     TResult? Function(_ScansBarcodeFound value)? barcodeFound,
     TResult? Function(_ScansInvalidBarcode value)? invalidBarcode,
-    TResult? Function(_ScansReturnToPrevious value)? returnToPrevious,
   }) {
     return load?.call(this);
   }
@@ -186,7 +175,6 @@ class _$ScansLoadImpl implements _ScansLoad {
     TResult Function(_ScansLoad value)? load,
     TResult Function(_ScansBarcodeFound value)? barcodeFound,
     TResult Function(_ScansInvalidBarcode value)? invalidBarcode,
-    TResult Function(_ScansReturnToPrevious value)? returnToPrevious,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -268,7 +256,6 @@ class _$ScansBarcodeFoundImpl implements _ScansBarcodeFound {
     required TResult Function() load,
     required TResult Function(String barcode) barcodeFound,
     required TResult Function(String barcode) invalidBarcode,
-    required TResult Function() returnToPrevious,
   }) {
     return barcodeFound(barcode);
   }
@@ -279,7 +266,6 @@ class _$ScansBarcodeFoundImpl implements _ScansBarcodeFound {
     TResult? Function()? load,
     TResult? Function(String barcode)? barcodeFound,
     TResult? Function(String barcode)? invalidBarcode,
-    TResult? Function()? returnToPrevious,
   }) {
     return barcodeFound?.call(barcode);
   }
@@ -290,7 +276,6 @@ class _$ScansBarcodeFoundImpl implements _ScansBarcodeFound {
     TResult Function()? load,
     TResult Function(String barcode)? barcodeFound,
     TResult Function(String barcode)? invalidBarcode,
-    TResult Function()? returnToPrevious,
     required TResult orElse(),
   }) {
     if (barcodeFound != null) {
@@ -305,7 +290,6 @@ class _$ScansBarcodeFoundImpl implements _ScansBarcodeFound {
     required TResult Function(_ScansLoad value) load,
     required TResult Function(_ScansBarcodeFound value) barcodeFound,
     required TResult Function(_ScansInvalidBarcode value) invalidBarcode,
-    required TResult Function(_ScansReturnToPrevious value) returnToPrevious,
   }) {
     return barcodeFound(this);
   }
@@ -316,7 +300,6 @@ class _$ScansBarcodeFoundImpl implements _ScansBarcodeFound {
     TResult? Function(_ScansLoad value)? load,
     TResult? Function(_ScansBarcodeFound value)? barcodeFound,
     TResult? Function(_ScansInvalidBarcode value)? invalidBarcode,
-    TResult? Function(_ScansReturnToPrevious value)? returnToPrevious,
   }) {
     return barcodeFound?.call(this);
   }
@@ -327,7 +310,6 @@ class _$ScansBarcodeFoundImpl implements _ScansBarcodeFound {
     TResult Function(_ScansLoad value)? load,
     TResult Function(_ScansBarcodeFound value)? barcodeFound,
     TResult Function(_ScansInvalidBarcode value)? invalidBarcode,
-    TResult Function(_ScansReturnToPrevious value)? returnToPrevious,
     required TResult orElse(),
   }) {
     if (barcodeFound != null) {
@@ -415,7 +397,6 @@ class _$ScansInvalidBarcodeImpl implements _ScansInvalidBarcode {
     required TResult Function() load,
     required TResult Function(String barcode) barcodeFound,
     required TResult Function(String barcode) invalidBarcode,
-    required TResult Function() returnToPrevious,
   }) {
     return invalidBarcode(barcode);
   }
@@ -426,7 +407,6 @@ class _$ScansInvalidBarcodeImpl implements _ScansInvalidBarcode {
     TResult? Function()? load,
     TResult? Function(String barcode)? barcodeFound,
     TResult? Function(String barcode)? invalidBarcode,
-    TResult? Function()? returnToPrevious,
   }) {
     return invalidBarcode?.call(barcode);
   }
@@ -437,7 +417,6 @@ class _$ScansInvalidBarcodeImpl implements _ScansInvalidBarcode {
     TResult Function()? load,
     TResult Function(String barcode)? barcodeFound,
     TResult Function(String barcode)? invalidBarcode,
-    TResult Function()? returnToPrevious,
     required TResult orElse(),
   }) {
     if (invalidBarcode != null) {
@@ -452,7 +431,6 @@ class _$ScansInvalidBarcodeImpl implements _ScansInvalidBarcode {
     required TResult Function(_ScansLoad value) load,
     required TResult Function(_ScansBarcodeFound value) barcodeFound,
     required TResult Function(_ScansInvalidBarcode value) invalidBarcode,
-    required TResult Function(_ScansReturnToPrevious value) returnToPrevious,
   }) {
     return invalidBarcode(this);
   }
@@ -463,7 +441,6 @@ class _$ScansInvalidBarcodeImpl implements _ScansInvalidBarcode {
     TResult? Function(_ScansLoad value)? load,
     TResult? Function(_ScansBarcodeFound value)? barcodeFound,
     TResult? Function(_ScansInvalidBarcode value)? invalidBarcode,
-    TResult? Function(_ScansReturnToPrevious value)? returnToPrevious,
   }) {
     return invalidBarcode?.call(this);
   }
@@ -474,7 +451,6 @@ class _$ScansInvalidBarcodeImpl implements _ScansInvalidBarcode {
     TResult Function(_ScansLoad value)? load,
     TResult Function(_ScansBarcodeFound value)? barcodeFound,
     TResult Function(_ScansInvalidBarcode value)? invalidBarcode,
-    TResult Function(_ScansReturnToPrevious value)? returnToPrevious,
     required TResult orElse(),
   }) {
     if (invalidBarcode != null) {
@@ -492,122 +468,6 @@ abstract class _ScansInvalidBarcode implements ScansEvent {
   @JsonKey(ignore: true)
   _$$ScansInvalidBarcodeImplCopyWith<_$ScansInvalidBarcodeImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ScansReturnToPreviousImplCopyWith<$Res> {
-  factory _$$ScansReturnToPreviousImplCopyWith(
-          _$ScansReturnToPreviousImpl value,
-          $Res Function(_$ScansReturnToPreviousImpl) then) =
-      __$$ScansReturnToPreviousImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$ScansReturnToPreviousImplCopyWithImpl<$Res>
-    extends _$ScansEventCopyWithImpl<$Res, _$ScansReturnToPreviousImpl>
-    implements _$$ScansReturnToPreviousImplCopyWith<$Res> {
-  __$$ScansReturnToPreviousImplCopyWithImpl(_$ScansReturnToPreviousImpl _value,
-      $Res Function(_$ScansReturnToPreviousImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$ScansReturnToPreviousImpl implements _ScansReturnToPrevious {
-  const _$ScansReturnToPreviousImpl();
-
-  @override
-  String toString() {
-    return 'ScansEvent.returnToPrevious()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ScansReturnToPreviousImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() load,
-    required TResult Function(String barcode) barcodeFound,
-    required TResult Function(String barcode) invalidBarcode,
-    required TResult Function() returnToPrevious,
-  }) {
-    return returnToPrevious();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? load,
-    TResult? Function(String barcode)? barcodeFound,
-    TResult? Function(String barcode)? invalidBarcode,
-    TResult? Function()? returnToPrevious,
-  }) {
-    return returnToPrevious?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? load,
-    TResult Function(String barcode)? barcodeFound,
-    TResult Function(String barcode)? invalidBarcode,
-    TResult Function()? returnToPrevious,
-    required TResult orElse(),
-  }) {
-    if (returnToPrevious != null) {
-      return returnToPrevious();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_ScansLoad value) load,
-    required TResult Function(_ScansBarcodeFound value) barcodeFound,
-    required TResult Function(_ScansInvalidBarcode value) invalidBarcode,
-    required TResult Function(_ScansReturnToPrevious value) returnToPrevious,
-  }) {
-    return returnToPrevious(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_ScansLoad value)? load,
-    TResult? Function(_ScansBarcodeFound value)? barcodeFound,
-    TResult? Function(_ScansInvalidBarcode value)? invalidBarcode,
-    TResult? Function(_ScansReturnToPrevious value)? returnToPrevious,
-  }) {
-    return returnToPrevious?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ScansLoad value)? load,
-    TResult Function(_ScansBarcodeFound value)? barcodeFound,
-    TResult Function(_ScansInvalidBarcode value)? invalidBarcode,
-    TResult Function(_ScansReturnToPrevious value)? returnToPrevious,
-    required TResult orElse(),
-  }) {
-    if (returnToPrevious != null) {
-      return returnToPrevious(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ScansReturnToPrevious implements ScansEvent {
-  const factory _ScansReturnToPrevious() = _$ScansReturnToPreviousImpl;
 }
 
 /// @nodoc

@@ -186,14 +186,14 @@ class _ScansPage extends State<ScansPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     const SizedBox(height: 20),
-                    PrimaryButton(
-                      onTap: () {
-                        //_scansBloc.add(const ScansEvent.load());
-                        _captureFrame();
-                      },
-                      text:
-                          I18nUtils.translate(context, 'scan.capture-and-scan'),
-                    ),
+                    //PrimaryButton(
+                    //  onTap: () {
+                    //    //_scansBloc.add(const ScansEvent.load());
+                    //    _captureFrame();
+                    //  },
+                    //  text:
+                    //      I18nUtils.translate(context, 'scan.capture-and-scan'),
+                    //),
                     if (loading)
                       const Padding(
                         padding:
