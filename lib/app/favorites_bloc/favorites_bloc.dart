@@ -15,6 +15,8 @@ part 'favorites_state.dart';
 class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
   final FavoriteProductRepository _favoriteProductRepository;
   final ProductRepository _productRepository;
+  late List<ListProduct> allFavorites;
+
   FavoritesBloc(
       this._favoriteProductRepository,
       this._productRepository)
@@ -28,10 +30,13 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
           updateSort: (listProduct, favoriteSort) async {
             emit(const FavoritesState.loading());
             List<ListProduct> favorites = [];
+            for (var product in allFavorites) {
+              favorites.add(product);
+            }
 
             // Filter by name if it's not null
             if (favoriteSort.name != null) {
-              favorites = listProduct
+              favorites = favorites
                   .where((element) => element.name
                       .toLowerCase()
                       .contains(favoriteSort.name!.toLowerCase()))
@@ -52,16 +57,28 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
                   .toList();
             }
 
-            // Sort the list based on the sortCriteria
-            favorites.sort((a, b) {
-              if (favoriteSort.sortCriteria.order == SortOrder.ascending) {
-                return a.name.compareTo(b.name);
-              } else {
-                return b.name.compareTo(a.name);
-              }
-            });
+            switch (favoriteSort.sortCriteria.field) {
+              case SortField.name:
+                favorites.sort((a, b) {
+                  if (favoriteSort.sortCriteria.order == SortOrder.ascending) {
+                    return a.name.compareTo(b.name);
+                  } else {
+                    return b.name.compareTo(a.name);
+                  }
+                });
+                break;
+              case SortField.scanDate:
+                favorites.sort((a, b) {
+                  if (favoriteSort.sortCriteria.order == SortOrder.ascending) {
+                    return a.scanDate.compareTo(b.scanDate);
+                  } else {
+                    return b.scanDate.compareTo(a.scanDate);
+                  }
+                });
+                break;
+            }
 
-            emit(FavoritesState.loaded(favorites: listProduct));
+            emit(FavoritesState.loaded(favorites: favorites));
           }
         );
       }
@@ -91,6 +108,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
                     .firstWhere((element) => e.id == element.productId)
                     .addedAt))
                 .toList();
+            allFavorites = listProduct;
             emit(FavoritesState.loaded(favorites: listProduct));
           }
         );
