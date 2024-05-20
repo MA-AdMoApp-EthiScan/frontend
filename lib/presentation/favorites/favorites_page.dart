@@ -9,7 +9,7 @@ import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_text_field.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/core/list_view_layout_body.dart';
-import 'package:ethiscan/presentation/favorites/widgets/favorites_card.dart';
+import 'package:ethiscan/presentation/widget_core/product_card.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
@@ -272,7 +272,7 @@ class _FavoritesPage extends State<FavoritesPage> {
     } else {
       List<Widget> widgets = [];
       List<Widget> f = favorites
-          .map((favorite) => FavoriteCard(favorite: favorite))
+          .map((favorite) => ProductCard(favorite: favorite))
           .toList();
       for (int i = 0; i < f.length; i++) {
         widgets.add(const SizedBox(height: 15));

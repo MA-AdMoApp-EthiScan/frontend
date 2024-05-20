@@ -1,19 +1,19 @@
 import 'dart:async';
 
 import 'package:ethiscan/app/scans_bloc/scans_bloc.dart';
+import 'package:ethiscan/domain/entities/app/list_product.dart';
 import 'package:ethiscan/domain/entities/app/scan_history.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/core/list_view_layout_body.dart';
+import 'package:ethiscan/presentation/widget_core/product_card.dart';
 import 'package:ethiscan/presentation/product/product_page.dart';
-import 'package:ethiscan/presentation/scan/widgets/scans_card.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:camera/camera.dart';
 import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
-import 'package:intl/intl.dart';
 
 class ScansPage extends StatefulWidget {
   const ScansPage({super.key});
@@ -222,10 +222,14 @@ class _ScansPage extends State<ScansPage> {
       scans = scans.reversed.toList();
       List<Widget> widgets = [];
       List<Widget> f = scans
-          .map((scan) => ScansCard(
-              name: scan.name,
-              barcodeId: scan.barcodeId,
-              date: DateFormat('dd/MM/yy HH:mm').format(scan.date!)))
+          .map((scan) => ProductCard(
+          error: scan.name == null,
+          isFavorite: false,
+          favorite: ListProduct(
+              id: scan.barcodeId,
+              name: scan.name!,
+              scanDate: scan.date!
+          )))
           .toList();
       for (int i = 0; i < f.length; i++) {
         widgets.add(const SizedBox(height: 15));
@@ -235,13 +239,3 @@ class _ScansPage extends State<ScansPage> {
     }
   }
 }
-/*
-FavoriteCard(
-              key: Key(scan.barcodeId!),
-              error: scan.name == null,
-              favorite: ListProduct(
-                  id: scan.barcodeId,
-                  name: scan.name!,
-                  scanDate: scan.date!
-                  ))
- */
