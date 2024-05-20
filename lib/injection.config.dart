@@ -40,22 +40,23 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
-    gh.singleton<_i3.UserRepository>(() => _i4.UserRepositoryProvider());
-    gh.singleton<_i5.FavoriteProductRepository>(
-        () => _i6.FavoriteProductRepositoryProvider());
-    gh.singleton<_i7.AuthRepository>(() => _i8.AuthenticationProvider());
-    gh.lazySingleton<_i9.ILanguageRepository>(() => _i10.LanguageRepository());
-    gh.singleton<_i11.ProductRepository>(
-        () => _i12.ProductRepositoryProvider());
-    gh.singleton<_i13.MetadataRepository>(
-        () => _i14.MetadataRepositoryProvider());
-    gh.factory<_i15.ProductBloc>(
-        () => _i15.ProductBloc(gh<_i11.ProductRepository>()));
-    gh.factory<_i16.MainUserBloc>(
-        () => _i16.MainUserBloc(gh<_i7.AuthRepository>()));
-    gh.factory<_i17.FavoritesBloc>(() => _i17.FavoritesBloc(
-          gh<_i3.UserRepository>(),
-          gh<_i11.ProductRepository>(),
+    gh.factory<_i3.ScansBloc>(() => _i3.ScansBloc());
+    gh.singleton<_i4.UserRepository>(() => _i5.UserRepositoryProvider());
+    gh.singleton<_i6.FavoriteProductRepository>(
+        () => _i7.FavoriteProductRepositoryProvider());
+    gh.singleton<_i8.AuthRepository>(() => _i9.AuthenticationProvider());
+    gh.lazySingleton<_i10.ILanguageRepository>(() => _i11.LanguageRepository());
+    gh.singleton<_i12.ProductRepository>(
+        () => _i13.ProductRepositoryProvider());
+    gh.singleton<_i14.MetadataRepository>(
+        () => _i15.MetadataRepositoryProvider());
+    gh.factory<_i16.ProductBloc>(
+        () => _i16.ProductBloc(gh<_i12.ProductRepository>()));
+    gh.factory<_i17.MainUserBloc>(
+        () => _i17.MainUserBloc(gh<_i8.AuthRepository>()));
+    gh.factory<_i18.FavoritesBloc>(() => _i18.FavoritesBloc(
+          gh<_i4.UserRepository>(),
+          gh<_i12.ProductRepository>(),
         ));
     return this;
   }
