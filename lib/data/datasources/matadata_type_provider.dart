@@ -25,11 +25,13 @@ class MetadataTypeRepositoryProvider implements MetadataTypeRepository {
 
   @override
   Future<Either<APIError, List<MetadataType>>> getByIdList(List<String> ids) async {
-    final docList = ids.map((id) => metadataTypeCollection.doc(id).get());
+    final docList = ids.map((id) => metadataTypeCollection
+        .where('id', isEqualTo: id)
+        .get());
     return Future.wait(docList).then((docs) {
       final metadataTypes = docs
-          .where((doc) => doc.exists)
-          .map((doc) => MetadataType.fromJson(doc.data() as Map<String, dynamic>))
+          .where((doc) => doc.docs.isEmpty)
+          .map((doc) => MetadataType.fromJson(doc.docs as Map<String, dynamic>))
           .toList();
       return Right(metadataTypes);
     });
