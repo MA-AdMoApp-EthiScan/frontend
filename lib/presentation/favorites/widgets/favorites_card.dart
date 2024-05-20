@@ -27,7 +27,7 @@ class FavoriteCard extends MyCard {
       trailing: const Icon(Icons.star, color: UIColors.lightAccentColor),
       title: CustomH2(favorite.name),
       subtitle: CustomText(I18nUtils.translate(context,
-              "favorite.last_scan") +
+              "product.last_scan") +
           DateHelpers.formatDateToEuropeanStyle(favorite.scanDate)
           ),
     );
