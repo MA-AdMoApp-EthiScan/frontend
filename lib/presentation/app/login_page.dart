@@ -9,11 +9,12 @@ import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
   final MainUserBloc mainUserBloc;
+  final String? error;
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  LoginPage({required this.mainUserBloc, super.key});
+  LoginPage({required this.mainUserBloc, super.key, this.error});
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +42,12 @@ class LoginPage extends StatelessWidget {
                 placeholder: 'Password',
                 password: true,
               ),
+              const SizedBox(height: 20),
+              if (error != null && error!.isNotEmpty)
+                Text(
+                  error!,
+                  style: const TextStyle(color: Colors.red),
+                ),
               const SizedBox(height: 50),
               PrimaryButton(
                 text: 'Sign In', // TODO : translate 'Sign In'

@@ -59,12 +59,23 @@ sign_in:
 
 parameters:
   title: 'Parameters'
+  personal: 'Personal information'
+  metadatas: 'Metadatas'
+  name:
+    label: 'Name'
+    placeholder: 'My name'
+  email:
+      label: 'Email'
+      placeholder: 'my@email.com'
+  phone:
+    label: 'Phone number'
+    placeholder: 'My phone number'
   error:
     title: 'Error'
     message: 'An error occurred while fetching parameters'
   empty:
-    title: 'Empty page'
-    message: 'No parameter found'
+      title: 'Empty page'
+      message: 'No metadata found'
 
 splash:
   version: "Version {version}"

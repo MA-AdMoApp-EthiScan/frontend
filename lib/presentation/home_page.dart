@@ -1,3 +1,4 @@
+import 'package:ethiscan/app/user_bloc/main_user_bloc.dart';
 import 'package:ethiscan/domain/entities/firestore/ethiscan_user.dart';
 import 'package:ethiscan/presentation/favorites/favorites_page.dart';
 import 'package:ethiscan/presentation/scan/scans.dart';
@@ -6,10 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../utils/ui_colors.dart';
+import 'parameter/parameters_page.dart';
+import 'widget_core/popup_validation.dart';
 
 class HomePage extends StatefulWidget {
   final EthiscanUser user;
-  const HomePage(this.user, {super.key});
+  final MainUserBloc mainUserBloc;
+  const HomePage(this.user, this.mainUserBloc, {super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -32,13 +36,20 @@ class _HomePageState extends State<HomePage> {
           title: SvgPicture.asset(
             "assets/images/logo_white.svg",
           ),
+          actions: [
+            PopupValidation(
+              name: "logout",
+              onPressed: () => widget.mainUserBloc.add(const MainUserEvent.disconnect()),
+              button: const Icon(Icons.logout, color: Colors.white),
+            ),
+          ],
         ),
         bottomNavigationBar: menu(),
         body: TabBarView(
           children: [
             FavoritesPage(widget.user),
             const ScansPage(),
-            const Icon(Icons.settings),
+            ParametersPage(mainUserBloc: widget.mainUserBloc),
           ],
         ),
       ),
@@ -72,7 +83,7 @@ class _HomePageState extends State<HomePage> {
           Tab(
             text: I18nUtils.translate(
               context,
-              "parameter.title",
+              "parameters.title",
             ),
             icon: const Icon(Icons.settings),
           ),
