@@ -4,7 +4,7 @@ import 'package:ethiscan/domain/entities/firestore/product.dart';
 import 'package:ethiscan/domain/entities/firestore/metadata_type.dart';
 
 abstract class ProductRepository {
-  Future<Either<APIError, Product>> getProductById(String id);
+  Future<Either<APIError, Product>> getProductById(String codebareId);
   Future<Either<APIError, List<Product>>> getProductByIdList(List<String> id);
   Future<Either<APIError, List<Product>>> getProductsByMetadataType(
       MetadataType metadataType);

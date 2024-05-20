@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:ethiscan/app/scans_bloc/scans_bloc.dart';
 import 'package:ethiscan/domain/entities/app/scan_history.dart';
 import 'package:ethiscan/injection.dart';
-import 'package:ethiscan/presentation/core/buttons/primary_button.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/core/list_view_layout_body.dart';
@@ -186,14 +185,14 @@ class _ScansPage extends State<ScansPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     const SizedBox(height: 20),
-                    PrimaryButton(
-                      onTap: () {
-                        //_scansBloc.add(const ScansEvent.load());
-                        _captureFrame();
-                      },
-                      text:
-                          I18nUtils.translate(context, 'scan.capture-and-scan'),
-                    ),
+                    //PrimaryButton(
+                    //  onTap: () {
+                    //    //_scansBloc.add(const ScansEvent.load());
+                    //    _captureFrame();
+                    //  },
+                    //  text:
+                    //      I18nUtils.translate(context, 'scan.capture-and-scan'),
+                    //),
                     if (loading)
                       const Padding(
                         padding:
@@ -224,7 +223,8 @@ class _ScansPage extends State<ScansPage> {
       List<Widget> widgets = [];
       List<Widget> f = scans
           .map((scan) => ScansCard(
-              scan: scan.name,
+              name: scan.name,
+              barcodeId: scan.barcodeId,
               date: DateFormat('dd/MM/yy HH:mm').format(scan.date!))) 
           .toList();
       for (int i = 0; i < f.length; i++) {
