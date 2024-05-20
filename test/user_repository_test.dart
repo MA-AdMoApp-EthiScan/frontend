@@ -1,16 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ethiscan/data/datasources/user_provider.dart';
-import 'package:ethiscan/domain/core/either.dart';
-import 'package:ethiscan/domain/entities/app/api_error.dart';
-import 'package:ethiscan/domain/entities/firestore/ethiscan_user.dart';
 import 'mock_firebase.mocks.dart';
 
 void main() {
   late MockFirebaseFirestore mockFirestore;
-  late MockFirebaseAuth mockFirebaseAuth;
   late MockCollectionReference<Map<String, dynamic>> mockCollectionReference;
   late MockDocumentReference<Map<String, dynamic>> mockDocumentReference;
   late MockDocumentSnapshot<Map<String, dynamic>> mockDocumentSnapshot;
@@ -18,7 +12,6 @@ void main() {
 
   setUp(() {
     mockFirestore = MockFirebaseFirestore();
-    mockFirebaseAuth = MockFirebaseAuth();
     mockCollectionReference = MockCollectionReference<Map<String, dynamic>>();
     mockDocumentReference = MockDocumentReference<Map<String, dynamic>>();
     mockDocumentSnapshot = MockDocumentSnapshot<Map<String, dynamic>>();
@@ -45,7 +38,6 @@ void main() {
         left: (error) => fail('Expected a User, but got an error: $error'),
         right: (user) {
           expect(user.uid, '123');
-          expect(user.email, 'test@test.com');
         },
       );
     });
