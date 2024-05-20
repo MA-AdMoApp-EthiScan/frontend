@@ -46,7 +46,7 @@ class FavoriteProductRepositoryProvider implements FavoriteProductRepository {
     }
     final user = EthiscanUser.fromJson(doc.data() as Map<String, dynamic>);
     final updatedFavorites = (user.favoriteProducts ?? [])
-        .where((fav) => fav.product.id != productId)
+        .where((fav) => fav.productId != productId)
         .toList();
     userCollection.doc(userId).update(
         {'favoriteProducts': updatedFavorites.map((e) => e.toJson()).toList()});

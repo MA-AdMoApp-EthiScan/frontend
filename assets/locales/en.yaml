@@ -28,8 +28,8 @@ product:
   image: 'Image'
   description: 'Description'
   error:
-      title: 'Error'
-      message: 'An error occurred while fetching product'
+    title: 'Error'
+    message: 'An error occurred while fetching product'
   empty:
     title: 'Empty page'
     message: 'No product found'
@@ -45,9 +45,11 @@ favorites:
     message: 'No favorite found'
 
 scan:
+  capture-and-scan: 'Capture and scan'
   title: 'Scan'
-  error-title: 'Error'
-  error-message: 'An error occurred while scanning'
+  error:
+    title: 'Error'
+    message: 'An error occurred while scanning'
 
 sign_in:
   title: 'Sign In'
