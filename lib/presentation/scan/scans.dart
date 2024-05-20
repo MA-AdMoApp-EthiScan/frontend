@@ -42,7 +42,7 @@ class _ScansPage extends State<ScansPage> {
     const period = Duration(seconds: 1); // Change the duration as needed
     _timer = Timer.periodic(period, (timer) async {
       //if (!_isDisposed) {
-        await _captureFrame();
+      await _captureFrame();
       //}
     });
   }
@@ -74,19 +74,22 @@ class _ScansPage extends State<ScansPage> {
       try {
         final image = await _controller.takePicture();
         final inputImage = InputImage.fromFilePath(image.path);
-        final List<Barcode> barcodes = await _barcodeScanner.processImage(inputImage);
+        final List<Barcode> barcodes =
+            await _barcodeScanner.processImage(inputImage);
 
         if (barcodes.isNotEmpty) {
           //stopTimer();
           final Barcode barcode = barcodes.first;
           //for (Barcode barcode in barcodes) {
-          _scansBloc.add(ScansEvent.barcodeFound(barcode.displayValue ?? 'Unknown'));
+          _scansBloc
+              .add(ScansEvent.barcodeFound(barcode.displayValue ?? 'Unknown'));
           //}
         }
         //else {
         //  _scansBloc.add(const ScansEvent.stopScanning());
         //}
       } catch (e) {
+        // ignore: avoid_print
         print('Error taking picture: $e');
       }
       //_scansBloc.add(const ScansEvent.stopScanning());
@@ -103,7 +106,7 @@ class _ScansPage extends State<ScansPage> {
   }
 
   @override
-Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return BlocProvider<ScansBloc>(
       create: (context) => _scansBloc,
       child: BlocListener<ScansBloc, ScansState>(
@@ -112,10 +115,10 @@ Widget build(BuildContext context) {
             barcodeFound: (barcode) {
               Navigator.of(context)
                   .push(
-                    MaterialPageRoute(
-                      builder: (context) => ProductPage(productId: barcode),
-                    ),
-                  )
+                MaterialPageRoute(
+                  builder: (context) => ProductPage(productId: barcode),
+                ),
+              )
                   .then((_) {
                 // Dispatch returnToPrevious event when coming back
                 _scansBloc.add(const ScansEvent.returnToPrevious());
@@ -176,31 +179,33 @@ Widget build(BuildContext context) {
             },
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const SizedBox(height: 20),
-              PrimaryButton(
-                onTap: () {
-                  //_scansBloc.add(const ScansEvent.load());
-                  _captureFrame();
-                },
-                text: I18nUtils.translate(context, 'scan.capture-and-scan'),
-              ),
-              if (loading) const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                child: CustomCircularLoading(),
-              ),
-              if (barcode != null) Text('Barcode found: $barcode'),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 0),
-                child: Column(
-                  children: _getScanCards(scans, error),
-                ),
-              ),
-            ])
-          ),
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const SizedBox(height: 20),
+                    PrimaryButton(
+                      onTap: () {
+                        //_scansBloc.add(const ScansEvent.load());
+                        _captureFrame();
+                      },
+                      text:
+                          I18nUtils.translate(context, 'scan.capture-and-scan'),
+                    ),
+                    if (loading)
+                      const Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                        child: CustomCircularLoading(),
+                      ),
+                    if (barcode != null) Text('Barcode found: $barcode'),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 0),
+                      child: Column(
+                        children: _getScanCards(scans, error),
+                      ),
+                    ),
+                  ])),
         ],
       ),
     );
@@ -216,7 +221,9 @@ Widget build(BuildContext context) {
       scans = scans.isEmpty ? ["Scan 1", "Scan 2"] : scans;
       List<Widget> widgets = [];
       List<Widget> f = scans
-          .map((scan) => ScansCard(scan: scan, date: "12 nov. 2023")) // todo : use values from backend
+          .map((scan) => ScansCard(
+              scan: scan,
+              date: "12 nov. 2023")) // todo : use values from backend
           .toList();
       for (int i = 0; i < f.length; i++) {
         widgets.add(const SizedBox(height: 15));
