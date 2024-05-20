@@ -3,6 +3,7 @@ import 'package:mockito/mockito.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:ethiscan/data/datasources/favorite_product_provider.dart';
 import 'mock_firebase.mocks.dart';
+import 'package:ethiscan/firebase_options.dart';
 
 void main() {
   late MockFirebaseFirestore mockFirestore;
@@ -14,7 +15,9 @@ void main() {
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
   });
 
   setUp(() {
@@ -27,8 +30,9 @@ void main() {
   });
 
   group('FavoriteProductRepository', () {
-    test('getFavoriteProducts returns list of FavoriteProducts on success',
-        () async {
+    testWidgets(
+        'getFavoriteProducts returns list of FavoriteProducts on success',
+        (WidgetTester tester) async {
       when(mockFirebaseAuth.currentUser).thenReturn(MockUser());
       when(mockFirebaseAuth.currentUser?.uid).thenReturn('123');
       when(mockFirestore.collection('users'))
@@ -49,7 +53,6 @@ void main() {
             'name': 'Favorite Product 2',
           },
         ],
-        // Ajoutez d'autres champs selon votre modèle EthiscanUser
       });
 
       final result = await favoriteProductRepository.getFavoriteProducts();
@@ -65,7 +68,8 @@ void main() {
       );
     });
 
-    test('getFavoriteProducts returns APIError on failure', () async {
+    testWidgets('getFavoriteProducts returns APIError on failure',
+        (WidgetTester tester) async {
       when(mockFirebaseAuth.currentUser).thenReturn(MockUser());
       when(mockFirebaseAuth.currentUser?.uid).thenReturn('123');
       when(mockFirestore.collection('users'))

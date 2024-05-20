@@ -3,6 +3,7 @@ import 'package:mockito/mockito.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:ethiscan/data/datasources/user_provider.dart';
 import 'mock_firebase.mocks.dart';
+import 'package:ethiscan/firebase_options.dart';
 
 void main() {
   late MockFirebaseFirestore mockFirestore;
@@ -13,7 +14,9 @@ void main() {
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
   });
 
   setUp(() {
@@ -25,7 +28,8 @@ void main() {
   });
 
   group('UserRepository', () {
-    test('getUserFromId returns EthiscanUser on success', () async {
+    testWidgets('getUserFromId returns EthiscanUser on success',
+        (WidgetTester tester) async {
       when(mockFirestore.collection('users'))
           .thenReturn(mockCollectionReference);
       when(mockCollectionReference.doc(any)).thenReturn(mockDocumentReference);
@@ -35,7 +39,6 @@ void main() {
       when(mockDocumentSnapshot.data()).thenReturn({
         'uid': '123',
         'email': 'test@test.com',
-        // Ajoutez d'autres champs selon votre modèle EthiscanUser
       });
 
       final result = await userRepository.getUserFromId('123');
@@ -48,7 +51,8 @@ void main() {
       );
     });
 
-    test('getUserFromId returns APIError on failure', () async {
+    testWidgets('getUserFromId returns APIError on failure',
+        (WidgetTester tester) async {
       when(mockFirestore.collection('users'))
           .thenReturn(mockCollectionReference);
       when(mockCollectionReference.doc(any)).thenReturn(mockDocumentReference);

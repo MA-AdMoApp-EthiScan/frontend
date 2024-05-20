@@ -3,6 +3,7 @@ import 'package:mockito/mockito.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:ethiscan/data/datasources/product_provider.dart';
 import 'mock_firebase.mocks.dart';
+import 'package:ethiscan/firebase_options.dart';
 
 void main() {
   late MockFirebaseFirestore mockFirestore;
@@ -13,7 +14,9 @@ void main() {
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
   });
 
   setUp(() {
@@ -25,7 +28,8 @@ void main() {
   });
 
   group('ProductRepository', () {
-    test('getProductById returns Product on success', () async {
+    testWidgets('getProductById returns Product on success',
+        (WidgetTester tester) async {
       when(mockFirestore.collection('products'))
           .thenReturn(mockCollectionReference);
       when(mockCollectionReference.doc(any)).thenReturn(mockDocumentReference);
@@ -37,7 +41,6 @@ void main() {
         'name': 'Test Product',
         'description': 'Test Description',
         'imageUrl': 'Test URL',
-        // Ajoutez d'autres champs selon votre modèle Product
       });
 
       final result = await productRepository.getProductById('123');
@@ -51,7 +54,8 @@ void main() {
       );
     });
 
-    test('getProductById returns APIError on failure', () async {
+    testWidgets('getProductById returns APIError on failure',
+        (WidgetTester tester) async {
       when(mockFirestore.collection('products'))
           .thenReturn(mockCollectionReference);
       when(mockCollectionReference.doc(any)).thenReturn(mockDocumentReference);
