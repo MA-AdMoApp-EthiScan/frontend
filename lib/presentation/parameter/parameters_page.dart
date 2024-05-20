@@ -55,7 +55,10 @@ class _ParametersPageState extends State<ParametersPage> {
       builder: (context, state) {
         return state.maybeWhen(
           loading: () => _page(context, loading: true),
-          loaded: (metadataTypes) => _page(context, metadataTypes: metadataTypes),
+          loaded: (allMetadataTypes, subscribedMetadataTypes) =>
+              _page(context,
+                  allMetadataTypes: allMetadataTypes,
+                  subscribedMetadataTypes: subscribedMetadataTypes),
           orElse: () => _page(context),
         );
       },
@@ -64,7 +67,8 @@ class _ParametersPageState extends State<ParametersPage> {
 
   Widget _page(BuildContext context, {
     bool loading = false,
-    List<MetadataType> metadataTypes = const [],
+    List<MetadataType> allMetadataTypes = const [],
+    List<MetadataType> subscribedMetadataTypes = const [],
   }) {
     return Scaffold(
       appBar: AppBar(
@@ -85,7 +89,10 @@ class _ParametersPageState extends State<ParametersPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
-              children: _getBody(context, loading: loading, metadataTypes: metadataTypes),
+              children: _getBody(context,
+                  loading: loading,
+                  allMetadataTypes: allMetadataTypes,
+                  subscribedMetadataTypes: subscribedMetadataTypes),
             ),
           ),
         ],
@@ -96,7 +103,8 @@ class _ParametersPageState extends State<ParametersPage> {
   List<Widget> _getBody(
       BuildContext context, {
         required bool loading,
-        List<MetadataType> metadataTypes = const [],
+        List<MetadataType> allMetadataTypes = const [],
+        List<MetadataType> subscribedMetadataTypes = const [],
         bool error = false,
       }) {
     if (error) {
@@ -136,16 +144,16 @@ class _ParametersPageState extends State<ParametersPage> {
         CustomH2P(I18nUtils.translate(context, "parameters.metadatas")),
       ]);
       
-      if (metadataTypes.isEmpty) {
+      if (allMetadataTypes.isEmpty) {
         widgets.addAll([
           CustomText(I18nUtils.translate(context, "parameters.empty.message"))
         ]);
       } else {
         widgets.addAll([
           ListView.builder(
-            itemCount: metadataTypes.length,
+            itemCount: allMetadataTypes.length,
             itemBuilder: (context, index) {
-              final parameter = metadataTypes[index];
+              final parameter = allMetadataTypes[index];
               return ListTile(
                   title: Text(parameter.name),
                   subtitle: Text(parameter.schema.toString()));

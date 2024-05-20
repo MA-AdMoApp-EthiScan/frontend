@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:ethiscan/data/repositories/metadata_repository.dart';
 import 'package:ethiscan/data/repositories/metadata_type_repository.dart';
 import 'package:ethiscan/data/repositories/user_repository.dart';
 import 'package:ethiscan/domain/entities/firestore/metadata_type.dart';
@@ -24,60 +23,52 @@ class ParametersBloc extends Bloc<ParametersEvent, ParametersState> {
       await event.when(
         load: () async {
           emit(const ParametersState.loading());
-          // TODO get user preferences from the repository
-          List<MetadataType> metadataTypes = await getMetadata();
-          emit(ParametersState.loaded(metadataTypes: metadataTypes));
+          List<MetadataType> allMetadataTypes = [];
+          var metadataTypesEither = await _metadataTypeRepository.getMetadataTypes();
+          await metadataTypesEither.when(
+              left: (failure) async {
+                emit(const ParametersState.error());
+              },
+              right: (m) async {
+                allMetadataTypes.addAll(m);
+
+                var either = await _userRepository.getUserFromId(FirebaseAuth.instance.currentUser!.uid);
+                await either.when(
+                  right: (user) async {
+                    if (user.metadataTypeIds == null) {
+                      emit(ParametersState.loaded(
+                          allMetadataTypes: allMetadataTypes,
+                          subscribedMetadataTypes: []
+                      )
+                      );
+                    }
+                    var metadataTypesEither = await _metadataTypeRepository.getByIdList(user.metadataTypeIds!);
+                    await metadataTypesEither.when(
+                        left: (failure) async {
+                          emit(ParametersState.loaded(
+                              allMetadataTypes: allMetadataTypes,
+                              subscribedMetadataTypes: []
+                          )
+                          );
+                        },
+                        right: (metadataTypes) async {
+                          emit(ParametersState.loaded(
+                              allMetadataTypes: allMetadataTypes,
+                              subscribedMetadataTypes: metadataTypes
+                          )
+                          );
+                        }
+                    );
+                  },
+                  left: (failure) async {
+                    return [];
+                  },
+                );
+              }
+          );
+
         },
       );
     });
-  }
-
-  Future<List<MetadataType>> getMetadata() async {
-    var either = await _userRepository.getUserFromId(FirebaseAuth.instance.currentUser!.uid);
-    return await either.when(
-      right: (user) async {
-        if (user.metadataTypeIds == null) {
-          return [];
-        }
-        var metadataTypesEither = await _metadataTypeRepository.getByIdList(user.metadataTypeIds!);
-        await metadataTypesEither.when(
-            left: (failure) async {
-              return [];
-            },
-            right: (metadataTypes) async {
-              return metadataTypes;
-            }
-        );
-      },
-      left: (failure) async {
-        var newEither = await _userRepository.addUser(user);
-        await newEither.when(
-          left: (failure) async {
-            return [];
-          },
-          right: (user) async {
-            if (user.metadataTypeIds == null) {
-              return [];
-            }
-            var metadataTypesEither = await _metadataTypeRepository.getByIdList(user.metadataTypeIds!);
-            await metadataTypesEither.when(
-                left: (failure) async {
-                  return [];
-                },
-                right: (metadataTypes) async {
-                  List<ListProduct> listProduct = metadataTypes.map((e) =>
-                      ListProduct(
-                          id: e.id,
-                          name: e.name,
-                          scanDate: user.metadataTypeProducts!.firstWhere((element) => e.id == element.productId).addedAt
-                      )
-                  ).toList();
-                  return listProduct;
-                }
-            );
-          },
-        );
-      },
-    );
   }
 }

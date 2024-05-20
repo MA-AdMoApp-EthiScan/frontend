@@ -35,7 +35,7 @@ class EthiscanUser {
 
   Map<String, dynamic> toJson() {
     return {
-      'uid': firebaseUser?.uid,
+      'uid': uid,
       'favoriteProducts': favoriteProducts,
       'metadataTypeIds': metadataTypeIds,
     };

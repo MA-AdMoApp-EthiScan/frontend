@@ -3,6 +3,7 @@ import 'package:ethiscan/domain/core/either.dart';
 import 'package:ethiscan/domain/entities/app/api_error.dart';
 import 'package:ethiscan/domain/entities/firestore/ethiscan_user.dart';
 import 'package:ethiscan/data/repositories/user_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
 @Singleton(as: UserRepository)
@@ -23,7 +24,7 @@ class UserRepositoryProvider implements UserRepository {
   Future<Either<APIError, EthiscanUser>> addUser(EthiscanUser user) async {
     try {
       final doc =
-          await userCollection.doc(user.firebaseUser?.uid).set(user.toJson());
+          await userCollection.doc(FirebaseAuth.instance.currentUser?.uid).set(user.toJson());
       return Right(EthiscanUser.fromJson(doc as Map<String, dynamic>));
     } on Exception catch (e) {
       return Left(APIError(e.toString(), 500));

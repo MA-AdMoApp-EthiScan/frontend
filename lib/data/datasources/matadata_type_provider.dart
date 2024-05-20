@@ -13,10 +13,14 @@ class MetadataTypeRepositoryProvider implements MetadataTypeRepository {
 
   @override
   Future<Either<APIError, List<MetadataType>>> getMetadataTypes() async {
-    final doc = await metadataTypeCollection.get();
-    return Right(doc.docs.map((d) =>
-        MetadataType.fromJson(d.data() as Map<String, dynamic>))
-        .toList());
+    final snapshot = await metadataTypeCollection.get();
+    if (snapshot.docs.isEmpty) {
+      return Left(APIError('MetadataType not found', 404));
+    }
+    final metadataTypes = snapshot.docs
+        .map((doc) => MetadataType.fromJson(doc.data() as Map<String, dynamic>))
+        .toList();
+    return Right(metadataTypes);
   }
 
   @override
