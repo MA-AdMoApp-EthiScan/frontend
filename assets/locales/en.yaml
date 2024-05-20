@@ -34,6 +34,7 @@ product:
     title: 'Empty page'
     message: 'No product found'
   metadatas: 'Metadatas'
+  certifications: 'Certifications'
 
 favorites:
   title: 'Favorites'

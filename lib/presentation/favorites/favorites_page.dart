@@ -1,8 +1,8 @@
 import 'package:ethiscan/app/favorites_bloc/favorites_bloc.dart';
-import 'package:ethiscan/domain/entities/ethiscan_user.dart';
-import 'package:ethiscan/domain/entities/favorite_sort.dart';
-import 'package:ethiscan/domain/entities/product.dart';
-import 'package:ethiscan/domain/entities/sort_criteria.dart';
+import 'package:ethiscan/domain/entities/app/list_product.dart';
+import 'package:ethiscan/domain/entities/firestore/ethiscan_user.dart';
+import 'package:ethiscan/domain/entities/app/favorite_sort.dart';
+import 'package:ethiscan/domain/entities/firestore/sort_criteria.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/core/buttons/icon_button.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
@@ -69,7 +69,7 @@ class _FavoritesPage extends State<FavoritesPage> {
               loading: () => _page(context, loading: true),
               error: () => _page(context, error: true),
               initial: () => _page(context),
-              loaded: (List<Product> favorites) =>
+              loaded: (List<ListProduct> favorites) =>
                   _page(context, favorites: favorites),
               orElse: () => _page(context),
             );
@@ -81,7 +81,7 @@ class _FavoritesPage extends State<FavoritesPage> {
     BuildContext context, {
     bool loading = false,
     bool error = false,
-    List<Product> favorites = const [],
+    List<ListProduct> favorites = const [],
   }) {
     return Scaffold(
       appBar: AppBar(
@@ -246,7 +246,7 @@ class _FavoritesPage extends State<FavoritesPage> {
   }
 
   List<Widget> _getFavoritesCards(
-      List<Product> favorites, bool loading, bool error) {
+      List<ListProduct> favorites, bool loading, bool error) {
     if (error) {
       return [
         CustomH3(I18nUtils.translate(context, "favorites.error.title")),

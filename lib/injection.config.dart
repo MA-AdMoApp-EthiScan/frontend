@@ -54,8 +54,10 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i16.ProductBloc(gh<_i12.ProductRepository>()));
     gh.factory<_i17.MainUserBloc>(
         () => _i17.MainUserBloc(gh<_i8.AuthRepository>()));
-    gh.factory<_i18.FavoritesBloc>(
-        () => _i18.FavoritesBloc(gh<_i4.UserRepository>()));
+    gh.factory<_i18.FavoritesBloc>(() => _i18.FavoritesBloc(
+          gh<_i4.UserRepository>(),
+          gh<_i12.ProductRepository>(),
+        ));
     return this;
   }
 }

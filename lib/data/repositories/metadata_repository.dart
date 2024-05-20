@@ -1,4 +1,4 @@
-import 'package:ethiscan/domain/entities/product_metadata.dart';
+import 'package:ethiscan/domain/entities/firestore/product_metadata.dart';
 
 abstract class MetadataRepository {
   Future<List<ProductMetadata>> getMetadata();

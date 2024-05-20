@@ -390,7 +390,7 @@ mixin _$FavoritesState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Product> favorites) loaded,
+    required TResult Function(List<ListProduct> favorites) loaded,
     required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
@@ -398,7 +398,7 @@ mixin _$FavoritesState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Product> favorites)? loaded,
+    TResult? Function(List<ListProduct> favorites)? loaded,
     TResult? Function()? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -406,7 +406,7 @@ mixin _$FavoritesState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Product> favorites)? loaded,
+    TResult Function(List<ListProduct> favorites)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) =>
@@ -496,7 +496,7 @@ class _$FavoritesInitialImpl implements _FavoritesInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Product> favorites) loaded,
+    required TResult Function(List<ListProduct> favorites) loaded,
     required TResult Function() error,
   }) {
     return initial();
@@ -507,7 +507,7 @@ class _$FavoritesInitialImpl implements _FavoritesInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Product> favorites)? loaded,
+    TResult? Function(List<ListProduct> favorites)? loaded,
     TResult? Function()? error,
   }) {
     return initial?.call();
@@ -518,7 +518,7 @@ class _$FavoritesInitialImpl implements _FavoritesInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Product> favorites)? loaded,
+    TResult Function(List<ListProduct> favorites)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -610,7 +610,7 @@ class _$FavoritesLoadingImpl implements _FavoritesLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Product> favorites) loaded,
+    required TResult Function(List<ListProduct> favorites) loaded,
     required TResult Function() error,
   }) {
     return loading();
@@ -621,7 +621,7 @@ class _$FavoritesLoadingImpl implements _FavoritesLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Product> favorites)? loaded,
+    TResult? Function(List<ListProduct> favorites)? loaded,
     TResult? Function()? error,
   }) {
     return loading?.call();
@@ -632,7 +632,7 @@ class _$FavoritesLoadingImpl implements _FavoritesLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Product> favorites)? loaded,
+    TResult Function(List<ListProduct> favorites)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -690,7 +690,7 @@ abstract class _$$FavoritesLoadedImplCopyWith<$Res> {
           $Res Function(_$FavoritesLoadedImpl) then) =
       __$$FavoritesLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Product> favorites});
+  $Res call({List<ListProduct> favorites});
 }
 
 /// @nodoc
@@ -710,7 +710,7 @@ class __$$FavoritesLoadedImplCopyWithImpl<$Res>
       favorites: null == favorites
           ? _value._favorites
           : favorites // ignore: cast_nullable_to_non_nullable
-              as List<Product>,
+              as List<ListProduct>,
     ));
   }
 }
@@ -718,12 +718,12 @@ class __$$FavoritesLoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FavoritesLoadedImpl implements _FavoritesLoaded {
-  const _$FavoritesLoadedImpl({required final List<Product> favorites})
+  const _$FavoritesLoadedImpl({required final List<ListProduct> favorites})
       : _favorites = favorites;
 
-  final List<Product> _favorites;
+  final List<ListProduct> _favorites;
   @override
-  List<Product> get favorites {
+  List<ListProduct> get favorites {
     if (_favorites is EqualUnmodifiableListView) return _favorites;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_favorites);
@@ -759,7 +759,7 @@ class _$FavoritesLoadedImpl implements _FavoritesLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Product> favorites) loaded,
+    required TResult Function(List<ListProduct> favorites) loaded,
     required TResult Function() error,
   }) {
     return loaded(favorites);
@@ -770,7 +770,7 @@ class _$FavoritesLoadedImpl implements _FavoritesLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Product> favorites)? loaded,
+    TResult? Function(List<ListProduct> favorites)? loaded,
     TResult? Function()? error,
   }) {
     return loaded?.call(favorites);
@@ -781,7 +781,7 @@ class _$FavoritesLoadedImpl implements _FavoritesLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Product> favorites)? loaded,
+    TResult Function(List<ListProduct> favorites)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -830,10 +830,10 @@ class _$FavoritesLoadedImpl implements _FavoritesLoaded {
 }
 
 abstract class _FavoritesLoaded implements FavoritesState {
-  const factory _FavoritesLoaded({required final List<Product> favorites}) =
+  const factory _FavoritesLoaded({required final List<ListProduct> favorites}) =
       _$FavoritesLoadedImpl;
 
-  List<Product> get favorites;
+  List<ListProduct> get favorites;
   @JsonKey(ignore: true)
   _$$FavoritesLoadedImplCopyWith<_$FavoritesLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -879,7 +879,7 @@ class _$FavoritesErrorImpl implements _FavoritesError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Product> favorites) loaded,
+    required TResult Function(List<ListProduct> favorites) loaded,
     required TResult Function() error,
   }) {
     return error();
@@ -890,7 +890,7 @@ class _$FavoritesErrorImpl implements _FavoritesError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Product> favorites)? loaded,
+    TResult? Function(List<ListProduct> favorites)? loaded,
     TResult? Function()? error,
   }) {
     return error?.call();
@@ -901,7 +901,7 @@ class _$FavoritesErrorImpl implements _FavoritesError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Product> favorites)? loaded,
+    TResult Function(List<ListProduct> favorites)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
