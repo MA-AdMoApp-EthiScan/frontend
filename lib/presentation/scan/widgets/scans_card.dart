@@ -2,7 +2,6 @@ import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/product/product_page.dart';
 import 'package:ethiscan/presentation/widget_core/my_card.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
-import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
 
 class ScansCard extends MyCard {
@@ -23,7 +22,6 @@ class ScansCard extends MyCard {
     }
 
     return ListTile(
-      trailing: const Icon(Icons.star, color: UIColors.lightAccentColor),
       title: CustomH2(scan!),
       subtitle: CustomText(I18nUtils.translate(context, "scan.last_scan") + (date ?? "")),
     );
