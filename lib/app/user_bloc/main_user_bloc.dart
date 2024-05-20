@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ethiscan/utils/exceptions.dart';
+import 'package:ethiscan/data/repositories/user_repository.dart';
 
 part 'main_user_bloc.freezed.dart';
 part 'main_user_event.dart';
@@ -13,8 +14,10 @@ part 'main_user_state.dart';
 @injectable
 class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
   final AuthRepository _authRepository;
+  final UserRepository _userRepository;
 
-  MainUserBloc(this._authRepository) : super(MainUserState.initial()) {
+  MainUserBloc(this._authRepository, this._userRepository)
+      : super(MainUserState.initial()) {
     on<MainUserEvent>((event, emit) async {
       // ~~~ Authentication ~~~
       await event.when(connect: (email, password) async {
@@ -31,8 +34,23 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
               emit(const MainUserState.disconnected(false));
               return;
             }
-            EthiscanUser user = EthiscanUser(uid: userCredential.user!.uid);
-            emit(MainUserState.connected(user: user));
+            final userId = userCredential.user!.uid;
+
+            var either = await _userRepository.getUserFromId(userId);
+            await either.when(left: (failure) async {
+              var newEither =
+                  await _userRepository.addUser(EthiscanUser(uid: userId));
+              await newEither.when(
+                left: (failure) {
+                  emit(const MainUserState.disconnected(false));
+                },
+                right: (user) {
+                  emit(MainUserState.connected(user: user));
+                },
+              );
+            }, right: (user) {
+              emit(MainUserState.connected(user: user));
+            });
           } on FirebaseAuthException catch (e) {
             emit(const MainUserState.disconnected(false));
             getAuthenticationExceptionFromCode(e.code);
