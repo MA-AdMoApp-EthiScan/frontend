@@ -27,6 +27,8 @@ product:
   carbon_footprint: "Empreinte carbone"
   image: "Image"
   description: "Description"
+  added_to_favorites: "Ajouté aux favoris"
+  removed_from_favorites: "Retiré des favoris"
   error:
     title: "Erreur"
     message: "Une erreur s'est produite lors de la récupération du produit"
@@ -46,6 +48,7 @@ favorites:
 
 scan:
   title: "Scan"
+  barcode_found: "Code-barres trouvé !"
   error-title: "Erreur"
   error-message: "Une erreur s'est produite lors du scan"
 

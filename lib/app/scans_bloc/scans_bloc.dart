@@ -61,6 +61,9 @@ class ScansBloc extends Bloc<ScansEvent, ScansState> {
         invalidBarcode: (barcode) async {
           emit(const ScansState.error());
         },
+        stop: () {
+            emit(const ScansState.waiting());
+        },
       );
     });
   }
