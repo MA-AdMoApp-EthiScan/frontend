@@ -37,6 +37,7 @@ class MyToaster {
         gravity: gravity,
         toastDuration: Duration(seconds: duration),
       );
+      // ignore: empty_catches
     } catch (e) {}
   }
 }
