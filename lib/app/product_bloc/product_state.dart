@@ -6,10 +6,10 @@ abstract class ProductState with _$ProductState {
 
   const factory ProductState.loading() = _ProductLoading;
 
-  const factory ProductState.loaded({
-    required Product product,
-    /*required List<ProductMetadata> metadatas,*/
-  }) = ProductLoaded;
+  const factory ProductState.loaded(
+          {required Product product,
+          required List<MapEntry<MetadataType, ProductMetadata>> metadata}) =
+      _Loaded;
 
   const factory ProductState.error({
     required APIError error,

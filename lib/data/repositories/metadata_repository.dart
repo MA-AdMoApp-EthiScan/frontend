@@ -6,6 +6,8 @@ abstract class MetadataRepository {
   Future<Either<APIError, List<ProductMetadata>>> getMetadata();
   Future<Either<APIError, List<ProductMetadata>>> getMetadatasByProductId(
       List<String> ids);
+  Future<Either<APIError, List<ProductMetadata>>> getMetadataForProduct(
+      String productId);
   Future<void> addMetadata(ProductMetadata metadata);
   Future<void> updateMetadata(ProductMetadata metadata);
   Future<void> deleteMetadata(ProductMetadata metadata);

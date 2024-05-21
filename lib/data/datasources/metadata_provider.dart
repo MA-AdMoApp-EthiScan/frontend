@@ -12,24 +12,50 @@ class MetadataRepositoryProvider implements MetadataRepository {
 
   @override
   Future<Either<APIError, List<ProductMetadata>>> getMetadata() async {
-    final doc = await metadataCollection.get();
-    return Right(doc.docs
-        .map((d) => ProductMetadata.fromJson(d.data() as Map<String, dynamic>))
-        .toList());
+    try {
+      final doc = await metadataCollection.get();
+      final metadataList = doc.docs
+          .map(
+              (d) => ProductMetadata.fromJson(d.data() as Map<String, dynamic>))
+          .toList();
+      return Right(metadataList);
+    } catch (e) {
+      return Left(APIError(e.toString(), 500));
+    }
   }
 
   @override
   Future<Either<APIError, List<ProductMetadata>>> getMetadatasByProductId(
       List<String> ids) async {
-    final docList = ids.map((id) => metadataCollection.doc(id).get());
-    return Future.wait(docList).then((docs) {
-      final metadata = docs
+    try {
+      final docList =
+          await Future.wait(ids.map((id) => metadataCollection.doc(id).get()));
+      final metadata = docList
           .where((doc) => doc.exists)
           .map((doc) =>
               ProductMetadata.fromJson(doc.data() as Map<String, dynamic>))
           .toList();
       return Right(metadata);
-    });
+    } catch (e) {
+      return Left(APIError(e.toString(), 500));
+    }
+  }
+
+  @override
+  Future<Either<APIError, List<ProductMetadata>>> getMetadataForProduct(
+      String productId) async {
+    try {
+      final querySnapshot = await metadataCollection
+          .where('productId', isEqualTo: productId)
+          .get();
+      final metadataList = querySnapshot.docs
+          .map((doc) =>
+              ProductMetadata.fromJson(doc.data() as Map<String, dynamic>))
+          .toList();
+      return Right(metadataList);
+    } catch (e) {
+      return Left(APIError(e.toString(), 500));
+    }
   }
 
   @override
