@@ -27,7 +27,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final MetadataTypeRepository _metadataTypeRepository;
   final UserRepository _userRepository;
   final CertificationRepository _certificationRepository;
-  String? _userId;
+  //String? _userId;
+  Product? _product;
+  List<MapEntry<MetadataType, ProductMetadata>>? _metadata;
+  List<Certification>? _certifications;
 
   ProductBloc(
     this._productRepository,
@@ -41,7 +44,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       await event.when(
         load: (id, userId) async {
           emit(const ProductState.loading());
-          _userId = userId;
           final userEither = await _userRepository.getUserFromId(userId);
           final productEither = await _loadProduct(id);
 
@@ -70,12 +72,18 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
                           final isInFavoriteEither = await _isInFavorite(product.id);
                           await isInFavoriteEither.fold(
                             (failure) async => emit(ProductState.error(error: failure)),
-                            (isInFavorite) async => emit(ProductState.loaded(
-                              product: product, 
-                              isInFavorite: isInFavorite, 
-                              metadata: metadata, 
-                              certifications: certifications
-                              )),
+                            (isInFavorite) async {
+                              _product = product;
+                              _metadata = metadata;
+                              _certifications = certifications;
+
+                              emit(ProductState.loaded(
+                                product: product, 
+                                isInFavorite: isInFavorite, 
+                                metadata: metadata, 
+                                certifications: certifications
+                              ));
+                            },
                           );
                         },
                       );
@@ -96,44 +104,12 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           await addFavEither.fold(
             (failure) async => emit(ProductState.error(error: failure)),
             // ignore: unnecessary_set_literal
-            (_) async {
-              final productEither = await _loadProduct(barcodeId);
-              final userEither = await _userRepository.getUserFromId(_userId!);
-              await productEither.fold(
-                (failure) async => emit(ProductState.error(error: failure)),
-                (product) async {
-                  await userEither.fold(
-                    (failure) async => emit(ProductState.error(error: failure)),
-                    (user) async {
-                      final metadataEither = await _loadFilteredProductMetadata(
-                        product.productMetadataIds ?? [],
-                        user.metadataTypeIds ?? [],
-                      );
-
-                      final certificationsEither = await _loadCertifications(
-                        product.certificationIds ?? [],
-                      );
-
-                      await metadataEither.fold(
-                        (failure) async => emit(ProductState.error(error: failure)),
-                        (metadata) async {
-                          await certificationsEither.fold(
-                            (failure) async =>
-                                emit(ProductState.error(error: failure)),
-                            (certifications) async => emit(ProductState.loaded(
-                                  product: product, 
+            (_) async => emit(ProductState.loaded(
+                                  product: _product!, 
                                   isInFavorite: true, 
-                                  metadata: metadata, 
-                                  certifications: certifications
+                                  metadata: _metadata!, 
+                                  certifications: _certifications!
                                   )),
-                          );
-                        },
-                      );
-                    },
-                  );
-                },
-              );
-            },
           );
 
         },
@@ -142,44 +118,12 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           await removeFavEither.fold(
             (failure) async => emit(ProductState.error(error: failure)),
             // ignore: unnecessary_set_literal
-            (_) async {
-              final productEither = await _loadProduct(barcodeId);
-              final userEither = await _userRepository.getUserFromId(_userId!);
-              await productEither.fold(
-                (failure) async => emit(ProductState.error(error: failure)),
-                (product) async {
-                  await userEither.fold(
-                    (failure) async => emit(ProductState.error(error: failure)),
-                    (user) async {
-                      final metadataEither = await _loadFilteredProductMetadata(
-                        product.productMetadataIds ?? [],
-                        user.metadataTypeIds ?? [],
-                      );
-
-                      final certificationsEither = await _loadCertifications(
-                        product.certificationIds ?? [],
-                      );
-
-                      await metadataEither.fold(
-                        (failure) async => emit(ProductState.error(error: failure)),
-                        (metadata) async {
-                          await certificationsEither.fold(
-                            (failure) async =>
-                                emit(ProductState.error(error: failure)),
-                            (certifications) async => emit(ProductState.loaded(
-                                  product: product, 
+            (_) async => emit(ProductState.loaded(
+                                  product: _product!, 
                                   isInFavorite: false, 
-                                  metadata: metadata, 
-                                  certifications: certifications
+                                  metadata: _metadata!, 
+                                  certifications: _certifications!
                                   )),
-                          );
-                        },
-                      );
-                    },
-                  );
-                },
-              );
-            },
           );
         }
       );
