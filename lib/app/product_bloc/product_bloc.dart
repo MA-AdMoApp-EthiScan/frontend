@@ -40,7 +40,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       await event.when(
         load: (id, userId) async {
           emit(const ProductState.loading());
-          _userId = userId;
           final userEither = await _userRepository.getUserFromId(userId);
           final productEither = await _loadProduct(id);
 
