@@ -4,7 +4,6 @@ import 'package:ethiscan/app/scans_bloc/scans_bloc.dart';
 import 'package:ethiscan/domain/entities/app/list_product.dart';
 import 'package:ethiscan/domain/entities/app/scan_history.dart';
 import 'package:ethiscan/injection.dart';
-import 'package:ethiscan/presentation/core/buttons/secondary_button.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/core/list_view_layout_body.dart';
@@ -242,7 +241,7 @@ class _ScansPage extends State<ScansPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomH2R(
-                I18nUtils.translate(context, "scan.clear_history")
+                I18nUtils.translate(context, "popup.clear_history.title")
               ),
               const SizedBox(width: 10),
               const Icon(Icons.delete, color: UIColors.red)

@@ -40,6 +40,20 @@ product:
     message: 'No product found'
   metadatas: 'Metadatas'
   certifications: 'Certifications'
+  metadata:
+    location: 'Location'
+    note: 'Note'
+    co2_quantity: 'CO2 quantity'
+    packaging_percentage: 'Packaging'
+    manufacturing_percentage: 'Manufacturing'
+    transport_percentage: 'Transport'
+    gluten: 'Gluten'
+    lactose: 'Lactose'
+    peanuts: 'Peanuts'
+    soy: 'Soy'
+    unit:
+      co2: 'g CO2'
+      percentage: '%'
 
 favorites:
   title: 'Favorites'
@@ -93,3 +107,5 @@ words:
   cancel: 'Cancel'
   close: 'Close'
   confirm: 'Confirm'
+  yes: 'Yes'
+  no: 'No'

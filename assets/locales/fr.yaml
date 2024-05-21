@@ -5,7 +5,7 @@ app:
   unknownVersion: "Version inconnue"
   reloading: "Rechargement"
   disconnected: "Déconnecté"
-  search: "Rechercher"
+  search: "Recherche"
   data:
     empty: "Aucune donnée disponible"
     error:
@@ -39,6 +39,21 @@ product:
     title: "Page vide"
     message: "Aucun produit trouvé"
   metadatas: "Métadonnées"
+  certifications: "Certifications"
+  metadata:
+    location: "Localisation"
+    note: "Note"
+    co2_quantity: "Quantité de CO2"
+    packaging_percentage: "Emballage"
+    manufacturing_percentage: "Fabrication"
+    transport_percentage: "Transport"
+    gluten: "Gluten"
+    lactose: "Lactose"
+    peanuts: "Arachides"
+    soy: "Soja"
+    unit:
+      co2: "g CO2"
+      percentage: "%"
 
 favorites:
   title: "Favoris"
@@ -50,11 +65,12 @@ favorites:
     message: "Aucun favori trouvé"
 
 scan:
-  clear_history: "Effacer l'historique"
+  capture-and-scan: "Capturer et scanner"
   title: "Scan"
-  barcode_found: "Code-barres trouvé !"
-  error-title: "Erreur"
-  error-message: "Une erreur s'est produite lors du scan"
+  barcode_found: "Code-barres détecté !"
+  error:
+    title: "Erreur"
+    message: "Une erreur s'est produite lors du scan"
 
 sign_in:
   title: "Connexion"
@@ -66,14 +82,14 @@ parameters:
   personal: "Informations personnelles"
   metadatas: "Métadonnées"
   name:
-    label: 'Nom'
-    placeholder: 'Mon nom'
+    label: "Nom"
+    placeholder: "Mon nom"
   email:
-    label: 'Email'
-    placeholder: 'mon@email.com'
+    label: "Email"
+    placeholder: "mon@email.com"
   phone:
-    label: 'Téléphone'
-    placeholder: 'Mon numéro de téléphone'
+    label: "Numéro de téléphone"
+    placeholder: "Mon numéro de téléphone"
   error:
     title: "Erreur"
     message: "Une erreur s'est produite lors de la récupération des paramètres"
@@ -91,3 +107,5 @@ words:
   cancel: "Annuler"
   close: "Fermer"
   confirm: "Confirmer"
+  yes: "Oui"
+  no: "Non"
