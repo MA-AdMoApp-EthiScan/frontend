@@ -8,6 +8,7 @@ abstract class ProductState with _$ProductState {
 
   const factory ProductState.loaded({
     required Product product,
+    /*required List<ProductMetadata> metadatas,*/
   }) = ProductLoaded;
 
   const factory ProductState.error({
