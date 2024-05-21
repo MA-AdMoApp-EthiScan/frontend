@@ -81,8 +81,8 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
 
   Future<void> getUserWithFavorites(Emitter<FavoritesState> emit) async {
     var either = await _favoriteProductRepository.getFavoriteProducts();
-    either.fold(
-      (failure) {
+    await either.fold(
+      (failure) async {
         emit(const FavoritesState.error());
       },
       (favoriteProducts) async {
@@ -92,7 +92,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
             await _productRepository.getProductByIdList(favoriteIds);
         await favoritesEither.fold((failure) async {
           emit(const FavoritesState.error());
-        }, (favorites) {
+        }, (favorites) async {
           List<ListProduct> listProduct = favorites
               .map((e) => ListProduct(
                   id: e.id,
