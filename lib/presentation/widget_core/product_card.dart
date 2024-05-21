@@ -2,10 +2,10 @@ import 'package:ethiscan/domain/entities/app/list_product.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/product/product_page.dart';
 import 'package:ethiscan/presentation/widget_core/my_card.dart';
-import 'package:ethiscan/utils/date_helpers.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ProductCard extends MyCard {
   final ListProduct favorite;
@@ -34,7 +34,7 @@ class ProductCard extends MyCard {
       title: CustomH2(favorite.name),
       subtitle: CustomText(I18nUtils.translate(context,
               "product.last_scan") +
-          DateHelpers.formatDateToEuropeanStyle(favorite.scanDate)
+          DateFormat("dd.MM.yyyy").format(favorite.scanDate)
           ),
     );
   }

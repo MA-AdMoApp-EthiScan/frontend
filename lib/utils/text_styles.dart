@@ -1,125 +1,50 @@
-import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:ethiscan/utils/ui_colors.dart';
 
 class TextStyles {
-  TextStyles._();
+  TextStyles._(); // Private constructor to prevent instantiation.
 
-  static const String fontFamily = "Montserrat";
+  static const String _fontFamily = "Montserrat";
 
-  static const TextStyle h1 = TextStyle(
-    color: Colors.black,
-    fontFamily: fontFamily,
-    fontWeight: FontWeight.w800,
-    fontSize: 28,
-    height: 1.4,
-  );
+  // General text style template
+  static TextStyle _baseStyle(double fontSize, FontWeight fontWeight, Color color, {double? height = 1.4}) {
+    return TextStyle(
+      fontFamily: _fontFamily,
+      fontWeight: fontWeight,
+      fontSize: fontSize,
+      color: color,
+      height: height,
+    );
+  }
 
-  static const TextStyle h1w = TextStyle(
-    color: Colors.white,
-    fontFamily: fontFamily,
-    fontWeight: FontWeight.w800,
-    fontSize: 28,
-    height: 1.4,
-  );
+  // Specific text style getters
+  static final TextStyle h1 = _baseStyle(28, FontWeight.w800, Colors.black);
+  static final TextStyle h1w = _baseStyle(28, FontWeight.w800, Colors.white);
+  static final TextStyle h1p = _baseStyle(28, FontWeight.w800, UIColors.lightPrimaryColor);
 
-  static const TextStyle h1p = TextStyle(
-    color: UIColors.lightPrimaryColor,
-    fontFamily: fontFamily,
-    fontWeight: FontWeight.w800,
-    fontSize: 28,
-    height: 1.4,
-  );
+  static final TextStyle h2 = _baseStyle(18, FontWeight.w600, Colors.black);
+  static final TextStyle h2R = _baseStyle(18, FontWeight.w600, UIColors.red);
+  static final TextStyle h2p = _baseStyle(18, FontWeight.w600, UIColors.lightPrimaryColor);
 
-  static const TextStyle h2 = TextStyle(
-    color: Colors.black,
-    fontFamily: fontFamily,
-    fontWeight: FontWeight.w600,
-    fontSize: 18,
-    height: 1.4,
-  );
+  static final TextStyle h3 = _baseStyle(14, FontWeight.w600, UIColors.lightPrimaryColor);
 
-  static const TextStyle h2R = TextStyle(
-    color: UIColors.red,
-    fontFamily: fontFamily,
-    fontWeight: FontWeight.w600,
-    fontSize: 18,
-    height: 1.4,
-  );
-
-  static const TextStyle h2p = TextStyle(
-    color: UIColors.lightPrimaryColor,
-    fontFamily: fontFamily,
-    fontWeight: FontWeight.w600,
-    fontSize: 18,
-    height: 1.4,
-  );
-
-  static const TextStyle h3 = TextStyle(
-    color: UIColors.lightPrimaryColor,
-    fontFamily: fontFamily,
-    fontWeight: FontWeight.w600,
-    fontSize: 14,
-    height: 1.4,
-  );
-
-  static const TextStyle textBold = TextStyle(
-    color: Colors.black,
-    fontFamily: fontFamily,
-    fontWeight: FontWeight.w800,
-    fontSize: 14,
-    height: 1.4,
-  );
-
-  static TextStyle textBoldColor(Color c) => TextStyle(
-        color: c,
-        fontFamily: fontFamily,
-        fontWeight: FontWeight.w800,
-        fontSize: 14,
-        height: 1.4,
-      );
+  static final TextStyle textBold = _baseStyle(14, FontWeight.w800, Colors.black);
+  static TextStyle textBoldColor(Color color) => _baseStyle(14, FontWeight.w800, color);
 
   static const TextStyle text = TextStyle(
     color: UIColors.grey1,
-    fontFamily: fontFamily,
+    fontFamily: _fontFamily,
     fontWeight: FontWeight.w500,
     fontSize: 14,
     height: 1.4,
   );
 
-  static const TextStyle link = TextStyle(
-    color: UIColors.darkAccentColor,
-    fontFamily: fontFamily,
-    fontWeight: FontWeight.w800,
-    fontSize: 14,
-    height: 1.4,
-    decoration: TextDecoration.none,
-    decorationStyle: TextDecorationStyle.dotted,
-  );
+  static final TextStyle link = _baseStyle(14, FontWeight.w800, UIColors.darkAccentColor, height: 1.4)
+      .copyWith(decoration: TextDecoration.none, decorationStyle: TextDecorationStyle.dotted);
 
-  static TextStyle get error =>
-      TextStyles.text.copyWith(color: UIColors.darkAccentColor);
+  static TextStyle get error => text.copyWith(color: UIColors.darkAccentColor);
 
-  static const TextStyle small = TextStyle(
-    color: Colors.black,
-    fontFamily: fontFamily,
-    fontWeight: FontWeight.w500,
-    fontSize: 12,
-    height: 1.4,
-  );
-
-  static const TextStyle smallBold = TextStyle(
-    color: Colors.black,
-    fontFamily: fontFamily,
-    fontWeight: FontWeight.w800,
-    fontSize: 12,
-    height: 1.4,
-  );
-
-  static const TextStyle smallBoldColor = TextStyle(
-    color: UIColors.lightPrimaryColor,
-    fontFamily: fontFamily,
-    fontWeight: FontWeight.w800,
-    fontSize: 12,
-    height: 1.4,
-  );
+  static final TextStyle small = _baseStyle(12, FontWeight.w500, Colors.black);
+  static final TextStyle smallBold = _baseStyle(12, FontWeight.w800, Colors.black);
+  static final TextStyle smallBoldColor = _baseStyle(12, FontWeight.w800, UIColors.lightPrimaryColor);
 }
