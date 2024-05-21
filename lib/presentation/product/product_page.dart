@@ -100,14 +100,14 @@ class _ProductPage extends State<ProductPage> {
               )
             : const SizedBox(),
         const SizedBox(height: 20),
-        if (isInFavorite != null && isInFavorite) 
+        if (isInFavorite != null && !isInFavorite) 
           PrimaryButton(
             onTap: () {
               _productBloc.add(ProductEvent.addFavorite(product.id));
                       },
             text: I18nUtils.translate(context, 'product.add'),
           ),
-        if (isInFavorite != null && !isInFavorite)
+        if (isInFavorite != null && isInFavorite)
           PrimaryButton(
             onTap: () {
               _productBloc.add(ProductEvent.removeFavorite(product.id));
