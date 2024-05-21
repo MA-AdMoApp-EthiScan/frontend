@@ -3,15 +3,19 @@ import 'package:ethiscan/domain/entities/app/api_error.dart';
 import 'package:ethiscan/domain/entities/firestore/product.dart';
 import 'package:ethiscan/domain/entities/firestore/metadata_type.dart';
 import 'package:ethiscan/domain/entities/firestore/product_metadata.dart';
+import 'package:ethiscan/domain/entities/firestore/certification.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/core/buttons/primary_button.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/core/list_view_layout_body.dart';
+import 'package:ethiscan/presentation/product/widgets/metadata_widget.dart';
+import 'package:ethiscan/presentation/product/widgets/certification_widget.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ProductPage extends StatefulWidget {
   final String productId;
@@ -28,7 +32,8 @@ class _ProductPage extends State<ProductPage> {
   @override
   void initState() {
     _productBloc = getIt();
-    _productBloc.add(ProductEvent.load(widget.productId));
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+    _productBloc.add(ProductEvent.load(widget.productId, userId));
     super.initState();
   }
 
@@ -43,8 +48,11 @@ class _ProductPage extends State<ProductPage> {
             loading: () => _page(context, state, loading: true),
             error: (error) => _page(context, state, error: error),
             initial: () => _page(context, state),
-            loaded: (product, isInFavorite, metadata) =>
-                _page(context, state, product: product, isInFavorite: isInFavorite, metadata: metadata),
+            loaded: (product, isInFavorite, metadata, certifications) => _page(context, state,
+                product: product,
+                isInFavorite: isInFavorite,
+                metadata: metadata,
+                certifications: certifications),
             orElse: () => _page(context, state),
           );
         },
@@ -59,6 +67,7 @@ class _ProductPage extends State<ProductPage> {
     APIError? error,
     Product? product,
     List<MapEntry<MetadataType, ProductMetadata>>? metadata,
+    List<Certification>? certifications,
     bool? isInFavorite,
   }) {
     return Scaffold(
@@ -77,7 +86,8 @@ class _ProductPage extends State<ProductPage> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: _getContent(loading, error, product, isInFavorite, metadata),
+              children: _getContent(
+                  loading, error, product, isInFavorite, metadata, certifications),
             ),
           ),
         ],
@@ -85,8 +95,13 @@ class _ProductPage extends State<ProductPage> {
     );
   }
 
-  List<Widget> _getContent(bool loading, APIError? error, Product? product, bool? isInFavorite,
-      List<MapEntry<MetadataType, ProductMetadata>>? metadata) {
+  List<Widget> _getContent(
+      bool loading,
+      APIError? error,
+      Product? product,
+      bool? isInFavorite,
+      List<MapEntry<MetadataType, ProductMetadata>>? metadata,
+      List<Certification>? certifications) {
     if (loading) {
       return [const CustomCircularLoading()];
     } else if (error != null) {
@@ -96,14 +111,13 @@ class _ProductPage extends State<ProductPage> {
       ];
     } else if (product != null) {
       return [
-        product.imageUrl != ''
-            ? ClipRRect(
+        if (product.imageUrl.isNotEmpty)
+            ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Image.network(
                   product.imageUrl,
                 ),
-              )
-            : const SizedBox(),
+              ),
         const SizedBox(height: 20),
         if (isInFavorite != null && !isInFavorite) 
           PrimaryButton(
@@ -124,13 +138,18 @@ class _ProductPage extends State<ProductPage> {
         CustomH2P(I18nUtils.translate(context, "product.description")),
         CustomText(product.description),
         const SizedBox(height: 30),
-        if (metadata != null && metadata.isNotEmpty)
-          ..._buildMetadataWidgets(metadata),
+        CustomH2P(I18nUtils.translate(context, "product.certifications")),
+        if (certifications != null && certifications.isNotEmpty)
+          CertificationWidget(certifications: certifications)
+        else
+          CustomText(I18nUtils.translate(context, "product.no_certifications")),
         const SizedBox(height: 30),
-        if (product.certificationIds != null &&
-            product.certificationIds!.isNotEmpty)
-          CustomH2P(I18nUtils.translate(context, "product.certifications")),
-        // Add the certification widgets here
+        CustomH2P(I18nUtils.translate(context, "product.metadatas")),
+        if (metadata != null && metadata.isNotEmpty)
+          MetadataWidget(metadata: metadata)
+        else
+          CustomText(I18nUtils.translate(context, "product.no_metadata")),
+        const SizedBox(height: 30),
       ];
     } else {
       return [
@@ -138,22 +157,5 @@ class _ProductPage extends State<ProductPage> {
         CustomText(I18nUtils.translate(context, "product.empty.message"))
       ];
     }
-  }
-
-  List<Widget> _buildMetadataWidgets(
-      List<MapEntry<MetadataType, ProductMetadata>> metadata) {
-    return metadata.map((entry) {
-      final metadataType = entry.key;
-      final productMetadata = entry.value;
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CustomH2P(metadataType.name),
-          CustomText(
-              productMetadata.data.toString()), // Display metadata content
-          const SizedBox(height: 20),
-        ],
-      );
-    }).toList();
   }
 }

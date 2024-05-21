@@ -18,21 +18,21 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ProductEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id) load,
+    required TResult Function(String id, String userId) load,
     required TResult Function(String barcodeId) addFavorite,
     required TResult Function(String barcodeId) removeFavorite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id)? load,
+    TResult? Function(String id, String userId)? load,
     TResult? Function(String barcodeId)? addFavorite,
     TResult? Function(String barcodeId)? removeFavorite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id)? load,
+    TResult Function(String id, String userId)? load,
     TResult Function(String barcodeId)? addFavorite,
     TResult Function(String barcodeId)? removeFavorite,
     required TResult orElse(),
@@ -86,7 +86,7 @@ abstract class _$$ProductLoadImplCopyWith<$Res> {
           _$ProductLoadImpl value, $Res Function(_$ProductLoadImpl) then) =
       __$$ProductLoadImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String id});
+  $Res call({String id, String userId});
 }
 
 /// @nodoc
@@ -101,11 +101,16 @@ class __$$ProductLoadImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? userId = null,
   }) {
     return _then(_$ProductLoadImpl(
       null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -114,14 +119,16 @@ class __$$ProductLoadImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ProductLoadImpl implements _ProductLoad {
-  const _$ProductLoadImpl(this.id);
+  const _$ProductLoadImpl(this.id, this.userId);
 
   @override
   final String id;
+  @override
+  final String userId;
 
   @override
   String toString() {
-    return 'ProductEvent.load(id: $id)';
+    return 'ProductEvent.load(id: $id, userId: $userId)';
   }
 
   @override
@@ -129,11 +136,12 @@ class _$ProductLoadImpl implements _ProductLoad {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProductLoadImpl &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode => Object.hash(runtimeType, id, userId);
 
   @JsonKey(ignore: true)
   @override
@@ -144,33 +152,33 @@ class _$ProductLoadImpl implements _ProductLoad {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id) load,
+    required TResult Function(String id, String userId) load,
     required TResult Function(String barcodeId) addFavorite,
     required TResult Function(String barcodeId) removeFavorite,
   }) {
-    return load(id);
+    return load(id, userId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id)? load,
+    TResult? Function(String id, String userId)? load,
     TResult? Function(String barcodeId)? addFavorite,
     TResult? Function(String barcodeId)? removeFavorite,
   }) {
-    return load?.call(id);
+    return load?.call(id, userId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id)? load,
+    TResult Function(String id, String userId)? load,
     TResult Function(String barcodeId)? addFavorite,
     TResult Function(String barcodeId)? removeFavorite,
     required TResult orElse(),
   }) {
     if (load != null) {
-      return load(id);
+      return load(id, userId);
     }
     return orElse();
   }
@@ -211,9 +219,11 @@ class _$ProductLoadImpl implements _ProductLoad {
 }
 
 abstract class _ProductLoad implements ProductEvent {
-  const factory _ProductLoad(final String id) = _$ProductLoadImpl;
+  const factory _ProductLoad(final String id, final String userId) =
+      _$ProductLoadImpl;
 
   String get id;
+  String get userId;
   @JsonKey(ignore: true)
   _$$ProductLoadImplCopyWith<_$ProductLoadImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -285,7 +295,7 @@ class _$ProductAddFavoriteImpl implements _ProductAddFavorite {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id) load,
+    required TResult Function(String id, String userId) load,
     required TResult Function(String barcodeId) addFavorite,
     required TResult Function(String barcodeId) removeFavorite,
   }) {
@@ -295,7 +305,7 @@ class _$ProductAddFavoriteImpl implements _ProductAddFavorite {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id)? load,
+    TResult? Function(String id, String userId)? load,
     TResult? Function(String barcodeId)? addFavorite,
     TResult? Function(String barcodeId)? removeFavorite,
   }) {
@@ -305,7 +315,7 @@ class _$ProductAddFavoriteImpl implements _ProductAddFavorite {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id)? load,
+    TResult Function(String id, String userId)? load,
     TResult Function(String barcodeId)? addFavorite,
     TResult Function(String barcodeId)? removeFavorite,
     required TResult orElse(),
@@ -428,7 +438,7 @@ class _$ProductRemoveFavoriteImpl implements _ProductRemoveFavorite {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id) load,
+    required TResult Function(String id, String userId) load,
     required TResult Function(String barcodeId) addFavorite,
     required TResult Function(String barcodeId) removeFavorite,
   }) {
@@ -438,7 +448,7 @@ class _$ProductRemoveFavoriteImpl implements _ProductRemoveFavorite {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id)? load,
+    TResult? Function(String id, String userId)? load,
     TResult? Function(String barcodeId)? addFavorite,
     TResult? Function(String barcodeId)? removeFavorite,
   }) {
@@ -448,7 +458,7 @@ class _$ProductRemoveFavoriteImpl implements _ProductRemoveFavorite {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id)? load,
+    TResult Function(String id, String userId)? load,
     TResult Function(String barcodeId)? addFavorite,
     TResult Function(String barcodeId)? removeFavorite,
     required TResult orElse(),
@@ -510,8 +520,11 @@ mixin _$ProductState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Product product, bool isInFavorite,
-            List<MapEntry<MetadataType, ProductMetadata>> metadata)
+    required TResult Function(
+            Product product,
+            bool isInFavorite,
+            List<MapEntry<MetadataType, ProductMetadata>> metadata,
+            List<Certification> certifications)
         loaded,
     required TResult Function(APIError error) error,
   }) =>
@@ -520,8 +533,11 @@ mixin _$ProductState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Product product, bool isInFavorite,
-            List<MapEntry<MetadataType, ProductMetadata>> metadata)?
+    TResult? Function(
+            Product product,
+            bool isInFavorite,
+            List<MapEntry<MetadataType, ProductMetadata>> metadata,
+            List<Certification> certifications)?
         loaded,
     TResult? Function(APIError error)? error,
   }) =>
@@ -530,8 +546,11 @@ mixin _$ProductState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Product product, bool isInFavorite,
-            List<MapEntry<MetadataType, ProductMetadata>> metadata)?
+    TResult Function(
+            Product product,
+            bool isInFavorite,
+            List<MapEntry<MetadataType, ProductMetadata>> metadata,
+            List<Certification> certifications)?
         loaded,
     TResult Function(APIError error)? error,
     required TResult orElse(),
@@ -622,8 +641,11 @@ class _$ProductInitialImpl implements _ProductInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Product product, bool isInFavorite,
-            List<MapEntry<MetadataType, ProductMetadata>> metadata)
+    required TResult Function(
+            Product product,
+            bool isInFavorite,
+            List<MapEntry<MetadataType, ProductMetadata>> metadata,
+            List<Certification> certifications)
         loaded,
     required TResult Function(APIError error) error,
   }) {
@@ -635,8 +657,11 @@ class _$ProductInitialImpl implements _ProductInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Product product, bool isInFavorite,
-            List<MapEntry<MetadataType, ProductMetadata>> metadata)?
+    TResult? Function(
+            Product product,
+            bool isInFavorite,
+            List<MapEntry<MetadataType, ProductMetadata>> metadata,
+            List<Certification> certifications)?
         loaded,
     TResult? Function(APIError error)? error,
   }) {
@@ -648,8 +673,11 @@ class _$ProductInitialImpl implements _ProductInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Product product, bool isInFavorite,
-            List<MapEntry<MetadataType, ProductMetadata>> metadata)?
+    TResult Function(
+            Product product,
+            bool isInFavorite,
+            List<MapEntry<MetadataType, ProductMetadata>> metadata,
+            List<Certification> certifications)?
         loaded,
     TResult Function(APIError error)? error,
     required TResult orElse(),
@@ -742,8 +770,11 @@ class _$ProductLoadingImpl implements _ProductLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Product product, bool isInFavorite,
-            List<MapEntry<MetadataType, ProductMetadata>> metadata)
+    required TResult Function(
+            Product product,
+            bool isInFavorite,
+            List<MapEntry<MetadataType, ProductMetadata>> metadata,
+            List<Certification> certifications)
         loaded,
     required TResult Function(APIError error) error,
   }) {
@@ -755,8 +786,11 @@ class _$ProductLoadingImpl implements _ProductLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Product product, bool isInFavorite,
-            List<MapEntry<MetadataType, ProductMetadata>> metadata)?
+    TResult? Function(
+            Product product,
+            bool isInFavorite,
+            List<MapEntry<MetadataType, ProductMetadata>> metadata,
+            List<Certification> certifications)?
         loaded,
     TResult? Function(APIError error)? error,
   }) {
@@ -768,8 +802,11 @@ class _$ProductLoadingImpl implements _ProductLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Product product, bool isInFavorite,
-            List<MapEntry<MetadataType, ProductMetadata>> metadata)?
+    TResult Function(
+            Product product,
+            bool isInFavorite,
+            List<MapEntry<MetadataType, ProductMetadata>> metadata,
+            List<Certification> certifications)?
         loaded,
     TResult Function(APIError error)? error,
     required TResult orElse(),
@@ -831,7 +868,8 @@ abstract class _$$ProductLoadedImplCopyWith<$Res> {
   $Res call(
       {Product product,
       bool isInFavorite,
-      List<MapEntry<MetadataType, ProductMetadata>> metadata});
+      List<MapEntry<MetadataType, ProductMetadata>> metadata,
+      List<Certification> certifications});
 }
 
 /// @nodoc
@@ -848,6 +886,7 @@ class __$$ProductLoadedImplCopyWithImpl<$Res>
     Object? product = null,
     Object? isInFavorite = null,
     Object? metadata = null,
+    Object? certifications = null,
   }) {
     return _then(_$ProductLoadedImpl(
       product: null == product
@@ -862,6 +901,10 @@ class __$$ProductLoadedImplCopyWithImpl<$Res>
           ? _value._metadata
           : metadata // ignore: cast_nullable_to_non_nullable
               as List<MapEntry<MetadataType, ProductMetadata>>,
+      certifications: null == certifications
+          ? _value._certifications
+          : certifications // ignore: cast_nullable_to_non_nullable
+              as List<Certification>,
     ));
   }
 }
@@ -872,8 +915,10 @@ class _$ProductLoadedImpl implements _ProductLoaded {
   const _$ProductLoadedImpl(
       {required this.product,
       required this.isInFavorite,
-      required final List<MapEntry<MetadataType, ProductMetadata>> metadata})
-      : _metadata = metadata;
+      required final List<MapEntry<MetadataType, ProductMetadata>> metadata,
+      required final List<Certification> certifications})
+      : _metadata = metadata,
+        _certifications = certifications;
 
   @override
   final Product product;
@@ -887,9 +932,17 @@ class _$ProductLoadedImpl implements _ProductLoaded {
     return EqualUnmodifiableListView(_metadata);
   }
 
+  final List<Certification> _certifications;
+  @override
+  List<Certification> get certifications {
+    if (_certifications is EqualUnmodifiableListView) return _certifications;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_certifications);
+  }
+
   @override
   String toString() {
-    return 'ProductState.loaded(product: $product, isInFavorite: $isInFavorite, metadata: $metadata)';
+    return 'ProductState.loaded(product: $product, isInFavorite: $isInFavorite, metadata: $metadata, certifications: $certifications)';
   }
 
   @override
@@ -900,12 +953,18 @@ class _$ProductLoadedImpl implements _ProductLoaded {
             (identical(other.product, product) || other.product == product) &&
             (identical(other.isInFavorite, isInFavorite) ||
                 other.isInFavorite == isInFavorite) &&
-            const DeepCollectionEquality().equals(other._metadata, _metadata));
+            const DeepCollectionEquality().equals(other._metadata, _metadata) &&
+            const DeepCollectionEquality()
+                .equals(other._certifications, _certifications));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, product, isInFavorite,
-      const DeepCollectionEquality().hash(_metadata));
+  int get hashCode => Object.hash(
+      runtimeType,
+      product,
+      isInFavorite,
+      const DeepCollectionEquality().hash(_metadata),
+      const DeepCollectionEquality().hash(_certifications));
 
   @JsonKey(ignore: true)
   @override
@@ -918,12 +977,15 @@ class _$ProductLoadedImpl implements _ProductLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Product product, bool isInFavorite,
-            List<MapEntry<MetadataType, ProductMetadata>> metadata)
+    required TResult Function(
+            Product product,
+            bool isInFavorite,
+            List<MapEntry<MetadataType, ProductMetadata>> metadata,
+            List<Certification> certifications)
         loaded,
     required TResult Function(APIError error) error,
   }) {
-    return loaded(product, isInFavorite, metadata);
+    return loaded(product, isInFavorite, metadata, certifications);
   }
 
   @override
@@ -931,12 +993,15 @@ class _$ProductLoadedImpl implements _ProductLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Product product, bool isInFavorite,
-            List<MapEntry<MetadataType, ProductMetadata>> metadata)?
+    TResult? Function(
+            Product product,
+            bool isInFavorite,
+            List<MapEntry<MetadataType, ProductMetadata>> metadata,
+            List<Certification> certifications)?
         loaded,
     TResult? Function(APIError error)? error,
   }) {
-    return loaded?.call(product, isInFavorite, metadata);
+    return loaded?.call(product, isInFavorite, metadata, certifications);
   }
 
   @override
@@ -944,14 +1009,17 @@ class _$ProductLoadedImpl implements _ProductLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Product product, bool isInFavorite,
-            List<MapEntry<MetadataType, ProductMetadata>> metadata)?
+    TResult Function(
+            Product product,
+            bool isInFavorite,
+            List<MapEntry<MetadataType, ProductMetadata>> metadata,
+            List<Certification> certifications)?
         loaded,
     TResult Function(APIError error)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(product, isInFavorite, metadata);
+      return loaded(product, isInFavorite, metadata, certifications);
     }
     return orElse();
   }
@@ -998,12 +1066,13 @@ abstract class _ProductLoaded implements ProductState {
   const factory _ProductLoaded(
       {required final Product product,
       required final bool isInFavorite,
-      required final List<MapEntry<MetadataType, ProductMetadata>>
-          metadata}) = _$ProductLoadedImpl;
+      required final List<MapEntry<MetadataType, ProductMetadata>> metadata,
+      required final List<Certification> certifications}) = _$ProductLoadedImpl;
 
   Product get product;
   bool get isInFavorite;
   List<MapEntry<MetadataType, ProductMetadata>> get metadata;
+  List<Certification> get certifications;
   @JsonKey(ignore: true)
   _$$ProductLoadedImplCopyWith<_$ProductLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1075,8 +1144,11 @@ class _$ProductErrorImpl implements _ProductError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Product product, bool isInFavorite,
-            List<MapEntry<MetadataType, ProductMetadata>> metadata)
+    required TResult Function(
+            Product product,
+            bool isInFavorite,
+            List<MapEntry<MetadataType, ProductMetadata>> metadata,
+            List<Certification> certifications)
         loaded,
     required TResult Function(APIError error) error,
   }) {
@@ -1088,8 +1160,11 @@ class _$ProductErrorImpl implements _ProductError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Product product, bool isInFavorite,
-            List<MapEntry<MetadataType, ProductMetadata>> metadata)?
+    TResult? Function(
+            Product product,
+            bool isInFavorite,
+            List<MapEntry<MetadataType, ProductMetadata>> metadata,
+            List<Certification> certifications)?
         loaded,
     TResult? Function(APIError error)? error,
   }) {
@@ -1101,8 +1176,11 @@ class _$ProductErrorImpl implements _ProductError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Product product, bool isInFavorite,
-            List<MapEntry<MetadataType, ProductMetadata>> metadata)?
+    TResult Function(
+            Product product,
+            bool isInFavorite,
+            List<MapEntry<MetadataType, ProductMetadata>> metadata,
+            List<Certification> certifications)?
         loaded,
     TResult Function(APIError error)? error,
     required TResult orElse(),
