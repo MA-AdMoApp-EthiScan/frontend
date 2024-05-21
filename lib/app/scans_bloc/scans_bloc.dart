@@ -14,20 +14,28 @@ class ScansBloc extends Bloc<ScansEvent, ScansState> {
   final ScanHistoryRepository _scanHistoryRepository;
   final ProductRepository _productRepository;
 
-  ScansBloc(this._scanHistoryRepository,this._productRepository) : super(const ScansState.initial()) {
+  ScansBloc(this._scanHistoryRepository, this._productRepository)
+      : super(const ScansState.initial()) {
     on<ScansEvent>((event, emit) async {
       await event.when(
         load: () async {
           emit(const ScansState.loading());
           //await Future.delayed(const Duration(seconds: 3));
           final history = await _scanHistoryRepository.getScanHistory();
-          emit(ScansState.loaded(scans: history));
+          await history.fold(
+            (failure) async {
+              emit(const ScansState.error());
+            },
+            (history) async {
+              emit(ScansState.loaded(scans: history));
+            },
+          );
         },
         barcodeFound: (barcode) async {
           var either = await _productRepository.getProductById(barcode);
           String productName = "";
-          either.when(
-            left: (failure)  {
+          await either.fold(
+            (failure) async {
               productName = 'Unknown name $barcode';
               //_productRepository.addProduct(
               //  Product(
@@ -37,7 +45,7 @@ class ScansBloc extends Bloc<ScansEvent, ScansState> {
               //    description: 'Unknown', // Provide a description here
               //  ),);
             },
-            right: (product)  {
+            (product) async {
               productName = product.name;
             },
           );
@@ -57,4 +65,3 @@ class ScansBloc extends Bloc<ScansEvent, ScansState> {
     });
   }
 }
-
