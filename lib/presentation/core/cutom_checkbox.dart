@@ -38,9 +38,9 @@ class CustomCheckbox extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(top: 0),
-              child: CustomText(
+              child: CustomH2(
                 text,
-                style: TextStyles.textBold,
+                //style: TextStyles.textBold,
               ),
             ),
           ),

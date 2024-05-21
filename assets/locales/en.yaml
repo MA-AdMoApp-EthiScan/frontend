@@ -13,6 +13,9 @@ app:
       message: 'An error occurred while fetching data'
 
 popup:
+  clear_history:
+      title: 'Clear history'
+      message: 'Are you sure you want to clear history ?'
   logout:
     title: 'Logging out'
     message: 'Are you sure you want to log out ?'

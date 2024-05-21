@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:ethiscan/app/user_bloc/main_user_bloc.dart';
-import 'package:ethiscan/domain/language/i_language_repository.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/app/app_connected.dart';
 import 'package:ethiscan/presentation/app/custom_app.dart';
@@ -27,17 +26,16 @@ class _AppState extends State<App> {
 
   @override
   void initState() {
-    final ILanguageRepository languageRepository = getIt();
     _mainUserBloc = getIt();
 
     // Set the locale from the shared preferences
     SharedPreferences.getInstance().then((prefs) {
       if (prefs.containsKey('locale')) {
         FlutterI18n.refresh(context, Locale(prefs.getString('locale')!));
-        languageRepository.storeCachedLanguage(prefs.getString('locale')!);
+        prefs.setString('language', prefs.getString('locale')!);
       } else {
         String locale = Platform.localeName.split('_')[0];
-        languageRepository.storeCachedLanguage(locale);
+        prefs.setString('language', locale);
       }
     });
 

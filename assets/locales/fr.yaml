@@ -13,6 +13,9 @@ app:
       message: "Une erreur s'est produite lors de la récupération des données"
 
 popup:
+  clear_history:
+    title: "Effacer l'historique"
+    message: "Êtes-vous sûr de vouloir effacer l'historique ?"
   logout:
     title: "Déconnexion"
     message: "Êtes-vous sûr de vouloir vous déconnecter ?"
@@ -47,6 +50,7 @@ favorites:
     message: "Aucun favori trouvé"
 
 scan:
+  clear_history: "Effacer l'historique"
   title: "Scan"
   barcode_found: "Code-barres trouvé !"
   error-title: "Erreur"

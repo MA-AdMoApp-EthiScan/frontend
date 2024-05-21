@@ -4,14 +4,17 @@ import 'package:ethiscan/app/scans_bloc/scans_bloc.dart';
 import 'package:ethiscan/domain/entities/app/list_product.dart';
 import 'package:ethiscan/domain/entities/app/scan_history.dart';
 import 'package:ethiscan/injection.dart';
+import 'package:ethiscan/presentation/core/buttons/secondary_button.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/core/list_view_layout_body.dart';
 import 'package:ethiscan/presentation/product/product_page.dart';
+import 'package:ethiscan/presentation/widget_core/popup_validation.dart';
 import 'package:ethiscan/presentation/widget_core/product_card.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:ethiscan/utils/navigation_util.dart';
 import 'package:ethiscan/utils/toast.dart';
+import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:camera/camera.dart';
@@ -230,9 +233,28 @@ class _ScansPage extends State<ScansPage> {
             )
           ))
           .toList();
+
+      widgets.addAll([
+        PopupValidation(
+          name: "clear_history",
+          onPressed: () => _scansBloc.add(const ScansEvent.clear()),
+          button: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomH2R(
+                I18nUtils.translate(context, "scan.clear_history")
+              ),
+              const SizedBox(width: 10),
+              const Icon(Icons.delete, color: UIColors.red)
+            ]
+          ),
+        ),
+      ]);
       for (int i = 0; i < scanCards.length; i++) {
-        widgets.add(const SizedBox(height: 15));
-        widgets.add(scanCards[i]);
+        widgets.addAll([
+          const SizedBox(height: 15),
+          scanCards[i]
+        ]);
       }
       return widgets;
     }
