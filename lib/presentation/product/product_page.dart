@@ -1,6 +1,8 @@
 import 'package:ethiscan/app/product_bloc/product_bloc.dart';
 import 'package:ethiscan/domain/entities/app/api_error.dart';
 import 'package:ethiscan/domain/entities/firestore/product.dart';
+import 'package:ethiscan/domain/entities/firestore/metadata_type.dart';
+import 'package:ethiscan/domain/entities/firestore/product_metadata.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
@@ -32,20 +34,21 @@ class _ProductPage extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-        value: _productBloc,
-        child: BlocConsumer<ProductBloc, ProductState>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            return state.maybeWhen(
-              loading: () => _page(context, state, loading: true),
-              error: (error) => _page(context, state, error: error),
-              initial: () => _page(context, state),
-              loaded: (Product product) =>
-                  _page(context, state, product: product),
-              orElse: () => _page(context, state),
-            );
-          },
-        ));
+      value: _productBloc,
+      child: BlocConsumer<ProductBloc, ProductState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return state.maybeWhen(
+            loading: () => _page(context, state, loading: true),
+            error: (error) => _page(context, state, error: error),
+            initial: () => _page(context, state),
+            loaded: (product, metadata) =>
+                _page(context, state, product: product, metadata: metadata),
+            orElse: () => _page(context, state),
+          );
+        },
+      ),
+    );
   }
 
   Widget _page(
@@ -54,6 +57,7 @@ class _ProductPage extends State<ProductPage> {
     bool loading = false,
     APIError? error,
     Product? product,
+    List<MapEntry<MetadataType, ProductMetadata>>? metadata,
   }) {
     return Scaffold(
       appBar: AppBar(
@@ -71,7 +75,7 @@ class _ProductPage extends State<ProductPage> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: _getContent(loading, error, product),
+              children: _getContent(loading, error, product, metadata),
             ),
           ),
         ],
@@ -79,7 +83,8 @@ class _ProductPage extends State<ProductPage> {
     );
   }
 
-  List<Widget> _getContent(bool loading, APIError? error, Product? product) {
+  List<Widget> _getContent(bool loading, APIError? error, Product? product,
+      List<MapEntry<MetadataType, ProductMetadata>>? metadata) {
     if (loading) {
       return [const CustomCircularLoading()];
     } else if (error != null) {
@@ -101,31 +106,13 @@ class _ProductPage extends State<ProductPage> {
         CustomH2P(I18nUtils.translate(context, "product.description")),
         CustomText(product.description),
         const SizedBox(height: 30),
-        if (product.productMetadataIds != null && product.productMetadataIds!.isNotEmpty)
-          CustomH2P(I18nUtils.translate(context, "product.metadatas")),
-          /*Row(
-            children: [
-              CustomH3(I18nUtils.translate(context, "product.carbon_footprint")),
-              const Spacer(),
-              CustomText(product.carbonFootprint.toString()),
-            ],
-          ),*/
+        if (metadata != null && metadata.isNotEmpty)
+          ..._buildMetadataWidgets(metadata),
         const SizedBox(height: 30),
-        if (product.certificationIds != null && product.certificationIds!.isNotEmpty)
+        if (product.certificationIds != null &&
+            product.certificationIds!.isNotEmpty)
           CustomH2P(I18nUtils.translate(context, "product.certifications")),
-          /*Row(
-            children: [
-              ListView.builder(
-                itemCount: product.certificationIds?.length,
-                itemBuilder: (context, index) {
-                  final parameter = product.certificationIds?[index];
-                  return ListTile(
-                      title: Text(parameter/*.name*/),
-                      subtitle: Text(parameter.schema.toString()));
-                },
-              )
-            ],
-          ),*/
+        // Add the certification widgets here
       ];
     } else {
       return [
@@ -133,5 +120,74 @@ class _ProductPage extends State<ProductPage> {
         CustomText(I18nUtils.translate(context, "product.empty.message"))
       ];
     }
+  }
+
+  List<Widget> _buildMetadataWidgets(
+      List<MapEntry<MetadataType, ProductMetadata>> metadata) {
+    return metadata.map((entry) {
+      final metadataType = entry.key;
+      final productMetadata = entry.value;
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomH2P(metadataType.name),
+          _buildMetadataContent(metadataType, productMetadata),
+          const SizedBox(height: 20),
+        ],
+      );
+    }).toList();
+  }
+
+  Widget _buildMetadataContent(
+      MetadataType metadataType, ProductMetadata productMetadata) {
+    switch (metadataType.id) {
+      case 'impactCarbone':
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildMetadataRow('Note', productMetadata.data['note'].toString()),
+            _buildMetadataRow(
+                'CO2 Quantity', productMetadata.data['co2Quantity'].toString()),
+            _buildMetadataRow('Packaging Percentage',
+                productMetadata.data['packagingPercentage'].toString()),
+            _buildMetadataRow('Manufacturing Percentage',
+                productMetadata.data['manufacturingPercentage'].toString()),
+            _buildMetadataRow('Transport Percentage',
+                productMetadata.data['transportPercentage'].toString()),
+          ],
+        );
+      case 'animalHappiness':
+        return _buildMetadataRow(
+            'Note', productMetadata.data['note'].toString());
+      case 'localization':
+        return _buildMetadataRow(
+            'Location', productMetadata.data['location'].toString());
+      case 'allergies':
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildMetadataRow(
+                'Gluten', productMetadata.data['gluten'] ? 'Yes' : 'No'),
+            _buildMetadataRow(
+                'Lactose', productMetadata.data['lactose'] ? 'Yes' : 'No'),
+            _buildMetadataRow(
+                'Peanuts', productMetadata.data['peanuts'] ? 'Yes' : 'No'),
+            _buildMetadataRow(
+                'Soy', productMetadata.data['soy'] ? 'Yes' : 'No'),
+          ],
+        );
+      default:
+        return CustomText(productMetadata.data.toString());
+    }
+  }
+
+  Widget _buildMetadataRow(String label, String value) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        CustomText(label),
+        CustomText(value),
+      ],
+    );
   }
 }

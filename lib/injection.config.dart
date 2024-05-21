@@ -8,11 +8,11 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:ethiscan/app/favorites_bloc/favorites_bloc.dart' as _i20;
-import 'package:ethiscan/app/parameters_bloc/parameters_bloc.dart' as _i22;
-import 'package:ethiscan/app/product_bloc/product_bloc.dart' as _i19;
-import 'package:ethiscan/app/scans_bloc/scans_bloc.dart' as _i23;
-import 'package:ethiscan/app/user_bloc/main_user_bloc.dart' as _i21;
+import 'package:ethiscan/app/favorites_bloc/favorites_bloc.dart' as _i19;
+import 'package:ethiscan/app/parameters_bloc/parameters_bloc.dart' as _i21;
+import 'package:ethiscan/app/product_bloc/product_bloc.dart' as _i23;
+import 'package:ethiscan/app/scans_bloc/scans_bloc.dart' as _i22;
+import 'package:ethiscan/app/user_bloc/main_user_bloc.dart' as _i20;
 import 'package:ethiscan/data/datasources/auth_provider.dart' as _i8;
 import 'package:ethiscan/data/datasources/favorite_product_provider.dart'
     as _i6;
@@ -59,21 +59,24 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i15.MetadataRepository>(
         () => _i16.MetadataRepositoryProvider());
     gh.singleton<_i17.ScanHistoryRepository>(() => _i18.ScanHistoryProvider());
-    gh.factory<_i19.ProductBloc>(
-        () => _i19.ProductBloc(gh<_i13.ProductRepository>()));
-    gh.factory<_i20.FavoritesBloc>(() => _i20.FavoritesBloc(
+    gh.factory<_i19.FavoritesBloc>(() => _i19.FavoritesBloc(
           gh<_i5.FavoriteProductRepository>(),
           gh<_i13.ProductRepository>(),
         ));
-    gh.factory<_i21.MainUserBloc>(
-        () => _i21.MainUserBloc(gh<_i7.AuthRepository>()));
-    gh.factory<_i22.ParametersBloc>(() => _i22.ParametersBloc(
+    gh.factory<_i20.MainUserBloc>(
+        () => _i20.MainUserBloc(gh<_i7.AuthRepository>()));
+    gh.factory<_i21.ParametersBloc>(() => _i21.ParametersBloc(
           gh<_i11.MetadataTypeRepository>(),
           gh<_i3.UserRepository>(),
         ));
-    gh.factory<_i23.ScansBloc>(() => _i23.ScansBloc(
+    gh.factory<_i22.ScansBloc>(() => _i22.ScansBloc(
           gh<_i17.ScanHistoryRepository>(),
           gh<_i13.ProductRepository>(),
+        ));
+    gh.factory<_i23.ProductBloc>(() => _i23.ProductBloc(
+          gh<_i13.ProductRepository>(),
+          gh<_i15.MetadataRepository>(),
+          gh<_i11.MetadataTypeRepository>(),
         ));
     return this;
   }
