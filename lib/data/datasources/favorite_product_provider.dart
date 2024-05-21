@@ -2,7 +2,7 @@ import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ethiscan/domain/core/either.dart';
+import 'package:dartz/dartz.dart';
 import 'package:ethiscan/domain/entities/app/api_error.dart';
 import 'package:ethiscan/data/repositories/favorite_product_repository.dart';
 import 'package:ethiscan/domain/entities/firestore/favorite_product.dart';
@@ -43,7 +43,7 @@ class FavoriteProductRepositoryProvider implements FavoriteProductRepository {
       ..add(favoriteProduct);
     userCollection.doc(userId).update(
         {'favoriteProducts': updatedFavorites.map((e) => e.toJson()).toList()});
-    return Right(null);
+    return const Right(null);
   }
 
     @override
@@ -65,7 +65,6 @@ class FavoriteProductRepositoryProvider implements FavoriteProductRepository {
     return Right(isFavorite);
   }
 
-
   @override
   Future<Either<APIError, void>> removeFavoriteProduct(String productId) async {
     final userId = await getCurrentUserId();
@@ -79,6 +78,6 @@ class FavoriteProductRepositoryProvider implements FavoriteProductRepository {
         .toList();
     userCollection.doc(userId).update(
         {'favoriteProducts': updatedFavorites.map((e) => e.toJson()).toList()});
-    return Right(null);
+    return const Right(null);
   }
 }

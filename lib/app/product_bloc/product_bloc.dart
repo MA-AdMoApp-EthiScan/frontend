@@ -21,70 +21,73 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       await event.when(
         load: (id) async {
           emit(const ProductState.loading());
-          var either = await _productRepository.getProductById(id);
-          await either.when(
-            left: (failure) async {
-              emit(ProductState.error(error: failure));
-            },
-            right: (product) async {
-              var either2 = await _favoriteProductRepository.productIsInFavorite(product.id);
-              bool isInFavorite = false;
-              either2.when(
-                left: (failure)  {
-                  isInFavorite = false;
-                },
-                right: (res)  {
-                  isInFavorite = res;
-                },
-              );
-              emit(ProductState.loaded(product: product, isInFavorite: isInFavorite));
-            },
-          );
+          try {
+            final product = await _getProduct(id);
+            //final metadatas = await _getMetadata(product.id);
+            final isInFavorite = await _isInFavorite(product.id);
+
+            emit(ProductState.loaded(
+                product: product , isInFavorite: isInFavorite/*, metadatas: metadatas*/));
+          } catch (e) {
+            emit(ProductState.error(error: e as APIError));
+          }
+
         },
         addFavorite: (barcodeId) async {
-          var either = await _favoriteProductRepository.addFavoriteProduct(
+          await _addFavorite(
             FavoriteProduct(
               productId: barcodeId,
               addedAt: DateTime.now(),
             ),
           );
-          await either.when(
-            left: (failure) async {
-              emit(ProductState.error(error: failure));
-            }, right: (void value) {  },
-          );
-
-          var eitherNew = await _productRepository.getProductById(barcodeId);
-          await eitherNew.when(
-            left: (failure) async {
-              emit(ProductState.error(error: failure));
-            },
-            right: (product) async {
-              emit(ProductState.loaded(product: product, isInFavorite: true));
-            },
-          );
+          final product = await _getProduct(barcodeId);
+          emit(ProductState.loaded(product: product, isInFavorite: true));
         },
         removeFavorite: (barcodeId) async {
-          var either = await _favoriteProductRepository.removeFavoriteProduct(
-            barcodeId
-          );
-          await either.when(
-            left: (failure) async {
-              emit(ProductState.error(error: failure));
-            }, right: (void value) {  },
-          );
-
-          var eitherNew = await _productRepository.getProductById(barcodeId);
-          await eitherNew.when(
-            left: (failure) async {
-              emit(ProductState.error(error: failure));
-            },
-            right: (product) async {
-              emit(ProductState.loaded(product: product, isInFavorite: false));
-            },
-          );
+          await _removeFromFavorite(barcodeId);
+          final product = await _getProduct(barcodeId);
+          emit(ProductState.loaded(product: product, isInFavorite: false));
         }
       );
     });
   }
+
+  Future<Product> _getProduct(String id) async {
+    final either = await _productRepository.getProductById(id);
+    return either.fold(
+      (failure) => throw failure,
+      (product) => product,
+    );
+  }
+
+  Future<bool> _isInFavorite(String id) async {
+    final either = await _favoriteProductRepository.productIsInFavorite(id);
+    return either.fold(
+      (failure) => throw failure,
+      (boolVal) => boolVal,
+    );
+  }
+
+  Future<void> _addFavorite(FavoriteProduct favorite) async {
+    final either = await _favoriteProductRepository.addFavoriteProduct(favorite);
+    return either.fold(
+      (failure) => throw failure,
+      (_) => null,
+    );
+  }
+
+  Future<void> _removeFromFavorite(String barcodeId) async {
+    final either = await _favoriteProductRepository.removeFavoriteProduct(barcodeId);
+    return either.fold(
+      (failure) => throw failure,
+      (_) => null,
+    );
+  }
+  // Future<List<ProductMetadata>> _getMetadata(String productId) async {
+  //   final either = await _metadataRepository.getMetadatasByProductId(productId);
+  //   return either.fold(
+  //     (failure) => throw failure,
+  //     (metadata) => metadata,
+  //   );
+  // }
 }

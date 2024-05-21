@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ethiscan/domain/core/either.dart';
+import 'package:dartz/dartz.dart';
 import 'package:ethiscan/domain/entities/app/api_error.dart';
 import 'package:ethiscan/domain/entities/firestore/product.dart';
 import 'package:ethiscan/data/repositories/product_repository.dart';
@@ -13,22 +13,23 @@ class ProductRepositoryProvider implements ProductRepository {
 
   @override
   Future<Either<APIError, Product>> getProductById(String codebareId) async {
-    final querySnapshot = await productCollection
-        .where('id', isEqualTo: codebareId)
-        .get();
+    final querySnapshot =
+        await productCollection.where('id', isEqualTo: codebareId).get();
     if (querySnapshot.docs.isEmpty) {
       return Left(APIError('Product not found', 404));
     }
     final product = querySnapshot.docs
         .map((doc) => Product.fromJson(doc.data() as Map<String, dynamic>))
-        .toList().first;
+        .toList()
+        .first;
 
     return Right(product);
   }
 
   @override
   Future<Either<APIError, List<Product>>> getProductByIdList(List<String> id) {
-    final docList = id.map((productId) => productCollection.doc(productId).get());
+    final docList =
+        id.map((productId) => productCollection.doc(productId).get());
     return Future.wait(docList).then((docs) {
       final products = docs
           .where((doc) => doc.exists)
