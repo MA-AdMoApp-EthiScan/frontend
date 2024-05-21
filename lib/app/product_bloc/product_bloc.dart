@@ -4,10 +4,12 @@ import 'package:ethiscan/data/repositories/metadata_repository.dart';
 import 'package:ethiscan/data/repositories/metadata_type_repository.dart';
 import 'package:ethiscan/data/repositories/product_repository.dart';
 import 'package:ethiscan/data/repositories/user_repository.dart';
+import 'package:ethiscan/data/repositories/certification_repository.dart';
 import 'package:ethiscan/domain/entities/app/api_error.dart';
 import 'package:ethiscan/domain/entities/firestore/product.dart';
 import 'package:ethiscan/domain/entities/firestore/product_metadata.dart';
 import 'package:ethiscan/domain/entities/firestore/metadata_type.dart';
+import 'package:ethiscan/domain/entities/firestore/certification.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -21,12 +23,14 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final MetadataRepository _metadataRepository;
   final MetadataTypeRepository _metadataTypeRepository;
   final UserRepository _userRepository;
+  final CertificationRepository _certificationRepository;
 
   ProductBloc(
     this._productRepository,
     this._metadataRepository,
     this._metadataTypeRepository,
     this._userRepository,
+    this._certificationRepository,
   ) : super(const ProductState.initial()) {
     on<ProductEvent>((event, emit) async {
       await event.when(
@@ -40,16 +44,35 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
             (failure) async => emit(ProductState.error(error: failure)),
             (product) async {
               await userEither.fold(
-                  (failure) async => emit(ProductState.error(error: failure)),
-                  (user) async {
-                final metadataEither = await _loadFilteredProductMetadata(
-                    product.productMetadataIds!, user.metadataTypeIds!);
-                await metadataEither.fold(
-                  (failure) async => emit(ProductState.error(error: failure)),
-                  (metadata) async => emit(ProductState.loaded(
-                      product: product, metadata: metadata)),
-                );
-              });
+                (failure) async => emit(ProductState.error(error: failure)),
+                (user) async {
+                  final metadataEither = await _loadFilteredProductMetadata(
+                    product.productMetadataIds ?? [],
+                    user.metadataTypeIds ?? [],
+                  );
+
+                  final certificationsEither = await _loadCertifications(
+                    product.certificationIds ?? [],
+                  );
+
+                  await metadataEither.fold(
+                    (failure) async => emit(ProductState.error(error: failure)),
+                    (metadata) async {
+                      await certificationsEither.fold(
+                        (failure) async =>
+                            emit(ProductState.error(error: failure)),
+                        (certifications) async {
+                          emit(ProductState.loaded(
+                            product: product,
+                            metadata: metadata,
+                            certifications: certifications,
+                          ));
+                        },
+                      );
+                    },
+                  );
+                },
+              );
             },
           );
         },
@@ -64,6 +87,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   Future<Either<APIError, List<MapEntry<MetadataType, ProductMetadata>>>>
       _loadFilteredProductMetadata(
           List<String> metadataIds, List<String> userMetadataTypeIds) async {
+    if (metadataIds.isEmpty || userMetadataTypeIds.isEmpty) {
+      return const Right([]);
+    }
+
     final metadataEither =
         await _metadataRepository.getProductMetadatasById(metadataIds);
     return metadataEither.fold(
@@ -73,6 +100,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
             .where((metadata) =>
                 userMetadataTypeIds.contains(metadata.metadataTypeId))
             .toList();
+        if (filteredMetadataList.isEmpty) {
+          return const Right([]);
+        }
         final metadataTypeIds =
             filteredMetadataList.map((meta) => meta.metadataTypeId).toList();
         final metadataTypeEither =
@@ -90,5 +120,14 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         );
       },
     );
+  }
+
+  Future<Either<APIError, List<Certification>>> _loadCertifications(
+      List<String> certificationIds) async {
+    if (certificationIds.isEmpty) {
+      return const Right([]);
+    }
+    return await _certificationRepository
+        .getCertificationsByIds(certificationIds);
   }
 }
