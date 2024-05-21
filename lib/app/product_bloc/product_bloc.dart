@@ -44,29 +44,35 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
             (failure) async => emit(ProductState.error(error: failure)),
             (product) async {
               await userEither.fold(
-                  (failure) async => emit(ProductState.error(error: failure)),
-                  (user) async {
-                final metadataEither = await _loadFilteredProductMetadata(
-                    product.productMetadataIds!, user.metadataTypeIds!);
-                final certificationsEither =
-                    await _loadCertifications(product.certificationIds!);
+                (failure) async => emit(ProductState.error(error: failure)),
+                (user) async {
+                  final metadataEither = await _loadFilteredProductMetadata(
+                    product.productMetadataIds ?? [],
+                    user.metadataTypeIds ?? [],
+                  );
 
-                await metadataEither.fold(
-                  (failure) async => emit(ProductState.error(error: failure)),
-                  (metadata) async {
-                    await certificationsEither.fold(
+                  final certificationsEither = await _loadCertifications(
+                    product.certificationIds ?? [],
+                  );
+
+                  await metadataEither.fold(
+                    (failure) async => emit(ProductState.error(error: failure)),
+                    (metadata) async {
+                      await certificationsEither.fold(
                         (failure) async =>
                             emit(ProductState.error(error: failure)),
                         (certifications) async {
-                      emit(ProductState.loaded(
-                        product: product,
-                        metadata: metadata,
-                        certifications: certifications,
-                      ));
-                    });
-                  },
-                );
-              });
+                          emit(ProductState.loaded(
+                            product: product,
+                            metadata: metadata,
+                            certifications: certifications,
+                          ));
+                        },
+                      );
+                    },
+                  );
+                },
+              );
             },
           );
         },
@@ -81,6 +87,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   Future<Either<APIError, List<MapEntry<MetadataType, ProductMetadata>>>>
       _loadFilteredProductMetadata(
           List<String> metadataIds, List<String> userMetadataTypeIds) async {
+    if (metadataIds.isEmpty || userMetadataTypeIds.isEmpty) {
+      return const Right([]);
+    }
+
     final metadataEither =
         await _metadataRepository.getProductMetadatasById(metadataIds);
     return metadataEither.fold(
@@ -90,6 +100,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
             .where((metadata) =>
                 userMetadataTypeIds.contains(metadata.metadataTypeId))
             .toList();
+        if (filteredMetadataList.isEmpty) {
+          return const Right([]);
+        }
         final metadataTypeIds =
             filteredMetadataList.map((meta) => meta.metadataTypeId).toList();
         final metadataTypeEither =
@@ -111,6 +124,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
   Future<Either<APIError, List<Certification>>> _loadCertifications(
       List<String> certificationIds) async {
+    if (certificationIds.isEmpty) {
+      return const Right([]);
+    }
     return await _certificationRepository
         .getCertificationsByIds(certificationIds);
   }

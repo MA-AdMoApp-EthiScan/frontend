@@ -118,11 +118,14 @@ class _ProductPage extends State<ProductPage> {
         CustomText(product.description),
         const SizedBox(height: 30),
         if (metadata != null && metadata.isNotEmpty)
-          ..._buildMetadataWidgets(metadata),
+          ..._buildMetadataWidgets(metadata)
+        else
+          CustomText(I18nUtils.translate(context, "product.no_metadata")),
         const SizedBox(height: 30),
         if (certifications != null && certifications.isNotEmpty)
-          CustomH2P(I18nUtils.translate(context, "product.certifications")),
-        _buildCertificationWidgets(certifications!),
+          ..._buildCertificationWidgets(certifications)
+        else
+          CustomText(I18nUtils.translate(context, "product.no_certifications")),
         const SizedBox(height: 30),
       ];
     } else {
@@ -202,29 +205,26 @@ class _ProductPage extends State<ProductPage> {
     );
   }
 
-  Widget _buildCertificationWidgets(List<Certification> certifications) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: certifications.map((certification) {
-        return Row(
-          children: [
-            Image.network(
-              certification.imageUrl,
-              width: 50,
-              height: 50,
-            ),
-            const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomH3(certification.name),
-                CustomText(certification.description),
-              ],
-            ),
-            const SizedBox(height: 20),
-          ],
-        );
-      }).toList(),
-    );
+  List<Widget> _buildCertificationWidgets(List<Certification> certifications) {
+    return certifications.map((certification) {
+      return Row(
+        children: [
+          Image.network(
+            certification.imageUrl,
+            width: 50,
+            height: 50,
+          ),
+          const SizedBox(width: 10),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomH3(certification.name),
+              CustomText(certification.description),
+            ],
+          ),
+          const SizedBox(height: 20),
+        ],
+      );
+    }).toList();
   }
 }
