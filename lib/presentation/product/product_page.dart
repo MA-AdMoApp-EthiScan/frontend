@@ -11,6 +11,7 @@ import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ProductPage extends StatefulWidget {
   final String productId;
@@ -27,7 +28,8 @@ class _ProductPage extends State<ProductPage> {
   @override
   void initState() {
     _productBloc = getIt();
-    _productBloc.add(ProductEvent.load(widget.productId));
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+    _productBloc.add(ProductEvent.load(widget.productId, userId));
     super.initState();
   }
 

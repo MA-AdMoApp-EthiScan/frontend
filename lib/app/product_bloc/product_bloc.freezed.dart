@@ -17,19 +17,20 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ProductEvent {
   String get id => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id) load,
+    required TResult Function(String id, String userId) load,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id)? load,
+    TResult? Function(String id, String userId)? load,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id)? load,
+    TResult Function(String id, String userId)? load,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +62,7 @@ abstract class $ProductEventCopyWith<$Res> {
           ProductEvent value, $Res Function(ProductEvent) then) =
       _$ProductEventCopyWithImpl<$Res, ProductEvent>;
   @useResult
-  $Res call({String id});
+  $Res call({String id, String userId});
 }
 
 /// @nodoc
@@ -78,11 +79,16 @@ class _$ProductEventCopyWithImpl<$Res, $Val extends ProductEvent>
   @override
   $Res call({
     Object? id = null,
+    Object? userId = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -96,7 +102,7 @@ abstract class _$$ProductLoadImplCopyWith<$Res>
       __$$ProductLoadImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id});
+  $Res call({String id, String userId});
 }
 
 /// @nodoc
@@ -111,11 +117,16 @@ class __$$ProductLoadImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? userId = null,
   }) {
     return _then(_$ProductLoadImpl(
       null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -124,14 +135,16 @@ class __$$ProductLoadImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ProductLoadImpl implements _ProductLoad {
-  const _$ProductLoadImpl(this.id);
+  const _$ProductLoadImpl(this.id, this.userId);
 
   @override
   final String id;
+  @override
+  final String userId;
 
   @override
   String toString() {
-    return 'ProductEvent.load(id: $id)';
+    return 'ProductEvent.load(id: $id, userId: $userId)';
   }
 
   @override
@@ -139,11 +152,12 @@ class _$ProductLoadImpl implements _ProductLoad {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProductLoadImpl &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode => Object.hash(runtimeType, id, userId);
 
   @JsonKey(ignore: true)
   @override
@@ -154,27 +168,27 @@ class _$ProductLoadImpl implements _ProductLoad {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id) load,
+    required TResult Function(String id, String userId) load,
   }) {
-    return load(id);
+    return load(id, userId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id)? load,
+    TResult? Function(String id, String userId)? load,
   }) {
-    return load?.call(id);
+    return load?.call(id, userId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id)? load,
+    TResult Function(String id, String userId)? load,
     required TResult orElse(),
   }) {
     if (load != null) {
-      return load(id);
+      return load(id, userId);
     }
     return orElse();
   }
@@ -209,10 +223,13 @@ class _$ProductLoadImpl implements _ProductLoad {
 }
 
 abstract class _ProductLoad implements ProductEvent {
-  const factory _ProductLoad(final String id) = _$ProductLoadImpl;
+  const factory _ProductLoad(final String id, final String userId) =
+      _$ProductLoadImpl;
 
   @override
   String get id;
+  @override
+  String get userId;
   @override
   @JsonKey(ignore: true)
   _$$ProductLoadImplCopyWith<_$ProductLoadImpl> get copyWith =>
