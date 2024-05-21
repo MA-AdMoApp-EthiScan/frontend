@@ -168,7 +168,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
                                 emit(ProductState.error(error: failure)),
                             (certifications) async => emit(ProductState.loaded(
                                   product: product, 
-                                  isInFavorite: true, 
+                                  isInFavorite: false, 
                                   metadata: metadata, 
                                   certifications: certifications
                                   )),
