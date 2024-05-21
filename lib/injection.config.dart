@@ -77,6 +77,7 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i13.ProductRepository>(),
           gh<_i15.MetadataRepository>(),
           gh<_i11.MetadataTypeRepository>(),
+          gh<_i3.UserRepository>(),
         ));
     return this;
   }
