@@ -12,28 +12,27 @@ class CertificationWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: certifications.map((certification) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Image.network(
-                  certification.imageUrl,
-                  width: 50,
-                  height: 50,
-                ),
-                const SizedBox(width: 10),
-                Column(
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Row(
+            children: [
+              Image.network(
+                certification.imageUrl,
+                width: 50,
+                height: 50,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomH3(certification.name),
                     CustomText(certification.description),
                   ],
                 ),
-              ],
-            ),
-            const SizedBox(height: 20),
-          ],
+              ),
+            ],
+          ),
         );
       }).toList(),
     );

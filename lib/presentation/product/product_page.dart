@@ -107,27 +107,28 @@ class _ProductPage extends State<ProductPage> {
       ];
     } else if (product != null) {
       return [
-        product.imageUrl != ''
-            ? ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.network(
-                  product.imageUrl,
-                ),
-              )
-            : const SizedBox(),
+        if (product.imageUrl.isNotEmpty)
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.network(
+              product.imageUrl,
+            ),
+          ),
         const SizedBox(height: 30),
         CustomH2P(I18nUtils.translate(context, "product.description")),
         CustomText(product.description),
         const SizedBox(height: 30),
-        if (metadata != null && metadata.isNotEmpty)
-          MetadataWidget(metadata: metadata)
-        else
-          CustomText(I18nUtils.translate(context, "product.no_metadata")),
-        const SizedBox(height: 30),
+        CustomH2P(I18nUtils.translate(context, "product.certifications")),
         if (certifications != null && certifications.isNotEmpty)
           CertificationWidget(certifications: certifications)
         else
           CustomText(I18nUtils.translate(context, "product.no_certifications")),
+        const SizedBox(height: 30),
+        CustomH2P(I18nUtils.translate(context, "product.metadatas")),
+        if (metadata != null && metadata.isNotEmpty)
+          MetadataWidget(metadata: metadata)
+        else
+          CustomText(I18nUtils.translate(context, "product.no_metadata")),
         const SizedBox(height: 30),
       ];
     } else {
