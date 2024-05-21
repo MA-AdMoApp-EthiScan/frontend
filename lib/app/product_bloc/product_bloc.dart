@@ -2,10 +2,12 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ethiscan/data/repositories/metadata_repository.dart';
 import 'package:ethiscan/data/repositories/metadata_type_repository.dart';
+import 'package:ethiscan/data/repositories/favorite_product_repository.dart';
 import 'package:ethiscan/data/repositories/product_repository.dart';
 import 'package:ethiscan/data/repositories/user_repository.dart';
 import 'package:ethiscan/data/repositories/certification_repository.dart';
 import 'package:ethiscan/domain/entities/app/api_error.dart';
+import 'package:ethiscan/domain/entities/firestore/favorite_product.dart';
 import 'package:ethiscan/domain/entities/firestore/product.dart';
 import 'package:ethiscan/domain/entities/firestore/product_metadata.dart';
 import 'package:ethiscan/domain/entities/firestore/metadata_type.dart';
@@ -20,13 +22,16 @@ part 'product_state.dart';
 @injectable
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final ProductRepository _productRepository;
+  final FavoriteProductRepository _favoriteProductRepository;
   final MetadataRepository _metadataRepository;
   final MetadataTypeRepository _metadataTypeRepository;
   final UserRepository _userRepository;
   final CertificationRepository _certificationRepository;
+  String? _userId;
 
   ProductBloc(
     this._productRepository,
+    this._favoriteProductRepository,
     this._metadataRepository,
     this._metadataTypeRepository,
     this._userRepository,
@@ -36,7 +41,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       await event.when(
         load: (id, userId) async {
           emit(const ProductState.loading());
-
+          _userId = userId;
           final userEither = await _userRepository.getUserFromId(userId);
           final productEither = await _loadProduct(id);
 
@@ -62,11 +67,16 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
                         (failure) async =>
                             emit(ProductState.error(error: failure)),
                         (certifications) async {
-                          emit(ProductState.loaded(
-                            product: product,
-                            metadata: metadata,
-                            certifications: certifications,
-                          ));
+                          final isInFavoriteEither = await _isInFavorite(product.id);
+                          await isInFavoriteEither.fold(
+                            (failure) async => emit(ProductState.error(error: failure)),
+                            (isInFavorite) async => emit(ProductState.loaded(
+                              product: product, 
+                              isInFavorite: isInFavorite, 
+                              metadata: metadata, 
+                              certifications: certifications
+                              )),
+                          );
                         },
                       );
                     },
@@ -76,11 +86,107 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
             },
           );
         },
+        addFavorite: (barcodeId) async {
+          final addFavEither = await _addFavorite(
+            FavoriteProduct(
+              productId: barcodeId,
+              addedAt: DateTime.now(),
+            ),
+          );
+          await addFavEither.fold(
+            (failure) async => emit(ProductState.error(error: failure)),
+            // ignore: unnecessary_set_literal
+            (_) async {
+              final productEither = await _loadProduct(barcodeId);
+              final userEither = await _userRepository.getUserFromId(_userId!);
+              await productEither.fold(
+                (failure) async => emit(ProductState.error(error: failure)),
+                (product) async {
+                  await userEither.fold(
+                    (failure) async => emit(ProductState.error(error: failure)),
+                    (user) async {
+                      final metadataEither = await _loadFilteredProductMetadata(
+                        product.productMetadataIds ?? [],
+                        user.metadataTypeIds ?? [],
+                      );
+
+                      final certificationsEither = await _loadCertifications(
+                        product.certificationIds ?? [],
+                      );
+
+                      await metadataEither.fold(
+                        (failure) async => emit(ProductState.error(error: failure)),
+                        (metadata) async {
+                          await certificationsEither.fold(
+                            (failure) async =>
+                                emit(ProductState.error(error: failure)),
+                            (certifications) async => emit(ProductState.loaded(
+                                  product: product, 
+                                  isInFavorite: true, 
+                                  metadata: metadata, 
+                                  certifications: certifications
+                                  )),
+                          );
+                        },
+                      );
+                    },
+                  );
+                },
+              );
+            },
+          );
+
+        },
+        removeFavorite: (barcodeId) async {
+          final removeFavEither = await _removeFromFavorite(barcodeId);
+          await removeFavEither.fold(
+            (failure) async => emit(ProductState.error(error: failure)),
+            // ignore: unnecessary_set_literal
+            (_) async {
+              final productEither = await _loadProduct(barcodeId);
+              final userEither = await _userRepository.getUserFromId(_userId!);
+              await productEither.fold(
+                (failure) async => emit(ProductState.error(error: failure)),
+                (product) async {
+                  await userEither.fold(
+                    (failure) async => emit(ProductState.error(error: failure)),
+                    (user) async {
+                      final metadataEither = await _loadFilteredProductMetadata(
+                        product.productMetadataIds ?? [],
+                        user.metadataTypeIds ?? [],
+                      );
+
+                      final certificationsEither = await _loadCertifications(
+                        product.certificationIds ?? [],
+                      );
+
+                      await metadataEither.fold(
+                        (failure) async => emit(ProductState.error(error: failure)),
+                        (metadata) async {
+                          await certificationsEither.fold(
+                            (failure) async =>
+                                emit(ProductState.error(error: failure)),
+                            (certifications) async => emit(ProductState.loaded(
+                                  product: product, 
+                                  isInFavorite: false, 
+                                  metadata: metadata, 
+                                  certifications: certifications
+                                  )),
+                          );
+                        },
+                      );
+                    },
+                  );
+                },
+              );
+            },
+          );
+        }
       );
     });
   }
 
-  Future<Either<APIError, Product>> _loadProduct(String id) async {
+ Future<Either<APIError, Product>> _loadProduct(String id) async {
     return await _productRepository.getProductById(id);
   }
 
@@ -129,5 +235,18 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     }
     return await _certificationRepository
         .getCertificationsByIds(certificationIds);
+  }
+
+  
+  Future<Either<APIError,bool>> _isInFavorite(String id) async {
+    return await _favoriteProductRepository.productIsInFavorite(id);
+  }
+
+  Future<Either<APIError,void>> _addFavorite(FavoriteProduct favorite) async {
+    return await _favoriteProductRepository.addFavoriteProduct(favorite);
+  }
+
+  Future<Either<APIError,void>> _removeFromFavorite(String barcodeId) async {
+    return await _favoriteProductRepository.removeFavoriteProduct(barcodeId);
   }
 }

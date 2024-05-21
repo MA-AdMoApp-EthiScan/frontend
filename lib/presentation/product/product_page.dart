@@ -5,6 +5,7 @@ import 'package:ethiscan/domain/entities/firestore/metadata_type.dart';
 import 'package:ethiscan/domain/entities/firestore/product_metadata.dart';
 import 'package:ethiscan/domain/entities/firestore/certification.dart';
 import 'package:ethiscan/injection.dart';
+import 'package:ethiscan/presentation/core/buttons/primary_button.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/core/list_view_layout_body.dart';
@@ -47,8 +48,9 @@ class _ProductPage extends State<ProductPage> {
             loading: () => _page(context, state, loading: true),
             error: (error) => _page(context, state, error: error),
             initial: () => _page(context, state),
-            loaded: (product, metadata, certifications) => _page(context, state,
+            loaded: (product, isInFavorite, metadata, certifications) => _page(context, state,
                 product: product,
+                isInFavorite: isInFavorite,
                 metadata: metadata,
                 certifications: certifications),
             orElse: () => _page(context, state),
@@ -66,6 +68,7 @@ class _ProductPage extends State<ProductPage> {
     Product? product,
     List<MapEntry<MetadataType, ProductMetadata>>? metadata,
     List<Certification>? certifications,
+    bool? isInFavorite,
   }) {
     return Scaffold(
       appBar: AppBar(
@@ -84,7 +87,7 @@ class _ProductPage extends State<ProductPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: _getContent(
-                  loading, error, product, metadata, certifications),
+                  loading, error, product, isInFavorite, metadata, certifications),
             ),
           ),
         ],
@@ -96,6 +99,7 @@ class _ProductPage extends State<ProductPage> {
       bool loading,
       APIError? error,
       Product? product,
+      bool? isInFavorite,
       List<MapEntry<MetadataType, ProductMetadata>>? metadata,
       List<Certification>? certifications) {
     if (loading) {
@@ -108,12 +112,28 @@ class _ProductPage extends State<ProductPage> {
     } else if (product != null) {
       return [
         if (product.imageUrl.isNotEmpty)
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Image.network(
-              product.imageUrl,
-            ),
+            ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.network(
+                  product.imageUrl,
+                ),
+              ),
+        const SizedBox(height: 20),
+        if (isInFavorite != null && !isInFavorite) 
+          PrimaryButton(
+            onTap: () {
+              _productBloc.add(ProductEvent.addFavorite(product.id));
+                      },
+            text: I18nUtils.translate(context, 'product.add'),
           ),
+        if (isInFavorite != null && isInFavorite)
+          PrimaryButton(
+            onTap: () {
+              _productBloc.add(ProductEvent.removeFavorite(product.id));
+                      },
+            text: I18nUtils.translate(context, 'product.remove'),
+          ),
+
         const SizedBox(height: 30),
         CustomH2P(I18nUtils.translate(context, "product.description")),
         CustomText(product.description),

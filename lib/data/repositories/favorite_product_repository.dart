@@ -7,4 +7,5 @@ abstract class FavoriteProductRepository {
   Future<Either<APIError, void>> addFavoriteProduct(
       FavoriteProduct favoriteProduct);
   Future<Either<APIError, void>> removeFavoriteProduct(String productId);
+  Future<Either<APIError, bool>> productIsInFavorite(String productId);
 }
