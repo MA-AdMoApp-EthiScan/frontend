@@ -9,8 +9,7 @@ abstract class ProductState with _$ProductState {
   const factory ProductState.loaded({
     required Product product, 
     required bool isInFavorite,
-    required List<MapEntry<MetadataType, 
-    ProductMetadata>> metadata,
+    required List<MapEntry<MetadataType, ProductMetadata>> metadata,
     required List<Certification> certifications,
     }) = _ProductLoaded;
 

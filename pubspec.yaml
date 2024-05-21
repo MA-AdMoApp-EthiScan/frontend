@@ -69,6 +69,9 @@ dependencies:
   uuid: ^4.4.0
   phone_number_controller: ^1.0.4
   dartz: ^0.10.1
+  fluttertoast: ^8.2.5
+  pie_chart: ^5.4.0
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   injectable_generator: ^2.1.5

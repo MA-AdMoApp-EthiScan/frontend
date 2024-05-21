@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:ethiscan/data/repositories/user_repository.dart';
 import 'package:ethiscan/domain/entities/firestore/ethiscan_user.dart';
 import 'package:ethiscan/data/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,8 +14,12 @@ part 'main_user_state.dart';
 @injectable
 class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
   final AuthRepository _authRepository;
+  final UserRepository _userRepository;
 
-  MainUserBloc(this._authRepository) : super(MainUserState.initial()) {
+  MainUserBloc(
+      this._authRepository,
+      this._userRepository
+      ) : super(MainUserState.initial()) {
     on<MainUserEvent>((event, emit) async {
       // ~~~ Authentication ~~~
       await event.when(connect: (email, password) async {
@@ -46,7 +51,13 @@ class MainUserBloc extends Bloc<MainUserEvent, MainUserState> {
           UserCredential userCredential =
               await _authRepository.signUp(email: email, password: password);
           EthiscanUser user = EthiscanUser(uid: userCredential.user!.uid);
-          emit(MainUserState.connected(user: user));
+          await _userRepository.addUser(user).then((value) => {
+            if (value.isLeft()) {
+              emit(MainUserState.error(true, value.fold((l) => l.message, (r) => "")))
+            } else {
+              emit(MainUserState.connected(user: user))
+            }
+          });
         } on FirebaseAuthException catch (e) {
           emit(MainUserState.error(true, e.message ?? ""));
           getAuthenticationExceptionFromCode(e.code);

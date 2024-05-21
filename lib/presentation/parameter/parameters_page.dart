@@ -144,12 +144,6 @@ class _ParametersPageState extends State<ParametersPage> {
           placeholder: I18nUtils.translate(context, "parameters.email.placeholder"),
           label: I18nUtils.translate(context, "parameters.email.label"),
         ),
-        /*const SizedBox(height: 20),
-        CustomTextField(
-          controller: _phoneController,
-          placeholder: I18nUtils.translate(context, "parameters.phone.placeholder"),
-          label: I18nUtils.translate(context, "parameters.phone.label"),
-        ),*/
         const SizedBox(height: 20),
         CustomH2P(I18nUtils.translate(context, "parameters.metadatas")),
       ]);
@@ -160,7 +154,8 @@ class _ParametersPageState extends State<ParametersPage> {
         ]);
       } else {
         for (var metadataType in allMetadataTypes) {
-          widgets.add(
+          widgets.addAll([
+            const SizedBox(height: 20),
             CustomCheckbox(
               text: metadataType.name,
               value: subscribedMetadataTypeIds.contains(metadataType.id),
@@ -171,7 +166,7 @@ class _ParametersPageState extends State<ParametersPage> {
                   _parameterBloc.add(ParametersEvent.unsubscribe(metadataType.id));
                 }
               },
-            ),
+            )],
           );
         }
       }

@@ -13,6 +13,9 @@ app:
       message: 'An error occurred while fetching data'
 
 popup:
+  clear_history:
+      title: 'Clear history'
+      message: 'Are you sure you want to clear history ?'
   logout:
     title: 'Logging out'
     message: 'Are you sure you want to log out ?'
@@ -27,6 +30,8 @@ product:
   carbon_footprint: 'Carbon footprint'
   image: 'Image'
   description: 'Description'
+  added_to_favorites: 'Added to favorites'
+  removed_from_favorites: 'Removed from favorites'
   error:
     title: 'Error'
     message: 'An error occurred while fetching product'
@@ -35,6 +40,20 @@ product:
     message: 'No product found'
   metadatas: 'Metadatas'
   certifications: 'Certifications'
+  metadata:
+    location: 'Location'
+    note: 'Note'
+    co2_quantity: 'CO2 quantity'
+    packaging_percentage: 'Packaging'
+    manufacturing_percentage: 'Manufacturing'
+    transport_percentage: 'Transport'
+    gluten: 'Gluten'
+    lactose: 'Lactose'
+    peanuts: 'Peanuts'
+    soy: 'Soy'
+    unit:
+      co2: 'g CO2'
+      percentage: '%'
 
 favorites:
   title: 'Favorites'
@@ -48,6 +67,7 @@ favorites:
 scan:
   capture-and-scan: 'Capture and scan'
   title: 'Scan'
+  barcode_found: 'Barcode found !'
   error:
     title: 'Error'
     message: 'An error occurred while scanning'
@@ -87,3 +107,5 @@ words:
   cancel: 'Cancel'
   close: 'Close'
   confirm: 'Confirm'
+  yes: 'Yes'
+  no: 'No'

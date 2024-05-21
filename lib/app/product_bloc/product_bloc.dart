@@ -27,7 +27,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final MetadataTypeRepository _metadataTypeRepository;
   final UserRepository _userRepository;
   final CertificationRepository _certificationRepository;
-  String? _userId;
 
   ProductBloc(
     this._productRepository,
@@ -41,7 +40,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       await event.when(
         load: (id, userId) async {
           emit(const ProductState.loading());
-          _userId = userId;
           final userEither = await _userRepository.getUserFromId(userId);
           final productEither = await _loadProduct(id);
 
@@ -87,6 +85,11 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           );
         },
         addFavorite: (barcodeId) async {
+          _ProductLoaded previousState = (state as _ProductLoaded);
+          Product product = previousState.product;
+          List<MapEntry<MetadataType, ProductMetadata>> metadata = previousState.metadata;
+          List<Certification> certifications = previousState.certifications;
+
           final addFavEither = await _addFavorite(
             FavoriteProduct(
               productId: barcodeId,
@@ -95,89 +98,33 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           );
           await addFavEither.fold(
             (failure) async => emit(ProductState.error(error: failure)),
-            // ignore: unnecessary_set_literal
             (_) async {
-              final productEither = await _loadProduct(barcodeId);
-              final userEither = await _userRepository.getUserFromId(_userId!);
-              await productEither.fold(
-                (failure) async => emit(ProductState.error(error: failure)),
-                (product) async {
-                  await userEither.fold(
-                    (failure) async => emit(ProductState.error(error: failure)),
-                    (user) async {
-                      final metadataEither = await _loadFilteredProductMetadata(
-                        product.productMetadataIds ?? [],
-                        user.metadataTypeIds ?? [],
-                      );
-
-                      final certificationsEither = await _loadCertifications(
-                        product.certificationIds ?? [],
-                      );
-
-                      await metadataEither.fold(
-                        (failure) async => emit(ProductState.error(error: failure)),
-                        (metadata) async {
-                          await certificationsEither.fold(
-                            (failure) async =>
-                                emit(ProductState.error(error: failure)),
-                            (certifications) async => emit(ProductState.loaded(
-                                  product: product, 
-                                  isInFavorite: true, 
-                                  metadata: metadata, 
-                                  certifications: certifications
-                                  )),
-                          );
-                        },
-                      );
-                    },
-                  );
-                },
+              emit(ProductState.loaded(
+                product: product,
+                isInFavorite: true,
+                metadata: metadata,
+                certifications: certifications
+                )
               );
             },
           );
 
         },
         removeFavorite: (barcodeId) async {
+          _ProductLoaded previousState = (state as _ProductLoaded);
+          Product product = previousState.product;
+          List<MapEntry<MetadataType, ProductMetadata>> metadata = previousState.metadata;
+          List<Certification> certifications = previousState.certifications;
           final removeFavEither = await _removeFromFavorite(barcodeId);
           await removeFavEither.fold(
-            (failure) async => emit(ProductState.error(error: failure)),
-            // ignore: unnecessary_set_literal
-            (_) async {
-              final productEither = await _loadProduct(barcodeId);
-              final userEither = await _userRepository.getUserFromId(_userId!);
-              await productEither.fold(
-                (failure) async => emit(ProductState.error(error: failure)),
-                (product) async {
-                  await userEither.fold(
-                    (failure) async => emit(ProductState.error(error: failure)),
-                    (user) async {
-                      final metadataEither = await _loadFilteredProductMetadata(
-                        product.productMetadataIds ?? [],
-                        user.metadataTypeIds ?? [],
-                      );
-
-                      final certificationsEither = await _loadCertifications(
-                        product.certificationIds ?? [],
-                      );
-
-                      await metadataEither.fold(
-                        (failure) async => emit(ProductState.error(error: failure)),
-                        (metadata) async {
-                          await certificationsEither.fold(
-                            (failure) async =>
-                                emit(ProductState.error(error: failure)),
-                            (certifications) async => emit(ProductState.loaded(
-                                  product: product, 
-                                  isInFavorite: false, 
-                                  metadata: metadata, 
-                                  certifications: certifications
-                                  )),
-                          );
-                        },
-                      );
-                    },
-                  );
-                },
+              (failure) async => emit(ProductState.error(error: failure)),
+              (_) async {
+                emit(ProductState.loaded(
+                    product: product,
+                    isInFavorite: false,
+                    metadata: metadata,
+                    certifications: certifications
+                )
               );
             },
           );

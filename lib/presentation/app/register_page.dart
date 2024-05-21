@@ -39,10 +39,6 @@ class _RegisterPage extends State<RegisterPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              /*CustomPaint(
-                size: Size(width, (width * 0.21944444444444444).toDouble()),
-                painter: TopShape(),
-              ),*/
               CustomTextField(
                 controller: _emailController,
                 placeholder: 'Email',

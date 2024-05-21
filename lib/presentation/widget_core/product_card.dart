@@ -7,11 +7,17 @@ import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
 
-class FavoriteCard extends MyCard {
+class ProductCard extends MyCard {
   final ListProduct favorite;
   final bool error;
+  final bool isFavorite;
 
-  const FavoriteCard({super.key, required this.favorite, this.error = false})
+  const ProductCard({
+    super.key,
+    required this.favorite,
+    this.error = false,
+    this.isFavorite = true,
+  })
       : super(
           showChildWhileLoading: true,
           disableNavigation: error,
@@ -24,7 +30,7 @@ class FavoriteCard extends MyCard {
     }
 
     return ListTile(
-      trailing: const Icon(Icons.star, color: UIColors.lightAccentColor),
+      trailing: isFavorite ? const Icon(Icons.star, color: UIColors.lightAccentColor) : null,
       title: CustomH2(favorite.name),
       subtitle: CustomText(I18nUtils.translate(context,
               "product.last_scan") +

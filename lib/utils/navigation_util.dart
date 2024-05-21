@@ -6,6 +6,10 @@ class NavigationUtils {
   static GlobalKey<NavigatorState> connectAppNavigatorKey =
       GlobalKey<NavigatorState>();
 
+  static String? getCurrentRouteName(BuildContext context) {
+    return ModalRoute.of(context)!.settings.name;
+  }
+
   static void push(
     BuildContext context,
     Widget page, {

@@ -1,26 +1,29 @@
 import 'package:ethiscan/app/product_bloc/product_bloc.dart';
+import 'package:ethiscan/app/scans_bloc/scans_bloc.dart';
 import 'package:ethiscan/domain/entities/app/api_error.dart';
 import 'package:ethiscan/domain/entities/firestore/product.dart';
 import 'package:ethiscan/domain/entities/firestore/metadata_type.dart';
 import 'package:ethiscan/domain/entities/firestore/product_metadata.dart';
 import 'package:ethiscan/domain/entities/firestore/certification.dart';
 import 'package:ethiscan/injection.dart';
-import 'package:ethiscan/presentation/core/buttons/primary_button.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/core/list_view_layout_body.dart';
 import 'package:ethiscan/presentation/product/widgets/metadata_widget.dart';
 import 'package:ethiscan/presentation/product/widgets/certification_widget.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
+import 'package:ethiscan/utils/toast.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ProductPage extends StatefulWidget {
   final String productId;
+  final ScansBloc? scansBloc;
 
-  const ProductPage({super.key, required this.productId});
+  const ProductPage({super.key, required this.productId, this.scansBloc});
 
   @override
   State<ProductPage> createState() => _ProductPage();
@@ -28,13 +31,31 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPage extends State<ProductPage> {
   late ProductBloc _productBloc;
+  late FToast fToast;
 
   @override
   void initState() {
+    if(widget.scansBloc != null) {
+      widget.scansBloc!.add(const ScansEvent.stop());
+    }
+
     _productBloc = getIt();
     final userId = FirebaseAuth.instance.currentUser!.uid;
     _productBloc.add(ProductEvent.load(widget.productId, userId));
+
+    fToast = FToast();
+    fToast.init(context);
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    if(widget.scansBloc != null) {
+      widget.scansBloc!.add(const ScansEvent.load());
+    }
+    _productBloc.close();
+    super.dispose();
   }
 
   @override
@@ -74,6 +95,27 @@ class _ProductPage extends State<ProductPage> {
       appBar: AppBar(
         backgroundColor: UIColors.lightScaffoldBackgroundColor,
         title: Text(product?.name ?? ""),
+        actions: [
+          IconButton(
+            onPressed: () {
+              MyToaster.showToast(fToast,
+                  message:
+                  isInFavorite != null && !isInFavorite ?
+                  I18nUtils.translate(context, "product.added_to_favorites") :
+                  I18nUtils.translate(context, "product.removed_from_favorites")
+              );
+              if (isInFavorite != null && !isInFavorite) {
+                _productBloc.add(ProductEvent.addFavorite(product!.id));
+              } else if (isInFavorite != null && isInFavorite) {
+                _productBloc.add(ProductEvent.removeFavorite(product!.id));
+              }
+            },
+            color: isInFavorite != null && isInFavorite
+                ? UIColors.lightAccentColor
+                : UIColors.grey1,
+            icon: const Icon(Icons.star),
+          ),
+        ],
         titleTextStyle: const TextStyle(
             color: UIColors.lightPrimaryColor,
             fontSize: 24,
@@ -118,22 +160,6 @@ class _ProductPage extends State<ProductPage> {
                   product.imageUrl,
                 ),
               ),
-        const SizedBox(height: 20),
-        if (isInFavorite != null && !isInFavorite) 
-          PrimaryButton(
-            onTap: () {
-              _productBloc.add(ProductEvent.addFavorite(product.id));
-                      },
-            text: I18nUtils.translate(context, 'product.add'),
-          ),
-        if (isInFavorite != null && isInFavorite)
-          PrimaryButton(
-            onTap: () {
-              _productBloc.add(ProductEvent.removeFavorite(product.id));
-                      },
-            text: I18nUtils.translate(context, 'product.remove'),
-          ),
-
         const SizedBox(height: 30),
         CustomH2P(I18nUtils.translate(context, "product.description")),
         CustomText(product.description),
@@ -158,4 +184,5 @@ class _ProductPage extends State<ProductPage> {
       ];
     }
   }
+
 }
