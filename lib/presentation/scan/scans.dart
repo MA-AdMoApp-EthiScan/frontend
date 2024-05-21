@@ -27,33 +27,28 @@ class _ScansPage extends State<ScansPage> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
   late BarcodeScanner _barcodeScanner;
-  late Timer? _timer;
+  Timer? _timer;
   bool _isDisposed = false;
 
   @override
   void initState() {
     super.initState();
-    _scansBloc = getIt();
+    _scansBloc = getIt<ScansBloc>();
     _scansBloc.add(const ScansEvent.load());
     _initializeControllerFuture = _initializeCamera();
-    // ignore: deprecated_member_use
     _barcodeScanner = BarcodeScanner();
   }
 
   void startTimer() {
     const period = Duration(seconds: 1); // Change the duration as needed
     _timer = Timer.periodic(period, (timer) async {
-      //if (!_isDisposed) {
       await _captureFrame();
-      //}
     });
   }
 
   void stopTimer() {
-    if (_timer != null) {
-      _timer!.cancel();
-      _timer = null;
-    }
+    _timer?.cancel();
+    _timer = null;
   }
 
   Future<void> _initializeCamera() async {
@@ -72,7 +67,6 @@ class _ScansPage extends State<ScansPage> {
 
   Future<void> _captureFrame() async {
     if (_controller.value.isInitialized && !_isDisposed) {
-      //_scansBloc.add(const ScansEvent.startScanning());
       try {
         final image = await _controller.takePicture();
         final inputImage = InputImage.fromFilePath(image.path);
@@ -80,21 +74,14 @@ class _ScansPage extends State<ScansPage> {
             await _barcodeScanner.processImage(inputImage);
 
         if (barcodes.isNotEmpty) {
-          //stopTimer();
           final Barcode barcode = barcodes.first;
-          //for (Barcode barcode in barcodes) {
           _scansBloc
               .add(ScansEvent.barcodeFound(barcode.displayValue ?? 'Unknown'));
-          //}
         }
-        //else {
-        //  _scansBloc.add(const ScansEvent.stopScanning());
-        //}
       } catch (e) {
         // ignore: avoid_print
         print('Error taking picture: $e');
       }
-      //_scansBloc.add(const ScansEvent.stopScanning());
     }
   }
 
@@ -185,14 +172,6 @@ class _ScansPage extends State<ScansPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     const SizedBox(height: 20),
-                    //PrimaryButton(
-                    //  onTap: () {
-                    //    //_scansBloc.add(const ScansEvent.load());
-                    //    _captureFrame();
-                    //  },
-                    //  text:
-                    //      I18nUtils.translate(context, 'scan.capture-and-scan'),
-                    //),
                     if (loading)
                       const Padding(
                         padding:
@@ -219,17 +198,17 @@ class _ScansPage extends State<ScansPage> {
         CustomText(I18nUtils.translate(context, "scan.error.message")),
       ];
     } else {
-      scans = scans.reversed.toList();//.isEmpty ? ["Scan 1", "Scan 2"] : scans;
+      scans = scans.reversed.toList();
       List<Widget> widgets = [];
-      List<Widget> f = scans
+      List<Widget> scanCards = scans
           .map((scan) => ScansCard(
               name: scan.name,
               barcodeId: scan.barcodeId,
-              date: DateFormat('dd/MM/yy HH:mm').format(scan.date!))) 
+              date: DateFormat('dd/MM/yy HH:mm').format(scan.date!)))
           .toList();
-      for (int i = 0; i < f.length; i++) {
+      for (int i = 0; i < scanCards.length; i++) {
         widgets.add(const SizedBox(height: 15));
-        widgets.add(f[i]);
+        widgets.add(scanCards[i]);
       }
       return widgets;
     }
