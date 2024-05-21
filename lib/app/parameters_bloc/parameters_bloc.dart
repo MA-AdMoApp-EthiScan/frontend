@@ -36,7 +36,7 @@ class ParametersBloc extends Bloc<ParametersEvent, ParametersState> {
               (failure) async {
                 emit(const ParametersState.error());
               },
-              (user) {
+              (user) async {
                 currentMetadataTypeIds = user.metadataTypeIds ?? [];
                 emit(ParametersState.loaded(
                   allMetadataTypes: allMetadataTypes,
@@ -50,8 +50,8 @@ class ParametersBloc extends Bloc<ParametersEvent, ParametersState> {
           emit(const ParametersState.loading());
           var either = await _userRepository
               .getUserFromId(FirebaseAuth.instance.currentUser!.uid);
-          either.fold(
-            (failure) {
+          await either.fold(
+            (failure) async {
               emit(const ParametersState.error());
             },
             (user) async {
@@ -70,8 +70,8 @@ class ParametersBloc extends Bloc<ParametersEvent, ParametersState> {
           emit(const ParametersState.loading());
           var either = await _userRepository
               .getUserFromId(FirebaseAuth.instance.currentUser!.uid);
-          either.fold(
-            (failure) {
+          await either.fold(
+            (failure) async {
               emit(const ParametersState.error());
             },
             (user) async {
@@ -85,18 +85,18 @@ class ParametersBloc extends Bloc<ParametersEvent, ParametersState> {
             },
           );
         },
-        updateName: (String newName) {
+        updateName: (String newName) async {
           emit(const ParametersState.loading());
           var currentUser = FirebaseAuth.instance.currentUser;
-          currentUser!.updateDisplayName(newName);
+          await currentUser!.updateDisplayName(newName);
           emit(ParametersState.loaded(
               allMetadataTypes: allMetadataTypes,
               subscribedMetadataTypeIds: currentMetadataTypeIds));
         },
-        updateEmail: (String newEmail) {
+        updateEmail: (String newEmail) async {
           emit(const ParametersState.loading());
           var currentUser = FirebaseAuth.instance.currentUser;
-          currentUser!.verifyBeforeUpdateEmail(newEmail);
+          await currentUser!.verifyBeforeUpdateEmail(newEmail);
           emit(ParametersState.loaded(
               allMetadataTypes: allMetadataTypes,
               subscribedMetadataTypeIds: currentMetadataTypeIds));

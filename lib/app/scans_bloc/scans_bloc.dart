@@ -22,7 +22,14 @@ class ScansBloc extends Bloc<ScansEvent, ScansState> {
           emit(const ScansState.loading());
           //await Future.delayed(const Duration(seconds: 3));
           final history = await _scanHistoryRepository.getScanHistory();
-          emit(ScansState.loaded(scans: history));
+          await history.fold(
+            (failure) async {
+              emit(const ScansState.error());
+            },
+            (history) async {
+              emit(ScansState.loaded(scans: history));
+            },
+          );
         },
         barcodeFound: (barcode) async {
           var either = await _productRepository.getProductById(barcode);
@@ -38,7 +45,7 @@ class ScansBloc extends Bloc<ScansEvent, ScansState> {
               //    description: 'Unknown', // Provide a description here
               //  ),);
             },
-            (product) {
+            (product) async {
               productName = product.name;
             },
           );
