@@ -17,45 +17,44 @@ class ParametersBloc extends Bloc<ParametersEvent, ParametersState> {
   List<MetadataType> allMetadataTypes = [];
   List<String> currentMetadataTypeIds = [];
 
-  ParametersBloc(
-      this._metadataTypeRepository,
-      this._userRepository
-      ) : super(const ParametersState.initial()) {
+  ParametersBloc(this._metadataTypeRepository, this._userRepository)
+      : super(const ParametersState.initial()) {
     on<ParametersEvent>((event, emit) async {
       await event.when(
         load: () async {
           emit(const ParametersState.loading());
-          var metadataTypesEither = await _metadataTypeRepository.getMetadataTypes();
-          await metadataTypesEither.when(
-              left: (failure) async {
+          var metadataTypesEither =
+              await _metadataTypeRepository.getMetadataTypes();
+          metadataTypesEither.fold((failure) {
+            emit(const ParametersState.error());
+          }, (metadataTypes) async {
+            allMetadataTypes.addAll(metadataTypes);
+
+            var either = await _userRepository
+                .getUserFromId(FirebaseAuth.instance.currentUser!.uid);
+            either.fold(
+              (failure) {
                 emit(const ParametersState.error());
               },
-              right: (m) async {
-                allMetadataTypes.addAll(m);
-
-                var either = await _userRepository.getUserFromId(FirebaseAuth.instance.currentUser!.uid);
-                await either.when(
-                  right: (user) async {
-                    currentMetadataTypeIds = user.metadataTypeIds ?? [];
-                        emit(ParametersState.loaded(
-                        allMetadataTypes: allMetadataTypes,
-                        subscribedMetadataTypeIds: user.metadataTypeIds ?? []
-                      )
-                    );
-                  },
-                  left: (failure) async {
-                    return [];
-                  },
-                );
-              }
-          );
-
+              (user) {
+                currentMetadataTypeIds = user.metadataTypeIds ?? [];
+                emit(ParametersState.loaded(
+                  allMetadataTypes: allMetadataTypes,
+                  subscribedMetadataTypeIds: user.metadataTypeIds ?? [],
+                ));
+              },
+            );
+          });
         },
         subscribe: (String metadataTypeId) async {
           emit(const ParametersState.loading());
-          var either = await _userRepository.getUserFromId(FirebaseAuth.instance.currentUser!.uid);
-          await either.when(
-            right: (user) async {
+          var either = await _userRepository
+              .getUserFromId(FirebaseAuth.instance.currentUser!.uid);
+          either.fold(
+            (failure) {
+              emit(const ParametersState.error());
+            },
+            (user) async {
               user.metadataTypeIds ??= [];
               currentMetadataTypeIds = user.metadataTypeIds ?? [];
               user.metadataTypeIds!.add(metadataTypeId);
@@ -63,30 +62,26 @@ class ParametersBloc extends Bloc<ParametersEvent, ParametersState> {
 
               emit(ParametersState.loaded(
                   allMetadataTypes: allMetadataTypes,
-                  subscribedMetadataTypeIds: user.metadataTypeIds ?? []
-              ));
-            },
-            left: (failure) async {
-              emit(const ParametersState.error());
+                  subscribedMetadataTypeIds: user.metadataTypeIds ?? []));
             },
           );
         },
         unsubscribe: (String metadataTypeId) async {
           emit(const ParametersState.loading());
-          var either = await _userRepository.getUserFromId(FirebaseAuth.instance.currentUser!.uid);
-          await either.when(
-            right: (user) async {
+          var either = await _userRepository
+              .getUserFromId(FirebaseAuth.instance.currentUser!.uid);
+          either.fold(
+            (failure) {
+              emit(const ParametersState.error());
+            },
+            (user) async {
               currentMetadataTypeIds = user.metadataTypeIds ?? [];
               user.metadataTypeIds?.remove(metadataTypeId);
               await _userRepository.updateUser(user);
 
               emit(ParametersState.loaded(
                   allMetadataTypes: allMetadataTypes,
-                  subscribedMetadataTypeIds: user.metadataTypeIds ?? []
-              ));
-            },
-            left: (failure) async {
-              emit(const ParametersState.error());
+                  subscribedMetadataTypeIds: user.metadataTypeIds ?? []));
             },
           );
         },
@@ -96,8 +91,7 @@ class ParametersBloc extends Bloc<ParametersEvent, ParametersState> {
           currentUser!.updateDisplayName(newName);
           emit(ParametersState.loaded(
               allMetadataTypes: allMetadataTypes,
-              subscribedMetadataTypeIds: currentMetadataTypeIds
-          ));
+              subscribedMetadataTypeIds: currentMetadataTypeIds));
         },
         updateEmail: (String newEmail) {
           emit(const ParametersState.loading());
@@ -105,8 +99,7 @@ class ParametersBloc extends Bloc<ParametersEvent, ParametersState> {
           currentUser!.verifyBeforeUpdateEmail(newEmail);
           emit(ParametersState.loaded(
               allMetadataTypes: allMetadataTypes,
-              subscribedMetadataTypeIds: currentMetadataTypeIds
-          ));
+              subscribedMetadataTypeIds: currentMetadataTypeIds));
         },
       );
     });
