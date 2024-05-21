@@ -27,8 +27,8 @@ class ScansBloc extends Bloc<ScansEvent, ScansState> {
         barcodeFound: (barcode) async {
           var either = await _productRepository.getProductById(barcode);
           String productName = "";
-          either.fold(
-            (failure) {
+          await either.fold(
+            (failure) async {
               productName = 'Unknown name $barcode';
               //_productRepository.addProduct(
               //  Product(

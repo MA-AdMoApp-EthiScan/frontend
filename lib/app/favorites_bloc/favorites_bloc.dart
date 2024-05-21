@@ -90,7 +90,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
             favoriteProducts.map((f) => f.productId).toList();
         var favoritesEither =
             await _productRepository.getProductByIdList(favoriteIds);
-        favoritesEither.fold((failure) {
+        await favoritesEither.fold((failure) async {
           emit(const FavoritesState.error());
         }, (favorites) {
           List<ListProduct> listProduct = favorites

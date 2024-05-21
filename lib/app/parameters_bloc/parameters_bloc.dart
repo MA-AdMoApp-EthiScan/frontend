@@ -25,15 +25,15 @@ class ParametersBloc extends Bloc<ParametersEvent, ParametersState> {
           emit(const ParametersState.loading());
           var metadataTypesEither =
               await _metadataTypeRepository.getMetadataTypes();
-          metadataTypesEither.fold((failure) {
+          await metadataTypesEither.fold((failure) async {
             emit(const ParametersState.error());
           }, (metadataTypes) async {
             allMetadataTypes.addAll(metadataTypes);
 
             var either = await _userRepository
                 .getUserFromId(FirebaseAuth.instance.currentUser!.uid);
-            either.fold(
-              (failure) {
+            await either.fold(
+              (failure) async {
                 emit(const ParametersState.error());
               },
               (user) {
