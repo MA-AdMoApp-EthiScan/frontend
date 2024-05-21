@@ -32,7 +32,7 @@ class _RegisterPage extends State<RegisterPage> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: UIColors.lightPrimaryColor,
-          title: const CustomH1W("Create account"),
+          title: CustomH1W("Create account"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),

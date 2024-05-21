@@ -23,7 +23,7 @@ class LoginPage extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: UIColors.lightPrimaryColor,
-          title: const CustomH1W("Sign In"),
+          title: CustomH1W("Sign In"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
