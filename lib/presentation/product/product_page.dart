@@ -1,6 +1,8 @@
 import 'package:ethiscan/app/product_bloc/product_bloc.dart';
 import 'package:ethiscan/domain/entities/app/api_error.dart';
 import 'package:ethiscan/domain/entities/firestore/product.dart';
+import 'package:ethiscan/domain/entities/firestore/metadata_type.dart';
+import 'package:ethiscan/domain/entities/firestore/product_metadata.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/core/buttons/primary_button.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
@@ -33,20 +35,21 @@ class _ProductPage extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-        value: _productBloc,
-        child: BlocConsumer<ProductBloc, ProductState>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            return state.maybeWhen(
-              loading: () => _page(context, state, loading: true),
-              error: (error) => _page(context, state, error: error),
-              initial: () => _page(context, state),
-              loaded: (Product product, bool isInFavorite) =>
-                  _page(context, state, product: product, isInFavorite: isInFavorite),
-              orElse: () => _page(context, state),
-            );
-          },
-        ));
+      value: _productBloc,
+      child: BlocConsumer<ProductBloc, ProductState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return state.maybeWhen(
+            loading: () => _page(context, state, loading: true),
+            error: (error) => _page(context, state, error: error),
+            initial: () => _page(context, state),
+            loaded: (product, isInFavorite, metadata) =>
+                _page(context, state, product: product, isInFavorite: isInFavorite, metadata: metadata),
+            orElse: () => _page(context, state),
+          );
+        },
+      ),
+    );
   }
 
   Widget _page(
@@ -55,6 +58,7 @@ class _ProductPage extends State<ProductPage> {
     bool loading = false,
     APIError? error,
     Product? product,
+    List<MapEntry<MetadataType, ProductMetadata>>? metadata,
     bool? isInFavorite,
   }) {
     return Scaffold(
@@ -73,7 +77,7 @@ class _ProductPage extends State<ProductPage> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: _getContent(loading, error, product, isInFavorite),
+              children: _getContent(loading, error, product, isInFavorite, metadata),
             ),
           ),
         ],
@@ -81,7 +85,8 @@ class _ProductPage extends State<ProductPage> {
     );
   }
 
-  List<Widget> _getContent(bool loading, APIError? error, Product? product, bool? isInFavorite) {
+  List<Widget> _getContent(bool loading, APIError? error, Product? product, bool? isInFavorite,
+      List<MapEntry<MetadataType, ProductMetadata>>? metadata) {
     if (loading) {
       return [const CustomCircularLoading()];
     } else if (error != null) {
@@ -119,31 +124,13 @@ class _ProductPage extends State<ProductPage> {
         CustomH2P(I18nUtils.translate(context, "product.description")),
         CustomText(product.description),
         const SizedBox(height: 30),
-        if (product.productMetadataIds != null && product.productMetadataIds!.isNotEmpty)
-          CustomH2P(I18nUtils.translate(context, "product.metadatas")),
-          /*Row(
-            children: [
-              CustomH3(I18nUtils.translate(context, "product.carbon_footprint")),
-              const Spacer(),
-              CustomText(product.carbonFootprint.toString()),
-            ],
-          ),*/
+        if (metadata != null && metadata.isNotEmpty)
+          ..._buildMetadataWidgets(metadata),
         const SizedBox(height: 30),
-        if (product.certificationIds != null && product.certificationIds!.isNotEmpty)
+        if (product.certificationIds != null &&
+            product.certificationIds!.isNotEmpty)
           CustomH2P(I18nUtils.translate(context, "product.certifications")),
-          /*Row(
-            children: [
-              ListView.builder(
-                itemCount: product.certificationIds?.length,
-                itemBuilder: (context, index) {
-                  final parameter = product.certificationIds?[index];
-                  return ListTile(
-                      title: Text(parameter/*.name*/),
-                      subtitle: Text(parameter.schema.toString()));
-                },
-              )
-            ],
-          ),*/
+        // Add the certification widgets here
       ];
     } else {
       return [
@@ -152,23 +139,21 @@ class _ProductPage extends State<ProductPage> {
       ];
     }
   }
+
+  List<Widget> _buildMetadataWidgets(
+      List<MapEntry<MetadataType, ProductMetadata>> metadata) {
+    return metadata.map((entry) {
+      final metadataType = entry.key;
+      final productMetadata = entry.value;
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomH2P(metadataType.name),
+          CustomText(
+              productMetadata.data.toString()), // Display metadata content
+          const SizedBox(height: 20),
+        ],
+      );
+    }).toList();
+  }
 }
-
-
-
-     //     ElevatedButton(
-     //       onPressed: () {
-     //         _productBloc.add(ProductEvent.addFavorite(product.id));
-     //                 },
-     //       child: Text(I18nUtils.translate(context, 'product.add')),
-     //     ),
-     //   if (isInFavorite != null && !isInFavorite)
-     //     ElevatedButton(
-     //       onPressed: () {
-     //         _productBloc.add(ProductEvent.addFavorite(product.id));
-     //                 },
-     //       style: ElevatedButton.styleFrom(
-     //         foregroundColor: Colors.white, backgroundColor: Colors.red, // text color
-     //       ),
-     //       child: Text(I18nUtils.translate(context, 'product.remove')),
-     //     ),
