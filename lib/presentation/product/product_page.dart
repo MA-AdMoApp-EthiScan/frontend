@@ -3,6 +3,7 @@ import 'package:ethiscan/domain/entities/app/api_error.dart';
 import 'package:ethiscan/domain/entities/firestore/product.dart';
 import 'package:ethiscan/domain/entities/firestore/metadata_type.dart';
 import 'package:ethiscan/domain/entities/firestore/product_metadata.dart';
+import 'package:ethiscan/domain/entities/firestore/certification.dart';
 import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
@@ -44,8 +45,10 @@ class _ProductPage extends State<ProductPage> {
             loading: () => _page(context, state, loading: true),
             error: (error) => _page(context, state, error: error),
             initial: () => _page(context, state),
-            loaded: (product, metadata) =>
-                _page(context, state, product: product, metadata: metadata),
+            loaded: (product, metadata, certifications) => _page(context, state,
+                product: product,
+                metadata: metadata,
+                certifications: certifications),
             orElse: () => _page(context, state),
           );
         },
@@ -60,6 +63,7 @@ class _ProductPage extends State<ProductPage> {
     APIError? error,
     Product? product,
     List<MapEntry<MetadataType, ProductMetadata>>? metadata,
+    List<Certification>? certifications,
   }) {
     return Scaffold(
       appBar: AppBar(
@@ -77,7 +81,8 @@ class _ProductPage extends State<ProductPage> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: _getContent(loading, error, product, metadata),
+              children: _getContent(
+                  loading, error, product, metadata, certifications),
             ),
           ),
         ],
@@ -85,8 +90,12 @@ class _ProductPage extends State<ProductPage> {
     );
   }
 
-  List<Widget> _getContent(bool loading, APIError? error, Product? product,
-      List<MapEntry<MetadataType, ProductMetadata>>? metadata) {
+  List<Widget> _getContent(
+      bool loading,
+      APIError? error,
+      Product? product,
+      List<MapEntry<MetadataType, ProductMetadata>>? metadata,
+      List<Certification>? certifications) {
     if (loading) {
       return [const CustomCircularLoading()];
     } else if (error != null) {
@@ -111,10 +120,10 @@ class _ProductPage extends State<ProductPage> {
         if (metadata != null && metadata.isNotEmpty)
           ..._buildMetadataWidgets(metadata),
         const SizedBox(height: 30),
-        if (product.certificationIds != null &&
-            product.certificationIds!.isNotEmpty)
+        if (certifications != null && certifications.isNotEmpty)
           CustomH2P(I18nUtils.translate(context, "product.certifications")),
-        // Add the certification widgets here
+        _buildCertificationWidgets(certifications!),
+        const SizedBox(height: 30),
       ];
     } else {
       return [
@@ -190,6 +199,32 @@ class _ProductPage extends State<ProductPage> {
         CustomText(label),
         CustomText(value),
       ],
+    );
+  }
+
+  Widget _buildCertificationWidgets(List<Certification> certifications) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: certifications.map((certification) {
+        return Row(
+          children: [
+            Image.network(
+              certification.imageUrl,
+              width: 50,
+              height: 50,
+            ),
+            const SizedBox(width: 10),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomH3(certification.name),
+                CustomText(certification.description),
+              ],
+            ),
+            const SizedBox(height: 20),
+          ],
+        );
+      }).toList(),
     );
   }
 }
