@@ -8,6 +8,8 @@ import 'package:ethiscan/injection.dart';
 import 'package:ethiscan/presentation/core/custom_loading.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/core/list_view_layout_body.dart';
+import 'package:ethiscan/presentation/product/widgets/metadata_widget.dart';
+import 'package:ethiscan/presentation/product/widgets/certification_widget.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
@@ -118,12 +120,12 @@ class _ProductPage extends State<ProductPage> {
         CustomText(product.description),
         const SizedBox(height: 30),
         if (metadata != null && metadata.isNotEmpty)
-          ..._buildMetadataWidgets(metadata)
+          MetadataWidget(metadata: metadata)
         else
           CustomText(I18nUtils.translate(context, "product.no_metadata")),
         const SizedBox(height: 30),
         if (certifications != null && certifications.isNotEmpty)
-          ..._buildCertificationWidgets(certifications)
+          CertificationWidget(certifications: certifications)
         else
           CustomText(I18nUtils.translate(context, "product.no_certifications")),
         const SizedBox(height: 30),
@@ -134,97 +136,5 @@ class _ProductPage extends State<ProductPage> {
         CustomText(I18nUtils.translate(context, "product.empty.message"))
       ];
     }
-  }
-
-  List<Widget> _buildMetadataWidgets(
-      List<MapEntry<MetadataType, ProductMetadata>> metadata) {
-    return metadata.map((entry) {
-      final metadataType = entry.key;
-      final productMetadata = entry.value;
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CustomH2P(metadataType.name),
-          _buildMetadataContent(metadataType, productMetadata),
-          const SizedBox(height: 20),
-        ],
-      );
-    }).toList();
-  }
-
-  Widget _buildMetadataContent(
-      MetadataType metadataType, ProductMetadata productMetadata) {
-    switch (metadataType.id) {
-      case 'impactCarbone':
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildMetadataRow('Note', productMetadata.data['note'].toString()),
-            _buildMetadataRow(
-                'CO2 Quantity', productMetadata.data['co2Quantity'].toString()),
-            _buildMetadataRow('Packaging Percentage',
-                productMetadata.data['packagingPercentage'].toString()),
-            _buildMetadataRow('Manufacturing Percentage',
-                productMetadata.data['manufacturingPercentage'].toString()),
-            _buildMetadataRow('Transport Percentage',
-                productMetadata.data['transportPercentage'].toString()),
-          ],
-        );
-      case 'animalHappiness':
-        return _buildMetadataRow(
-            'Note', productMetadata.data['note'].toString());
-      case 'localization':
-        return _buildMetadataRow(
-            'Location', productMetadata.data['location'].toString());
-      case 'allergies':
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildMetadataRow(
-                'Gluten', productMetadata.data['gluten'] ? 'Yes' : 'No'),
-            _buildMetadataRow(
-                'Lactose', productMetadata.data['lactose'] ? 'Yes' : 'No'),
-            _buildMetadataRow(
-                'Peanuts', productMetadata.data['peanuts'] ? 'Yes' : 'No'),
-            _buildMetadataRow(
-                'Soy', productMetadata.data['soy'] ? 'Yes' : 'No'),
-          ],
-        );
-      default:
-        return CustomText(productMetadata.data.toString());
-    }
-  }
-
-  Widget _buildMetadataRow(String label, String value) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        CustomText(label),
-        CustomText(value),
-      ],
-    );
-  }
-
-  List<Widget> _buildCertificationWidgets(List<Certification> certifications) {
-    return certifications.map((certification) {
-      return Row(
-        children: [
-          Image.network(
-            certification.imageUrl,
-            width: 50,
-            height: 50,
-          ),
-          const SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomH3(certification.name),
-              CustomText(certification.description),
-            ],
-          ),
-          const SizedBox(height: 20),
-        ],
-      );
-    }).toList();
   }
 }
