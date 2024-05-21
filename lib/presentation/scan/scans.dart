@@ -13,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:camera/camera.dart';
 import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
-import 'package:intl/intl.dart';
 
 class ScansPage extends StatefulWidget {
   const ScansPage({super.key});
@@ -201,10 +200,7 @@ class _ScansPage extends State<ScansPage> {
       scans = scans.reversed.toList();
       List<Widget> widgets = [];
       List<Widget> scanCards = scans
-          .map((scan) => ScansCard(
-              name: scan.name,
-              barcodeId: scan.barcodeId,
-              date: DateFormat('dd/MM/yy HH:mm').format(scan.date!)))
+          .map((scan) => ScansCard(scanHistory: scan,))
           .toList();
       for (int i = 0; i < scanCards.length; i++) {
         widgets.add(const SizedBox(height: 15));

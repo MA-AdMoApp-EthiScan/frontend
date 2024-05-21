@@ -1,19 +1,19 @@
+import 'package:ethiscan/domain/entities/app/scan_history.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
 import 'package:ethiscan/presentation/product/product_page.dart';
 import 'package:ethiscan/presentation/widget_core/my_card.dart';
 import 'package:ethiscan/utils/i18n_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ScansCard extends MyCard {
-  final String? name;
-  final String? date;
-  final String? barcodeId;
+  final ScanHistory? scanHistory;
   final bool error;
 
-  const ScansCard({super.key, this.name, this.date, this.barcodeId, this.error = false})
+  const ScansCard({super.key, this.scanHistory, this.error = false})
       : super(
           showChildWhileLoading: true,
-          disableNavigation: name == null || error,
+          disableNavigation: scanHistory == null || error,
         );
 
   @override
@@ -21,10 +21,16 @@ class ScansCard extends MyCard {
     if (error) {
       return CustomH2(I18nUtils.translate(context, "app.data.error.title"));
     }
+    final price = '${scanHistory!.price!} CHF';
+    final name = scanHistory!.name!;
+    
+    final date = DateFormat('dd/MM/yy HH:mm').format(scanHistory!.date!);
+
 
     return ListTile(
-      title: Text(name!),
-      subtitle: Text(date!),
+      trailing: Text(price),
+      title: Text(name),
+      subtitle: Text(date),
     );
   }
 
@@ -34,5 +40,5 @@ class ScansCard extends MyCard {
   }
 
   @override
-  Widget page() => ProductPage(productId: barcodeId != null ? barcodeId! : "unknown id");
+  Widget page() => ProductPage(productId: scanHistory != null ? scanHistory!.barcodeId : "unknown id");
 }

@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 @Singleton(as: ScanHistoryRepository)
 class ScanHistoryProvider implements ScanHistoryRepository {
-  static const _scanHistoryKey = 'scan_history_2';
+  static const _scanHistoryKey = 'scan_history_3';
 
   @override
   Future<Either<APIError, List<ScanHistory>>> getScanHistory() async {

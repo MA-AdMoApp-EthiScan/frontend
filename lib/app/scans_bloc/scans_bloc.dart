@@ -54,6 +54,7 @@ class ScansBloc extends Bloc<ScansEvent, ScansState> {
               barcodeId: barcode,
               name: productName,
               date: DateTime.now(),
+              price: 2.95,
             ),
           );
           emit(ScansState.barcodeFound(barcode: barcode));
