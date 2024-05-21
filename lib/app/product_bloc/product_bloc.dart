@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:ethiscan/data/repositories/metadata_repository.dart';
 import 'package:ethiscan/data/repositories/metadata_type_repository.dart';
 import 'package:ethiscan/data/repositories/product_repository.dart';
@@ -26,46 +27,51 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       await event.when(
         load: (id) async {
           emit(const ProductState.loading());
-          final either = await _productRepository.getProductById(id);
-          await either.fold(
-            (failure) async {
-              emit(ProductState.error(error: failure));
-            },
+          final productEither = await _loadProduct(id);
+          await productEither.fold(
+            (failure) async => emit(ProductState.error(error: failure)),
             (product) async {
-              // Get metadata
-              final metadataEither = await _metadataRepository
-                  .getMetadatasByProductId(product.productMetadataIds!);
+              final metadataEither =
+                  await _loadProductMetadata(product.productMetadataIds!);
               await metadataEither.fold(
-                (failure) async {
-                  emit(ProductState.error(error: failure));
-                },
-                (metadataList) async {
-                  // Get metadata types
-                  final metadataTypeIds =
-                      metadataList.map((meta) => meta.metadataTypeId).toList();
-                  final metadataTypeEither = await _metadataTypeRepository
-                      .getByIdList(metadataTypeIds);
-                  await metadataTypeEither.fold(
-                    (failure) async {
-                      emit(ProductState.error(error: failure));
-                    },
-                    (metadataTypes) async {
-                      // Merge metadata and metadata types
-                      final mergedMetadata = metadataList.map((meta) {
-                        final metadataType = metadataTypes.firstWhere(
-                            (type) => type.id == meta.metadataTypeId);
-                        return MapEntry(metadataType, meta);
-                      }).toList();
-                      emit(ProductState.loaded(
-                          product: product, metadata: mergedMetadata));
-                    },
-                  );
-                },
+                (failure) async => emit(ProductState.error(error: failure)),
+                (metadata) async => emit(
+                    ProductState.loaded(product: product, metadata: metadata)),
               );
             },
           );
         },
       );
     });
+  }
+
+  Future<Either<APIError, Product>> _loadProduct(String id) async {
+    return await _productRepository.getProductById(id);
+  }
+
+  Future<Either<APIError, List<MapEntry<MetadataType, ProductMetadata>>>>
+      _loadProductMetadata(List<String> metadataIds) async {
+    final productMetadataEither =
+        await _metadataRepository.getProductMetadatasById(metadataIds);
+    return productMetadataEither.fold(
+      (failure) async => Left(failure),
+      (productMetadataList) async {
+        final metadataTypeIds =
+            productMetadataList.map((meta) => meta.metadataTypeId).toList();
+        final metadataTypeEither =
+            await _metadataTypeRepository.getByIdList(metadataTypeIds);
+        return metadataTypeEither.fold(
+          (failure) async => Left(failure),
+          (metadataTypes) async {
+            final mergedMetadata = productMetadataList.map((meta) {
+              final metadataType = metadataTypes
+                  .firstWhere((type) => type.id == meta.metadataTypeId);
+              return MapEntry(metadataType, meta);
+            }).toList();
+            return Right(mergedMetadata);
+          },
+        );
+      },
+    );
   }
 }

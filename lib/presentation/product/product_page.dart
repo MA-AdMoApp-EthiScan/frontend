@@ -34,20 +34,21 @@ class _ProductPage extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-        value: _productBloc,
-        child: BlocConsumer<ProductBloc, ProductState>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            return state.maybeWhen(
-              loading: () => _page(context, state, loading: true),
-              error: (error) => _page(context, state, error: error),
-              initial: () => _page(context, state),
-              loaded: (product, metadata) =>
-                  _page(context, state, product: product, metadata: metadata),
-              orElse: () => _page(context, state),
-            );
-          },
-        ));
+      value: _productBloc,
+      child: BlocConsumer<ProductBloc, ProductState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return state.maybeWhen(
+            loading: () => _page(context, state, loading: true),
+            error: (error) => _page(context, state, error: error),
+            initial: () => _page(context, state),
+            loaded: (product, metadata) =>
+                _page(context, state, product: product, metadata: metadata),
+            orElse: () => _page(context, state),
+          );
+        },
+      ),
+    );
   }
 
   Widget _page(
@@ -130,11 +131,63 @@ class _ProductPage extends State<ProductPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomH2P(metadataType.name),
-          CustomText(
-              productMetadata.data.toString()), // Display metadata content
+          _buildMetadataContent(metadataType, productMetadata),
           const SizedBox(height: 20),
         ],
       );
     }).toList();
+  }
+
+  Widget _buildMetadataContent(
+      MetadataType metadataType, ProductMetadata productMetadata) {
+    switch (metadataType.id) {
+      case 'impactCarbone':
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildMetadataRow('Note', productMetadata.data['note'].toString()),
+            _buildMetadataRow(
+                'CO2 Quantity', productMetadata.data['co2Quantity'].toString()),
+            _buildMetadataRow('Packaging Percentage',
+                productMetadata.data['packagingPercentage'].toString()),
+            _buildMetadataRow('Manufacturing Percentage',
+                productMetadata.data['manufacturingPercentage'].toString()),
+            _buildMetadataRow('Transport Percentage',
+                productMetadata.data['transportPercentage'].toString()),
+          ],
+        );
+      case 'animalHappiness':
+        return _buildMetadataRow(
+            'Note', productMetadata.data['note'].toString());
+      case 'localization':
+        return _buildMetadataRow(
+            'Location', productMetadata.data['location'].toString());
+      case 'allergies':
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildMetadataRow(
+                'Gluten', productMetadata.data['gluten'] ? 'Yes' : 'No'),
+            _buildMetadataRow(
+                'Lactose', productMetadata.data['lactose'] ? 'Yes' : 'No'),
+            _buildMetadataRow(
+                'Peanuts', productMetadata.data['peanuts'] ? 'Yes' : 'No'),
+            _buildMetadataRow(
+                'Soy', productMetadata.data['soy'] ? 'Yes' : 'No'),
+          ],
+        );
+      default:
+        return CustomText(productMetadata.data.toString());
+    }
+  }
+
+  Widget _buildMetadataRow(String label, String value) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        CustomText(label),
+        CustomText(value),
+      ],
+    );
   }
 }

@@ -7,17 +7,22 @@ import 'package:injectable/injectable.dart';
 
 @Singleton(as: MetadataRepository)
 class MetadataRepositoryProvider implements MetadataRepository {
-  final CollectionReference metadataCollection =
-      FirebaseFirestore.instance.collection('metadata');
+  // final CollectionReference metadataCollection =
+  //     FirebaseFirestore.instance.collection('productMetadatas');
+  final CollectionReference<ProductMetadata> metadataCollection =
+      FirebaseFirestore.instance
+          .collection('productMetadatas')
+          .withConverter<ProductMetadata>(
+            fromFirestore: (snapshot, _) =>
+                ProductMetadata.fromJson(snapshot.data()!),
+            toFirestore: (metadata, _) => metadata.toJson(),
+          );
 
   @override
-  Future<Either<APIError, List<ProductMetadata>>> getMetadata() async {
+  Future<Either<APIError, List<ProductMetadata>>> getProductMetadata() async {
     try {
       final doc = await metadataCollection.get();
-      final metadataList = doc.docs
-          .map(
-              (d) => ProductMetadata.fromJson(d.data() as Map<String, dynamic>))
-          .toList();
+      final metadataList = doc.docs.map((d) => d.data()).toList();
       return Right(metadataList);
     } catch (e) {
       return Left(APIError(e.toString(), 500));
@@ -25,16 +30,13 @@ class MetadataRepositoryProvider implements MetadataRepository {
   }
 
   @override
-  Future<Either<APIError, List<ProductMetadata>>> getMetadatasByProductId(
+  Future<Either<APIError, List<ProductMetadata>>> getProductMetadatasById(
       List<String> ids) async {
     try {
       final docList =
           await Future.wait(ids.map((id) => metadataCollection.doc(id).get()));
-      final metadata = docList
-          .where((doc) => doc.exists)
-          .map((doc) =>
-              ProductMetadata.fromJson(doc.data() as Map<String, dynamic>))
-          .toList();
+      final metadata =
+          docList.where((doc) => doc.exists).map((doc) => doc.data()!).toList();
       return Right(metadata);
     } catch (e) {
       return Left(APIError(e.toString(), 500));
@@ -42,16 +44,13 @@ class MetadataRepositoryProvider implements MetadataRepository {
   }
 
   @override
-  Future<Either<APIError, List<ProductMetadata>>> getMetadataForProduct(
+  Future<Either<APIError, List<ProductMetadata>>> getProductMetadataForProduct(
       String productId) async {
     try {
       final querySnapshot = await metadataCollection
           .where('productId', isEqualTo: productId)
           .get();
-      final metadataList = querySnapshot.docs
-          .map((doc) =>
-              ProductMetadata.fromJson(doc.data() as Map<String, dynamic>))
-          .toList();
+      final metadataList = querySnapshot.docs.map((doc) => doc.data()).toList();
       return Right(metadataList);
     } catch (e) {
       return Left(APIError(e.toString(), 500));
@@ -60,18 +59,16 @@ class MetadataRepositoryProvider implements MetadataRepository {
 
   @override
   Future<void> addMetadata(ProductMetadata metadata) {
-    return metadataCollection.add(metadata.toJson());
+    return metadataCollection.add(metadata);
   }
 
   @override
   Future<void> updateMetadata(ProductMetadata metadata) {
-    return metadataCollection
-        .doc(metadata.metadataTypeId)
-        .update(metadata.toJson());
+    return metadataCollection.doc(metadata.id).update(metadata.toJson());
   }
 
   @override
   Future<void> deleteMetadata(ProductMetadata metadata) {
-    return metadataCollection.doc(metadata.metadataTypeId).delete();
+    return metadataCollection.doc(metadata.id).delete();
   }
 }
