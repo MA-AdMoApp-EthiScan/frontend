@@ -134,7 +134,7 @@ class MetadataWidget extends StatelessWidget {
         Row(
           children: [
             CustomText(value),
-            CustomText(unit??"")
+            CustomText(unit)
           ]
         )
       ],

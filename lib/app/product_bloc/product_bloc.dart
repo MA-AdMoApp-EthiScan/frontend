@@ -27,7 +27,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final MetadataTypeRepository _metadataTypeRepository;
   final UserRepository _userRepository;
   final CertificationRepository _certificationRepository;
-  String? _userId;
 
   ProductBloc(
     this._productRepository,

@@ -1,4 +1,3 @@
-import 'package:ethiscan/utils/text_styles.dart';
 import 'package:ethiscan/utils/ui_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:ethiscan/presentation/core/custom_texts.dart';
